@@ -1,10 +1,10 @@
-import React from 'react';
-import PrimeiraPagina from './pages/paginasplash/primeirapagina'; 
+import PaginaInicial from './pages/PaginaInicial/PaginaInicial';
+
 function App() {
   return (
     <div className="App">
-      {/* ⭐ AQUI ESTAMOS CHAMANDO NOSSO COMPONENTE */}
       <PrimeiraPagina />
+      <PaginaInicial />
     </div>
   );
 }
