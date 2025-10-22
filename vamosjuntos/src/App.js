@@ -1,3 +1,4 @@
+import PrimeiraPagina from './pages/PrimeiraPagina/PrimeiraPagina'; 
 import PaginaInicial from './pages/PaginaInicial/PaginaInicial';
 
 function App() {
