@@ -1,0 +1,38 @@
+/* paginainicial.css */
+.paginainicial{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; 
+    background: linear-gradient(160deg, #F8F4FF, #D0BCFF); 
+    text-align: center;
+    padding: 20px; 
+}
+
+.paginainicial-logo{
+    width: 200px;
+    margin-top: -300px;
+}
+
+.paginainicial-title{
+    font-size: 80px;
+    font-weight: 900;
+    font-family: Inter;
+    color: #1A1A1A;
+    margin-top: 100px;
+}
+
+.paginainicial-subtitle{
+    font-size: 22px;
+    font-family: Inter;
+    font-weight: 500; 
+    color: #4A4A4A; 
+    margin-top: -50px; 
+    margin-bottom: 50px; 
+}
+
+.paginainicial-button-group{
+    display: flex;
+    gap: 20px; 
+}
