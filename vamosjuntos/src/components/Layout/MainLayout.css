@@ -1,22 +1,28 @@
 /* src/components/Layout/MainLayout.css */
 
 .main-layout-container {
-    display: flex; /* Coloca a Sidebar e o Conteúdo lado a lado */
-    min-height: 100vh; 
-    background-color: #f5ffef; /* Cor de fundo leve para a área de conteúdo */
+    display: flex;
+    min-height: 100vh;
+    
+    /* FUNDO CORRIGIDO: Branco no Topo e Roxo embaixo */
+    background: linear-gradient(to bottom, #FFFFFF 0%, #C2A3FF 100%); 
+    
+    /* Adiciona um pequeno padding geral para o gradient aparecer ao redor do Main Content */
+    padding: 20px; 
 }
 
-/* Estilos para a Área de Conteúdo (onde a ProfilePage aparece) */
+/* O conteúdo principal ocupa o espaço restante ao lado da Sidebar */
 .main-content {
-    flex-grow: 1; /* Ocupa todo o espaço restante */
+    flex-grow: 1; 
     padding: 30px; 
     overflow-x: hidden; 
 }
 
-/* Mobile: Conteúdo ocupa 100% da largura */
+/* Mobile: O conteúdo ocupa 100% (a Sidebar estará oculta) */
 @media (max-width: 767px) {
     .main-layout-container {
-        flex-direction: column; 
+        flex-direction: column;
+        padding: 0; /* Remove padding no mobile */
     }
     .main-content {
         width: 100%;
@@ -24,9 +30,19 @@
     }
 }
 
-/* Desktop: Conteúdo é deslocado para a direita pela Sidebar */
+/* Desktop: Ajusta a área de conteúdo para o efeito 'cartão branco' */
 @media (min-width: 768px) {
     .main-content {
-        margin-left: 20px; 
+        /* Fundo branco e sombra para o efeito de "cartão" do Figma */
+        background-color: white;
+        border-radius: 10px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); 
+        
+        /* Ajusta o padding e margem para o layout de duas colunas */
+        padding: 30px 40px; 
+        margin-left: 20px; /* Mantém espaço entre Sidebar e Conteúdo */
+        
+        /* Garante que o conteúdo ocupe o espaço restante */
+        flex-grow: 1;
     }
 }

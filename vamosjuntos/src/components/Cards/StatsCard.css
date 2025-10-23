@@ -1,0 +1,77 @@
+/* src/components/Cards/StatsCard.css */
+
+/* src/components/Cards/StatsCard.css */
+
+.stats-card {
+    background-color: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+
+    /* ADICIONAR ESTA LINHA: 25px de espaço abaixo do card */
+    margin-bottom: 25px; 
+
+    text-align: center;
+    
+}
+
+.card-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #460073; /* Darkest purple */
+    margin-bottom: 20px;
+}
+
+.main-rating {
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+}
+
+.rating-value {
+    font-size: 3rem;
+    font-weight: bold;
+    color: #333;
+    margin: 0;
+    line-height: 1;
+}
+
+.stars-row {
+    font-size: 1.5rem;
+    margin: 5px 0;
+    color: #f7b731; 
+    letter-spacing: 5px; 
+}
+
+.reviews-count {
+    font-size: 0.9rem;
+    color: #888;
+}
+
+.divider {
+    border: none;
+    border-top: 1px solid #eee;
+    margin: 15px 0;
+}
+
+.ride-stats {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    font-size: 1rem;
+    border-bottom: 1px dotted #f0f0f0;
+}
+
+.ride-stats:last-child {
+    border-bottom: none;
+}
+
+.ride-stats p {
+    color: #555;
+    margin: 0;
+}
+
+.stat-value {
+    font-weight: bold;
+    color: #460073; /* Darkest purple */
+}

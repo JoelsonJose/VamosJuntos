@@ -1,7 +1,7 @@
 // src/components/Layout/MainLayout.js
 
 import React from 'react';
-import Sidebar from './SideBar'; // Importa a Sidebar
+import Sidebar from './Sidebar.js'; // Importa a Sidebar
 import './MainLayout.css';
 
 // O MainLayout recebe 'children', que é a página (ProfilePage, DashboardPage, etc.)

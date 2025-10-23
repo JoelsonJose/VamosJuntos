@@ -1,0 +1,49 @@
+/* src/components/Cards/ConquistasCard.css */
+
+.conquistas-card {
+    background-color: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.card-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #460073; /* Darkest purple */
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.conquista-item {
+    display: flex;
+    align-items: center;
+    padding: 15px 0;
+    border-bottom: 1px dashed #f0f0f0;
+}
+
+.conquista-item:last-child {
+    border-bottom: none;
+}
+
+.conquista-icon {
+    font-size: 1.8rem;
+    margin-right: 15px;
+}
+
+.conquista-details {
+    flex-grow: 1;
+    text-align: left;
+}
+
+.conquista-title {
+    font-weight: bold;
+    color: #333;
+    margin: 0;
+}
+
+.conquista-description {
+    font-size: 0.85rem;
+    color: #888;
+    margin: 0;
+}

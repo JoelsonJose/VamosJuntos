@@ -2,7 +2,8 @@
 
 import React from 'react';
 import './Sidebar.css';
-// Importe ícones se você estiver usando uma biblioteca (ex: react-icons)
+// CORREÇÃO: Usando o nome exato do arquivo do logo
+import LogoImage from '../../assets/Somente_Logo_VJ 1.png'; 
 
 // Dados de navegação
 const navItems = [
@@ -11,7 +12,7 @@ const navItems = [
     { name: 'Minhas Caronas', icon: '🚚', path: '/my-rides' },
     { name: 'Minhas Rotas', icon: '🗺️', path: '/my-routes' },
     { name: 'Criar Rotas', icon: '➕', path: '/create-route' },
-    { name: 'Perfil Corporativo', icon: '🧑‍💻', path: '/profile' }, // Item da sua tela atual
+    { name: 'Perfil Corporativo', icon: '🧑‍💻', path: '/profile' },
 ];
 
 // O 'activeItem' é passado pelo MainLayout para destacar o link correto
@@ -19,7 +20,8 @@ function Sidebar({ activeItem = 'Perfil Corporativo' }) {
     return (
         <aside className="sidebar">
             <div className="sidebar-logo">
-                VamosJuntos
+                {/* CORREÇÃO AQUI: Renderiza a imagem importada */}
+                <img src={LogoImage} alt="Logo VamosJuntos" className="logo-img" />
             </div>
 
             <nav className="sidebar-nav">
