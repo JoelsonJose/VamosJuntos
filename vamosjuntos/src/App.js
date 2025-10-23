@@ -1,12 +1,13 @@
-import PrimeiraPagina from './pages/PrimeiraPagina/PrimeiraPagina'; 
+import { Routes, Route } from 'react-router-dom';
+import PrimeiraPagina from './pages/paginasplash/primeirapagina'; 
 import PaginaInicial from './pages/PaginaInicial/PaginaInicial';
 
 function App() {
   return (
-    <div className="App">
-      <PrimeiraPagina />
-      <PaginaInicial />
-    </div>
+    <Routes>
+      <Route path= "/" element = {<PrimeiraPagina />} />
+      <Route path= "/inicio" element= {<PaginaInicial />} />
+    </Routes>
   );
 }
 
