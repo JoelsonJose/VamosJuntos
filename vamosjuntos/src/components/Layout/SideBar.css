@@ -1,0 +1,83 @@
+/* src/components/Layout/Sidebar.css */
+
+/* Por padrão (Mobile First), a sidebar está oculta no mobile */
+.sidebar {
+    display: none;
+}
+
+/* Estilos de Desktop (Media Query a partir de 768px, conforme o seu plano [cite: 23]) */
+@media (min-width: 768px) {
+    .sidebar {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between; 
+        
+        width: 250px;
+        min-height: 100vh; 
+        padding: 20px 0;
+        
+        /* Estilização roxa do design */
+        background-color: #5d3f9b; 
+        border-top-right-radius: 20px;
+        border-bottom-right-radius: 20px;
+        color: white; 
+    }
+
+    .sidebar-logo {
+        text-align: center;
+        font-size: 1.5rem;
+        font-weight: bold;
+        padding-bottom: 30px;
+    }
+
+    .sidebar-nav {
+        flex-grow: 1;
+        padding: 0 10px;
+    }
+
+    .nav-item {
+        display: flex;
+        align-items: center;
+        text-decoration: none;
+        color: rgba(255, 255, 255, 0.7); 
+        padding: 12px 15px;
+        margin-bottom: 10px;
+        border-radius: 8px;
+        transition: background-color 0.2s, color 0.2s;
+    }
+
+    .nav-item:hover {
+        color: white;
+        background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    /* Estilo do item ativo (o item "Perfil Corporativo") */
+    .nav-item.active {
+        background-color: white;
+        color: #5d3f9b; 
+        font-weight: bold;
+    }
+    
+    .nav-icon {
+        font-size: 1.2rem;
+        margin-right: 15px;
+    }
+
+    .sidebar-footer {
+        display: flex;
+        justify-content: center;
+        padding-top: 20px;
+        border-top: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .footer-icon {
+        font-size: 1.5rem;
+        margin: 0 15px;
+        cursor: pointer;
+        transition: opacity 0.2s;
+    }
+
+    .footer-icon:hover {
+        opacity: 0.8;
+    }
+}

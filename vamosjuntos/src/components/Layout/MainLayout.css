@@ -1,0 +1,32 @@
+/* src/components/Layout/MainLayout.css */
+
+.main-layout-container {
+    display: flex; /* Coloca a Sidebar e o Conteúdo lado a lado */
+    min-height: 100vh; 
+    background-color: #f5ffef; /* Cor de fundo leve para a área de conteúdo */
+}
+
+/* Estilos para a Área de Conteúdo (onde a ProfilePage aparece) */
+.main-content {
+    flex-grow: 1; /* Ocupa todo o espaço restante */
+    padding: 30px; 
+    overflow-x: hidden; 
+}
+
+/* Mobile: Conteúdo ocupa 100% da largura */
+@media (max-width: 767px) {
+    .main-layout-container {
+        flex-direction: column; 
+    }
+    .main-content {
+        width: 100%;
+        padding: 20px 15px;
+    }
+}
+
+/* Desktop: Conteúdo é deslocado para a direita pela Sidebar */
+@media (min-width: 768px) {
+    .main-content {
+        margin-left: 20px; 
+    }
+}
