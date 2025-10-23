@@ -1,50 +1,52 @@
-/* src/primeirapagina.css */
 
-/* ⭐ CONTAINER PRINCIPAL - Ocupa a tela toda */
 .splash-container {
-  display: flex;                    /* Usa flexbox para organizar */
-  flex-direction: column;          /* Coloca os itens em coluna */
-  justify-content: center;         /* Centraliza verticalmente */
-  align-items: center;             /* Centraliza horizontalmente */
-  height: 100vh;                   /* Altura: 100% da tela (viewport height) */
-  width: 100vw;                    /* Largura: 100% da tela (viewport width) */
-  background-color: #FFFFFF;       /* Cor de fundo BRANCA */
-  position: fixed;                 /* Fixa na tela, não rola */
-  top: 0;                          /* Cola no topo */
-  left: 0;                         /* Cola na esquerda */
+  display: flex;                   
+  flex-direction: column;          
+  justify-content: center;         
+  align-items: center;             
+  height: 100vh;                   
+  width: 100vw;                    
+  background-color: #FFFFFF;      
+  position: fixed;                 
+  top: 0;                          
+  left: 0; 
+  transition: opacity 1s ease-in-out;   
+  opacity: 1;                     
 }
 
-/* ⭐ CONTAINER DA LOGO */
+.splash-container.fade-out{
+  opacity: 0;
+}
+
 .logo-container {
-  margin-bottom: 30px;             /* Espaço abaixo da logo */
+  margin-bottom: 30px;             
 }
 
-/* ⭐ IMAGEM DA LOGO */
+
 .logo-image {
-  width: 150px;                    /* Largura da imagem */
-  height: 150px;                   /* Altura da imagem */
-  border-radius: 20px;             /* Cantos arredondados */
+  width: 244px;                    
+  height: 200px;                  
 }
 
-/* ⭐ CONTAINER DO TEXTO */
+
 .text-container {
-  text-align: center;              /* Texto centralizado */
+  text-align: center;              
 }
 
-/* ⭐ TÍTULO PRINCIPAL */
+
 .main-title {
-  font-size: 3.5rem;               /* Tamanho grande da fonte */
-  font-weight: bold;               /* Texto em negrito */
-  color: #8A2BE2;                  /* Cor PRETA */
-  margin: 0;                       /* Remove margens padrão */
-  padding: 0;                      /* Remove paddings padrão */
-  font-family: Arial, sans-serif;  /* Fonte limpa e moderna */
+  font-size: 3.5rem;               
+  font-weight: bold;               
+  color: #8A2BE2;                  
+  margin: 0;                       
+  padding: 0;                      
+  font-family: Arial, sans-serif;  
 }
 
-/* ⭐ SUBTÍTULO */
+
 .subtitle {
-  font-size: 1.3rem;               /* Tamanho médio da fonte */
-  color: #9c56dd;                  /* Cor cinza escuro */
-  margin-top: 15px;                /* Espaço acima do subtítulo */
-  font-family: Arial, sans-serif;  /* Mesma fonte do título */
+  font-size: 1.3rem;              
+  color: #9c56dd;                  
+  margin-top: 15px;                
+  font-family: Arial, sans-serif;  
 }
