@@ -1,4 +1,3 @@
-/* paginainicial.css */
 .paginainicial{
     display: flex;
     flex-direction: column;
@@ -8,6 +7,12 @@
     background: linear-gradient(160deg, #F8F4FF, #D0BCFF); 
     text-align: center;
     padding: 20px; 
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.paginainicial.fade-in {
+    opacity: 1;
 }
 
 .paginainicial-logo{
@@ -25,8 +30,8 @@
 
 .paginainicial-subtitle{
     font-size: 22px;
-    font-family: Inter;
     font-weight: 500; 
+    font-family: Inter;
     color: #4A4A4A; 
     margin-top: -50px; 
     margin-bottom: 50px; 

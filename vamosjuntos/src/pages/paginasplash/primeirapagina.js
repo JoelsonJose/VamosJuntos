@@ -13,7 +13,7 @@ const PrimeiraPagina = () => {
       setTimeout(() => {
         navigate('/inicio');
       }, 1000);
-    },3000);
+    },250);
 
     return () => clearTimeout(timer);
   }, [navigate]);
@@ -28,10 +28,7 @@ const PrimeiraPagina = () => {
         />
       </div>
       
-      <div className="text-container">
-        <h1 className="main-title">VamosJuntos</h1>
-        <p className="subtitle">Menos carros mais conexões</p>
-      </div>
+    
     </div>
   );
 };
