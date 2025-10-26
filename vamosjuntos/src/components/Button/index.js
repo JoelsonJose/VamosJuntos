@@ -1,8 +1,9 @@
 import './index.css';
 
-export default function Button({title}) {
+export default function Button ({ title, variant = 'primary', onClick })  {
+  const buttonClassName = `button ${variant === 'primary' ? 'button-primary' : 'button-secondary'}`;
   return (
-    <button className='Button'>
+    <button className={buttonClassName} onClick={onClick}>
       {title}
     </button>
   )
