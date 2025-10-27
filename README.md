@@ -1,14 +1,14 @@
-# 🚀 VamosJuntos
+# VamosJuntos
 
 > Um projeto de plataforma de caronas corporativas seguras entre colaboradores. Menos carros, mais conexões.
 
 Este é o repositório oficial do projeto "VamosJuntos", uma aplicação web moderna construída com React, focada em conectar colegas de trabalho para otimizar o transporte e fortalecer conexões.
 
-![Capa do Projeto](<img width="990" height="627" alt="Screenshot_1" src="https://github.com/user-attachments/assets/12700519-00d9-4939-b5ed-3330a80a2f23" />) 
+![Capa do Projeto](https://github.com/user-attachments/assets/12700519-00d9-4939-b5ed-3330a80a2f23)
 
 ---
 
-## 🛠️ Tecnologias Utilizadas
+## Tecnologias Utilizadas
 
 Este projeto foi construído com as seguintes tecnologias e bibliotecas:
 
@@ -20,7 +20,7 @@ Este projeto foi construído com as seguintes tecnologias e bibliotecas:
 
 ---
 
-## 🏁 Como Instalar e Executar
+## Como Instalar e Executar
 
 Siga estes passos para configurar e rodar o projeto na sua máquina local.
 
