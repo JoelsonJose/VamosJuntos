@@ -2,7 +2,8 @@ import './PaginaRegistro.css';
 import { Link } from 'react-router-dom'; 
 import Input from '../../components/Input/Input'; 
 import Button from '../../components/Button'; 
-import logo from '../../assets/Somente_Logo_VJ 1.png'; 
+import logo from '../../assets/Somente_Logo_VJ 1.png';
+import uploadicon  from '../../assets/Upward Arrow.png';
 
 export default function RegisterPage () {
   return (
@@ -35,8 +36,9 @@ export default function RegisterPage () {
             
             <div className="campo-container"> 
               <label className="campo-rotulo">Foto de Perfil <span className="optional-text">(Opcional)</span></label>
-              <button type="button" className="file-upload-button">
-                ⬆️ Escolher foto
+              <button type="button" className="file-upload-button" >
+                <img src={uploadicon} alt="Upload Icon" className="upload-icon" />
+                Escolher foto
               </button>
             </div>
 
