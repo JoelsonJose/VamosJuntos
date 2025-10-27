@@ -27,8 +27,6 @@ const PrimeiraPagina = () => {
           className="logo-image"
         />
       </div>
-      
-    
     </div>
   );
 };
