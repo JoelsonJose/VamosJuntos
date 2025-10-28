@@ -2,7 +2,6 @@ import { Routes, Route } from 'react-router-dom';
 import PrimeiraPagina from './pages/paginasplash/primeirapagina'; 
 import PaginaInicial from './pages/PaginaInicial/PaginaInicial';
 import PaginaRegistro from './pages/PaginaRegistro/PaginaRegistro';
-import PaginaLogin from './pages/PaginaLogin/PaginaLogin';
 
 function App() {
   return (
@@ -16,4 +15,3 @@ function App() {
 }
 
 export default App;
-

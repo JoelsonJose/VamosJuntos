@@ -1,5 +1,3 @@
-import './PaginaLogin.css'; 
-import { Link } from 'react-router-dom'; 
 import Input from '../../components/Input/Input'; 
 import Button from '../../components/Button'; 
 import logo from '../../assets/Somente_Logo_VJ 1.png';
