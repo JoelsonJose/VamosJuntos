@@ -1,0 +1,186 @@
+/* Importando a fonte Inter do Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+/* Fonte padrão para toda a página */
+body {
+  font-family: 'Inter', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+
+/* LAYOUT PRINCIPAL */
+.pagina-buscar {
+  display: block; /* sidebar é fixed, então a página não precisa ser flex */
+  min-height: 100vh;
+  background: linear-gradient(to bottom, #f3e8ff, #d8c0ff);
+}
+
+/* Conteúdo principal ao lado da sidebar */
+.conteudo-buscar {
+  margin-left: 230px; /* espaço para sidebar */
+  padding: 28px 36px;
+  color: #333;
+}
+
+/* cabeçalho */
+.conteudo-buscar h1 {
+  margin: 0 0 6px 0;
+  font-size: 28px;
+  color: #120023;
+}
+.subtitulo {
+  color: #777;
+  margin-bottom: 18px;
+}
+
+/* filtros */
+.filtros-container {
+  background: #fff;
+  border-radius: 12px;
+  padding: 18px;
+  margin-bottom: 26px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+}
+
+.filtro-titulo h3 { margin: 0; color: #3a0961; }
+.filtro-titulo p { color: #666; font-size: 14px; margin-bottom: 12px; }
+
+.filtros-inputs {
+  display: grid;
+  grid-template-columns: 1fr 1fr 220px 220px auto;
+  gap: 10px;
+  align-items: center;
+}
+
+.filtros-inputs input,
+.filtros-inputs select {
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  min-width: 0;
+}
+
+/* botão buscar */
+.btn-buscar {
+  background-color: #7b3d9a;
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+/* RESULTADOS + DICAS: container principal */
+.conteudo-busca {
+  display: grid;
+  grid-template-columns: 1fr 340px; /* resultados + dicas lado a lado */
+  gap: 20px;
+  align-items: start;
+}
+
+/* área de resultados (quadrao branco grande) */
+.resultados-container {
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  min-height: 420px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* faça os cards ocuparem largura total do container */
+.carona-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #f9f5ff;
+  border-radius: 12px;
+  padding: 20px 8px;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.05);
+  width: 100%;
+}
+
+/* forçar conteúdo do lado esquerdo do card a ocupar espaço */
+.carona-left {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-width: calc(100% - 110px); /* evita que texto estoure no lado do status */
+}
+
+.carona-nome {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 16px;
+  color: #150029;
+}
+
+.carona-estrelas { color: #fbc02d; }
+
+.carona-rota {
+  font-size: 14px;
+  color: #555;
+  margin: 0;
+  word-break: break-word;
+}
+
+/* indicador de vagas */
+.carona-status {
+  padding: 8px 12px;
+  border-radius: 20px;
+  font-weight: 700;
+  color: #fff;
+  font-size: 13px;
+  min-width: 64px;
+  text-align: center;
+}
+
+/* vagas: 1-3 verde, 4 vermelho */
+.vagas1, .vagas2, .vagas3 { background-color: #2f9e44; }
+.vagas4 { background-color: #d32f2f; }
+
+/* dicas laterais */
+.dicas-container {
+  background: #fff;
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+  height: fit-content;
+}
+
+.dica-bloco h4 { margin-top: 12px; color: #3a0961; font-size: 15px; }
+.dica-bloco ul { padding-left: 18px; color: #444; font-size: 14px; }
+
+/* ======== RESPONSIVIDADE ======== */
+@media (max-width: 1000px) {
+  .filtros-inputs { grid-template-columns: 1fr 1fr; }
+  .conteudo-busca { grid-template-columns: 1fr; } /* dicas abaixo dos resultados */
+  .conteudo-buscar { margin-left: 0; padding: 18px; }
+  .sidebar { position: relative; width: 100%; height: auto; } /* sidebar vira topo em telas pequenas */
+}
+
+@media (max-width: 600px) {
+  .filtros-inputs { grid-template-columns: 1fr; }
+  .carona-nome { font-size: 14px; }
+  .carona-rota { font-size: 13px; }
+}
+
+/* Star rating */
+.star-rating {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-left: 8px; /* espaço entre nome e estrelas */
+}
+
+.star-img {
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+  display: inline-block;
+  user-select: none;
+}
