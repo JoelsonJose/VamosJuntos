@@ -1,11 +1,9 @@
-import React from 'react';
 import './PaginaBuscar.css';
-import Sidebar from '../../components/Sidebar/Sidebar'; // caminho que você já tem
+import Sidebar from '../../components/Sidebar/Sidebar'; 
 import StarYellow from '../../assets/Star amarela.png';
 import StarWhite from '../../assets/Star branca.png';
 
 function StarRating({ rating = 0, max = 5 }) {
-  // rating: número inteiro entre 0 e max
   const stars = [];
   for (let i = 0; i < max; i++) {
     const src = i < rating ? StarYellow : StarWhite;
@@ -32,7 +30,6 @@ export default function PaginaBuscar() {
         <h1>Buscar Caronas</h1>
         <p className="subtitulo">Encontre caronas disponíveis na sua região</p>
 
-        {/* filtros (mantém o que você já tem) */}
         <div className="filtros-container">
           <div className="filtro-titulo">
             <h3>Filtros de Busca</h3>
@@ -60,10 +57,8 @@ export default function PaginaBuscar() {
           </div>
         </div>
 
-        {/* resultados + dicas */}
         <div className="conteudo-busca">
           <div className="resultados-container">
-            {/* exemplo de cards */}
             <div className="carona-card">
               <div className="carona-left">
                 <div className="carona-nome">
