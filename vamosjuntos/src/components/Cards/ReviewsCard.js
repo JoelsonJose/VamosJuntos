@@ -3,7 +3,7 @@
 import React from 'react';
 import './ReviewsCard.css';
 
-// Dados simulados das avaliações do seu design
+// Dados simulados 
 const reviews = [
     {
         name: 'Maria Santos',

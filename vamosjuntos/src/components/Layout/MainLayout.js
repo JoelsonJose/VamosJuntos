@@ -4,7 +4,7 @@ import React from 'react';
 import Sidebar from './Sidebar.js'; // Importa a Sidebar
 import './MainLayout.css';
 
-// O MainLayout recebe 'children', que é a página (ProfilePage, DashboardPage, etc.)
+// O MainLayout recebe 'children', que é a página (ProfilePage)
 function MainLayout({ children }) {
     
     // Define o item ativo para a Sidebar

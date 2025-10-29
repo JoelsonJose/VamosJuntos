@@ -1,19 +1,14 @@
 import React from 'react';
 import './ProfilePage.css'; 
-
-// --- Importação dos Cards de Visualização ---
 import ProfileHeaderCard from '../../components/Cards/ProfileHeaderCard'; 
-import StatsCard from '../../components/Cards/StatsCard';                 
-import ReviewsCard from '../../components/Cards/ReviewsCard';           
-import ConquistasCard from '../../components/Cards/ConquistasCard';     
-
-// **IMPORTAÇÃO DO MODAL DE EDIÇÃO**
+import StatsCard from '../../components/Cards/StatsCard'; 
+import ReviewsCard from '../../components/Cards/ReviewsCard'; 
+import ConquistasCard from '../../components/Cards/ConquistasCard'; 
 import EditProfileModal from '../../components/Modals/EditProfileModal'; 
 
 
 function ProfilePage() {
-    // 1. **Definir o estado do usuário para que os dados possam ser atualizados**
-    //    Usamos 'useState' para que a página possa ser renderizada novamente após a edição.
+    
     const [userData, setUserData] = React.useState({
         name: "Homero Flávio",
         rating: 4.7,
@@ -59,10 +54,7 @@ function ProfilePage() {
         handleCloseModal();
     };
 
-
-    // O estado para Popover de Acessibilidade também será incluído futuramente:
-    // const [isAccessibilityPopoverOpen, setIsAccessibilityPopoverOpen] = React.useState(false);
-    
+  
     return (
         <div className="profile-page-container">
             
@@ -101,8 +93,7 @@ function ProfilePage() {
                 
             </div>
             
-            {/* **5. Modal de Edição (Ativado e com props)** */}
-            {/* Passa as funções e os dados para o modal */}
+           
             <EditProfileModal 
                 isOpen={isEditModalOpen} 
                 onClose={handleCloseModal} 

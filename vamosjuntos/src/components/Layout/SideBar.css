@@ -1,6 +1,6 @@
-/* src/components/Layout/Sidebar.css (FINAL COM AJUSTE DE ESPAÇAMENTO VERTICAL) */
 
-/* Por padrão, a sidebar está oculta no mobile (Mobile First) */
+
+
 .sidebar {
     display: none;
 }
@@ -12,26 +12,29 @@
         flex-direction: column;
         justify-content: space-between;
         
-        /* Largura e altura */
+        /* Largura e padding */
         width: 250px;
-        min-height: 100vh;
         padding: 20px 0;
+        position: relative; 
+        min-height: auto; 
+        left: auto;
+        top: auto;
         
-        /* Estilos de cor e borda */
+        /* Estilos visuais */
         background-color: white; 
         border-top-right-radius: 20px;
         border-bottom-right-radius: 20px;
         color: #460073; 
         box-shadow: 2px 0 10px rgba(0, 0, 0, 0.05); 
+        overflow-y: visible; 
     }
-
+    
     /* ESTILO DO LOGO CONTAINER */
     .sidebar-logo {
         text-align: center;
-        /* Adiciona padding lateral para afastar a logo das bordas */
         padding: 0 20px 30px 20px; 
     }
-    
+
     /* ESTILO DA IMAGEM DO LOGO */
     .logo-img {
         max-width: 150px; 
@@ -40,12 +43,9 @@
         margin: 0 auto;
     }
 
-
     .sidebar-nav {
-        /* CORREÇÃO AQUI: Remove flex-grow para que a navegação ocupe apenas o espaço dos botões */
-        /* flex-grow: 1; */ 
         padding: 0; 
-        margin-top: 10px; /* Adiciona uma margem superior para afastar do logo */
+        margin-top: 10px; 
     }
 
     /* ESTILO DOS ITENS DE NAVEGAÇÃO */
@@ -77,31 +77,46 @@
         background-color: #f0e6ff; 
     }
     
-    .nav-icon {
-        font-size: 1.2rem;
+    /* ESTILO PARA O ÍCONE (IMG) DA NAVEGAÇÃO */
+    .nav-icon-img {
+        width: 24px; 
+        height: 24px;
+        object-fit: contain;
         margin-right: 15px;
+        filter: brightness(0.5); 
+        transition: filter 0.2s;
     }
 
-    /* ESTILO DO FOOTER (Ícones Notificações/Logout) */
+    
+    .nav-item.active .nav-icon-img {
+        filter: brightness(0) invert(1); 
+    }
+
+    /* ESTILO DO FOOTER  */
     .sidebar-footer {
         display: flex;
         justify-content: center;
         padding-top: 20px;
-        /* CORREÇÃO AQUI: Remove o margin-top para aproximar mais da navegação, se necessário */
-        /* margin-top: 20px; */ 
         margin-top: 20px;
         border-top: 1px solid #f0f0f0; 
     }
 
-    .footer-icon {
-        font-size: 1.5rem;
-        margin: 0 15px;
+    /* Wrapper e estilo dos Ícones do Footer */
+    .footer-icon-wrapper {
+        display: inline-block;
         cursor: pointer;
         transition: opacity 0.2s;
-        color: #460073; 
+        margin: 0 15px;
+    }
+    
+    .footer-icon-img {
+        width: 26px; 
+        height: 26px;
+        object-fit: contain;
+        filter: brightness(0.5); 
     }
 
-    .footer-icon:hover {
-        opacity: 0.8;
+    .footer-icon-wrapper:hover .footer-icon-img {
+        filter: brightness(0.2); 
     }
 }

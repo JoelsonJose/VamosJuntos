@@ -2,26 +2,27 @@
 
 .profile-page-container {
     position: relative; 
-    /* Remove padding-top desnecessário, o MainLayout já trata o espaçamento */
     padding-top: 0; 
+
+    
+    /* Mantendo o padding lateral para o grid */
+    padding-right: 0; 
 }
 
+
 .page-title {
-    /* Ajusta a margem para separar do conteúdo e do botão */
     margin-top: 0;
     margin-bottom: 30px; 
     font-size: 2rem;
     color: #333;
 }
 
-/* Estilo para posicionar o botão Editar (alinhado com o título) */
 .edit-button {
     position: absolute;
-    top: 0px; /* ALINHA O BOTÃO NO TOPO */
+    top: 0px; 
     right: 0; 
     
-    /* Estilo do botão conforme o design */
-    background-color: #A100FF; /* Core Purple */
+    background-color: #A100FF; 
     color: white;
     border: none;
     padding: 8px 15px;
@@ -29,10 +30,14 @@
     font-weight: bold;
     cursor: pointer;
     z-index: 10;
+    transition: background-color 0.2s;
+}
+
+.edit-button:hover {
+    background-color: #6b21a8; 
 }
 
 
-/* Estilos para o alinhamento lado a lado dos Cards (Grid) */
 @media (min-width: 1024px) {
     .profile-cards-grid {
         display: grid;
