@@ -22,9 +22,20 @@ function StarRating({ rating = 0, max = 5 }) {
 }
 
 export default function PaginaBuscar() {
+  const caronas = [
+    { nome: "João Silva", rating: 4, rota: "Av. Alfredo Lisboa 810, Empresa → Jardim São Paulo, Casa", vagas: "3/4", classe: "vagas3" },
+    { nome: "Maria Santos", rating: 3, rota: "Jardim São Paulo, Casa → Av. Alfredo Lisboa 810, Empresa", vagas: "1/4", classe: "vagas1" },
+    { nome: "Pedro Lima", rating: 5, rota: "Av. Alfredo Lisboa 810, Empresa → Jardim São Paulo, Casa", vagas: "4/4", classe: "vagas4" },
+    { nome: "Carla Menezes", rating: 2, rota: "Boa Viagem → Derby", vagas: "2/4", classe: "vagas2" },
+    { nome: "Lucas Andrade", rating: 4, rota: "Casa Amarela → Recife Antigo", vagas: "3/4", classe: "vagas3" },
+    { nome: "Fernanda Costa", rating: 5, rota: "Torre → Pina", vagas: "4/4", classe: "vagas4" },
+    { nome: "Ricardo Alves", rating: 3, rota: "Imbiribeira → Boa Vista", vagas: "1/4", classe: "vagas1" },
+  ];
+
   return (
     <div className="pagina-buscar">
-      <Sidebar />
+      <Sidebar activePage="buscar" />
+
       <div className="conteudo-buscar">
         <h1>Buscar Caronas</h1>
         <p className="subtitulo">Encontre caronas disponíveis na sua região</p>
@@ -58,38 +69,18 @@ export default function PaginaBuscar() {
 
         <div className="conteudo-busca">
           <div className="resultados-container">
-            <div className="carona-card">
-              <div className="carona-left">
-                <div className="carona-nome">
-                  <strong>João Silva</strong>
-                <StarRating rating={4} />
+            {caronas.map((c, i) => (
+              <div key={i} className="carona-card">
+                <div className="carona-left">
+                  <div className="carona-nome">
+                    <strong>{c.nome}</strong>
+                    <StarRating rating={c.rating} />
+                  </div>
+                  <p className="carona-rota">{c.rota}</p>
                 </div>
-                <p className="carona-rota">Av. Alfredo Lisboa 810, Empresa → Jardim São Paulo, Casa</p>
+                <div className={`carona-status ${c.classe}`}>{c.vagas} vagas</div>
               </div>
-              <div className="carona-status vagas3">3/4 vagas</div>
-            </div>
-
-            <div className="carona-card">
-              <div className="carona-left">
-                <div className="carona-nome">
-                  <strong>Maria Santos</strong>
-                   <StarRating rating={3} />
-                </div>
-                <p className="carona-rota">Jardim São Paulo, Casa → Av. Alfredo Lisboa 810, Empresa</p>
-              </div>
-              <div className="carona-status vagas1">1/4 vagas</div>
-            </div>
-
-            <div className="carona-card">
-              <div className="carona-left">
-                <div className="carona-nome">
-                  <strong>Pedro Lima</strong>
-                 <StarRating rating={5} />
-                </div>
-                <p className="carona-rota">Av. Alfredo Lisboa 810, Empresa → Jardim São Paulo, Casa</p>
-              </div>
-              <div className="carona-status vagas4">4/4 vagas</div>
-            </div>
+            ))}
           </div>
 
           <div className="dicas-container">
