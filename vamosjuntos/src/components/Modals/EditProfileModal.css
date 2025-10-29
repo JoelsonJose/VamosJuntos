@@ -1,0 +1,168 @@
+/* ------------------------------------------------------------------------- */
+/* 1. Modal Overlay e Posicionamento */
+/* ------------------------------------------------------------------------- */
+
+.edit-modal-overlay {
+    /* Fundo escurecido que ocupa toda a tela */
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.7); /* Fundo preto semi-transparente */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Garante que fique acima de todo o resto */
+}
+
+.edit-modal-content {
+    background-color: white;
+    padding: 30px 40px;
+    border-radius: 20px;
+    width: 100%;
+    max-width: 500px; /* Limita a largura como na sua imagem */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    /* Permite o scroll interno se o conteúdo for muito grande */
+    max-height: 90vh; 
+    overflow-y: auto; 
+}
+
+
+/* ------------------------------------------------------------------------- */
+/* 2. Header do Modal (Título e Ícone) */
+/* ------------------------------------------------------------------------- */
+
+.edit-modal-header {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 25px;
+}
+
+.modal-icon-container {
+    /* Estilização do ícone da sua empresa no canto do modal */
+    background-color: #5d3596; /* Cor roxa similar a da imagem */
+    padding: 8px;
+    border-radius: 8px;
+    margin-right: 15px;
+    /* Adicione aqui o estilo para a sua imagem/SVG do ícone */
+    width: 40px; 
+    height: 40px;
+}
+
+.modal-title-container h2 {
+    color: #5d3596; /* Cor roxa */
+    font-size: 1.5em;
+    margin: 0;
+    font-weight: 600;
+}
+
+.modal-title-container p {
+    color: #666;
+    font-size: 0.9em;
+    margin: 3px 0 0 0;
+}
+
+
+/* ------------------------------------------------------------------------- */
+/* 3. Formulário e Inputs */
+/* ------------------------------------------------------------------------- */
+
+.edit-profile-form label {
+    display: block;
+    font-weight: 500;
+    color: #333;
+    margin-top: 15px;
+    margin-bottom: 5px;
+    font-size: 0.95em;
+}
+
+.edit-profile-form input[type="text"],
+.edit-profile-form input[type="email"],
+.edit-profile-form input[type="tel"],
+.edit-profile-form textarea,
+.edit-profile-form .select-field {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    font-size: 1em;
+    box-sizing: border-box; /* Garante que padding e border não aumentem a largura */
+    color: #333;
+    /* Estilo para focar */
+    transition: border-color 0.2s;
+}
+
+.edit-profile-form input:focus,
+.edit-profile-form textarea:focus,
+.edit-profile-form .select-field:focus {
+    border-color: #5d3596; /* Cor roxa ao focar */
+    outline: none;
+}
+
+/* Campo "Sobre" (textarea) */
+.edit-profile-form textarea {
+    resize: vertical; /* Permite redimensionar apenas na vertical */
+    min-height: 70px;
+}
+
+/* ------------------------------------------------------------------------- */
+/* 4. Campo de Upload de Foto */
+/* ------------------------------------------------------------------------- */
+
+.profile-photo-upload {
+    margin-top: 20px;
+}
+
+.profile-photo-upload label {
+    margin-bottom: 5px;
+}
+
+.upload-options {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.choose-photo-btn {
+    background-color: #f0f0f0;
+    color: #333;
+    border: 1px solid #ccc;
+    padding: 8px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background-color 0.2s;
+}
+
+.choose-photo-btn:hover {
+    background-color: #e0e0e0;
+}
+
+.optional-text {
+    color: #999;
+    font-size: 0.9em;
+}
+
+
+/* ------------------------------------------------------------------------- */
+/* 5. Botão Confirmar */
+/* ------------------------------------------------------------------------- */
+
+.confirm-button {
+    width: 100%;
+    background-color: #5d3596; /* Roxo principal */
+    color: white;
+    border: none;
+    padding: 15px;
+    border-radius: 10px;
+    font-size: 1.1em;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 30px;
+    transition: background-color 0.2s ease;
+}
+
+.confirm-button:hover {
+    background-color: #4c2c80; /* Roxo um pouco mais escuro */
+}
