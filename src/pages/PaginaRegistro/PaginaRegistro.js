@@ -4,8 +4,16 @@ import Input from '../../components/Input/Input';
 import Button from '../../components/Button'; 
 import logo from '../../assets/Somente_Logo_VJ 1.png';
 import uploadicon  from '../../assets/Upward Arrow.png';
+import { useNavigate } from 'react-router-dom';
 
 export default function RegisterPage () {
+
+  const navigate = useNavigate();
+
+  const irParaDash = () => {
+        navigate('/dashboard'); 
+    };
+
   return (
       <div className="register-background">
         
@@ -45,7 +53,7 @@ export default function RegisterPage () {
             <Input label="Senha" type="password" placeholder="Digite uma senha segura" />
             <Input label="Confirmar senha" type="password" placeholder="Confirme sua senha" />
             
-            <Button title="Cadastrar" variant="primary" /> 
+            <Button title="Cadastrar" variant="primary" onClick={irParaDash} /> 
           </form>
 
           <p className="login-link-text">
