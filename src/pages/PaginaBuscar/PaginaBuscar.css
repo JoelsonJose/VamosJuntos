@@ -1,7 +1,6 @@
-/* Importando a fonte Inter do Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
-/* Fonte padrão para toda a página */
+
 body {
   font-family: 'Inter', sans-serif;
   margin: 0;
@@ -9,21 +8,21 @@ body {
 }
 
 
-/* LAYOUT PRINCIPAL */
+
 .pagina-buscar {
-  display: block; /* sidebar é fixed, então a página não precisa ser flex */
+  display: block;
   min-height: 100vh;
   background: linear-gradient(to bottom, #f3e8ff, #d8c0ff);
 }
 
-/* Conteúdo principal ao lado da sidebar */
+
 .conteudo-buscar {
-  margin-left: 230px; /* espaço para sidebar */
+  margin-left: 230px; 
   padding: 28px 36px;
   color: #333;
 }
 
-/* cabeçalho */
+
 .conteudo-buscar h1 {
   margin: 0 0 6px 0;
   font-size: 28px;
@@ -71,15 +70,15 @@ body {
   cursor: pointer;
 }
 
-/* RESULTADOS + DICAS: container principal */
+
 .conteudo-busca {
   display: grid;
-  grid-template-columns: 1fr 340px; /* resultados + dicas lado a lado */
+  grid-template-columns: 1fr 340px; 
   gap: 20px;
   align-items: start;
 }
 
-/* área de resultados (quadrao branco grande) */
+
 .resultados-container {
   background: #fff;
   border-radius: 12px;
@@ -91,7 +90,7 @@ body {
   gap: 12px;
 }
 
-/* faça os cards ocuparem largura total do container */
+
 .carona-card {
   display: flex;
   justify-content: space-between;
@@ -103,12 +102,12 @@ body {
   width: 100%;
 }
 
-/* forçar conteúdo do lado esquerdo do card a ocupar espaço */
+
 .carona-left {
   display: flex;
   flex-direction: column;
   gap: 6px;
-  max-width: calc(100% - 110px); /* evita que texto estoure no lado do status */
+  max-width: calc(100% - 110px); 
 }
 
 .carona-nome {
@@ -128,7 +127,7 @@ body {
   word-break: break-word;
 }
 
-/* indicador de vagas */
+
 .carona-status {
   padding: 8px 12px;
   border-radius: 20px;
@@ -139,11 +138,11 @@ body {
   text-align: center;
 }
 
-/* vagas: 1-3 verde, 4 vermelho */
+
 .vagas1, .vagas2, .vagas3 { background-color: #2f9e44; }
 .vagas4 { background-color: #d32f2f; }
 
-/* dicas laterais */
+
 .dicas-container {
   background: #fff;
   border-radius: 12px;
@@ -155,12 +154,12 @@ body {
 .dica-bloco h4 { margin-top: 12px; color: #3a0961; font-size: 15px; }
 .dica-bloco ul { padding-left: 18px; color: #444; font-size: 14px; }
 
-/* ======== RESPONSIVIDADE ======== */
+
 @media (max-width: 1000px) {
   .filtros-inputs { grid-template-columns: 1fr 1fr; }
-  .conteudo-busca { grid-template-columns: 1fr; } /* dicas abaixo dos resultados */
+  .conteudo-busca { grid-template-columns: 1fr; } 
   .conteudo-buscar { margin-left: 0; padding: 18px; }
-  .sidebar { position: relative; width: 100%; height: auto; } /* sidebar vira topo em telas pequenas */
+  .sidebar { position: relative; width: 100%; height: auto; } 
 }
 
 @media (max-width: 600px) {
@@ -169,12 +168,11 @@ body {
   .carona-rota { font-size: 13px; }
 }
 
-/* Star rating */
 .star-rating {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  margin-left: 8px; /* espaço entre nome e estrelas */
+  margin-left: 8px; 
 }
 
 .star-img {

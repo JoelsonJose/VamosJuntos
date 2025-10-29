@@ -1,57 +1,76 @@
-import React from 'react';
+import { Link, useLocation } from 'react-router-dom'; 
+
 import './Sidebar.css';
-import IconDashboard from '../../assets/Sidebar_icons/Details.png';
-import IconBuscar from '../../assets/Sidebar_icons/Search.png';
-import IconMinhasCaronas from '../../assets/Sidebar_icons/People in Car Side View.png';
-import IconMinhasRotas from '../../assets/Sidebar_icons/Travel Signpost.png';
-import IconCriarRotas from '../../assets/Sidebar_icons/Add.png';
-import IconPerfil from '../../assets/Sidebar_icons/User.png';
-import IconNotificacao from '../../assets/Sidebar_icons/Doorbell.png';
-import IconLogout from '../../assets/Sidebar_icons/Logout.png';
 import logo from '../../assets/Somente_Logo_VJ 1.png';
 
-export default function Sidebar({ activePage = ' ' }) {
-  const navItems = [
-  { label: 'Dashboard', icon: IconDashboard, page: 'dashboard' },
-  { label: 'Buscar Carona', icon: IconBuscar, page: 'buscar' },
-  { label: 'Minhas Caronas', icon: IconMinhasCaronas, page: 'minhas-caronas' },
-  { label: 'Minhas Rotas', icon: IconMinhasRotas, page: 'rotas' },
-  { label: 'Criar Rotas', icon: IconCriarRotas, page: 'criar' },
-  { label: 'Perfil Corporativo', icon: IconPerfil, page: 'perfil' },
-];
 
+import IconDashboardB from '../../assets/Sidebar_icons/Detailsb.png';
+import IconBuscarB from '../../assets/Sidebar_icons/Searchb.png'; 
+import IconMinhasCaronasB from '../../assets/Sidebar_icons/People in Car Side Viewb.png';
+import IconMinhasRotasB from '../../assets/Sidebar_icons/Travel Signpostb.png';
+import IconCriarRotasB from '../../assets/Sidebar_icons/Addb.png';
+import IconPerfilB from '../../assets/Sidebar_icons/Userb.png';
+import IconNotificacaoB from '../../assets/Sidebar_icons/Doorbellb.png';
+import IconLogoutB from '../../assets/Sidebar_icons/Logoutb.png';
+
+import IconDashboardW from '../../assets/Sidebar_icons/Detailsw.png';
+import IconBuscarW from '../../assets/Sidebar_icons/Searchw.png';
+import IconMinhasCaronasW from '../../assets/Sidebar_icons/People in Car Side Vieww.png'; 
+import IconMinhasRotasW from '../../assets/Sidebar_icons/Travel Signpostw.png';
+import IconCriarRotasW from '../../assets/Sidebar_icons/Addw.png'; 
+import IconPerfilW from '../../assets/Sidebar_icons/Userw.png';
+
+export default function Sidebar() {
+  
+  const location = useLocation();
+
+  const navItems = [
+    { label: 'Dashboard', iconB: IconDashboardB, iconW: IconDashboardW, path: '/dashboard' },
+    { label: 'Buscar Carona', iconB: IconBuscarB, iconW: IconBuscarW, path: '/buscar' },
+    { label: 'Minhas Caronas', iconB: IconMinhasCaronasB, iconW: IconMinhasCaronasW, path: '/minhas-caronas' },
+    { label: 'Minhas Rotas', iconB: IconMinhasRotasB, iconW: IconMinhasRotasW, path: '/rotas' },
+    { label: 'Criar Rotas', iconB: IconCriarRotasB, iconW: IconCriarRotasW, path: '/criar' },
+    { label: 'Perfil Corporativo', iconB: IconPerfilB, iconW: IconPerfilW, path: '/perfil' },
+  ];
 
   return (
     <aside className="sidebar">
       <div className="sidebar-top">
         <div className="sidebar-logo">
-          {/* se tiver logo troque src */}
           <img src= {logo} alt="logo" /> 
         </div>
 
         <nav className="sidebar-nav">
-  {navItems.map((it) => (
-    <button
-      key={it.page}
-      className={`nav-btn ${activePage === it.page ? 'active' : ''}`}
-    >
-      <img src={it.icon} alt={it.label} className="nav-icon" />
-      <span>{it.label}</span>
-    </button>
-  ))}
-</nav>
+          {navItems.map((it) => {
+            
+            const isActive = location.pathname === it.path;
 
+            return (
+              <Link
+                key={it.path}
+                to={it.path}
+                className={`nav-btn ${isActive ? 'active' : ''}`}
+              >
+                <img 
+                  src={isActive ? it.iconW : it.iconB} 
+                  alt={it.label} 
+                  className="nav-icon" 
+                />
+                <span>{it.label}</span>
+              </Link>
+            );
+          })}
+        </nav>
       </div>
 
       <div className="sidebar-footer">
-  <button className="footer-btn">
-    <img src={IconNotificacao} alt="Notificações" />
-  </button>
-  <button className="footer-btn">
-    <img src={IconLogout} alt="Logout" />
-  </button>
-</div>
-
+        <button className="footer-btn">
+          <img src={IconNotificacaoB} alt="Notificações" /> 
+        </button>
+        <Link to="/" className="footer-btn"> {/* <-- MUDANÇA AQUI */}
+          <img src={IconLogoutB} alt="Logout" />
+        </Link>
+      </div>
     </aside>
   );
 }

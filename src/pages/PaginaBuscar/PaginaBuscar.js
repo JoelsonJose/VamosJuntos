@@ -24,8 +24,7 @@ function StarRating({ rating = 0, max = 5 }) {
 export default function PaginaBuscar() {
   return (
     <div className="pagina-buscar">
-      <Sidebar activePage="buscar" />
-
+      <Sidebar />
       <div className="conteudo-buscar">
         <h1>Buscar Caronas</h1>
         <p className="subtitulo">Encontre caronas disponíveis na sua região</p>

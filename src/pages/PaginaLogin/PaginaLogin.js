@@ -3,8 +3,15 @@ import { Link } from 'react-router-dom';
 import Input from '../../components/Input/Input'; 
 import Button from '../../components/Button'; 
 import logo from '../../assets/Somente_Logo_VJ 1.png';
+import { useNavigate } from 'react-router-dom';
 
 export default function RegisterPage () {
+  const navigate = useNavigate();
+
+  const irParaDash = () => {
+        navigate('/dashboard'); 
+    };
+
   return (
       <div className="login-background">
         
@@ -18,7 +25,7 @@ export default function RegisterPage () {
           <form className="login-form">
             <Input label="Email Corporativo" type="email" placeholder="Seu.email@empresa.com" />
             <Input label="Senha" type="password" placeholder="Digite uma senha segura" />
-            <Button title="Entrar" variant="primary" /> 
+            <Button title="Entrar" variant="primary" onClick={irParaDash} />
           </form>
 
           <p className="forgot-link-text">

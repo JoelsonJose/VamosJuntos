@@ -1,0 +1,122 @@
+.card-carona {
+  background-color: #fff;
+  border-radius: 16px;
+  border: 1px solid #e5e7eb; 
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); 
+  padding: 24px; 
+  font-family: 'Inter', sans-serif;
+}
+
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start; 
+  border-bottom: 1px solid #f3f4f6; 
+  padding-bottom: 1rem;
+  margin-bottom: 1rem;
+}
+
+.rota-info h3 {
+  font-size: 22px; 
+  font-weight: 600;
+  color: #111827; 
+  margin: 0;
+}
+
+
+.rota-info h3 span {
+  color: #111827; 
+  font-weight: 400;
+}
+
+.detalhes-rota {
+  font-size: 15px; 
+  color: #6b7280; 
+  margin-top: 0.25rem;
+}
+
+.status-tag {
+  font-weight: 600;
+  font-size: 15px;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px; 
+  flex-shrink: 0; 
+  margin-left: 1rem;
+}
+
+
+.status-tag.confirmada {
+  background-color: #d1fae5; 
+  color: #065f46; 
+}
+
+
+
+.card-body {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem; 
+}
+
+.horario-info,
+.motorista-info {
+  font-size: 15px; 
+  font-weight: 400;
+  color: #374151; 
+  line-height: 1.6;
+}
+
+.motorista-info p {
+  margin: 0; 
+}
+
+.motorista-info p strong {
+  color: #1f2937; 
+}
+
+.card-footer {
+  display: flex;
+  justify-content: flex-end; 
+  margin-top: 1.5rem;
+}
+
+.btn-ver-viagem {
+  background-color: #8b5cf6; 
+  color: #fff;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 15px;
+  border: none;
+  border-radius: 12px;
+  padding: 0.75rem 1.5rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-ver-viagem:hover {
+  background-color: #7c3aed; 
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.squad-info{
+  font-size: 14px; 
+  font-weight: 400;
+  color: #6b7280; 
+  line-height: 1.6;
+}
+
+.Locationicon{
+  width: 15px;
+  height: 15px;
+  object-fit: contain;
+}
+
+.Clockicon{
+  width: 15px;
+  height: 15px;
+  object-fit: contain;
+  margin-right: 4px;
+}
