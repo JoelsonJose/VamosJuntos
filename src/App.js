@@ -5,6 +5,7 @@ import PaginaRegistro from './pages/PaginaRegistro/PaginaRegistro';
 import PaginaLogin from './pages/PaginaLogin/PaginaLogin';
 import PaginaDashboard from './pages/PaginaDashboard/PaginaDashboard';
 import PaginaBuscar from './pages/PaginaBuscar/PaginaBuscar';
+import ProfilePage from './pages/ProfilePage/ProfilePage';
 // import PaginaMinhasCaronas from './pages/PaginaMinhasCaronas/PaginaMinhasCaronas';
 // import PaginaRotas from './pages/PaginaRotas/PaginaRotas';
 // import PaginaCriar from './pages/PaginaCriar/PaginaCriar';
@@ -19,6 +20,7 @@ function App() {
       <Route path= "/login" element= {<PaginaLogin />} />
       <Route path= "/dashboard" element= {<PaginaDashboard />} />
       <Route path= "/buscar" element= {<PaginaBuscar />} />
+      <Route path= "/perfil" element= {<ProfilePage />} />
       {/*
         <Route path= "/minhas-caronas" element= {<PaginaMinhasCaronas />} />
         <Route path= "/rotas" element= {<PaginaRotas />} />
