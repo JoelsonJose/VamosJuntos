@@ -1,0 +1,62 @@
+
+
+
+
+.app-layout-container {
+    display: flex;       
+    min-height: 100vh;   
+    width: 100%;
+    align-items: flex-start; 
+    background: linear-gradient(to bottom, #f3e8ff, #d8c0ff);
+}
+
+.profile-page-container {
+ 
+    flex-grow: 1; 
+    padding: 20px 20px 20px 280px; 
+    position: relative; 
+    padding-top: 0; 
+    padding-right: 0; 
+    box-sizing: border-box; 
+    overflow-y: auto; 
+}
+
+
+.page-title {
+    margin-top: 0;
+    margin-bottom: 30px; 
+    font-size: 2rem;
+    color: #333;
+}
+
+.edit-button {
+    position: absolute;
+    /* Ajusta o botão para o canto superior direito do .profile-page-container */
+    top: 20px; 
+    right: 20px; 
+    
+    background-color: #A100FF; 
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 10;
+    transition: background-color 0.2s;
+}
+
+.edit-button:hover {
+    background-color: #6b21a8; 
+}
+
+
+
+@media (min-width: 1024px) {
+    .profile-cards-grid {
+        display: grid;
+        /* Coluna principal (2 partes) e lateral (1 parte) */
+        grid-template-columns: 2fr 1fr; 
+        gap: 25px; 
+    }
+}
