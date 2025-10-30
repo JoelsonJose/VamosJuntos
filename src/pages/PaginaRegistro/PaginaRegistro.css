@@ -1,0 +1,91 @@
+.register-background {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(160deg, #F8F4FF, #D0BCFF);
+  padding: 40px 20px;
+}
+
+.register-container {
+  background-color: #FFFFFF;
+  border-radius: 24px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  padding: 40px;
+  width: 100%;
+  max-width: 500px;
+  text-align: center;
+}
+
+.register-logo {
+  width: 40px;
+  margin-bottom: 16px;
+}
+
+.register-title {
+  font-size: 28px;
+  font-weight: 700;
+  font-family: Inter;
+  color: #1E1E1E;
+  margin: 0;
+}
+
+.register-subtitle {
+  font-size: 16px;
+  font-family: Inter;
+  color: #B1B1B1; 
+  margin-top: 8px;
+  margin-bottom: 30px;
+}
+
+.register-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: Inter;
+}
+
+
+.login-link-text {
+  margin-top: 25px;
+  font-size: 14px;
+  color: #555;
+}
+
+.login-link {
+  color: #4D0C7A;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.login-link:hover {
+  text-decoration: underline;
+}
+
+
+.optional-text {
+  font-weight: 400;
+  color: #777; 
+  margin-left: 4px;
+}
+
+.file-upload-button {
+  width: auto;
+  padding: 10px 15px;
+  border: 1px solid #D9D9D9;
+  border-radius: 8px;
+  background-color: #FAFAFA;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.select-field {
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23AAA' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 15px center;
+  background-size: 16px;
+}

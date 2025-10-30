@@ -1,0 +1,29 @@
+/* src/components/Input/Input.css */
+
+.campo-container {
+  width: 100%;
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.campo-rotulo {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+}
+
+.asterisco-obrigatorio {
+  color: #FF0000; 
+  margin-left: 2px;
+}
+
+.campo-entrada {
+  width: 100%;
+  padding: 12px 15px;
+  font-size: 16px;
+  border: 1px solid #d9d9d9;
+  border-radius: 8px;
+  box-sizing: border-box; 
+}
