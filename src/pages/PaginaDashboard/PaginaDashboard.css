@@ -14,7 +14,7 @@
 .dashboard-container {
   display: flex;
   min-height: 100vh;
-  background: linear-gradient(180deg, #f7f7f9 0%, #ede9fe 100%);
+  background: linear-gradient(to bottom, #f3e8ff, #d8c0ff);
   font-family: 'Inter', sans-serif;
 }
 
