@@ -4,16 +4,10 @@
   border-radius: 16px;
   padding: 32px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-  max-width: 700px;
-  margin: 0 auto;
-  font-family: 'Poppins', sans-serif;
   color: #222;
   transition: all 0.3s ease;
-}
-
-.profile-header-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  box-sizing: border-box;
 }
 
 /* --- CABEÇALHO --- */

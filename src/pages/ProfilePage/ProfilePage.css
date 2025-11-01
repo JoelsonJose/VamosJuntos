@@ -1,7 +1,5 @@
 
 
-
-
 .app-layout-container {
     display: flex;       
     min-height: 100vh;   
@@ -13,12 +11,11 @@
 .profile-page-container {
  
     flex-grow: 1; 
-    padding: 20px 20px 20px 280px; 
-    position: relative; 
-    padding-top: 0; 
-    padding-right: 0; 
+    padding: 40px 48px;
+    position: relative;  
     box-sizing: border-box; 
     overflow-y: auto; 
+    margin-left: 230px;
 }
 
 
@@ -31,10 +28,8 @@
 
 .edit-button {
     position: absolute;
-    /* Ajusta o botão para o canto superior direito do .profile-page-container */
     top: 20px; 
-    right: 20px; 
-    
+    right: 45px; 
     background-color: #A100FF; 
     color: white;
     border: none;
@@ -44,12 +39,22 @@
     cursor: pointer;
     z-index: 10;
     transition: background-color 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 8px; 
+    border-radius: 12px; 
+    padding: 10px 18px; 
+    font-size: 0.95rem;
 }
 
 .edit-button:hover {
     background-color: #6b21a8; 
 }
 
+.edit-button-icon {
+  width: 20px;  
+  height: 20px; 
+}
 
 
 @media (min-width: 1024px) {
