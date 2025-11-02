@@ -1,0 +1,202 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+  --cor-fundo-pagina: #f7f7f9;
+  --cor-roxo-principal: #8b5cf6;
+  --cor-verde-tag: #d1fae5;
+  --cor-verde-tag-texto: #065f46;
+  --cor-texto-principal: #1f2937;
+  --cor-texto-secundario: #6c93e0;
+  --cor-borda-cinza: #e5e7eb;
+}
+
+/* ---------------------------------------------------- */
+/* CONTAINER PRINCIPAL DA PÁGINA DE ROTAS               */
+/* ---------------------------------------------------- */
+.pagina-rotas-container {
+  display: flex;
+  min-height: 100vh;
+  background: linear-gradient(to bottom, #f3e8ff, #d8c0ff);
+  font-family: 'Inter', sans-serif;
+}
+
+/* ---------------------------------------------------- */
+/* CONTEÚDO PRINCIPAL (CRIAR ROTA)                      */
+/* ---------------------------------------------------- */
+.conteudo-rotas {
+  flex-grow: 1;
+  width: calc(100% - 230px);
+  margin-left: 230px;
+  padding: 40px 48px;
+  overflow-y: auto;
+}
+
+/* ---------------------------------------------------- */
+/* CABEÇALHO DA PÁGINA (TÍTULO + SUBTÍTULO)             */
+/* ---------------------------------------------------- */
+.header-rotas {
+  margin-bottom: 2.5rem;
+}
+
+.header-rotas h1 {
+  font-size: 70px;
+  font-weight: 700;
+  color: var(--cor-texto-principal);
+  margin: 0;
+}
+
+.header-rotas .subtitle {
+  display: inline-block;
+  background-color: var(--cor-roxo-principal);
+  color: #fff;
+  font-weight: 500;
+  font-size: 25px;
+  padding: 0.25rem 1rem;
+  border-radius: 9999px;
+  margin-top: 0.5rem;
+}
+
+/* ---------------------------------------------------- */
+/* FORMULÁRIO DE CRIAÇÃO DE ROTA                        */
+/* ---------------------------------------------------- */
+.form-rota {
+  background-color: #fff;
+  border: 1px solid var(--cor-borda-cinza);
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  padding: 24px;
+  max-width: 900px;
+  margin-left: 0;
+}
+
+/* ---------------------------------------------------- */
+/* INPUTS E SELECTS                                     */
+/* ---------------------------------------------------- */
+input,
+textarea,
+select {
+  border: 1px solid var(--cor-borda-cinza);
+  border-radius: 8px;
+  padding: 8px 10px;
+  font-size: 0.95rem;
+  width: 100%;
+  color: var(--cor-texto-principal);
+  box-sizing: border-box;
+  background-color: #fff;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  border-color: var(--cor-roxo-principal);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.2);
+}
+
+textarea {
+  min-height: 80px;
+  resize: vertical;
+}
+
+/* ---------------------------------------------------- */
+/* SEÇÃO: HORÁRIO E DIAS DA SEMANA                      */
+/* ---------------------------------------------------- */
+.secao-horario {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.secao-horario .horario-saida {
+  max-width: 180px;
+}
+
+/* ---------------------------------------------------- */
+/* SEÇÃO FINAL (VAGAS, VALOR, NOTA MÍNIMA)              */
+/* ---------------------------------------------------- */
+.secao-final {
+  display: flex;
+  gap: 15px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+/* ---------------------------------------------------- */
+/* BOTÕES                                               */
+/* ---------------------------------------------------- */
+.btn-primario {
+  background-color: var(--cor-roxo-principal);
+  color: #fff;
+  font-weight: 600;
+  font-size: 14px;
+  border: none;
+  border-radius: 9999px;
+  padding: 0.5rem 1.25rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.btn-primario:hover {
+  background-color: #7c3aed;
+}
+
+.btn-secundario {
+  background-color: var(--cor-verde-tag);
+  color: var(--cor-verde-tag-texto);
+  font-weight: 600;
+  font-size: 13px;
+  border: none;
+  border-radius: 9999px;
+  padding: 0.4rem 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.btn-secundario:hover {
+  background-color: #bbf7d0;
+}
+
+.btn-criar {
+  background-color: transparent;
+  color: var(--cor-texto-principal);
+  font-weight: 600;
+  font-size: 18px;
+  border: none;
+  cursor: pointer;
+  transition: color 0.2s ease;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 20px;
+  text-decoration: none;
+}
+
+.btn-criar strong {
+  color: inherit;
+}
+
+.btn-criar:hover {
+  color: var(--cor-roxo-principal);
+}
+
+/* RESPONSIVIDADE                                       */
+/* ---------------------------------------------------- */
+@media (max-width: 900px) {
+  .conteudo-rotas {
+    padding: 24px;
+    margin-left: 0;
+    width: 100%;
+  }
+
+  .form-rota {
+    max-width: 100%;
+  }
+
+  .secao-horario,
+  .secao-final {
+    flex-direction: column;
+    gap: 16px;
+  }
+}
