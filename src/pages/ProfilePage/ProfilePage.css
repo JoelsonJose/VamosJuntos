@@ -22,7 +22,7 @@
 .page-title {
     margin-top: 0;
     margin-bottom: 30px; 
-    font-size: 2rem;
+    font-size: 28px;
     color: #333;
 }
 
@@ -60,7 +60,6 @@
 @media (min-width: 1024px) {
     .profile-cards-grid {
         display: grid;
-        /* Coluna principal (2 partes) e lateral (1 parte) */
         grid-template-columns: 2fr 1fr; 
         gap: 25px; 
     }
