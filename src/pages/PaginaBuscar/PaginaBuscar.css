@@ -15,7 +15,7 @@ body {
 
 .conteudo-buscar {
   margin-left: 230px;
-  padding: 28px 36px;
+  padding: 40px 48px;
   color: #333;
 }
 
@@ -39,7 +39,7 @@ body {
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
 }
 
-.filtro-titulo h3 { margin: 0; color: #3a0961; }
+.filtro-titulo h3 { margin: 0; color: #333; }
 .filtro-titulo p { color: #666; font-size: 14px; margin-bottom: 12px; }
 
 .filtros-inputs {
