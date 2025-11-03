@@ -1,0 +1,66 @@
+body {
+  background: linear-gradient(to bottom right, #f3ecff, #e4d4ff);
+  margin: 0;
+}
+
+.dashboard-container {
+  display: flex;
+  height: 100vh;
+}
+
+.dashboard-content {
+  flex: 1;
+  padding: 50px 70px;
+  overflow-y: auto;
+}
+
+.dashboard-header h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #3c1665;
+}
+
+.dashboard-header .subtitle {
+  color: #777;
+  font-size: 1rem;
+}
+
+/* CARD PRINCIPAL */
+.card-editar-rota {
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+  margin-top: 30px;
+}
+
+label {
+  font-weight: 500;
+  color: #3c1665;
+  margin-bottom: 5px;
+}
+
+.form-control,
+.form-select,
+textarea {
+  border-radius: 10px;
+}
+
+/* BOTÕES */
+.btn-purple {
+  background-color: #b144ff;
+  color: white;
+  border-radius: 25px;
+  font-weight: 500;
+  padding: 10px 30px;
+}
+
+.btn-purple:hover {
+  background-color: #951fff;
+}
+
+.btn-outline-secondary {
+  border-radius: 25px;
+  font-weight: 500;
+  padding: 10px 25px;
+}
