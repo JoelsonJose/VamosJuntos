@@ -7,8 +7,9 @@ import PaginaDashboard from './pages/PaginaDashboard/PaginaDashboard';
 import PaginaBuscar from './pages/PaginaBuscar/PaginaBuscar';
 import ProfilePage from './pages/ProfilePage/ProfilePage';
 import PaginaCriar from './pages/PaginaCriarRota/PaginaCriarRota';
+import PaginaEditarRotas from './pages/PaginaEditarRotas/PaginaEditarRotas';
+import PaginaRotas from './pages/PaginaMinhasRotas/PaginaMinhasRotas';
 // import PaginaMinhasCaronas from './pages/PaginaMinhasCaronas/PaginaMinhasCaronas';
-// import PaginaRotas from './pages/PaginaRotas/PaginaRotas';
 // import PaginaPerfil from './pages/PaginaPerfil/PaginaPerfil';
 
 function App() {
@@ -22,9 +23,10 @@ function App() {
       <Route path= "/buscar" element= {<PaginaBuscar />} />
       <Route path= "/perfil" element= {<ProfilePage />} />
       <Route path= "/criar" element= {<PaginaCriar />} />
+      <Route path= "/editarRota" element= {<PaginaEditarRotas />} />
+      <Route path= "/rotas" element= {<PaginaRotas />} />
       {/*
         <Route path= "/minhas-caronas" element= {<PaginaMinhasCaronas />} />
-        <Route path= "/rotas" element= {<PaginaRotas />} />
         <Route path= "/perfil" element= {<PaginaPerfil />} />
       */}
     </Routes>

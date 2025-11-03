@@ -51,7 +51,7 @@ export default function PaginaCriarRota() {
 
   return (
     // 1. Layout Padrão da Página (Container Flex)
-    <div className="pagina-rotas-container">
+    <div className="pagina-criar-rotas-container">
       <Sidebar activePage="criar" /> {/* Define o item 'Criar Rotas' como ativo */}
       
       {/* 2. Área de Conteúdo Principal (com margem e padding corretos) */}

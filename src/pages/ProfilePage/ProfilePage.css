@@ -9,7 +9,6 @@
 }
 
 .profile-page-container {
- 
     flex-grow: 1; 
     padding: 40px 48px;
     position: relative;  
@@ -30,7 +29,7 @@
     position: absolute;
     top: 20px; 
     right: 45px; 
-    background-color: #A100FF; 
+    background-color: #8b5cf6; 
     color: white;
     border: none;
     padding: 8px 15px;
@@ -48,7 +47,9 @@
 }
 
 .edit-button:hover {
-    background-color: #6b21a8; 
+    background-color: #7c3aed; 
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 .edit-button-icon {

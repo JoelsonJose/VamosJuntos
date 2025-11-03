@@ -59,12 +59,18 @@ body {
 
 /* botão buscar */
 .btn-buscar {
-  background-color: #7b3d9a;
+  background-color: #8b5cf6;
   color: white;
   border: none;
   padding: 10px 18px;
   border-radius: 8px;
   cursor: pointer;
+}
+
+.btn-buscar:hover{
+  background-color: #7c3aed; 
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 /* RESULTADOS + DICAS */

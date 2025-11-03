@@ -29,7 +29,7 @@
   width: 100px;
   height: 100px;
   border-radius: 50%;
-  border: 3px solid #a200ff;
+  border: 3px solid #8b5cf6;
   object-fit: cover;
 }
 
@@ -92,7 +92,7 @@
 }
 
 .accessibility-button {
-  background-color: #a200ff;
+  background-color: #8b5cf6;
   color: white;
   font-size: 0.9rem;
   font-weight: 600;
@@ -104,7 +104,7 @@
 }
 
 .accessibility-button:hover {
-  background-color: #8000d6;
+  background-color: #7c3aed;
 }
 
 /* --- SEÇÕES INFERIORES --- */
