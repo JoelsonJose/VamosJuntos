@@ -26,8 +26,8 @@ function App() {
       <Route path= "/editarRota" element= {<PaginaEditarRotas />} />
       <Route path= "/rotas" element= {<PaginaRotas />} />
       <Route path= "/minhas-caronas" element= {<PaginaMinhasCaronas />} />
+      <Route path= "/editar" element= {<PaginaEditarRotas />} />
       {/*
-        
         <Route path= "/perfil" element= {<PaginaPerfil />} />
       */}
     </Routes>

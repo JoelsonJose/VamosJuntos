@@ -103,6 +103,9 @@ function CardRota({ rota }) {
           <span className={`status-tag ${rota.ativa ? 'ativa' : 'inativa'}`}>
             {rota.ativa ? 'Ativa' : 'Inativa'}
           </span>
+          <a href="/editar" className="btn-editar">
+            Editar
+          </a>
           <button className="btn-excluir">
             Excluir
           </button>
