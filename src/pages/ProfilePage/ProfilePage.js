@@ -7,8 +7,8 @@ import ReviewsCard from '../../components/CardPerfil/ReviewsCard';
 import ConquistasCard from '../../components/CardPerfil/ConquistasCard'; 
 import EditProfileModal from '../../components/Modals/EditProfileModal'; 
 import IconEditar from '../../assets/Editw.png';
-import FotoMaria from '../../assets/Maria Santos.png'; 
-import FotoRaul from '../../assets/Raul Cadena.png';
+import FotoMaria from '../../assets/Fotos/usuario4.png'; 
+import FotoRaul from '../../assets/Fotos/usuario3.png';
 
 
 function ProfilePage() {
