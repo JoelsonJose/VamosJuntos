@@ -2,7 +2,7 @@ import React from 'react';
 import './ProfileHeaderCard.css';
 
 // Caminho correto da imagem na pasta src/assets
-import FotodoPerfil from '../../assets/foto_perfil.png';
+import FotodoPerfil from '../../assets/Fotos/usuario5.png';
 
 // Ícones (mantendo o seu estilo simples)
 const StarIcon = '⭐';

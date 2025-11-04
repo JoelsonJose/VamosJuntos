@@ -1,0 +1,197 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+/* ---------------------------------------------------- */
+/* LAYOUT DA PÁGINA                                     */
+/* ---------------------------------------------------- */
+.pagina-caronas-container {
+  display: block;
+  min-height: 100vh;
+  background: linear-gradient(to bottom, #f3e8ff, #d8c0ff);
+}
+ 
+.conteudo-caronas {
+  margin-left: 230px;
+  padding: 40px 48px;
+  color: #333;
+}
+ 
+/* ---------------------------------------------------- */
+/* CABEÇALHO ("Minhas Caronas")                         */
+/* ---------------------------------------------------- */
+.header-minhas-caronas {
+  margin-bottom: 32px; 
+}
+
+.page-main-title {
+  font-size: 28px;
+  font-weight: 700;
+  color: #1f2937;
+  margin: 0 0 8px 0;
+}
+
+.page-main-subtitle {
+  color: #555;
+  font-size: 1rem;
+  margin: 0;
+}
+
+/* ---------------------------------------------------- */
+/* LISTA DE CARDS DE ROTA                               */
+/* ---------------------------------------------------- */
+.lista-caronas-container {
+  display: flex;
+  flex-direction: column;
+  gap: 35px; 
+  max-width: 10000px;
+}
+
+.carona-item-wrapper {
+  display: flex;
+  gap: 16px;
+  align-items: stretch;
+}
+
+/* ---------------------------------------------------- */
+/* CARD DA ESQUERDA (INFORMAÇÕES)                       */
+/* ---------------------------------------------------- */
+.carona-card-info {
+  flex-grow: 1; 
+  background: #fff;
+  border-radius: 12px;
+  padding: 28px 24px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  border: 1px solid #e5e7eb;
+}
+
+.card-info-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.rota-titulo {
+  font-size: 1.125rem; /* 18px */
+  font-weight: 600;
+  color: #1f2937;
+  margin: 0;
+  line-height: 1.4;
+}
+
+.rota-titulo span {
+  color: #9ca3af; /* Seta cinza */
+  font-weight: 400;
+  margin: 0 4px;
+}
+
+/* --- Tags de Status --- */
+.status-tag {
+  font-size: 0.75rem; /* 12px */
+  font-weight: 600;
+  padding: 4px 12px;
+  border-radius: 9999px;
+  text-transform: capitalize;
+  flex-shrink: 0;
+}
+
+.status-tag.status-agendada {
+  background-color: #FEF3C7; /* Amarelo */
+  color: #9A3412;
+}
+.status-tag.status-ativa {
+  background-color: #D1FAE5; /* Verde */
+  color: #065F46;
+}
+.status-tag.status-finalizada {
+  background-color: #DBEAFE; /* Azul */
+  color: #1E40AF;
+}
+.status-tag.status-cancelada {
+  background-color: #FEE2E2; /* Vermelho */
+  color: #991B1B;
+}
+
+.rota-horario {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.9rem; /* 14px */
+  color: #6b7280;
+  font-weight: 500;
+}
+
+.rota-horario .input-icon {
+  width: 16px;
+  height: 16px;
+  opacity: 0.6;
+}
+
+/* ---------------------------------------------------- */
+/* CARD DA DIREITA (AVALIAÇÃO)                          */
+/* ---------------------------------------------------- */
+.carona-card-rating {
+  flex-shrink: 0; 
+  width: 300px;
+  background: #fff;
+  border-radius: 12px;
+  padding: 28px 24px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  border: 1px solid #e5e7eb;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.rating-user-foto img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/* --- ESTILOS PARA O NOVO STAR-RATING COM <img> --- */
+.rating-stars {
+  display: flex;
+  gap: 8px;
+}
+
+.star-img {
+  width: 30px;  /* Tamanho da estrela */
+  height: 30px;
+}
+
+/* Estilo para o cadeado */
+.star-img.locked {
+  width: 20px;  /* Cadeado um pouco menor */
+  height: 20px;
+  opacity: 0.6; /* Deixa o cadeado cinza/faded */
+}
+
+/* ---------------------------------------------------- */
+/* RESPONSIVIDADE                                       */
+/* ---------------------------------------------------- */
+@media (max-width: 992px) {
+  .conteudo-caronas {
+    padding: 24px;
+    margin-left: 0;
+    width: 100%;
+  }
+  .lista-caronas-container {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .carona-item-wrapper {
+    flex-direction: column;
+  }
+  .carona-card-rating {
+    width: 100%;
+  }
+  .card-info-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+}
