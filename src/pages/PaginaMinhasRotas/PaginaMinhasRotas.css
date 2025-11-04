@@ -138,6 +138,28 @@
   color: #6b7280;
 }
 
+.btn-editar{
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: transparent;
+  border: none;
+  color: #8b5cf6; 
+  font-size: 0.875rem; 
+  font-weight: 600;
+  cursor: pointer;
+  padding: 4px;
+  text-decoration: none;
+}
+
+.btn-editar:hover {
+  background-color: #7c3aed; 
+  color: #fff; 
+  border-radius: 6px; 
+  text-decoration: none;
+}
+
+
 .btn-excluir {
   display: flex;
   align-items: center;
@@ -152,7 +174,9 @@
 }
 
 .btn-excluir:hover {
-  color: #DC2626; /* Vermelho escuro */
+  background-color: #DC2626; 
+  color: #fff; 
+  border-radius: 6px;
 }
 
 .btn-icon-excluir {
