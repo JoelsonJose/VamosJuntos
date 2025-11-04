@@ -15,15 +15,19 @@
   min-height: 100vh;
   background: linear-gradient(to bottom, #f3e8ff, #d8c0ff);
   font-family: 'Inter', sans-serif;
+ 
 }
 
 .dashboard-content {
-  margin-left: 208px;
+  margin-left: 230px;
   padding: 40px 48px;
   color: #333;
+  width: 100%;
+  max-width: 1800px; 
+  box-sizing: border-box;
 }
 
-.ddashboard-cabecalho {
+.dashboard-cabecalho {
   margin-bottom: 2.5rem; 
 }
 
@@ -63,6 +67,8 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
   padding: 20px 24px; 
   min-width: 300px;
+  width: 100%; 
+  box-sizing: border-box;
 }
 
 .card-resumo-info-group {
