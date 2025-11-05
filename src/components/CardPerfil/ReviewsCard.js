@@ -1,4 +1,3 @@
-import React from 'react';
 import './ReviewsCard.css';
 
 // O componente agora recebe a lista de avaliações através da prop 'reviewsData'

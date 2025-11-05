@@ -5,6 +5,7 @@ import Button from '../../components/Button';
 import logo from '../../assets/Somente_Logo_VJ 1.png';
 import uploadicon  from '../../assets/Upward Arrow.png';
 import { useNavigate } from 'react-router-dom';
+import BotaoAcessibilidade from "../../components/BotaoAcessibilidade/BotaoAcessibilidade";
 
 export default function RegisterPage () {
 
@@ -60,6 +61,7 @@ export default function RegisterPage () {
             Já tem conta? <Link to="/login" className="login-link">Fazer login</Link>
           </p>
         </div>
+        <BotaoAcessibilidade />
       </div>
   );
 };

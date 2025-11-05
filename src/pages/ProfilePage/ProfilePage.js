@@ -6,6 +6,9 @@ import StatsCard from '../../components/CardPerfil/StatsCard';
 import ReviewsCard from '../../components/CardPerfil/ReviewsCard'; 
 import ConquistasCard from '../../components/CardPerfil/ConquistasCard'; 
 import EditProfileModal from '../../components/Modals/EditProfileModal'; 
+import IconEditar from '../../assets/Editw.png';
+import FotoMaria from '../../assets/Fotos/usuario4.png'; 
+import FotoRaul from '../../assets/Fotos/usuario3.png';
 
 
 function ProfilePage() {
@@ -32,14 +35,14 @@ function ProfilePage() {
             date: '20/09/2025',
             role: 'Motorista',
             text: 'Excelente motorista! Muito pontual e educado.',
-            photo: '/assets/maria-santos.jpg' 
+            photo: FotoMaria 
         },
         {
             name: 'Raul Cadena',
             date: '20/09/2025',
             role: 'Caronista',
             text: 'Bom caronista, sempre no horário combinado.',
-            photo: '/assets/raul-cadena.jpg' 
+            photo: FotoRaul
         },
         {
             name: 'Wendell Barboza',
@@ -105,25 +108,20 @@ function ProfilePage() {
                     className="edit-button" 
                     onClick={handleOpenModal} 
                 >
-                    Editar
+                    <img src={IconEditar} alt="Editar" className="edit-button-icon" />
+                    <span>Editar</span>
                 </button>
                 
                 <div className="profile-cards-grid"> 
-                    
-                    <div className="main-content-column">
-                        <ProfileHeaderCard userData={userData} /> 
-                        {/* PASSANDO A LISTA DE AVALIAÇÕES */}
-                        <ReviewsCard reviewsData={reviewsList} /> 
-                    </div>
-                    
-                    <div className="sidebar-cards-column">
-                        {/* StatsCard usa userData, que inclui os números de caronas */}
-                        <StatsCard statsData={userData} /> 
-                        
-                        {/* PASSANDO A LISTA DE CONQUISTAS */}
-                        <ConquistasCard conquistasData={conquistasList} /> 
-                    </div>
-                    
+
+                    {/* Linha 1 */}
+                    <ProfileHeaderCard userData={userData} /> 
+                    <StatsCard statsData={userData} /> 
+
+                    {/* Linha 2 */}
+                    <ReviewsCard reviewsData={reviewsList} /> 
+                    <ConquistasCard conquistasData={conquistasList} /> 
+
                 </div>
                 
                 <EditProfileModal 

@@ -1,7 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
 :root {
-  --cor-fundo-pagina: #f7f7f9;
   --cor-roxo-principal: #8b5cf6;
   --cor-verde-tag: #d1fae5;
   --cor-verde-tag-texto: #065f46;
@@ -14,40 +13,40 @@
 .dashboard-container {
   display: flex;
   min-height: 100vh;
-  background: linear-gradient(180deg, #f7f7f9 0%, #ede9fe 100%);
+  background: linear-gradient(to bottom, #f3e8ff, #d8c0ff);
   font-family: 'Inter', sans-serif;
+ 
 }
 
 .dashboard-content {
-  flex-grow: 1;
-  width: calc(100% - 230px);
-  margin-left: 230px; 
-  padding: 40px 48px; 
-  overflow-y: auto;
+  margin-left: 230px;
+  padding: 40px 48px;
+  color: #333;
+  width: 100%;
+  max-width: 1800px; 
+  box-sizing: border-box;
 }
 
-
-
-.dashboard-header {
+.dashboard-cabecalho {
   margin-bottom: 2.5rem; 
 }
 
-.dashboard-header h1 {
+.dashboard-cabecalho h1 {
   font-size: 70px; 
   font-weight: 700;
-  color: var(--cor-texto-principal);
   margin: 0;
 }
 
-.dashboard-header .subtitle {
+.sobretitulo {
   display: inline-block;
-  background-color: var(--cor-roxo-principal);
+  background-color: #8b5cf6;
   color: #fff;
   font-weight: 500;
   font-size: 25px; 
   padding: 0.25rem 1rem;
   border-radius: 9999px; 
   margin-top: 0.5rem;
+  margin-bottom: 50px;
 }
 
 .area-resumo {
@@ -64,10 +63,12 @@
   flex-grow: 1;  
   background-color: #fff;
   border-radius: 16px;
-  border: 1px solid var(--cor-borda-cinza);
+  border: 1px solid #e5e7eb;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
   padding: 20px 24px; 
   min-width: 300px;
+  width: 100%; 
+  box-sizing: border-box;
 }
 
 .card-resumo-info-group {
@@ -86,7 +87,7 @@
 .card-resumo-info h4 {
   font-size: 18px; 
   font-weight: 600;
-  color: var(--cor-texto-principal);
+  color: #1f2937;
   margin: 0;
   white-space: nowrap;
 }
@@ -105,7 +106,7 @@
   text-decoration: none;
   font-weight: 600;
   font-size: 0.9rem;
-  color: var(--cor-texto-principal);
+  color: #1f2937;
   flex-shrink: 0; 
   margin-left: 1rem;
   transition: color 0.2s ease;
@@ -119,13 +120,13 @@
 }
 
 .card-resumo-link:hover {
-  color: var(--cor-roxo-principal);
+  color: #8b5cf6;
 }
 
 
 .btn-repetir {
-  background-color: var(--cor-verde-tag);
-  color: var(--cor-verde-tag-texto);
+  background-color: #d1fae5;
+  color: #065f46;
   font-family: 'Inter', sans-serif;
   font-weight: 600;
   font-size: 12px; 
@@ -154,7 +155,7 @@
 .title-card-resumo {
   font-size: 22px; 
   font-weight: 600;
-  color: var(--cor-texto-principal);
+  color: #1f2937;
 }
 
 .info-card-resumo{
@@ -170,10 +171,14 @@
   cursor: pointer;
   font-weight: 600;
   font-size: 18px;
-  color: var(--cor-texto-principal);
+  color:#1f2937;
   transition: color 0.2s ease;
   flex-shrink: 0;  
   margin-left: 1rem; 
+}
+
+.Infoicon{
+  width: 23px;
 }
 
 @media (max-width: 900px) {

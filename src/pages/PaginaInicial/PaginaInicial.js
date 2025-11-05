@@ -3,6 +3,7 @@ import logo from '../../assets/Somente_Logo_VJ 1.png';
 import Button from '../../components/Button/index';
 import { useNavigate } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
+import BotaoAcessibilidade from "../../components/BotaoAcessibilidade/BotaoAcessibilidade";
 
 export default function PaginaInicial () {
 
@@ -32,6 +33,7 @@ export default function PaginaInicial () {
                 <Button title="Login" variant="primary" onClick={irParaLogin} />
                 <Button title="Criar Conta" variant="primary" onClick={irParaCadastro} />
             </div>
+            <BotaoAcessibilidade />
         </div>
     )
 }

@@ -1,0 +1,290 @@
+﻿@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+/* ---------------------------------------------------- */
+/* LAYOUT PADRÃO DA PÁGINA (Container Flex)             */
+/* ---------------------------------------------------- */
+.pagina-criar-rotas-container {
+  display: block;
+  min-height: 100vh;
+  background: linear-gradient(to bottom, #f3e8ff, #d8c0ff);
+  font-family: 'Inter', sans-serif;
+  margin-top: -40px;
+}
+
+/* ---------------------------------------------------- */
+/* ÁREA DE CONTEÚDO (Direita da Sidebar)                */
+/* ---------------------------------------------------- */
+.conteudo-rotas {
+  flex-grow: 1; 
+  padding: 40px 48px;
+  position: relative;  
+  box-sizing: border-box; 
+  overflow-y: auto; 
+  margin-left: 230px;
+}
+
+/* ---------------------------------------------------- */
+/* TÍTULO E SUBTÍTULO DA PÁGINA                         */
+/* ---------------------------------------------------- */
+.page-main-title {
+  font-size: 28px;
+  font-weight: 700;
+  color: #1f2937;
+  margin-top: -40px;
+  margin-bottom: 8px;
+}
+
+.page-main-subtitle {
+  color: #555;
+  font-size: 1rem;
+  margin-top: 0;
+  margin-bottom: 1px;
+  display: block;
+}
+
+/* ---------------------------------------------------- */
+/* CARD BRANCO PRINCIPAL (O Formulário)                 */
+/* ---------------------------------------------------- */
+.form-card-principal {
+  background: #fff;
+  border-radius: 16px;
+  padding: 32px 40px; /* Padding interno do card */
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  display: block;
+  width: 1000; /* Limita a largura do card */
+  margin: 0; /* Remove centralização antiga */
+}
+
+/* ---------------------------------------------------- */
+/* Títulos de Seção (Dentro do Card)                    */
+/* ---------------------------------------------------- */
+.form-section-title {
+  display: flex;
+  align-items: center;
+  font-size: 1.125rem; /* 18px */
+  font-weight: 600;
+  color: #1f2937;
+  margin-top: 0;
+  margin-bottom: 4px;
+}
+
+.form-section-subtitle {
+  font-size: 0.9rem; /* 14px */
+  color: #6b7280; /* cinza */
+  margin-top: 0;
+  margin-bottom: 24px;
+}
+
+/* Linha divisória entre as seções */
+.form-divider {
+  border: none;
+  border-top: 1px solid #e5e7eb; /* cor-borda-cinza */
+  margin: 24px 0;
+}
+
+/* ---------------------------------------------------- */
+/* GRUPOS DE INPUTS (LABELS, INPUTS)                    */
+/* ---------------------------------------------------- */
+.grupo {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-bottom: 16px; /* Espaço entre grupos empilhados */
+}
+
+/* Remove a margem do último grupo em um layout inline */
+.grupo-inline .grupo,
+.grupo-inline-final .grupo {
+  margin-bottom: 0;
+}
+
+.grupo label {
+  font-size: 0.875rem; /* 14px */
+  font-weight: 500;
+  color: #374151; /* cinza mais escuro */
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.input-icon {
+  width: 16px;
+  height: 16px;
+  opacity: 0.7; /* Ícones mais suaves */
+}
+
+input,
+textarea,
+select {
+  border: 1px solid #D1D5DB; /* Borda cinza padrão */
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-size: 0.95rem;
+  width: 100%;
+  color: #1f2937;
+  box-sizing: border-box;
+  background-color: #fff;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  margin-bottom: 0; /* Remove margem padrão */
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  border-color: #A100FF; /* cor-roxo-principal */
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(161, 0, 255, 0.15);
+}
+
+textarea {
+  min-height: 90px;
+  resize: vertical;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: #9CA3AF; /* Placeholder cinza */
+}
+
+/* ---------------------------------------------------- */
+/* LAYOUTS INLINE (LADO A LADO)                         */
+/* ---------------------------------------------------- */
+.grupo-inline {
+  display: flex;
+  gap: 24px;
+  margin-bottom: 30px;
+}
+
+/* Layout para Horário (pequeno) e Dias (grande) */
+.grupo-inline-horario-dias {
+  display: flex;
+  gap: 24px;
+}
+
+.horario-saida-grupo {
+  max-width: 150px;
+  flex-shrink: 0; /* Não encolhe */
+}
+
+/* Layout para 3 colunas (Vagas, Valor, Nota) */
+.grupo-inline-final {
+  display: grid; /* Usamos grid para 3 colunas iguais */
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+/* ---------------------------------------------------- */
+/* DIAS DA SEMANA (Checkboxes)                          */
+/* ---------------------------------------------------- */
+.dias-semana-grupo {
+  flex-grow: 1; /* Ocupa o resto do espaço */
+}
+
+.dias-lista-grid {
+  display: grid;
+  /* 2 colunas, como no protótipo */
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px 16px;
+  padding-top: 5px; /* Alinha com o input de horário */
+}
+
+.checkbox-item {
+  display: flex;
+  align-items: center;
+  font-size: 0.9rem; /* 14px */
+  color: #374151;
+  cursor: pointer;
+  margin-bottom: 0;
+  font-weight: 500;
+}
+
+.checkbox-item input[type="checkbox"] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border: 2px solid #D1D5DB; /* Borda cinza */
+  border-radius: 4px;
+  margin-right: 8px;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.2s ease;
+  padding: 0;
+  margin-bottom: 0;
+}
+
+.checkbox-item input[type="checkbox"]:checked {
+  background-color: #A100FF; /* cor-roxo-principal */
+  border-color: #A100FF;
+}
+
+/* O "check" (✓) */
+.checkbox-item input[type="checkbox"]:checked::after {
+  content: '\2714';
+  color: white;
+  font-size: 12px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  line-height: 1;
+}
+
+/* ---------------------------------------------------- */
+/* BOTÃO CRIAR ROTA FINAL                               */
+/* ---------------------------------------------------- */
+.btn-criar-rota-final {
+  background-color: #8b5cf6; /* cor-roxo-principal */
+  color: white;
+  font-weight: 600;
+  font-size: 1rem; /* 16px */
+  border: none;
+  border-radius: 12px;
+  padding: 14px 25px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+  display: block;
+  width: 100%; /* Botão ocupa 100% da largura do card */
+  max-width: 300px; /* Mas tem um limite máximo */
+  margin: 32px auto 0 auto; /* Centraliza o botão e dá espaço em cima */
+  box-shadow: 0 4px 10px rgba(161, 0, 255, 0.2);
+}
+
+.btn-criar-rota-final:hover {
+  background-color: #7c3aed; /* cor-roxo-hover */
+  transform: translateY(-1px);
+}
+
+/* ---------------------------------------------------- */
+/* RESPONSIVIDADE                                       */
+/* ---------------------------------------------------- */
+@media (max-width: 992px) {
+  /* Em telas menores, remove a margem e o padding */
+  .conteudo-rotas {
+    padding: 24px;
+    margin-left: 0;
+    width: 100%;
+  }
+
+  .form-card-principal {
+    padding: 24px;
+  }
+}
+
+@media (max-width: 768px) {
+  /* Empilha os grupos que eram lado a lado */
+  .grupo-inline,
+  .grupo-inline-horario-dias,
+  .grupo-inline-final {
+    flex-direction: column;
+    grid-template-columns: 1fr; /* Para o grid de 3 colunas */
+    gap: 16px;
+  }
+
+  .horario-saida-grupo {
+    max-width: 100%;
+  }
+}
+

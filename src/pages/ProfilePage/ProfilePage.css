@@ -1,7 +1,5 @@
 
 
-
-
 .app-layout-container {
     display: flex;       
     min-height: 100vh;   
@@ -11,31 +9,27 @@
 }
 
 .profile-page-container {
- 
     flex-grow: 1; 
-    padding: 20px 20px 20px 280px; 
-    position: relative; 
-    padding-top: 0; 
-    padding-right: 0; 
+    padding: 40px 48px;
+    position: relative;  
     box-sizing: border-box; 
     overflow-y: auto; 
+    margin-left: 230px;
 }
 
 
 .page-title {
     margin-top: 0;
     margin-bottom: 30px; 
-    font-size: 2rem;
+    font-size: 28px;
     color: #333;
 }
 
 .edit-button {
     position: absolute;
-    /* Ajusta o botão para o canto superior direito do .profile-page-container */
     top: 20px; 
-    right: 20px; 
-    
-    background-color: #A100FF; 
+    right: 45px; 
+    background-color: #8b5cf6; 
     color: white;
     border: none;
     padding: 8px 15px;
@@ -44,18 +38,29 @@
     cursor: pointer;
     z-index: 10;
     transition: background-color 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 8px; 
+    border-radius: 12px; 
+    padding: 10px 18px; 
+    font-size: 0.95rem;
 }
 
 .edit-button:hover {
-    background-color: #6b21a8; 
+    background-color: #7c3aed; 
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
+.edit-button-icon {
+  width: 20px;  
+  height: 20px; 
+}
 
 
 @media (min-width: 1024px) {
     .profile-cards-grid {
         display: grid;
-        /* Coluna principal (2 partes) e lateral (1 parte) */
         grid-template-columns: 2fr 1fr; 
         gap: 25px; 
     }

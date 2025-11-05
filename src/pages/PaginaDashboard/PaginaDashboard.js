@@ -21,7 +21,6 @@ export default function DashboardPage() {
         <HeaderDashboard nomeUsuario="Homero Flávio" />
         <AreaResumo />
         <AreaCaronasSolicitadas />
-
       </main>
     </div>
   );
@@ -29,9 +28,9 @@ export default function DashboardPage() {
 
 function HeaderDashboard({ nomeUsuario }) {
   return (
-    <header className="dashboard-header">
+    <header className="dashboard-cabecalho">
       <h1>Olá, {nomeUsuario}!</h1>
-      <span className="subtitle">
+      <span className="sobretitulo">
         Bem-vindo ao seu dashboard de caronas
       </span>
     </header>
