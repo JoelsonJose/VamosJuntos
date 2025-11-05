@@ -1,0 +1,85 @@
+/* Container do botão flutuante */
+.botao-acessibilidade-container {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 999;
+  font-family: 'Arial', sans-serif;
+}
+
+/* Botão redondo principal */
+.botao-acessibilidade {
+  background: linear-gradient(135deg, #7F5FFF, #D6B4FF); /* degrade roxo/lilás */
+  color: white;
+  font-size: 26px;
+  border: none;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  cursor: pointer;
+  box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  border: 2px solid #000000;
+  box-shadow: 0 0 10px #d6b4ff;
+
+}
+
+.botao-acessibilidade:hover {
+  transform: scale(1.1);
+  box-shadow: 0 12px 20px rgba(0,0,0,0.25);
+}
+
+/* Painel de opções */
+.painel-acessibilidade {
+  position: absolute;
+  bottom: 70px;
+  right: 0;
+  background: #eae8ee; /* cinza claro de fundo */
+  border-radius: 16px;
+  padding: 15px 20px;
+  min-width: 200px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  font-size: 14px;
+  color: #333;
+}
+
+/* Título do painel */
+.painel-acessibilidade label:first-child {
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+/* Estilo para os switches */
+.painel-acessibilidade input[type="checkbox"] {
+  margin-right: 10px;
+  transform: scale(1.1);
+  accent-color: #7F5FFF; /* cor do projeto para o toggle */
+}
+
+/* Classes de efeitos globais */
+.modo-escuro {
+  background-color: #1a1a1a !important;
+  color: #f2f2f2 !important;
+}
+
+.modo-daltonico {
+  filter: grayscale(1);
+}
+
+.espacamento-letra * {
+  letter-spacing: 2px;
+}
+
+/* Transição suave para as mudanças */
+body.modo-escuro,
+body.modo-daltonico,
+body.espacamento-letra {
+  transition: all 0.3s ease;
+}

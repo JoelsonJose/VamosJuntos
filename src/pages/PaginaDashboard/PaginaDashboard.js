@@ -21,7 +21,6 @@ export default function DashboardPage() {
         <HeaderDashboard nomeUsuario="Homero Flávio" />
         <AreaResumo />
         <AreaCaronasSolicitadas />
-
       </main>
     </div>
   );
