@@ -43,7 +43,7 @@ export default function Sidebar() {
         <nav className="sidebar-nav">
           {navItems.map((it) => {
             
-            const isActive = location.pathname === it.path;
+            const isActive = location.pathname.startsWith(it.path);
 
             return (
               <Link
