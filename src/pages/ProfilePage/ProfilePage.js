@@ -1,4 +1,6 @@
 import React from 'react';
+// IMPORTANTE: Adicionar useNavigate para roteamento
+import { useNavigate } from 'react-router-dom';
 import './ProfilePage.css';
 import Sidebar from '../../components/Sidebar/Sidebar';
 import ProfileHeaderCard from '../../components/CardPerfil/ProfileHeaderCard'; 
@@ -6,17 +8,22 @@ import StatsCard from '../../components/CardPerfil/StatsCard';
 import ReviewsCard from '../../components/CardPerfil/ReviewsCard'; 
 import ConquistasCard from '../../components/CardPerfil/ConquistasCard'; 
 import EditProfileModal from '../../components/Modals/EditProfileModal'; 
+// Substitua estes imports pelos seus caminhos reais de assets
 import IconEditar from '../../assets/Editw.png';
 import FotoMaria from '../../assets/Fotos/usuario4.png'; 
 import FotoRaul from '../../assets/Fotos/usuario3.png';
+import FotoHomero from '../../assets/Fotos/usuario5.png'; // Import da foto do Homero
 
 
 function ProfilePage() {
-    
+    // Inicializa o hook de navegação do React Router
+    const navigate = useNavigate();
+
     // ESTADO 1: Dados do usuário (Inclui estatísticas)
     const [userData, setUserData] = React.useState({
         name: "Homero Flávio",
-        rating: 4.7,
+        photo: FotoHomero, // Campo adicionado anteriormente
+        rating: 4.7, // <--- VALOR DA NOTA MÉDIA
         reviewsCount: 23,
         totalRides: 47,
         motoristaRides: 28,
@@ -28,35 +35,37 @@ function ProfilePage() {
         phone: "(81) 9 1234-5678"
     });
 
-    // ESTADO 2: Dados das avaliações (Lista dinâmica)
+    // ... (reviewsList e conquistasList permanecem inalterados) ...
     const [reviewsList] = React.useState([
         {
             name: 'Maria Santos',
             date: '20/09/2025',
             role: 'Motorista',
             text: 'Excelente motorista! Muito pontual e educado.',
-            photo: FotoMaria 
+            photo: FotoMaria,
+            stars: 5, 
         },
         {
             name: 'Raul Cadena',
             date: '20/09/2025',
             role: 'Caronista',
             text: 'Bom caronista, sempre no horário combinado.',
-            photo: FotoRaul
+            photo: FotoRaul,
+            stars: 4,
         },
         {
             name: 'Wendell Barboza',
             date: '20/10/2025',
             role: 'Caronista',
             text: 'Bom caronista, sempre no horário combinado.',
-    
+            photo: null, 
+            stars: 3,
         }
     ]);
     
-    // ESTADO 3: Dados das Conquistas (Lista dinâmica)
     const [conquistasList] = React.useState([
         {
-            icon: '⭐', // Ícone de estrela para Motorista 5 Estrelas
+            icon: '⭐', 
             title: 'Motorista 5 estrelas',
             description: 'Mantém nota alta como motorista'
         },
@@ -65,12 +74,13 @@ function ProfilePage() {
             title: 'Veterano',
             description: 'Mais de 40 caronas realizadas'
         },
-         {
+        {
             icon: '🎶',
             title: 'Divertido',
             description: 'Melhores playlists'
         }
     ]);
+
 
     const [isEditModalOpen, setIsEditModalOpen] = React.useState(false);
     
@@ -91,7 +101,18 @@ function ProfilePage() {
         setUserData(updatedData);
         handleCloseModal();
     };
-
+    
+    // FUNÇÃO DE NAVEGAÇÃO ATUALIZADA PARA PASSAR A NOTA MÉDIA
+    const goToAvaliacoesPage = () => {
+        navigate('/avaliacoes', {
+            state: {
+                profileName: userData.name, 
+                profilePhoto: userData.photo, 
+                reviewsCount: userData.reviewsCount,
+                profileRating: userData.rating, // <--- CAMPO ADICIONADO AQUI
+            }
+        }); 
+    };
     
     return (
         // NOVO CONTAINER PAI: Aplica o Flexbox para alinhar Sidebar e Conteúdo
@@ -119,7 +140,11 @@ function ProfilePage() {
                     <StatsCard statsData={userData} /> 
 
                     {/* Linha 2 */}
-                    <ReviewsCard reviewsData={reviewsList} /> 
+                    {/* IMPORTANTE: Passar a função de clique para o ReviewsCard */}
+                    <ReviewsCard 
+                        reviewsData={reviewsList} 
+                        onCardClick={goToAvaliacoesPage} 
+                    /> 
                     <ConquistasCard conquistasData={conquistasList} /> 
 
                 </div>
