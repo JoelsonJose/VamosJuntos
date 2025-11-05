@@ -4,14 +4,16 @@ import Input from '../../components/Input/Input';
 import Button from '../../components/Button'; 
 import logo from '../../assets/Somente_Logo_VJ 1.png';
 import { useNavigate } from 'react-router-dom';
+import BotaoAcessibilidade from "../../components/BotaoAcessibilidade/BotaoAcessibilidade";
 
-export default function RegisterPage () {
+export default function PaginaLogin() {
   const navigate = useNavigate();
+  
+  const irParaDash = (event) => {
 
-  const irParaDash = () => {
-        navigate('/dashboard'); 
-    };
-
+    event.preventDefault(); 
+    navigate('/dashboard'); 
+  };
   return (
       <div className="login-background">
         
@@ -35,6 +37,7 @@ export default function RegisterPage () {
             Não tem conta? <Link to="/cadastro" className="cadastro-link">Cadastra-se</Link>
           </p>
         </div>
+        <BotaoAcessibilidade />
       </div>
   );
 };
