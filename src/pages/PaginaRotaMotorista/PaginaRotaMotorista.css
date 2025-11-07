@@ -1,0 +1,290 @@
+/* GLOBAIS/LAYOUT DA PÁGINA */
+.rota-pagina {
+  min-height: 100vh;
+  background: #f3e8ff;
+  display: flex;
+}
+
+/* O conteúdo que fica à direita do sidebar */
+.rota-conteudo {
+  margin-left: 230px; 
+  padding: 30px 40px;
+  flex-grow: 1;
+  overflow: auto;
+}
+
+/* TÍTULO E SUBTÍTULO */
+.rota-titulo-header h1 {
+  font-size: 28px;
+  color: #333;
+  margin-bottom: 5px;
+}
+.rota-titulo-header p {
+  font-size: 16px;
+  color: #666;
+  margin-bottom: 25px;
+}
+
+/* CONTAINER PRINCIPAL */
+.rota-principal-container {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 30px;
+}
+
+/* ✅ CARD ÚNICO: Destino + Status + Barra de Progresso (compactado) */
+.rota-mapa-progress-wrapper {
+  background: white;
+  border-radius: 8px;
+  padding: 12px 16px; 
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+
+  display: flex;
+  flex-direction: column;
+  gap: 10px; 
+
+  margin-top: 15px;
+  margin-bottom: 15px; 
+}
+
+/* CABEÇALHO DA ROTA E STATUS */
+.rota-progress-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.rota-descricao {
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+}
+
+.status-badge {
+  background: #6ab04c;
+  color: white;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+/* BARRA DE PROGRESSO */
+.rota-progresso-bar-wrapper {
+  margin: 0;
+}
+
+.rota-progresso-bar-bg {
+  height: 10px;
+  background: #e0b0ff;
+  border-radius: 10px;
+  position: relative;
+}
+.progresso-fill {
+  height: 100%;
+  background: #7b3d9a;
+  border-radius: 10px;
+  transition: width 0.6s;
+}
+.carro-progress-img {
+  position: absolute;
+  top: -12px;
+  transform: translateX(-50%);
+  width: 38px;
+  transition: left 0.6s;
+}
+
+.progresso-stop {
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 14px;
+  height: 14px;
+  background: #7b3d9a;
+  border: 3px solid #f3e8ff;
+  border-radius: 50%;
+  z-index: 10;
+}
+.stop-1 { left: 20%; }
+.stop-2 { left: 45%; }
+.stop-3 { left: 70%; }
+.stop-4 { left: 95%; }
+
+/* MAPA */
+.rota-mapa {
+  background: #ddd;
+  height: 480px;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+.mapa-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* CARD LATERAL DIREITO */
+.card-lateral-direita {
+  background: white;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  height: fit-content;
+  margin-top: 15px;
+}
+
+/* Motorista */
+.motorista-header-card {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.motorista-info-perfil {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+.perfil-img {
+  width: 65px;
+  height: 65px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.nome-motorista {
+  font-size: 18px;
+  font-weight: bold;
+}
+.star-rating {
+  margin-top: 3px;
+}
+
+/* Infos de Resumo */
+.rota-infos-resumo {
+  margin-bottom: 20px;
+}
+.carro-modelo {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 2px;
+}
+.caronas-info {
+  font-size: 12px;
+  color: #888;
+  margin-bottom: 15px;
+}
+.info-item-icon {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+  font-size: 14px;
+  color: #333;
+}
+.info-item-icon img {
+  width: 18px;
+  height: 18px;
+}
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-left: -4px;
+}
+.status-dot.green {
+  background-color: #6ab04c;
+}
+
+.divider-lista {
+  border: none;
+  border-top: 1px solid #eee;
+  margin: 15px 0;
+}
+
+/* LISTA DE PASSAGEIROS */
+.passageiros-lista {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.passageiro-card-lateral {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.passageiro-status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 15px;
+  background-color: #ccc; 
+  flex-shrink: 0;
+}
+.passageiro-status-dot.status-ok {
+  background-color: #6ab04c;
+}
+.passageiro-status-dot.status-no {
+  background-color: #ff6347;
+}
+
+.passageiro-info {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.acoes-lateral {
+  display: flex;
+  gap: 5px;
+}
+.acao-btn {
+  width: 28px;
+  cursor: pointer;
+  opacity: 1;
+  transition: opacity 0.3s;
+}
+.acao-btn.disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+/* BOTÃO FINALIZAR */
+.finalizar-btn {
+  background-color: #ff6347;
+  color: white;
+  font-weight: bold;
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 25px;
+  transition: background-color 0.3s;
+}
+.finalizar-btn:hover {
+  background-color: #e55337;
+}
+
+/* Card Branco Genérico */
+.card-branco {
+  background: white;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+/* Ícone Modelo do Carro */
+.carro-modelo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+.carro-modelo-icon {
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+}
