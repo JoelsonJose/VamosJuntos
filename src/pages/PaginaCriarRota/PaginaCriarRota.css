@@ -6,7 +6,7 @@
 .pagina-criar-rotas-container {
   display: block;
   min-height: 100vh;
-  background: linear-gradient(to bottom, #f3e8ff, #d8c0ff);
+  background: var(--cor-fundo-pagina);
   font-family: 'Inter', sans-serif;
   margin-top: -40px;
 }
@@ -236,7 +236,7 @@ textarea::placeholder {
 /* BOTÃO CRIAR ROTA FINAL                               */
 /* ---------------------------------------------------- */
 .btn-criar-rota-final {
-  background-color: #8b5cf6; /* cor-roxo-principal */
+  background-color: var(--cor-roxo-principal); /* cor-roxo-principal */
   color: white;
   font-weight: 600;
   font-size: 1rem; /* 16px */

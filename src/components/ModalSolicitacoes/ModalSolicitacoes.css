@@ -1,0 +1,172 @@
+/* Em: ModalSolicitacoes.css */
+
+/* Fundo escuro semi-transparente */
+.modal-solicitacoes-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.6); /* Fundo escuro */
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(5px);
+}
+
+/* O "card" branco principal do modal */
+.modal-solicitacoes-container {
+  background: #f7f7f9; /* Fundo claro (igual ao da página) */
+  width: 100%;
+  max-width: 900px;
+  height: 90vh;
+  max-height: 800px;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  animation: zoomIn 0.3s ease-out; /* Animação de entrada */
+}
+
+@keyframes zoomIn {
+  from { transform: scale(0.9); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+/* Cabeçalho do Modal ("Solicitações de Carona") */
+.modal-solicitacoes-header {
+  padding: 20px 30px;
+  border-bottom: 1px solid var(--cor-borda-cinza);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.modal-solicitacoes-header h2 {
+  margin: 0;
+  font-size: 1.5rem;
+  color: var(--cor-texto-principal);
+}
+.close-button {
+  font-size: 2.5rem;
+  color: #9ca3af;
+  cursor: pointer;
+  line-height: 1;
+}
+.close-button:hover {
+  color: #1f2937;
+}
+
+/* Corpo do Modal (onde ficam os cards) */
+.modal-solicitacoes-body {
+  flex-grow: 1;
+  overflow-y: auto;
+  padding: 24px 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* --- O Card de Solicitação Individual --- */
+.card-solicitacao {
+  position: relative; /* CRUCIAL para o toast */
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: var(--cor-fundo-card);
+  border-radius: 12px;
+  padding: 20px 24px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  border: 1px solid var(--cor-borda-cinza);
+  overflow: hidden; /* Para o toast não vazar */
+}
+
+.solicitacao-foto {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.solicitacao-info {
+  flex-grow: 1;
+}
+.solicitacao-info h4 {
+  margin: 0 0 4px 0;
+  font-size: 1.1rem;
+  color: var(--cor-texto-principal);
+}
+.solicitacao-info p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--cor-texto-secundario);
+}
+
+.solicitacao-nota {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--cor-texto-principal);
+  flex-shrink: 0;
+}
+.solicitacao-nota svg {
+  color: #F59E0B; /* Estrela amarela */
+}
+
+.solicitacao-actions {
+  display: flex;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+/* Botões Aceitar/Negar */
+.btn-aceitar, .btn-negar {
+  border: none;
+  border-radius: 8px;
+  padding: 10px 16px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-aceitar {
+  background-color: var(--cor-verde-tag);
+  color: var(--cor-verde-tag-texto);
+}
+.btn-aceitar:hover {
+  background-color: #bbf7d0;
+}
+
+.btn-negar {
+  background-color: #FEE2E2; /* Vermelho claro */
+  color: #991B1B; /* Vermelho escuro */
+}
+.btn-negar:hover {
+  background-color: #fecaca;
+}
+
+/* --- O Toast Flutuante (Aceito/Negado) --- */
+.toast-solicitacao {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #fff;
+  z-index: 10;
+  animation: zoomIn 0.2s ease;
+}
+.toast-solicitacao.aceito {
+  background-color: rgba(4, 120, 87, 0.9); /* Verde escuro com transparência */
+}
+.toast-solicitacao.negado {
+  background-color: rgba(185, 28, 28, 0.9); /* Vermelho escuro com transparência */
+}

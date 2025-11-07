@@ -1,5 +1,39 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Rubik&display=swap');
 
+/* No seu CSS Global (index.css ou App.css) */
+
+:root {
+  /* Nossas novas variáveis de Fundo */
+  --cor-fundo-pagina: linear-gradient(to bottom, #f3e8ff, #d8c0ff); /* Roxo claro (padrão) */
+  --cor-fundo-card: #fff; /* Card branco (padrão) */
+
+  /* Suas variáveis de Texto e Bordas (já existentes) */
+  --cor-texto-principal: #1A1A1A; /* Preto (padrão) */
+  --cor-texto-secundario: #4A4A4A; /* Cinza (padrão) */
+  --cor-borda-cinza: #e5e7eb;
+
+  /* Cores que não mudam (opcional) */
+  --cor-roxo-principal: #8b5cf6;
+  --cor-verde-tag: #d1fae5;
+  --cor-verde-tag-texto: #065f46;
+}
+
+body.modo-escuro {
+  /* Aqui nós REESCREVEMOS as variáveis */
+  
+  /* Fundos */
+  --cor-fundo-pagina: #000; /* Fundo escuro */
+  --cor-fundo-card: #2b2b2b; /* Card cinza escuro */
+
+  /* Textos */
+  --cor-roxo-principal: #a100ff;
+  --cor-texto-principal: #f2f2f2; /* Texto claro */
+  --cor-texto-secundario: #4A4A4A; /* Texto cinza claro */
+  
+  /* Bordas */
+  --cor-borda-cinza: #444; /* Borda escura */
+}
+
 body {
   margin: 0;
   font-family: 'Inter', sans-serif;

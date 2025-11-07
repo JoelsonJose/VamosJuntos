@@ -1,6 +1,7 @@
 import React from 'react';
 import Sidebar from '../../components/Sidebar/Sidebar';
 import './PaginaMinhasCaronas.css'; 
+import BotaoAcessibilidade from '../../components/BotaoAcessibilidade/BotaoAcessibilidade';
 
 // --- ÍCONES ---
 // (Certifique-se que estes caminhos/nomes estão corretos)
@@ -115,6 +116,7 @@ export default function PaginaMinhasCaronas() {
         <HeaderCaronas />
         <ListaCaronas caronas={mockCaronas} />
       </main>
+      <BotaoAcessibilidade />
     </div>
   );
 }

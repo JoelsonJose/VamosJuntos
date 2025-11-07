@@ -6,13 +6,13 @@
 .pagina-caronas-container {
   display: block;
   min-height: 100vh;
-  background: linear-gradient(to bottom, #f3e8ff, #d8c0ff);
+  background: var(--cor-fundo-pagina);
 }
  
 .conteudo-caronas {
   margin-left: 230px;
   padding: 40px 48px;
-  color: #333;
+  color: var(--cor-texto-principal); /* Era #333 */
 }
  
 /* ---------------------------------------------------- */
@@ -25,12 +25,12 @@
 .page-main-title {
   font-size: 28px;
   font-weight: 700;
-  color: #1f2937;
+  color: var(--cor-texto-principal); /* Era #1f2937 */
   margin: 0 0 8px 0;
 }
 
 .page-main-subtitle {
-  color: #555;
+  color: #777; /* Era #555 */
   font-size: 1rem;
   margin: 0;
 }

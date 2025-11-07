@@ -1,3 +1,4 @@
+import '../../index.css'
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './primeirapagina.css';

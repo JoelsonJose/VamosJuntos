@@ -2,6 +2,7 @@ import './PaginaBuscar.css';
 import Sidebar from '../../components/Sidebar/Sidebar'; 
 import StarYellow from '../../assets/Star amarela.png';
 import StarWhite from '../../assets/Star branca.png';
+import BotaoAcessibilidade from '../../components/BotaoAcessibilidade/BotaoAcessibilidade';
 
 function StarRating({ rating = 0, max = 5 }) {
   const stars = [];
@@ -118,6 +119,7 @@ export default function PaginaBuscar() {
           </div>
         </div>
       </div>
+      <BotaoAcessibilidade />
     </div>
   );
 }

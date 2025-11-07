@@ -5,7 +5,7 @@
   align-items: center;             
   height: 100vh;                   
   width: 100vw;                    
-  background: linear-gradient(to bottom, #f3e8ff, #d8c0ff); 
+  background: var(--cor-fundo-pagina);
   position: fixed;                 
   top: 0;                          
   left: 0; 

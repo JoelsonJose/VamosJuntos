@@ -9,6 +9,8 @@ import EditProfileModal from '../../components/Modals/EditProfileModal';
 import IconEditar from '../../assets/Editw.png';
 import FotoMaria from '../../assets/Fotos/usuario4.png'; 
 import FotoRaul from '../../assets/Fotos/usuario3.png';
+import BotaoAcessibilidade from '../../components/BotaoAcessibilidade/BotaoAcessibilidade';
+
 
 
 function ProfilePage() {
@@ -103,7 +105,7 @@ function ProfilePage() {
             <div className="profile-page-container"> 
                 
                 <h1 className="page-title">Meu Perfil</h1>
-
+                
                 <button 
                     className="edit-button" 
                     onClick={handleOpenModal} 
@@ -131,6 +133,7 @@ function ProfilePage() {
                     onSave={handleUpdateProfile} 
                 />
             </div>
+          <BotaoAcessibilidade />
         </div>
     );
 }

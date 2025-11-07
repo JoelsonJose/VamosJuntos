@@ -7,13 +7,14 @@
   top: 0;
   left: 0;
   height: 100vh;
-  background: #fff;
+  background: var(--cor-fundo-card); /* Era #fff */
   padding: 3px 12px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   box-shadow: 2px 0 8px rgba(0,0,0,0.03);
   z-index: 100;
+  border-right: 1px solid var(--cor-borda-cinza);
 }
 
 .sidebar-top {
@@ -45,12 +46,12 @@
   padding: 12px 16px;
   width: 90%;
   margin: 10px auto; 
-  background: #fff;
+  background: var(--cor-fundo-card); /* Era #fff */
   border: none;
   border-radius: 12px;
   font-weight: 500;
   font-size: 16px;
-  color: #333;
+  color: var(--cor-texto-principal); /* Era #333 */
   cursor: pointer;
   transition: all 0.3s ease;
   text-decoration: none;
@@ -64,8 +65,8 @@
 
 
 .nav-btn.active {
-  background-color: #8b5cf6; 
-  color: #fff;
+  background-color: var(--cor-roxo-principal); /* Era #8b5cf6 */
+  color: #fff; /* Texto branco (mantido) */
 }
 
 .nav-btn:not(.active):hover { 
@@ -89,20 +90,21 @@
   justify-content: center;
   align-items: center;
   padding: 16px;
-  border-top: 1px solid #f1ecef;
+  border-top: 1px solid var(--cor-borda-cinza); /* Era #f1ecef */
 }
 
 .footer-btn {
-  background: #fff;
+  background: var(--cor-fundo-card); /* Era #fff */
   border: none;
   padding: 10px;
   border-radius: 12px;
   cursor: pointer;
   transition: all 0.3s ease;
+  text-decoration: none; /* <-- ADICIONE ESTA LINHA */
 }
 
 .footer-btn:hover {
-  background-color: #ede9fe;
+  background-color: var(--cor-fundo-card-alt); /* Era #ede9fe */
 }
 
 .footer-btn img {
@@ -110,3 +112,60 @@
   height: 22px;
   object-fit: contain;
 }
+
+/* Em: Sidebar.css (Adicione isso e apague as regras de ícone antigas) */
+
+/* 1. O CONTAINER que segura os dois ícones */
+.nav-icon-container {
+  position: relative; /* Cria o contexto para o 'absolute' */
+  width: 22px;  /* Mesmo tamanho que seus ícones */
+  height: 22px;
+  flex-shrink: 0; /* Impede que o container encolha */
+}
+
+/* 2. OS ÍCONES (Ambos) */
+.nav-icon-container .nav-icon {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+
+  /* 3. MÁGICA: Empilha os ícones um em cima do outro */
+  position: absolute;
+  top: 0;
+  left: 0;
+  
+  /* 4. Animação suave de fade */
+  transition: opacity 0.2s ease-in-out;
+}
+
+/* --- LÓGICA DE TROCA DE ÍCONES (COM OPACIDADE) --- */
+
+/* --- 1. MODO CLARO (Padrão) --- */
+
+/* Botão Inativo: Mostra o preto (opacidade 1), esconde o branco (opacidade 0) */
+.nav-btn .icon-w { opacity: 0; }
+.nav-btn .icon-b { opacity: 1; }
+
+/* Botão ATIVO: Mostra o branco, esconde o preto */
+.nav-btn.active .icon-w { opacity: 1; }
+.nav-btn.active .icon-b { opacity: 0; }
+
+/* --- 2. MODO ESCURO (Inverte a lógica) --- */
+
+/* Botão Inativo (no Modo Escuro): Mostra o BRANCO, esconde o preto */
+body.modo-escuro .nav-btn .icon-w { opacity: 1; }
+body.modo-escuro .nav-btn .icon-b { opacity: 0; }
+
+/* Botão ATIVO (no Modo Escuro): Mostra o PRETO, esconde o branco */
+body.modo-escuro .nav-btn.active .icon-w { opacity: 0; }
+body.modo-escuro .nav-btn.active .icon-b { opacity: 1; }
+
+/* --- LÓGICA DO RODAPÉ (Inverte no Modo Escuro) --- */
+
+/* Rodapé (Padrão): Mostra o preto, esconde o branco */
+.footer-btn .icon-w { opacity: 0; }
+.footer-btn .icon-b { opacity: 1; }
+
+/* Rodapé (no Modo Escuro): Mostra o BRANCO, esconde o preto */
+body.modo-escuro .footer-btn .icon-w { opacity: 1; }
+body.modo-escuro .footer-btn .icon-b { opacity: 0; }

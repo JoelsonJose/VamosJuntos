@@ -92,7 +92,7 @@
 }
 
 .accessibility-button {
-  background-color: #8b5cf6;
+  background-color: var(--cor-roxo-principal);
   color: white;
   font-size: 0.9rem;
   font-weight: 600;
@@ -104,7 +104,7 @@
 }
 
 .accessibility-button:hover {
-  background-color: #7c3aed;
+  background-color: #8b5cf6;
 }
 
 /* --- SEÇÕES INFERIORES --- */

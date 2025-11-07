@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Sidebar from '../../components/Sidebar/Sidebar'; // Corrigido (sem chaves)
 import "./PaginaCriarRota.css"; 
+import BotaoAcessibilidade from '../../components/BotaoAcessibilidade/BotaoAcessibilidade';
 
 // Importe os ícones do seu protótipo
 // (Verifique se esses caminhos e nomes estão corretos)
@@ -203,6 +204,7 @@ export default function PaginaCriarRota() {
           </button>
         </form>
       </main>
+      <BotaoAcessibilidade />
     </div>
   );
 };

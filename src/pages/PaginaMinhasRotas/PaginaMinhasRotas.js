@@ -7,6 +7,8 @@ import IconMapa from '../../assets/IconsCriar/IconMapa.png';
 import IconRelogio from '../../assets/IconsCriar/IconRelogio.png';
 import IconPessoas from '../../assets/IconsCriar/IconPessoas.png';
 import IconEstrela from '../../assets/IconsCriar/IconEstrela.png';
+import BotaoAcessibilidade from '../../components/BotaoAcessibilidade/BotaoAcessibilidade';
+import ModalSolicitacoes from '../../components/ModalSolicitacoes/ModalSolicitacoes';
 
 const dadosIniciaisDasRotas = [
   {
@@ -40,6 +42,8 @@ export default function PaginaMinhasRotas() {
   const [minhasRotas, setMinhasRotas] = useState(dadosIniciaisDasRotas); 
   const [modalAberto, setModalAberto] = useState(false);
   const [rotaParaExcluir, setRotaParaExcluir] = useState(null); 
+  const [modalSolicitacoesAberto, setModalSolicitacoesAberto] = useState(false);
+  const [rotaSelecionada, setRotaSelecionada] = useState(null); // Para saber qual rota mostrar
   
   const handleAbrirModal = (rota) => {
     setRotaParaExcluir(rota); 
@@ -60,6 +64,16 @@ export default function PaginaMinhasRotas() {
     }
   };
 
+  const handleAbrirModalSolicitacoes = (rota) => {
+    setRotaSelecionada(rota); // Guarda a rota que o usuário clicou
+    setModalSolicitacoesAberto(true); // Abre o modal
+  };
+
+  const handleFecharModalSolicitacoes = () => {
+    setModalSolicitacoesAberto(false);
+    setRotaSelecionada(null);
+  };
+
   return (
     <div className="pagina-rotas-container">
       <Sidebar activePage="rotas" />
@@ -69,13 +83,21 @@ export default function PaginaMinhasRotas() {
         <ListaRotas 
           rotas={minhasRotas} 
           onExcluir={handleAbrirModal} 
+          onVerSolicitacoes={handleAbrirModalSolicitacoes}
         />
       </main>
-
+      <BotaoAcessibilidade />
       <PopUpExcluir 
         isOpen={modalAberto}
         onClose={handleFecharModal}
         onConfirm={handleConfirmarExclusao}
+        titulo="Excluir Rota" 
+        mensagem="Tem certeza que quer excluir esta rota?" 
+      />
+      <ModalSolicitacoes
+        isOpen={modalSolicitacoesAberto}
+        onClose={handleFecharModalSolicitacoes}
+        rota={rotaSelecionada}
       />
     </div>
   );
@@ -95,21 +117,22 @@ function HeaderRotas() {
   );
 }
 
-function ListaRotas({ rotas, onExcluir }) {
+function ListaRotas({ rotas, onExcluir, onVerSolicitacoes }) {
   return (
     <div className="lista-rotas-container">
       {rotas.map(rota => (
         <CardRota 
           key={rota.id} 
           rota={rota} 
-          onExcluir={onExcluir} 
+          onExcluir={onExcluir}
+          onVerSolicitacoes={onVerSolicitacoes}  
         />
       ))}
     </div>
   );
 }
 
-function CardRota({ rota, onExcluir }) {
+function CardRota({ rota, onExcluir, onVerSolicitacoes }) {
   const vagasDisponiveis = rota.vagasTotal - rota.vagasOcupadas;
 
   return (
@@ -164,7 +187,9 @@ function CardRota({ rota, onExcluir }) {
       <div className="card-rota-footer">
         <div className="footer-solicitacoes">
           <p>{rota.novasSolicitacoes} novas solicitações de carona</p>
-          <button className="btn-ver-solicitacoes">Ver solicitações</button>
+          <button 
+          className="btn-ver-solicitacoes"
+          onClick={() => onVerSolicitacoes(rota)}>Ver solicitações</button>
         </div>
         <div className="footer-actions">
           <button className="btn-encerrar-vagas">Encerrar vagas disponíveis</button>
