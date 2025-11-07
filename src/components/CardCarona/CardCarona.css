@@ -83,7 +83,7 @@
 }
 
 .btn-ver-viagem {
-  background-color: #8b5cf6; 
+  background-color: var(--cor-roxo-principal); 
   color: #fff;
   font-family: 'Inter', sans-serif;
   font-weight: 600;

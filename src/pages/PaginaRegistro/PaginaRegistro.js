@@ -10,10 +10,12 @@ import BotaoAcessibilidade from "../../components/BotaoAcessibilidade/BotaoAcess
 export default function RegisterPage () {
 
   const navigate = useNavigate();
+  
+  const irParaDash = (event) => {
 
-  const irParaDash = () => {
-        navigate('/dashboard'); 
-    };
+    event.preventDefault(); 
+    navigate('/dashboard'); 
+  };
 
   return (
       <div className="register-background">

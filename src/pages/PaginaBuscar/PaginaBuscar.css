@@ -10,23 +10,23 @@ body {
 .pagina-buscar {
   display: block;
   min-height: 100vh;
-  background: linear-gradient(to bottom, #f3e8ff, #d8c0ff);
+  background: var(--cor-fundo-pagina);
 }
 
 .conteudo-buscar {
   margin-left: 230px;
   padding: 40px 48px;
-  color: #333;
+  color:var(--cor-texto-principal); /* Era #333 */
 }
 
 /* cabeçalho */
 .conteudo-buscar h1 {
   margin: 0 0 6px 0;
   font-size: 28px;
-  color: #120023;
+  color: var(--cor-texto-principal); /* Era #120023 */
 }
 .subtitulo {
-  color: #777;
+  color: #777; 
   margin-bottom: 18px;
 }
 
@@ -37,6 +37,7 @@ body {
   padding: 18px;
   margin-bottom: 26px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  border: 1px solid var(--cor-borda-cinza); /* Adicionado para Dark Mode */
 }
 
 .filtro-titulo h3 { margin: 0; color: #333; }
@@ -59,7 +60,7 @@ body {
 
 /* botão buscar */
 .btn-buscar {
-  background-color: #8b5cf6;
+  background-color:var(--cor-roxo-principal);
   color: white;
   border: none;
   padding: 10px 18px;
@@ -152,6 +153,7 @@ body {
   box-shadow: 0 2px 10px rgba(0,0,0,0.08);
   height: calc(100vh - 260px);
   overflow-y: auto;
+  color: #000;
 }
 
 .dica-bloco h4 { 

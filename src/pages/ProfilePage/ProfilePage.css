@@ -5,9 +5,8 @@
     min-height: 100vh;   
     width: 100%;
     align-items: flex-start; 
-    background: linear-gradient(to bottom, #f3e8ff, #d8c0ff);
+    background: var(--cor-fundo-pagina);
 }
-
 .profile-page-container {
     flex-grow: 1; 
     padding: 40px 48px;
@@ -22,14 +21,14 @@
     margin-top: 0;
     margin-bottom: 30px; 
     font-size: 28px;
-    color: #333;
+    color: var(--cor-texto-principal);
 }
 
 .edit-button {
     position: absolute;
     top: 20px; 
     right: 45px; 
-    background-color: #8b5cf6; 
+    background-color: var(--cor-roxo-principal); 
     color: white;
     border: none;
     padding: 8px 15px;
@@ -47,7 +46,7 @@
 }
 
 .edit-button:hover {
-    background-color: #7c3aed; 
+    background-color: #8b5cf6; 
     transform: translateY(-2px);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }

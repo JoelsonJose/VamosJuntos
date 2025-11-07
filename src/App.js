@@ -10,7 +10,6 @@ import PaginaCriar from './pages/PaginaCriarRota/PaginaCriarRota';
 import PaginaEditarRotas from './pages/PaginaEditarRotas/PaginaEditarRotas';
 import PaginaRotas from './pages/PaginaMinhasRotas/PaginaMinhasRotas';
 import PaginaMinhasCaronas from './pages/PaginaMinhasCaronas/PaginaMinhasCaronas';
-// import PaginaPerfil from './pages/PaginaPerfil/PaginaPerfil';
 
 function App() {
   return (
@@ -26,9 +25,6 @@ function App() {
       <Route path= "/rotas/editar" element= {<PaginaEditarRotas />} />
       <Route path= "/rotas" element= {<PaginaRotas />} />
       <Route path= "/minhas-caronas" element= {<PaginaMinhasCaronas />} />
-      {/*
-        <Route path= "/perfil" element= {<PaginaPerfil />} />
-      */}
     </Routes>
   );
 }

@@ -1,3 +1,4 @@
+import '../../index.css'
 import './PaginaInicial.css';
 import logo from '../../assets/Somente_Logo_VJ 1.png';
 import Button from '../../components/Button/index';

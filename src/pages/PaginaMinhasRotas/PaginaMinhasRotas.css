@@ -6,7 +6,7 @@
 .pagina-rotas-container {
   display: flex;
   min-height: 100vh;
-  background: linear-gradient(to bottom, #f3e8ff, #d8c0ff);
+  background: var(--cor-fundo-pagina);
   font-family: 'Inter', sans-serif;
 }
 
@@ -47,7 +47,7 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  background-color: #8b5cf6; /* Roxo principal */
+  background-color: var(--cor-roxo-principal); /* Roxo principal */
   color: #fff;
   font-size: 1rem;
   font-weight: 600;
@@ -200,7 +200,7 @@
 }
 
 .rota-pontos-link:hover {
-  color: #8b5cf6; /* Roxo principal */
+  color: var(--cor-roxo-principal); /* Roxo principal */
 }
 
 .rota-pontos-link .input-icon { /* Reutiliza a classe de ícone */
@@ -274,7 +274,7 @@
 }
 
 .btn-ver-solicitacoes {
-  background-color: #8b5cf6; /* Roxo principal */
+  background-color: var(--cor-roxo-principal); /* Roxo principal */
   color: #fff;
   border: none;
   border-radius: 10px;

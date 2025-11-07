@@ -1,34 +1,24 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
-:root {
-  --cor-roxo-principal: #8b5cf6;
-  --cor-verde-tag: #d1fae5;
-  --cor-verde-tag-texto: #065f46;
-  --cor-texto-principal: #1f2937;
-  --cor-texto-secundario: #6b7280;
-  --cor-borda-cinza: #e5e7eb;
-}
-
-
 .dashboard-container {
   display: flex;
   min-height: 100vh;
-  background: linear-gradient(to bottom, #f3e8ff, #d8c0ff);
+  background: var(--cor-fundo-pagina);
   font-family: 'Inter', sans-serif;
- 
 }
 
 .dashboard-content {
   margin-left: 230px;
   padding: 40px 48px;
-  color: #333;
+  color: var(--cor-texto-principal); /* Era #333 */
   width: 100%;
   max-width: 1800px; 
   box-sizing: border-box;
 }
 
 .dashboard-cabecalho {
-  margin-bottom: 2.5rem; 
+  margin-bottom: 2.5rem;
+  color: var(--cor-texto-principal);
 }
 
 .dashboard-cabecalho h1 {
@@ -39,7 +29,7 @@
 
 .sobretitulo {
   display: inline-block;
-  background-color: #8b5cf6;
+  background-color: var(--cor-roxo-principal); /* Era #8b5cf6 */
   color: #fff;
   font-weight: 500;
   font-size: 25px; 
@@ -61,9 +51,9 @@
   justify-content: space-between; 
   align-items: center;
   flex-grow: 1;  
-  background-color: #fff;
+  background-color: #fff; 
   border-radius: 16px;
-  border: 1px solid #e5e7eb;
+  border: px solid #0055ff; 
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
   padding: 20px 24px; 
   min-width: 300px;
@@ -87,7 +77,7 @@
 .card-resumo-info h4 {
   font-size: 18px; 
   font-weight: 600;
-  color: #1f2937;
+  color: #1f2937; /* Era #1f2937 */
   margin: 0;
   white-space: nowrap;
 }
@@ -95,7 +85,7 @@
 
 .card-resumo-info {
   font-size: 14px ; 
-  color: var(--cor-texto-secundario);
+  color: var(--cor-texto-secundario); /* Era #6b7280 */
   margin: 0.25rem 0 0 0;
 }
 
@@ -106,7 +96,7 @@
   text-decoration: none;
   font-weight: 600;
   font-size: 0.9rem;
-  color: #1f2937;
+  color: #1f2937; /* Era #1f2937 */
   flex-shrink: 0; 
   margin-left: 1rem;
   transition: color 0.2s ease;
@@ -114,6 +104,7 @@
 
 
 .card-resumo-link::before {
+  color: var(--cor-roxo-principal); /* Era #8b5cf6 */
   content: 'ℹ️';
   font-size: 1.1rem;
   opacity: 0.7;
@@ -125,8 +116,8 @@
 
 
 .btn-repetir {
-  background-color: #d1fae5;
-  color: #065f46;
+  background-color: var(--cor-verde-tag); /* Era #d1fae5 */
+  color: var(--cor-verde-tag-texto); /* Era #065f46 */
   font-family: 'Inter', sans-serif;
   font-weight: 600;
   font-size: 12px; 
@@ -148,19 +139,19 @@
 .caronas-solicitadas h2 {
   font-size: 30px; 
   font-weight: 600;
-  color: #111827; 
+  color: var(--cor-texto-principal); /* Era #111827 */
   margin-bottom: 24px; 
 }
 
 .title-card-resumo {
   font-size: 22px; 
   font-weight: 600;
-  color: #1f2937;
+  color: #1f2937; /* Era #1f2937 */
 }
 
 .info-card-resumo{
   font-size: 15px ; 
-  color: var(--cor-texto-secundario);
+  color: var(--cor-texto-secundario); /* Era #6b7280 */
 }
 
 .detalhes-card-resumo{
@@ -171,7 +162,7 @@
   cursor: pointer;
   font-weight: 600;
   font-size: 18px;
-  color:#1f2937;
+  color: #1f2937; /* Era #1f2937 */
   transition: color 0.2s ease;
   flex-shrink: 0;  
   margin-left: 1rem; 

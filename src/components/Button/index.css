@@ -34,7 +34,7 @@
 }
 
 .button-primary {
-  background-color: #4D0C7A;
+  background-color: var(--cor-roxo-principal);
   color: white;
 }
 

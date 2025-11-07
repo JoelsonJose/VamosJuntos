@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Sidebar from '../../components/Sidebar/Sidebar'; // Corrigido (sem chaves)
 import "./PaginaEditarRotas.css"; 
+import BotaoAcessibilidade from '../../components/BotaoAcessibilidade/BotaoAcessibilidade';
 
 // Importe os ícones do seu protótipo
 // (Verifique se esses caminhos e nomes estão corretos)
@@ -52,7 +53,7 @@ export default function PaginaCriarRota() {
   return (
     // 1. Layout Padrão da Página (Container Flex)
     <div className="pagina-criar-rotas-container">
-      <Sidebar activePage="criar" /> {/* Define o item 'Criar Rotas' como ativo */}
+      <Sidebar activePage="rotas" /> {/* Define o item 'Criar Rotas' como ativo */}
       
       {/* 2. Área de Conteúdo Principal (com margem e padding corretos) */}
       <main className="conteudo-rotas">
@@ -203,6 +204,7 @@ export default function PaginaCriarRota() {
           </button>
         </form>
       </main>
+      <BotaoAcessibilidade />
     </div>
   );
 };
