@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import "./BotaoAcessibilidade.css";
 
 // --- Função Helper para ler o localStorage ---
-// Tenta ler um item do localStorage. Se não existir ou for inválido, retorna 'valorInicial'.
 function getEstadoInicial(key, valorInicial) {
   try {
     const item = window.localStorage.getItem(key);
@@ -16,43 +15,35 @@ function getEstadoInicial(key, valorInicial) {
 export default function BotaoAcessibilidade() {
   const [open, setOpen] = useState(false);
 
-  // 1. INICIALIZAR O ESTADO A PARTIR DO LOCALSTORAGE
-  // Em vez de useState(true), usamos uma função que lê o localStorage.
-  const [enabled, setEnabled] = useState(() => 
-    getEstadoInicial("acessibilidade-enabled", true)
-  );
+  // ... (toda a sua lógica de 'useState' e 'useEffect' continua igual) ...
+  const [enabled, setEnabled] = useState(() => 
+    getEstadoInicial("acessibilidade-enabled", true)
+  );
   const [dark, setDark] = useState(() => 
-    getEstadoInicial("acessibilidade-dark", false)
-  );
+    getEstadoInicial("acessibilidade-dark", false)
+  );
   const [daltonico, setDaltonico] = useState(() => 
-    getEstadoInicial("acessibilidade-daltonico", false)
-  );
+    getEstadoInicial("acessibilidade-daltonico", false)
+  );
   const [espacamento, setEspacamento] = useState(() => 
-    getEstadoInicial("acessibilidade-espacamento", false)
-  );
+    getEstadoInicial("acessibilidade-espacamento", false)
+  );
 
-  // 2. EFEITO PARA SALVAR NO LOCALSTORAGE E APLICAR CLASSES
-  // Este useEffect agora faz duas coisas:
-  // - Salva qualquer mudança no localStorage
-  // - Aplica/Remove as classes do <body>
   useEffect(() => {
-    // Salva as configurações atuais no localStorage
     localStorage.setItem("acessibilidade-enabled", JSON.stringify(enabled));
     localStorage.setItem("acessibilidade-dark", JSON.stringify(dark));
     localStorage.setItem("acessibilidade-daltonico", JSON.stringify(daltonico));
     localStorage.setItem("acessibilidade-espacamento", JSON.stringify(espacamento));
 
-    // Aplica ou remove as classes do <body>
     if (enabled) {
       document.body.classList.toggle("modo-escuro", dark);
       document.body.classList.toggle("modo-daltonico", daltonico);
       document.body.classList.toggle("espacamento-letra", espacamento);
     } else {
-      // Limpa todas as classes se a acessibilidade for desativada
       document.body.classList.remove("modo-escuro", "modo-daltonico", "espacamento-letra");
     }
-    // Dependências: Roda este efeito sempre que qualquer um destes estados mudar
   }, [enabled, dark, daltonico, espacamento]);
+
 
   return (
     <div className="botao-acessibilidade-container">
@@ -69,40 +60,48 @@ export default function BotaoAcessibilidade() {
 
       {open && (
         <div className="painel-acessibilidade">
-          <label>
+          {/* --- MUDANÇA AQUI --- */}
+          <label> 
             <input
               type="checkbox"
               checked={enabled}
               onChange={() => setEnabled(!enabled)}
             />
-            Acessibilidade {enabled ? "On" : "Off"}
+            {/* Texto envolvido em um <span> */}
+            <span className="label-texto">Acessibilidade {enabled ? "On" : "Off"}</span>
           </label>
 
           {enabled && (
             <>
+              {/* --- MUDANÇA AQUI --- */}
               <label>
                 <input
                   type="checkbox"
                   checked={dark}
                   onChange={() => setDark(!dark)}
                 />
-                Modo Escuro
+                {/* Texto envolvido em um <span> */}
+                <span className="label-texto">Modo Escuro</span>
               </label>
+              {/* --- MUDANÇA AQUI --- */}
               <label>
                 <input
-              m   type="checkbox"
+                  type="checkbox"
                   checked={daltonico}
                   onChange={() => setDaltonico(!daltonico)}
                 />
-                Modo Daltônico
+                {/* Texto envolvido em um <span> */}
+                <span className="label-texto">Modo Daltônico</span>
               </label>
+              {/* --- MUDANÇA AQUI --- */}
               <label>
                 <input
                   type="checkbox"
                   checked={espacamento}
                   onChange={() => setEspacamento(!espacamento)}
                 />
-                Espaçamento de Letra
+                {/* Texto envolvido em um <span> */}
+                <span className="label-texto">Espaçamento de Letra</span>
               </label>
             </>
           )}

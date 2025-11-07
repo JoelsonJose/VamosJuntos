@@ -1,7 +1,9 @@
+import '../../index.css'
 import './PaginaDashboard.css';
 import Sidebar from '../../components/Sidebar/Sidebar'
 import CardCarona  from '../../components/CardCarona/CardCarona'; 
 import Infoicon from '../../assets/Dashboard/Info.png';
+import BotaoAcessibilidade from '../../components/BotaoAcessibilidade/BotaoAcessibilidade';
 
 const dadosDaCarona = {
   origem: "Casa",
@@ -22,6 +24,7 @@ export default function DashboardPage() {
         <AreaResumo />
         <AreaCaronasSolicitadas />
       </main>
+      <BotaoAcessibilidade />
     </div>
   );
 }

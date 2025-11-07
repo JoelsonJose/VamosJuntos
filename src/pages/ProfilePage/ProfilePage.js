@@ -13,7 +13,7 @@ import IconEditar from '../../assets/Editw.png';
 import FotoMaria from '../../assets/Fotos/usuario4.png'; 
 import FotoRaul from '../../assets/Fotos/usuario3.png';
 import FotoHomero from '../../assets/Fotos/usuario5.png'; // Import da foto do Homero
-
+import BotaoAcessibilidade from '../../components/BotaoAcessibilidade/BotaoAcessibilidade';
 
 function ProfilePage() {
     // Inicializa o hook de navegação do React Router
@@ -124,7 +124,7 @@ function ProfilePage() {
             <div className="profile-page-container"> 
                 
                 <h1 className="page-title">Meu Perfil</h1>
-
+                
                 <button 
                     className="edit-button" 
                     onClick={handleOpenModal} 
@@ -156,6 +156,7 @@ function ProfilePage() {
                     onSave={handleUpdateProfile} 
                 />
             </div>
+          <BotaoAcessibilidade />
         </div>
     );
 }
