@@ -157,8 +157,8 @@ body.modo-escuro .nav-btn .icon-w { opacity: 1; }
 body.modo-escuro .nav-btn .icon-b { opacity: 0; }
 
 /* Botão ATIVO (no Modo Escuro): Mostra o PRETO, esconde o branco */
-body.modo-escuro .nav-btn.active .icon-w { opacity: 0; }
-body.modo-escuro .nav-btn.active .icon-b { opacity: 1; }
+body.modo-escuro .nav-btn.active .icon-w { opacity: 1; }
+body.modo-escuro .nav-btn.active .icon-b { opacity: 0; }
 
 /* --- LÓGICA DO RODAPÉ (Inverte no Modo Escuro) --- */
 
@@ -169,3 +169,6 @@ body.modo-escuro .nav-btn.active .icon-b { opacity: 1; }
 /* Rodapé (no Modo Escuro): Mostra o BRANCO, esconde o preto */
 body.modo-escuro .footer-btn .icon-w { opacity: 1; }
 body.modo-escuro .footer-btn .icon-b { opacity: 0; }
+
+body.modo-escuro .nav-btn:not(.active):hover .icon-w {opacity: 0; }
+body.modo-escuro .nav-btn:not(.active):hover .icon-b {opacity: 1; }
