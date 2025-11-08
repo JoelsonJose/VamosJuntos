@@ -105,16 +105,32 @@
   color: #f2f2f2 !important;
 }
 
-.modo-daltonico {
-  filter: grayscale(1);
-}
-
 .espacamento-letra * {
   letter-spacing: 2px;
 }
 
 body.modo-escuro,
-body.modo-daltonico,
 body.espacamento-letra {
   transition: all 0.3s ease;
+}
+
+body.modo-alto-contraste {
+  --cor-fundo-pagina: #ffffff !important;
+  --cor-fundo-card: #ffffff !important;
+  --cor-fundo-card-alt: #f0f0f0 !important; /* Roxo-claro vira cinza-claro */
+
+  --cor-texto-principal: #000000 !important;
+  --cor-texto-secundario: #000000 !important;
+  --cor-borda-cinza: #000000 !important;
+}
+
+/* Se o Modo Escuro E o Alto Contraste estiverem ligados,
+   força fundos PRETOS e textos BRANCOS */
+body.modo-alto-contraste.modo-escuro {
+  --cor-fundo-pagina: #000000 !important;
+  --cor-fundo-card: #000000 !important;
+  --cor-fundo-card-alt: #222222 !important; /* Cinza escuro */
+  --cor-texto-principal: #ffffff !important;
+  --cor-texto-secundario: #ffffff !important;
+  --cor-borda-cinza: #ffffff !important;
 }

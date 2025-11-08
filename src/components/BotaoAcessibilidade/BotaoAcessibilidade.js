@@ -15,34 +15,36 @@ function getEstadoInicial(key, valorInicial) {
 export default function BotaoAcessibilidade() {
   const [open, setOpen] = useState(false);
 
-  // ... (toda a sua lógica de 'useState' e 'useEffect' continua igual) ...
-  const [enabled, setEnabled] = useState(() => 
+  // --- MUDANÇA AQUI ---
+  const [enabled, setEnabled] = useState(() => 
     getEstadoInicial("acessibilidade-enabled", true)
   );
   const [dark, setDark] = useState(() => 
     getEstadoInicial("acessibilidade-dark", false)
   );
-  const [daltonico, setDaltonico] = useState(() => 
-    getEstadoInicial("acessibilidade-daltonico", false)
+  // 'daltonico' foi trocado por 'altoContraste'
+  const [altoContraste, setAltoContraste] = useState(() => 
+    getEstadoInicial("acessibilidade-alto-contraste", false)
   );
   const [espacamento, setEspacamento] = useState(() => 
     getEstadoInicial("acessibilidade-espacamento", false)
   );
 
+  // --- MUDANÇA AQUI ---
   useEffect(() => {
     localStorage.setItem("acessibilidade-enabled", JSON.stringify(enabled));
     localStorage.setItem("acessibilidade-dark", JSON.stringify(dark));
-    localStorage.setItem("acessibilidade-daltonico", JSON.stringify(daltonico));
+    localStorage.setItem("acessibilidade-alto-contraste", JSON.stringify(altoContraste)); // Salva o novo estado
     localStorage.setItem("acessibilidade-espacamento", JSON.stringify(espacamento));
 
     if (enabled) {
       document.body.classList.toggle("modo-escuro", dark);
-      document.body.classList.toggle("modo-daltonico", daltonico);
+      document.body.classList.toggle("modo-alto-contraste", altoContraste); // Aplica a nova classe
       document.body.classList.toggle("espacamento-letra", espacamento);
     } else {
-      document.body.classList.remove("modo-escuro", "modo-daltonico", "espacamento-letra");
+      document.body.classList.remove("modo-escuro", "modo-alto-contraste", "espacamento-letra");
     }
-  }, [enabled, dark, daltonico, espacamento]);
+  }, [enabled, dark, altoContraste, espacamento]); // Adiciona o novo estado às dependências
 
 
   return (
@@ -60,47 +62,42 @@ export default function BotaoAcessibilidade() {
 
       {open && (
         <div className="painel-acessibilidade">
-          {/* --- MUDANÇA AQUI --- */}
           <label> 
             <input
               type="checkbox"
               checked={enabled}
               onChange={() => setEnabled(!enabled)}
             />
-            {/* Texto envolvido em um <span> */}
             <span className="label-texto">Acessibilidade {enabled ? "On" : "Off"}</span>
           </label>
 
           {enabled && (
             <>
-              {/* --- MUDANÇA AQUI --- */}
               <label>
                 <input
                   type="checkbox"
                   checked={dark}
                   onChange={() => setDark(!dark)}
                 />
-                {/* Texto envolvido em um <span> */}
                 <span className="label-texto">Modo Escuro</span>
               </label>
+              
               {/* --- MUDANÇA AQUI --- */}
               <label>
                 <input
                   type="checkbox"
-                  checked={daltonico}
-                  onChange={() => setDaltonico(!daltonico)}
+                  checked={altoContraste}
+                  onChange={() => setAltoContraste(!altoContraste)}
                 />
-                {/* Texto envolvido em um <span> */}
-                <span className="label-texto">Modo Daltônico</span>
+                <span className="label-texto">Alto Contraste</span>
               </label>
-              {/* --- MUDANÇA AQUI --- */}
+              
               <label>
                 <input
                   type="checkbox"
                   checked={espacamento}
                   onChange={() => setEspacamento(!espacamento)}
                 />
-                {/* Texto envolvido em um <span> */}
                 <span className="label-texto">Espaçamento de Letra</span>
               </label>
             </>
