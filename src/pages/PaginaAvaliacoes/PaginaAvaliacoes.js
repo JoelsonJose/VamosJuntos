@@ -1,6 +1,7 @@
 import React from 'react';
 import { useNavigate, useLocation } from 'react-router-dom'; 
 import './PaginaAvaliacoes.css'; 
+import BotaoAcessibilidade from '../../components/BotaoAcessibilidade/BotaoAcessibilidade';
 
 // Componente simples para renderizar estrelas
 const renderEstrelas = (numEstrelas) => {
@@ -133,6 +134,7 @@ const PaginaAvaliacoes = () => {
                     ))}
                 </div>
             </div>
+            <BotaoAcessibilidade/>
         </div>
     );
 };

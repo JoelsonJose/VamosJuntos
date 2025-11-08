@@ -12,6 +12,7 @@ import PaginaRotas from './pages/PaginaMinhasRotas/PaginaMinhasRotas';
 import PaginaMinhasCaronas from './pages/PaginaMinhasCaronas/PaginaMinhasCaronas';
 import PaginaAvaliacoes from './pages/PaginaAvaliacoes/PaginaAvaliacoes';
 import PaginaRotaMotorista from './pages/PaginaRotaMotorista/PaginaRotaMotorista';
+import PaginaAvaliacao from './pages/PaginaAvaliacao/PaginaAvaliacao';  
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
       <Route path= "/minhas-caronas" element= {<PaginaMinhasCaronas />} />
       <Route path= "/avaliacoes" element= {<PaginaAvaliacoes />} />
       <Route path= "/rotas/motorista" element= {<PaginaRotaMotorista/>} />
+      <Route path= "/rotas/motorista/avaliacao" element= {<PaginaAvaliacao/>} />
     </Routes>
   );
 }
