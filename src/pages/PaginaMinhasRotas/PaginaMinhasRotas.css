@@ -1,280 +1,315 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
 /* ---------------------------------------------------- */
-/* LAYOUT DA PÁGINA (Reutilizado de 'Criar Rota')       */
+/* LAYOUT DA PÁGINA 
 /* ---------------------------------------------------- */
 .pagina-rotas-container {
-  display: flex;
-  min-height: 100vh;
-  background: var(--cor-fundo-pagina);
-  font-family: 'Inter', sans-serif;
+display: flex;
+min-height: 100vh;
+background: var(--cor-fundo-pagina);
+font-family: 'Inter', sans-serif;
 }
 
 .conteudo-rotas {
-  flex-grow: 1;
-  width: calc(100% - 230px);
-  margin-left: 230px;
-  padding: 40px 48px;
-  overflow-y: auto;
+flex-grow: 1;
+width: calc(100% - 230px);
+margin-left: 230px;
+padding: 40px 48px;
+overflow-y: auto;
+color: var(--cor-texto-principal);
 }
 
 /* ---------------------------------------------------- */
-/* CABEÇALHO DA PÁGINA ("Minhas Rotas" + Botão)         */
+/* CABEÇALHO DA PÁGINA
 /* ---------------------------------------------------- */
 .header-minhas-rotas {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 32px; /* Espaço antes dos cards */
+display: flex;
+justify-content: space-between;
+align-items: center;
+margin-bottom: 32px;
 }
 
-/* Títulos (reutilizados) */
 .page-main-title {
-  font-size: 28px;
-  font-weight: 700;
-  color: #1f2937;
-  margin: 0 0 8px 0;
+font-size: 28px;
+font-weight: 700;
+color: var(--cor-texto-principal);
+margin: 0 0 8px 0;
 }
 
 .page-main-subtitle {
-  color: #555;
-  font-size: 1rem;
-  margin: 0;
+color: var(--cor-texto-secundario);
+font-size: 1rem;
+margin: 0;
 }
 
-/* Botão "Nova Rota" */
 .btn-nova-rota {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  background-color: var(--cor-roxo-principal); /* Roxo principal */
-  color: #fff;
-  font-size: 1rem;
-  font-weight: 600;
-  border: none;
-  border-radius: 12px;
-  padding: 12px 20px;
-  cursor: pointer;
-  text-decoration: none;
-  transition: background-color 0.2s ease, transform 0.1s ease;
-  box-shadow: 0 4px 10px rgba(161, 0, 255, 0.2);
+display: flex;
+align-items: center;
+gap: 8px;
+background-color: var(--cor-roxo-principal);
+color: #fff;
+font-size: 1rem;
+font-weight: 600;
+border: none;
+border-radius: 12px;
+padding: 12px 20px;
+cursor: pointer;
+text-decoration: none;
+transition: background-color 0.2s ease, transform 0.1s ease;
+box-shadow: 0 4px 10px rgba(161, 0, 255, 0.2);
 }
-
 .btn-nova-rota:hover {
-  background-color: #7c3aed; 
-  transform: translateY(-2px);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+background-color: #7c3aed; 
+transform: translateY(-2px);
 }
-
 .btn-nova-rota .btn-icon {
-  width: 16px;
-  height: 16px;
-  filter: brightness(0) invert(1); /* Deixa o ícone branco */
+width: 16px;
+height: 16px;
+  filter: brightness(0) invert(1);
 }
 
 /* ---------------------------------------------------- */
-/* LISTA DE CARDS DE ROTA                               */
+/* LISTA DE CARDS DE ROTA
 /* ---------------------------------------------------- */
 .lista-rotas-container {
-  display: flex;
-  flex-direction: column;
-  gap: 24px; /* Espaço entre os cards */
+display: flex;
+flex-direction: column;
+gap: 24px;
 }
 
 .card-rota {
-  background: #fff;
-  border-radius: 16px;
-  padding: 24px 32px;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.07);
-  border: 1px solid #e5e7eb;
+background: var(--cor-fundo-card);
+border-radius: 16px;
+padding: 24px 32px;
+box-shadow: 0 6px 20px rgba(0, 0, 0, 0.07);
+border: 1px solid var(--cor-borda-cinza);
 }
 
 /* ---------------------------------------------------- */
-/* 1. Card Header (Título, Tag, Excluir)                */
+/* 1. Card Header (Título, Tag, Excluir)
 /* ---------------------------------------------------- */
 .card-rota-header {
+display: flex;
+justify-content: space-between;
+align-items: flex-start;
+ margin-bottom: 8px;
+  gap: 16px; /* Espaço entre o grupo da esquerda e os botões da direita */
+}
+
+/* NOVO: Grupo da Esquerda (Título + Status) */
+.header-info-principal {
   display: flex;
-  justify-content: space-between;
-  align-items: flex-start; /* Alinha no topo */
-  margin-bottom: 8px;
+  align-items: center;
+  gap: 16px; /* Espaço entre o título e o status */
+  flex-wrap: wrap; /* Permite que o status quebre a linha se o título for longo */
 }
 
 .rota-titulo {
-  font-size: 1.5rem; /* 24px */
-  font-weight: 600;
-  color: #1f2937;
-  margin: 0;
+font-size: 1.5rem; /* 24px */
+font-weight: 600;
+color: var(--cor-texto-principal);
+margin: 0;
 }
 
 .rota-titulo span {
-  color: #9ca3af; /* Seta cinza */
-  font-weight: 400;
-  margin: 0 8px;
+color: var(--cor-texto-secundario);
+font-weight: 400;
+margin: 0 8px;
 }
 
+/* Ações da Direita (Editar, Excluir) */
 .header-actions {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  flex-shrink: 0; /* Impede que encolha */
-  margin-left: 16px;
+display: flex; 
+align-items: center;
+gap: 16px;
+flex-shrink: 0; 
+  /* MUDANÇA: Empurra os botões para a direita */
+margin-left: auto; 
 }
 
 .status-tag {
-  font-size: 0.8rem; /* 12px */
-  font-weight: 600;
-  padding: 4px 12px;
-  border-radius: 9999px;
-  text-transform: uppercase;
+font-size: 0.8rem; /* 12px */
+font-weight: 600;
+padding: 4px 12px;
+border-radius: 9999px;
+text-transform: uppercase;
 }
-
 .status-tag.ativa {
-  background-color: #d1fae5; /* Verde claro */
-  color: #065f46; /* Verde escuro */
+background-color: var(--cor-verde-tag);
+color: var(--cor-verde-tag-texto);
 }
-
 .status-tag.inativa {
-  background-color: #f3f4f6;
-  color: #6b7280;
+background-color: var(--cor-fundo-card-alt);
+color: var(--cor-texto-secundario);
 }
 
 .btn-editar{
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  background: transparent;
-  border: none;
-  color: #8b5cf6; 
-  font-size: 0.875rem; 
-  font-weight: 600;
-  cursor: pointer;
-  padding: 4px;
-  text-decoration: none;
+ display: flex;
+ align-items: center;
+ gap: 6px;
+ background: transparent;
+ border: none;
+ color: var(--cor-roxo-principal); 
+ font-size: 0.875rem; 
+ font-weight: 600;
+ cursor: pointer;
+ padding: 4px;
+ text-decoration: none;
 }
-
 .btn-editar:hover {
-  background-color: #7c3aed; 
-  color: #fff; 
-  border-radius: 6px; 
-  text-decoration: none;
+ background-color: #7c3aed; 
+ color: #fff; 
+ border-radius: 6px; 
+ text-decoration: none;
 }
-
 
 .btn-excluir {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  background: transparent;
-  border: none;
-  color: #EF4444; /* Vermelho */
-  font-size: 0.875rem; /* 14px */
-  font-weight: 600;
-  cursor: pointer;
-  padding: 4px;
+ display: flex;
+ align-items: center;
+ gap: 6px;
+ background: transparent;
+ border: none;
+ color: #EF4444; /* Vermelho */
+ font-size: 0.875rem;
+ font-weight: 600;
+ cursor: pointer;
+ padding: 4px;
 }
-
 .btn-excluir:hover {
-  background-color: #DC2626; 
-  color: #fff; 
-  border-radius: 6px;
+ background-color: #DC2626; 
+ color: #fff; 
+ border-radius: 6px;
 }
-
 .btn-icon-excluir {
-  width: 14px;
-  height: 14px;
+ width: 14px;
+ height: 14px;
 }
 
 /* ---------------------------------------------------- */
-/* 2. Sub-Header (Ver pontos)                           */
+/* 2. Sub-Header (Ver pontos)
 /* ---------------------------------------------------- */
 .rota-pontos-link {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  color: #6b7280; /* Cinza */
-  font-size: 0.875rem; /* 14px */
-  font-weight: 500;
-  text-decoration: none;
-  cursor: pointer;
-  margin-bottom: 24px;
+ display: flex;
+ align-items: center;
+ gap: 8px;
+ color: var(--cor-texto-secundario);
+ font-size: 0.875rem;
+ font-weight: 500;
+ text-decoration: none;
+ cursor: pointer;
+ margin-bottom: 24px;
 }
-
 .rota-pontos-link:hover {
-  color: var(--cor-roxo-principal); /* Roxo principal */
+ color: var(--cor-roxo-principal);
 }
-
-.rota-pontos-link .input-icon { /* Reutiliza a classe de ícone */
-  width: 16px;
-  height: 16px;
-  opacity: 0.7;
+.rota-pontos-link .input-icon {
+ width: 16px;
+ height: 16px;
+ opacity: 0.7;
 }
 
 /* ---------------------------------------------------- */
-/* 3. Linha de Informações (Horário, Vagas, Nota)       */
+/* 3. Linha de Informações (Horário, Vagas, Nota)
 /* ---------------------------------------------------- */
 .rota-info-row {
-  display: flex;
-  flex-wrap: wrap; /* Permite quebrar em telas menores */
-  gap: 32px;
-  margin-top: 20px;
-  padding-bottom: 24px;
-  border-bottom: 1px solid #f3f4f6; /* Divisória */
+ display: flex;
+ flex-wrap: wrap; 
+ gap: 32px;
+ margin-top: 20px;
+ padding-bottom: 24px;
+ border-bottom: 1px solid var(--cor-borda-cinza);
 }
-
 .info-item {
-  display: flex;
-  align-items: center;
-  gap: 12px;
+ display: flex;
+ align-items: center;
+ gap: 12px;
 }
-
 .info-icon {
-  width: 24px; /* Ícones maiores */
-  height: 24px;
-  opacity: 0.6;
+ width: 24px;
+ height: 24px;
+ opacity: 0.6;
 }
-
 .info-text {
-  display: flex;
-  flex-direction: column;
-  line-height: 1.4;
+ display: flex;
+ flex-direction: column;
+ line-height: 1.4;
 }
-
 .info-text strong {
-  font-size: 0.9rem; /* 14px */
-  font-weight: 600;
-  color: #1f2937;
+ font-size: 0.9rem;
+ font-weight: 600;
+ color: var(--cor-texto-principal);
 }
-
 .info-text span {
-  font-size: 0.8rem; /* 12px */
-  color: #6b7280;
+ font-size: 0.8rem;
+ color: var(--cor-texto-secundario);
 }
 
 /* ---------------------------------------------------- */
-/* 4. Rodapé do Card (Solicitações, Botões)             */
+/* 4. Rodapé do Card (Solicitações, Botões)
 /* ---------------------------------------------------- */
 .card-rota-footer {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end; /* Alinha os botões na base */
-  margin-top: 24px;
+ display: flex;
+ justify-content: space-between;
+ align-items: flex-end; 
+ margin-top: 24px;
+  flex-wrap: wrap; /* Permite quebrar em telas pequenas */
+  gap: 16px; /* Espaço entre os botões se quebrar */
 }
 
 .footer-solicitacoes {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
+ display: flex;
+ flex-direction: column;
+ gap: 12px;
 }
 
 .footer-solicitacoes p {
-  font-size: 0.9rem;
-  font-weight: 500;
-  color: #374151;
-  margin: 0;
+ font-size: 0.9rem;
+ font-weight: 500;
+ color: var(--cor-texto-principal);
+ margin: 0;
 }
 
 .btn-ver-solicitacoes {
-  background-color: var(--cor-roxo-principal); /* Roxo principal */
+ background-color: var(--cor-roxo-principal);
+ color: #fff;
+ border: none;
+ border-radius: 10px;
+ padding: 10px 16px;
+ font-size: 0.875rem;
+ font-weight: 600;
+ cursor: pointer;
+ transition: background-color 0.2s ease;
+ width: fit-content;
+}
+.btn-ver-solicitacoes:hover {
+ background-color: #7c3aed;
+}
+
+/* NOVO: Grupo de botões da direita no rodapé */
+.footer-actions {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.btn-encerrar-vagas {
+ background-color: #FEE2E2; 
+ color: #DC2626; 
+ border: none;
+ border-radius: 10px;
+ padding: 10px 16px;
+ font-size: 0.875rem;
+ font-weight: 600;
+ cursor: pointer;
+ transition: background-color 0.2s ease;
+}
+.btn-encerrar-vagas:hover {
+ background-color: #FECACA;
+}
+
+/* NOVO: Botão Iniciar Viagem */
+.btn-iniciar-viagem {
+  background-color: #2563EB; /* Azul */
   color: #fff;
   border: none;
   border-radius: 10px;
@@ -283,73 +318,61 @@
   font-weight: 600;
   cursor: pointer;
   transition: background-color 0.2s ease;
-  width: fit-content;
+  text-decoration: none; /* Para o <Link> */
 }
-
-.btn-ver-solicitacoes:hover {
-  background-color: #7c3aed;
-}
-
-.btn-encerrar-vagas {
-  background-color: #FEE2E2; /* Vermelho claro */
-  color: #DC2626; /* Vermelho escuro */
-  border: none;
-  border-radius: 10px;
-  padding: 10px 16px;
-  font-size: 0.875rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-}
-
-.btn-encerrar-vagas:hover {
-  background-color: #FECACA;
+.btn-iniciar-viagem:hover {
+  background-color: #1D4ED8; /* Azul escuro */
 }
 
 /* ---------------------------------------------------- */
-/* RESPONSIVIDADE                                       */
+/* RESPONSIVIDADE
 /* ---------------------------------------------------- */
 @media (max-width: 992px) {
-  /* Remove margem e padding para telas menores (modo mobile) */
-  .conteudo-rotas {
-    padding: 24px;
-    margin-left: 0;
-    width: 100%;
-  }
+  .conteudo-rotas {
+ padding: 24px;
+ margin-left: 0;
+ width: 100%;
+}
 }
 
 @media (max-width: 768px) {
-  /* Empilha o header */
-  .header-minhas-rotas {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 16px;
-  }
-  
-  /* Empilha o header do card */
-  .card-rota-header {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 12px;
-  }
-  
-  .header-actions {
-    flex-direction: row-reverse; /* Coloca "Excluir" antes de "Ativa" */
-    width: 100%;
-    justify-content: space-between;
-  }
-  
-  /* Empilha a linha de infos */
-  .rota-info-row {
-    flex-direction: column;
-    gap: 16px;
-    align-items: flex-start;
-  }
-  
-  /* Empilha o rodapé do card */
-  .card-rota-footer {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 16px;
-  }
+ .header-minhas-rotas {
+ flex-direction: column;
+ align-items: flex-start;
+ gap: 16px;
+}
+  
+  .card-rota-header {
+flex-direction: column;
+align-items: flex-start;
+gap: 12px;
+}
+  
+  .header-actions {
+flex-direction: row; /* Mantém Editar/Excluir lado a lado */
+width: 100%;
+margin-left: 0;
+justify-content: flex-start; /* Alinha à esquerda */
+}
+  
+  .rota-info-row {
+flex-direction: column;
+gap: 16px;
+align-items: flex-start;
+}
+  
+  .card-rota-footer {
+flex-direction: column;
+align-items: flex-start;
+gap: 16px;
+}
+.footer-actions {
+flex-direction: column;
+align-items: stretch;
+width: 100%;
+}
+.btn-iniciar-viagem, .btn-encerrar-vagas {
+width: 100%;
+text-align: center;
+}
 }

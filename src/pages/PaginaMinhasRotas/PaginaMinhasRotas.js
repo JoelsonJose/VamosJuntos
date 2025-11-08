@@ -192,6 +192,9 @@ function CardRota({ rota, onExcluir, onVerSolicitacoes }) {
           onClick={() => onVerSolicitacoes(rota)}>Ver solicitações</button>
         </div>
         <div className="footer-actions">
+          <Link to={"/rotas/motorista"} className="btn-iniciar-viagem">
+            Iniciar Viagem
+          </Link>
           <button className="btn-encerrar-vagas">Encerrar vagas disponíveis</button>
         </div>
       </div>
