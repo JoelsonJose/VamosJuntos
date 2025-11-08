@@ -1,7 +1,7 @@
 
 .pagina-avaliacoes-full-container {
     min-height: 100vh;
-    background: linear-gradient(to bottom, #f3e8ff, #d8c0ff);
+    background: var(--cor-fundo-pagina);
     padding: 30px;
 }
 

@@ -1,7 +1,7 @@
 /* GLOBAIS/LAYOUT DA PÁGINA */
 .rota-pagina {
   min-height: 100vh;
-  background: #f3e8ff;
+  background: var(--cor-fundo-pagina);
   display: flex;
 }
 
@@ -16,12 +16,12 @@
 /* TÍTULO E SUBTÍTULO */
 .rota-titulo-header h1 {
   font-size: 28px;
-  color: #333;
+  color: var(--cor-texto-principal);
   margin-bottom: 5px;
 }
 .rota-titulo-header p {
   font-size: 16px;
-  color: #666;
+  color: #888 ;
   margin-bottom: 25px;
 }
 
@@ -146,24 +146,29 @@
   display: flex;
   align-items: center;
   gap: 15px;
+  color:#000
 }
 .perfil-img {
   width: 65px;
   height: 65px;
   border-radius: 50%;
   object-fit: cover;
+  color:#000
 }
 .nome-motorista {
   font-size: 18px;
   font-weight: bold;
+  color:#000
 }
 .star-rating {
   margin-top: 3px;
+
 }
 
 /* Infos de Resumo */
 .rota-infos-resumo {
   margin-bottom: 20px;
+  color:#000
 }
 .carro-modelo {
   font-size: 16px;
@@ -181,7 +186,7 @@
   gap: 8px;
   margin-bottom: 10px;
   font-size: 14px;
-  color: #333;
+  color:#000
 }
 .info-item-icon img {
   width: 18px;
@@ -208,6 +213,7 @@
   display: flex;
   flex-direction: column;
   gap: 12px;
+  color:#000
 }
 .passageiro-card-lateral {
   display: flex;
@@ -262,6 +268,8 @@
   cursor: pointer;
   margin-top: 25px;
   transition: background-color 0.3s;
+  text-decoration: none;
+  text-align: center;
 }
 .finalizar-btn:hover {
   background-color: #e55337;

@@ -5,7 +5,7 @@ import StarRating from '../../components/StarRating/StarRating';
 
 import PerfilHomero from '../../assets/RotaMotorista/perfilhomero.png'; // NOVA IMAGEM
 import MapaRota from '../../assets/RotaMotorista/MAPA.png'; // NOVA IMAGEM (para o mock)
-
+import { Link } from 'react-router-dom';
 import CarroProgress from '../../assets/RotaMotorista/Sedan.png';
 import Wheelchair from '../../assets/RotaMotorista/Wheelchair.png';
 import Person from '../../assets/RotaMotorista/Person.png';
@@ -16,7 +16,7 @@ import Cancel from '../../assets/RotaMotorista/Cancel.png';
 import CheckOff from '../../assets/RotaMotorista/Check Mark off.png';
 import CancelOff from '../../assets/RotaMotorista/Cancel off.png';
 import CarModelIcon from '../../assets/RotaMotorista/Koenigsegg One.png';
-
+import BotaoAcessibilidade from '../../components/BotaoAcessibilidade/BotaoAcessibilidade';
 
 
 
@@ -169,15 +169,13 @@ export default function PaginaRotaMotorista() {
                 </div>
               ))}
             </div>
-
-            <button className="finalizar-btn">
-                Finalizar carona
-            </button>
-
+            <Link to={"/rotas/motorista/avaliacao"} className="finalizar-btn">
+            Finalizar carona
+            </Link>
           </div> {/* FIM .card-lateral-direita */}
 
         </main>
-
+        <BotaoAcessibilidade/>
       </div>
     </div>
   );

@@ -1,0 +1,22 @@
+.star-rating-input-container {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+/* Esconde o 'radio' button (o círculo) */
+.star-rating-input-container input[type="radio"] {
+  display: none;
+}
+
+.star-icon {
+  cursor: pointer;
+  transition: transform 0.1s ease;
+  
+  /* 5. DEFINA O TAMANHO DA ESTRELA AQUI */
+  width: 40px;
+  height: 40px;
+}
+.star-icon:hover {
+  transform: scale(1.15);
+}
