@@ -1,0 +1,62 @@
+/* src/components/CardNotificacao/CardNotificacao.css */
+.card-notificacao {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  background-color: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.card-notificacao:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  border-color: #8b5cf6;
+}
+
+.card-notificacao-icon {
+  font-size: 18px;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.card-notificacao-content {
+  flex: 1;
+}
+
+.card-notificacao-message {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: #1f2937;
+  margin: 0 0 4px 0;
+  line-height: 1.4;
+}
+
+.card-notificacao-time {
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  color: #6b7280;
+  font-weight: 400;
+}
+
+.card-notificacao--success {
+  border-left: 4px solid #10b981;
+}
+
+.card-notificacao--warning {
+  border-left: 4px solid #f59e0b;
+}
+
+.card-notificacao--info {
+  border-left: 4px solid #3b82f6;
+}
+
+.card-notificacao--carona {
+  border-left: 4px solid #8b5cf6;
+}

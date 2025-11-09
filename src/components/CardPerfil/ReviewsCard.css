@@ -112,7 +112,7 @@
     display: -webkit-box;
     -webkit-box-orient: vertical;
     overflow: hidden;
-    -webkit-line-clamp: 2;
+    --webkit-line-clamp: 2;
     line-height: 1.4;
 }
 

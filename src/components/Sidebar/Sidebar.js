@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom'; 
 import './Sidebar.css';
 import logo from '../../assets/Somente_Logo_VJ 1.png';
+import CentralNotificacao from '../CentralNotificacao/CentralNotificacao';
 
 // Imports dos Ícones Pretos
 import IconDashboardB from '../../assets/Sidebar_icons/Detailsb.png';
@@ -35,6 +36,18 @@ export default function Sidebar() {
     { label: 'Criar Rotas', iconB: IconCriarRotasB, iconW: IconCriarRotasW, path: '/criar' },
     { label: 'Perfil Corporativo', iconB: IconPerfilB, iconW: IconPerfilW, path: '/perfil' },
   ];
+
+   const [isNotificacaoOpen, setIsNotificacaoOpen] = useState(false);
+
+   const [notifications, setNotifications] = useState([
+    { message: "Sua carona para 'Recife Antigo' foi confirmada!", time: "Agora", type: "simples" },
+    { message: "Joelson aceitou sua solicitação.", time: "5m atrás", type: "simples" },
+    { message: "Nova solicitação de Maria Santos.", time: "1h atrás", type: "simples" },
+  ]);
+
+   const toggleNotificacoes = () => {
+    setIsNotificacaoOpen(!isNotificacaoOpen);
+  };
 
   return (
     <aside className="sidebar">
@@ -74,7 +87,7 @@ export default function Sidebar() {
       </div>
 
       <div className="sidebar-footer">
-        <button className="footer-btn">
+        <button className="footer-btn" onClick={toggleNotificacoes}>
           <div className="nav-icon-container">
             <img src={IconNotificacaoB} alt="Notificações" className="nav-icon icon-b" /> 
             <img src={IconNotificacaoW} alt="Notificações" className="nav-icon icon-w" /> 
@@ -87,6 +100,12 @@ export default function Sidebar() {
           </div>
         </Link>
       </div>
+        {isNotificacaoOpen && (
+        <CentralNotificacao 
+          notifications={notifications} 
+          onClose={toggleNotificacoes} 
+        />
+        )}
     </aside>
   );
 }
