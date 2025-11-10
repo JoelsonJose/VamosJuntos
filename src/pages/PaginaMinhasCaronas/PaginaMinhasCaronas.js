@@ -2,7 +2,7 @@ import React from 'react';
 import Sidebar from '../../components/Sidebar/Sidebar';
 import './PaginaMinhasCaronas.css'; 
 import BotaoAcessibilidade from '../../components/BotaoAcessibilidade/BotaoAcessibilidade';
-
+import { useNavigate } from 'react-router-dom';
 // --- ÍCONES ---
 // (Certifique-se que estes caminhos/nomes estão corretos)
 import IconRelogio from '../../assets/IconsCriar/IconRelogio.png';
@@ -146,11 +146,20 @@ function ListaCaronas({ caronas }) {
 }
 
 function CardCaronaItem({ carona }) {
-  const statusClass = `status-${carona.status.toLowerCase()}`; 
+  const statusClass = `status-${carona.status.toLowerCase()}`;
+  const navigate = useNavigate();
+  const handleCardClick = () => {
+    navigate(`/caronas/caronista`);
+  }; 
 
   return (
-    <div className="carona-item-wrapper">
-      
+    <div 
+      className="carona-item-wrapper" 
+      onClick={handleCardClick}
+      role="button" // Para acessibilidade
+      tabIndex={0}  // Para acessibilidade (foco com Tab)
+      onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && handleCardClick()} // Para acessibilidade (clique com Enter/Espaço)
+    >
       {/* --- CARD DA ESQUERDA (INFORMAÇÕES) --- */}
       <div className="carona-card-info">
         <div className="card-info-header">
