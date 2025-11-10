@@ -36,8 +36,8 @@ font-size: 22px;
 font-weight: 500; 
 font-family: Inter;
 color: var(--cor-texto-secundario); 
-margin-top: -50px; 
-margin-bottom: 50px; 
+margin-top: -10px; 
+margin-bottom: 100px; 
 }
 
 .paginainicial-button-group{

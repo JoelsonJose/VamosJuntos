@@ -13,6 +13,9 @@ import PaginaMinhasCaronas from './pages/PaginaMinhasCaronas/PaginaMinhasCaronas
 import PaginaAvaliacoes from './pages/PaginaAvaliacoes/PaginaAvaliacoes';
 import PaginaRotaMotorista from './pages/PaginaRotaMotorista/PaginaRotaMotorista';
 import PaginaAvaliacao from './pages/PaginaAvaliacao/PaginaAvaliacao';  
+import PaginaRotaCaronista from './pages/PaginaRotaCaronista/PaginaRotaCaronista';
+import PaginaAvaliacaoCaronista from './pages/PaginaAvalliacaoCaronista/PaginaAvalliacaoCaronista';
+import PaginasDetalhesCarona from './pages/PaginasDetalhesCarona/PaginasDetalhesCarona'
 
 function App() {
   return (
@@ -27,10 +30,12 @@ function App() {
       <Route path= "/criar" element= {<PaginaCriar />} />
       <Route path= "/rotas/editar" element= {<PaginaEditarRotas />} />
       <Route path= "/rotas" element= {<PaginaRotas />} />
-      <Route path= "/minhas-caronas" element= {<PaginaMinhasCaronas />} />
+      <Route path= "/caronas" element= {<PaginaMinhasCaronas />} />
       <Route path= "/avaliacoes" element= {<PaginaAvaliacoes />} />
       <Route path= "/rotas/motorista" element= {<PaginaRotaMotorista/>} />
       <Route path= "/rotas/motorista/avaliacao" element= {<PaginaAvaliacao/>} />
+      <Route path= "/caronas/caronista" element= {<PaginaRotaCaronista/>} />
+      <Route path= "/caronas/caronista/avaliacao" element= {<PaginaAvaliacaoCaronista/>} />
     </Routes>
   );
 }
