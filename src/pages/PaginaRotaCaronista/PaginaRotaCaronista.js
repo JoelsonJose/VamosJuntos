@@ -12,8 +12,13 @@ import Wheelchair from '../../assets/RotaMotorista/Wheelchair.png';
 import Person from '../../assets/RotaMotorista/Person.png';
 import CarModelIcon from '../../assets/RotaMotorista/Koenigsegg One.png';
 import BotaoAcessibilidade from '../../components/BotaoAcessibilidade/BotaoAcessibilidade';
+import { useNavigate } from 'react-router-dom';
+
 
 export default function PaginaRotaCaronista() {
+
+  const navigate = useNavigate();
+
  
   return (
     <div className="rota-pagina">
@@ -112,7 +117,7 @@ export default function PaginaRotaCaronista() {
               Finalizar carona
             </Link>
 
-            <Link to={"/rotas/caronista/cancelar"} className="cancelar-btn">
+            <Link to={"/caronas"} className="cancelar-btn">
               Cancelar viagem
             </Link>
 

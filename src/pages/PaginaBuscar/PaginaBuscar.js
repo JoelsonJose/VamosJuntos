@@ -3,6 +3,8 @@ import Sidebar from '../../components/Sidebar/Sidebar';
 import StarYellow from '../../assets/Star amarela.png';
 import StarWhite from '../../assets/Star branca.png';
 import BotaoAcessibilidade from '../../components/BotaoAcessibilidade/BotaoAcessibilidade';
+import  {useNavigate}  from 'react-router-dom';
+
 
 function StarRating({ rating = 0, max = 5 }) {
   const stars = [];
@@ -23,9 +25,11 @@ function StarRating({ rating = 0, max = 5 }) {
 }
 
 export default function PaginaBuscar() {
+  const navigate = useNavigate();
+
   const caronas = [
     { nome: "João Silva", rating: 4, rota: "Av. Alfredo Lisboa 810, Empresa → Jardim São Paulo, Casa", vagas: "3/4", classe: "vagas3" },
-    { nome: "Maria Santos", rating: 3, rota: "Jardim São Paulo, Casa → Av. Alfredo Lisboa 810, Empresa", vagas: "1/4", classe: "vagas1" },
+    { nome: "Lucas Ximenes", rating: 3, rota: "Jardim São Paulo, Casa → Av. Alfredo Lisboa 810, Empresa", vagas: "1/4", classe: "vagas1" },
     { nome: "Pedro Lima", rating: 5, rota: "Av. Alfredo Lisboa 810, Empresa → Jardim São Paulo, Casa", vagas: "4/4", classe: "vagas4" },
     { nome: "Carla Menezes", rating: 2, rota: "Boa Viagem → Derby", vagas: "2/4", classe: "vagas2" },
     { nome: "Lucas Andrade", rating: 4, rota: "Casa Amarela → Recife Antigo", vagas: "3/4", classe: "vagas3" },
@@ -71,7 +75,15 @@ export default function PaginaBuscar() {
         <div className="conteudo-busca">
           <div className="resultados-container">
             {caronas.map((c, i) => (
-              <div key={i} className="carona-card">
+              <div
+  key={i}
+  className="carona-card"
+  onClick={() => {
+    if (c.nome === "Lucas Ximenes") navigate ('/buscar/conforimarcarona');
+  }}
+  style={{ cursor: c.nome === "Lucas Ximenes" ? 'pointer' : 'default' }}
+>
+
                 <div className="carona-left">
                   <div className="carona-nome">
                     <strong>{c.nome}</strong>

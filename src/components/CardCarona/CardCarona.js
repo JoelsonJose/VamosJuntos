@@ -1,8 +1,11 @@
 import './CardCarona.css';
 import Locationincon from '../../assets/Dashboard/Location.png';
 import Clockicon from '../../assets/Dashboard/Clock.png';
+import { useNavigate } from 'react-router-dom';
 
-export default function CardCarona({ carona }) {
+export default function CardCarona({ carona }) { 
+  const navigate = useNavigate();
+
   const {
     origem,
     destino,
@@ -39,7 +42,13 @@ export default function CardCarona({ carona }) {
       </div>
 
       <div className="card-footer">
-        <button className="btn-ver-viagem">Ver Viagem</button>
+        <button
+  className="btn-ver-viagem"
+  onClick={() => navigate('/caronas/caronista')}
+>
+  Ver Viagem
+</button>
+
       </div>
     </article>
   );

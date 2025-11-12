@@ -10,7 +10,7 @@ const mockDadosCarona = {
   id: 123,
   tipo: 'motorista', // 'motorista' ou 'caronista'
   nome: "Lucas Ximenes",
-  foto: "https://placehold.co/100x100/f0e6ff/a100ff?text=MS" // Use a foto real
+  foto: "https://placehold.co/100x100/f0e6ff/a100ff?text=LX" // Use a foto real
 };
 
 

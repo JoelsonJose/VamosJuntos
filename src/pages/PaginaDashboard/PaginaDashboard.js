@@ -4,6 +4,8 @@ import Sidebar from '../../components/Sidebar/Sidebar'
 import CardCarona  from '../../components/CardCarona/CardCarona'; 
 import Infoicon from '../../assets/Dashboard/Info.png';
 import BotaoAcessibilidade from '../../components/BotaoAcessibilidade/BotaoAcessibilidade';
+import { useNavigate } from 'react-router-dom';
+
 
 const dadosDaCarona = {
   origem: "Casa",
@@ -11,7 +13,7 @@ const dadosDaCarona = {
   horario: "08:00",
   data: "Hoje",
   status: "Confirmada",
-  motorista: "Maria Santos",
+  motorista: "Lucas Ximenes",
   squad: "Marketing"
 };
 

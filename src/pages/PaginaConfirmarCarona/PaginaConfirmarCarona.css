@@ -1,0 +1,317 @@
+.pagina-confirmar {
+  display: flex;
+  background: linear-gradient(to bottom, #f3e8ff, #d8c0ff);
+  min-height: 100vh;
+}
+
+.conteudo-confirmar {
+  flex: 1;
+  padding: 30px 40px;
+}
+
+.subtitulo {
+  color: #6b6b6b;
+  margin-bottom: 20px;
+}
+
+.container-geral {
+  display: flex;
+  gap: 20px;
+}
+
+/* Card esquerdo: trajeto + pontos */
+.card-esquerdo {
+  background: #fff;
+  flex: 2;
+  border-radius: 10px;
+  padding: 22px 26px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
+
+.trajeto-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.status-agendada {
+  background: #54d487;
+  color: #fff;
+  padding: 4px 10px;
+  border-radius: 10px;
+  font-size: 13px;
+}
+
+.info-trajeto {
+  display: flex;
+  gap: 18px;
+  margin: 10px 0 8px 0;
+  color: #555;
+  font-size: 14px;
+}
+
+.info-item img {
+  width: 16px;
+  margin-right: 8px;
+  vertical-align: middle;
+}
+
+/* Linha roxa separadora pedida (mais visível e com espaçamento) */
+.linha-roxa {
+  border: none;
+  border-top: 2px solid #a855f7;
+  margin: 18px 0;
+}
+
+/* Descer os pontos de embarque um pouco mais (maior espaçamento superior) */
+.pontos-embarque {
+  margin-top: 6px;
+}
+
+.lista-pontos {
+  margin-top: 12px;
+}
+
+/* Cada opção - estilo visual próximo ao protótipo */
+.opcao-embarque {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 8px 0;
+  cursor: pointer;
+  user-select: none;
+  padding: 8px 6px;
+  border-radius: 6px;
+}
+
+/* hover leve sem mudar estrutura */
+.opcao-embarque:hover {
+  background: #faf5ff;
+}
+
+.opcao-embarque input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+}
+
+/* estado ativo - muda o fundo do quadrado e ícone de check */
+.opcao-embarque.ativo input[type="checkbox"] {
+  /* deixamos o checkbox default marcado; a aparência principal vem do protótipo */
+}
+
+/* texto lado do checkbox */
+.texto-ponto {
+  display: flex;
+  gap: 8px;
+  align-items: baseline;
+}
+
+.nome-ponto {
+  font-size: 14px;
+  color: #222;
+}
+
+.previsao {
+  color: #6b6b6b;
+  font-size: 13px;
+}
+
+/* Card direito (perfil) — aumentei só a foto conforme pedido */
+.card-direito {
+  background: #fff;
+  flex: 1;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.perfil {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* foto levemente maior que antes */
+.foto-perfil {
+  width: 72px;   /* aumentado */
+  height: 72px;  /* aumentado */
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.nome-perfil {
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.info-lucas img {
+  width: 16px;
+  height: 16px;
+  margin-right: 6px;
+  vertical-align: middle;
+}
+
+.info-lucas p {
+  font-size: 14px;
+  margin: 6px 0;
+}
+
+.info-veiculo {
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+.placa {
+  background: #d8b4fe;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-weight: 600;
+}
+
+.vagas {
+  margin-top: 8px;
+  font-size: 14px;
+}
+
+.maximo {
+  color: #6b6b6b;
+  font-size: 12px;
+}
+
+/* comentário estilizado como no protótipo */
+.comentarios {
+  margin-top: 14px;
+}
+
+.comentarios textarea {
+  width: 100%;
+  border: 1px solid #d6b3ff;
+  border-radius: 8px;
+  padding: 10px;
+  resize: none;
+  font-size: 13px;
+  height: 72px;
+  color: #555;
+  background: #fff;
+}
+
+/* botoes */
+.botoes {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 14px;
+}
+
+.btn-voltar {
+  background: #ff6b6b;
+  border: none;
+  padding: 8px 20px;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.btn-confirmar {
+  background: #a855f7;
+  border: none;
+  padding: 8px 20px;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+/* Ajuste seguro: recua o primeiro card dentro de .container-geral
+   (não depende do nome da classe do card) */
+.conteudo-confirmar .container-geral > :first-child {
+  margin-left: 260px;           /* distância da sidebar */
+  width: calc(100% - 420px);    /* evita esticar por baixo da sidebar / mantém espaço pro card direito */
+  box-sizing: border-box;       /* garante que padding não quebre a largura */
+}
+
+/* proteção em telas menores: remove o margin-left e volta ao comportamento natural */
+@media (max-width: 1000px) {
+  .conteudo-confirmar .container-geral > :first-child {
+    margin-left: 0;
+    width: 100%;
+  }
+}
+
+/* Alinhar título e subtítulo corretamente (sem sobreposição da sidebar) */
+.conteudo-confirmar h2,
+.conteudo-confirmar .subtitulo {
+  margin-left: 260px; /* mesmo deslocamento lateral usado no card principal */
+}
+
+/* Proteção para telas menores */
+@media (max-width: 1000px) {
+  .conteudo-confirmar h2,
+  .conteudo-confirmar .subtitulo {
+    margin-left: 0;
+  }
+}
+
+/* --- ajustes solicitados para os checkboxes --- */
+.lista-pontos {
+  margin-top: 22px; /* mais espaço pra descer a lista */
+}
+
+/* === Ajuste final dos checkboxes === */
+.opcao-embarque {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 14px 0;
+  cursor: pointer;
+  user-select: none;
+  padding: 10px 8px;
+  border-radius: 6px;
+}
+
+/* Permite clicar no texto também */
+.opcao-embarque label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  cursor: pointer;
+}
+
+.opcao-embarque input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 18px;
+  height: 18px;
+  border: 2px solid #a855f7;
+  border-radius: 4px;
+  cursor: pointer;
+  position: relative;
+  background-color: #fff;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center; /* centraliza o check */
+}
+
+.opcao-embarque input[type="checkbox"]:checked {
+  background-color: #54d487;
+  border-color: #54d487;
+}
+
+.opcao-embarque input[type="checkbox"]:checked::after {
+  content: "✔";
+  color: #fff;
+  position: absolute;
+  font-size: 13px;
+  line-height: 1;
+}
+
+.opcao-embarque:hover {
+  background: #faf5ff;
+}
+

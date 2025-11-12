@@ -15,7 +15,7 @@ import PaginaRotaMotorista from './pages/PaginaRotaMotorista/PaginaRotaMotorista
 import PaginaAvaliacao from './pages/PaginaAvaliacao/PaginaAvaliacao';  
 import PaginaRotaCaronista from './pages/PaginaRotaCaronista/PaginaRotaCaronista';
 import PaginaAvaliacaoCaronista from './pages/PaginaAvalliacaoCaronista/PaginaAvalliacaoCaronista';
-import PaginasDetalhesCarona from './pages/PaginasDetalhesCarona/PaginasDetalhesCarona'
+import PaginaConfirmarCarona from './pages/PaginaConfirmarCarona/PaginaConfirmarCarona';
 
 function App() {
   return (
@@ -36,6 +36,7 @@ function App() {
       <Route path= "/rotas/motorista/avaliacao" element= {<PaginaAvaliacao/>} />
       <Route path= "/caronas/caronista" element= {<PaginaRotaCaronista/>} />
       <Route path= "/caronas/caronista/avaliacao" element= {<PaginaAvaliacaoCaronista/>} />
+      <Route path= "/buscar/conforimarcarona" element= {<PaginaConfirmarCarona/>} />
     </Routes>
   );
 }
