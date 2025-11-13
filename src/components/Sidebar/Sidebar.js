@@ -39,7 +39,7 @@ export default function Sidebar() {
 
    const [isNotificacaoOpen, setIsNotificacaoOpen] = useState(false);
 
-   const [notifications, setNotifications] = useState([
+   const [notifications] = useState([
     { message: "Sua carona para 'Recife Antigo' foi confirmada!", time: "Agora", type: "simples" },
     { message: "Joelson aceitou sua solicitação.", time: "5m atrás", type: "simples" },
     { message: "Nova solicitação de Maria Santos.", time: "1h atrás", type: "simples" },

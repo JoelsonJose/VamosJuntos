@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Sidebar from '../../components/Sidebar/Sidebar';
 import BotaoAcessibilidade from '../../components/BotaoAcessibilidade/BotaoAcessibilidade';
 import StarRatingInput from '../../components/StarRatingInput/StarRatingInput';

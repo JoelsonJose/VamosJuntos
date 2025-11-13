@@ -1,4 +1,3 @@
-import React, { useState } from 'react';
 import './PaginaRotaCaronista.css';
 import Sidebar from '../../components/Sidebar/Sidebar';
 import StarRating from '../../components/StarRating/StarRating';
@@ -12,14 +11,9 @@ import Wheelchair from '../../assets/RotaMotorista/Wheelchair.png';
 import Person from '../../assets/RotaMotorista/Person.png';
 import CarModelIcon from '../../assets/RotaMotorista/Koenigsegg One.png';
 import BotaoAcessibilidade from '../../components/BotaoAcessibilidade/BotaoAcessibilidade';
-import { useNavigate } from 'react-router-dom';
 
 
 export default function PaginaRotaCaronista() {
-
-  const navigate = useNavigate();
-
- 
   return (
     <div className="rota-pagina">
       <Sidebar activePage="caronas" />

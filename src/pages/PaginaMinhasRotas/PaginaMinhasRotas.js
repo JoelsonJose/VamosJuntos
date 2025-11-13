@@ -157,7 +157,7 @@ function CardRota({ rota, onExcluir, onVerSolicitacoes }) {
         </div>
       </div>
 
-      <a href="#" className="rota-pontos-link">
+      <a href="/rotas/motorista" className="rota-pontos-link">
         <img src={IconMapa} alt="Mapa" className="input-icon" />
         <span>Ver pontos de carona</span>
       </a>

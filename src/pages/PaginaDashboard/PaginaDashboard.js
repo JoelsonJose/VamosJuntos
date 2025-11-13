@@ -4,7 +4,6 @@ import Sidebar from '../../components/Sidebar/Sidebar'
 import CardCarona  from '../../components/CardCarona/CardCarona'; 
 import Infoicon from '../../assets/Dashboard/Info.png';
 import BotaoAcessibilidade from '../../components/BotaoAcessibilidade/BotaoAcessibilidade';
-import { useNavigate } from 'react-router-dom';
 
 
 const dadosDaCarona = {
