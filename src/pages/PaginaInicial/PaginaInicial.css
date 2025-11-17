@@ -1,46 +1,107 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
-.paginainicial{
-display: flex;
-flex-direction: column;
-justify-content: center;
-align-items: center;
-min-height: 100vh; 
-background: var(--cor-fundo-pagina);
-text-align: center;
-padding: 20px; 
-opacity: 0;
-transition: opacity 0.5s ease-in-out;
+.paginainicial {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: var(--cor-fundo-pagina);
+  text-align: center;
+  
+  /* MUDANÇA: 'px' para 'rem' e adicionado 'gap' */
+  padding: 1.25rem; /* 20px */
+  gap: 1.5rem; /* 24px - Espaçamento flexível ENTRE os itens */
+  
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
 }
 
 .paginainicial.fade-in {
-opacity: 1;
+  opacity: 1;
 }
 
-.paginainicial-logo{
-width: 200px;
-margin-top: -300px;
+.paginainicial-logo {
+  /* MUDANÇA: 'px' para 'rem' */
+  width: 12.5rem; /* 200px */
+  
+  /* CORREÇÃO CRÍTICA: Removido o margin-top negativo que cortava a tela */
+  margin-top: 0; /* ANTES: margin-top: -300px; */
 }
 
-.paginainicial-title{
-font-size: 80px;
-font-weight: 900;
-font-family: Inter;
-
-color: var(--cor-texto-principal);
-margin-top: 100px;
+.paginainicial-title {
+  /* MUDANÇA: 'px' para 'rem' */
+  font-size: 5rem; /* 80px */
+  font-weight: 900;
+  font-family: Inter;
+  color: var(--cor-texto-principal);
+  
+  /* MUDANÇA: Removido para usar 'gap' no container */
+  margin-top: 0; /* ANTES: margin-top: 100px; */
+  
+  /* Isso ajuda na quebra de linha em telas menores */
+  line-height: 1.1; 
 }
 
-.paginainicial-subtitle{
-font-size: 22px;
-font-weight: 500; 
-font-family: Inter;
-color: var(--cor-texto-secundario); 
-margin-top: -10px; 
-margin-bottom: 100px; 
+.paginainicial-subtitle {
+  /* MUDANÇA: 'px' para 'rem' */
+  font-size: 1.375rem; /* 22px */
+  font-weight: 500;
+  font-family: Inter;
+  color: var(--cor-texto-secundario);
+  
+  /* MUDANÇA: Removido para usar 'gap' no container */
+  margin-top: 0; /* ANTES: margin-top: -10px; */
+  margin-bottom: 0; /* ANTES: margin-bottom: 100px; */
+
+  /* Define uma largura máxima para o subtítulo não ficar muito largo */
+  max-width: 60ch; /* 'ch' = 60 caracteres */
 }
 
-.paginainicial-button-group{
-display: flex;
-gap: 20px; 
+.paginainicial-button-group {
+  display: flex;
+  /* MUDANÇA: 'px' para 'rem' */
+  gap: 1.25rem; /* 20px */
+}
+
+/* --- RESPONSIVIDADE --- 
+  Isso faz o layout se adaptar a telas menores (celulares/tablets pequenos)
+*/
+/* --- RESPONSIVIDADE --- 
+  Isso faz o layout se adaptar a telas menores (celulares/tablets pequenos)
+*/
+@media (max-width: 768px) {
+  
+.paginainicial-title {
+/* Diminui a fonte em telas menores para não transbordar */
+font-size: 3.5rem; /* 56px */
+}
+
+.paginainicial-subtitle {
+font-size: 1.125rem; /* 18px */
+}
+
+.paginainicial-button-group {
+/* Empilha os botões verticalmente em telas pequenas */
+flex-direction: column;
+width: 100%;
+max-width: 350px; /* Limita a largura dos botões */
+align-items: center;
+    }
+}
+
+/* --- AJUSTE FINO (Para celulares MUITO pequenos, ex: 320px-375px) --- */
+@media (max-width: 400px) {
+  
+  .paginainicial-logo {
+    width: 10rem; /* 160px (Deixa o logo um pouco menor) */
+  }
+
+  .paginainicial-title {
+    font-size: 2.5rem; /* 40px (Título ainda menor) */
+  }
+
+  .paginainicial-subtitle {
+    font-size: 1rem; /* 16px */
+  }
 }

@@ -1,57 +1,64 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
-
+/* --- SIDEBAR DESKTOP --- */
 .sidebar {
-  width: 230px;
+  width: 14.375rem;
   position: fixed;
   top: 0;
   left: 0;
   height: 100vh;
-  background: var(--cor-fundo-card); /* Era #fff */
+  background: var(--cor-fundo-card);
   padding: 3px 12px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   box-shadow: 2px 0 8px rgba(0,0,0,0.03);
-  z-index: 100;
   border-right: 1px solid var(--cor-borda-cinza);
+  z-index: 900;
 }
 
 .sidebar-top {
   display: flex;
   flex-direction: column;
   align-items: center;
+  flex-grow: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.sidebar-logo {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  cursor: default;
 }
 
 .sidebar-logo img {
-  width: 64px;
-  height: 64px;
+  width: 4rem;
+  height: 4rem;
   object-fit: contain;
   margin-top: 50px;
 }
 
 .sidebar-nav {
-  width: 100%;
   display: flex;
   flex-direction: column;
   padding: 25px 4px;
 }
 
-
-
 .nav-btn {
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 12px 16px;
+  gap: 8px;
+  padding: 12px;
   width: 90%;
-  margin: 10px auto; 
-  background: var(--cor-fundo-card); /* Era #fff */
+  margin: 10px auto;
+  background: var(--cor-fundo-card);
   border: none;
   border-radius: 12px;
   font-weight: 500;
   font-size: 16px;
-  color: var(--cor-texto-principal); /* Era #333 */
+  color: var(--cor-texto-principal);
   cursor: pointer;
   transition: all 0.3s ease;
   text-decoration: none;
@@ -60,115 +67,132 @@
 .nav-icon {
   width: 22px;
   height: 22px;
-  object-fit: contain;
 }
-
 
 .nav-btn.active {
-  background-color: var(--cor-roxo-principal); /* Era #8b5cf6 */
-  color: #fff; /* Texto branco (mantido) */
+  background-color: var(--cor-roxo-principal);
+  color: #fff;
 }
 
-.nav-btn:not(.active):hover { 
-  background-color: #f3e8ff; 
-  color: #333; 
-  transform: translateY(-2px); 
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+.nav-btn:not(.active):hover {
+  background-color: #f3e8ff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.05);
 }
-
-
-.nav-btn.active:hover {
-  background-color: #7c3aed; 
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25); 
-  transform: translateY(-3px);
-}
-
 
 .sidebar-footer {
   display: flex;
   gap: 8px;
   justify-content: center;
-  align-items: center;
   padding: 16px;
-  border-top: 1px solid var(--cor-borda-cinza); /* Era #f1ecef */
+  border-top: 1px solid var(--cor-borda-cinza);
 }
 
-.footer-btn {
-  background: var(--cor-fundo-card); /* Era #fff */
-  border: none;
-  padding: 10px;
-  border-radius: 12px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  text-decoration: none; /* <-- ADICIONE ESTA LINHA */
-}
-
-.footer-btn:hover {
-  background-color: var(--cor-fundo-card-alt); /* Era #ede9fe */
-}
-
-.footer-btn img {
+/* --- ÍCONES DINÂMICOS --- */
+.nav-icon-container {
+  position: relative;
   width: 22px;
   height: 22px;
-  object-fit: contain;
 }
 
-/* Em: Sidebar.css (Adicione isso e apague as regras de ícone antigas) */
-
-/* 1. O CONTAINER que segura os dois ícones */
-.nav-icon-container {
-  position: relative; /* Cria o contexto para o 'absolute' */
-  width: 22px;  /* Mesmo tamanho que seus ícones */
-  height: 22px;
-  flex-shrink: 0; /* Impede que o container encolha */
-}
-
-/* 2. OS ÍCONES (Ambos) */
 .nav-icon-container .nav-icon {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-
-  /* 3. MÁGICA: Empilha os ícones um em cima do outro */
   position: absolute;
   top: 0;
   left: 0;
-  
-  /* 4. Animação suave de fade */
-  transition: opacity 0.2s ease-in-out;
+  transition: opacity 0.2s;
 }
 
-/* --- LÓGICA DE TROCA DE ÍCONES (COM OPACIDADE) --- */
+.icon-w { opacity: 0; }
+.icon-b { opacity: 1; }
 
-/* --- 1. MODO CLARO (Padrão) --- */
-
-/* Botão Inativo: Mostra o preto (opacidade 1), esconde o branco (opacidade 0) */
-.nav-btn .icon-w { opacity: 0; }
-.nav-btn .icon-b { opacity: 1; }
-
-/* Botão ATIVO: Mostra o branco, esconde o preto */
 .nav-btn.active .icon-w { opacity: 1; }
 .nav-btn.active .icon-b { opacity: 0; }
 
-/* --- 2. MODO ESCURO (Inverte a lógica) --- */
+/* ============================
+      MOBILE FIX DEFINITIVO
+=============================== */
 
-/* Botão Inativo (no Modo Escuro): Mostra o BRANCO, esconde o preto */
-body.modo-escuro .nav-btn .icon-w { opacity: 1; }
-body.modo-escuro .nav-btn .icon-b { opacity: 0; }
+.mobile-logo-opener {
+  position: fixed;
+  top: 12px;
+  left: 12px;
+  z-index: 2000;
+  background: #fff;
+  border: 1px solid var(--cor-borda-cinza);
+  border-radius: 50%;
+  padding: 8px;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  display: none; /* desktop */
+}
 
-/* Botão ATIVO (no Modo Escuro): Mostra o PRETO, esconde o branco */
-body.modo-escuro .nav-btn.active .icon-w { opacity: 1; }
-body.modo-escuro .nav-btn.active .icon-b { opacity: 0; }
+.mobile-logo-opener img {
+  width: 36px;
+  height: 36px;
+}
 
-/* --- LÓGICA DO RODAPÉ (Inverte no Modo Escuro) --- */
+/* MOBILE */
+@media (max-width: 992px) {
 
-/* Rodapé (Padrão): Mostra o preto, esconde o branco */
-.footer-btn .icon-w { opacity: 0; }
-.footer-btn .icon-b { opacity: 1; }
+  .mobile-logo-opener {
+    display: block !important;
+  }
 
-/* Rodapé (no Modo Escuro): Mostra o BRANCO, esconde o preto */
-body.modo-escuro .footer-btn .icon-w { opacity: 1; }
-body.modo-escuro .footer-btn .icon-b { opacity: 0; }
+  .sidebar {
+    transform: translateX(-100%);
+    transition: transform 0.3s ease-in-out;
+    width: 250px;
+    z-index: 1100;
+  }
 
-body.modo-escuro .nav-btn:not(.active):hover .icon-w {opacity: 0; }
-body.modo-escuro .nav-btn:not(.active):hover .icon-b {opacity: 1; }
+  .sidebar.mobile-open {
+    transform: translateX(0);
+  }
+
+  body.menu-backdrop-active {
+    overflow: hidden;
+  }
+
+  body.menu-backdrop-active::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 1000;
+  }
+
+  .sidebar-logo {
+    cursor: pointer;
+  }
+  /* Botão some quando sidebar abre */
+.mobile-logo-opener.hide {
+  display: none !important;
+}
+
+/* Clique fora fecha o menu */
+.sidebar-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: 1000;
+}
+
+/* Footer icons fix */
+.footer-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 12px;
+  display: flex;
+  align-items: center;
+}
+
+.footer-btn.active .icon-w {
+  opacity: 1;
+}
+
+.footer-btn.active .icon-b {
+  opacity: 0;
+}
+
+}
