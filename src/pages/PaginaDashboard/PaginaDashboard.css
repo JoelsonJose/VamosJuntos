@@ -61,6 +61,7 @@
   background-color: #fff;
   /* MUDANÇA: 'px' para 'rem' */
   border-radius: 1rem; /* 16px */
+
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
   padding: 1.25rem 1.5rem; /* 20px 24px */
   min-width: 18.75rem; /* 300px */
@@ -233,3 +234,4 @@ margin-left: 0;
 padding: 24px 16px; 
 }
 }
+
