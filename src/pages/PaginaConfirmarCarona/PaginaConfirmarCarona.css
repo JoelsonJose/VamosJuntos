@@ -1,301 +1,171 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+/* ---------------------------------------------------- */
+/* LAYOUT GERAL 
+/* ---------------------------------------------------- */
 .pagina-confirmar {
   display: flex;
   background: linear-gradient(to bottom, #f3e8ff, #d8c0ff);
   min-height: 100vh;
+  font-family: 'Inter', sans-serif;
+  overflow-x: hidden; /* Previne rolagem horizontal na página inteira */
 }
 
 .conteudo-confirmar {
-  flex: 1;
+  flex-grow: 1;
+  /* Padrão Desktop */
+  margin-left: 230px;
+  width: calc(100% - 230px);
   padding: 30px 40px;
+  box-sizing: border-box; /* CRÍTICO: Garante que padding não estoure */
+}
+
+.titulo-confirmar {
+  color: #333;
+  margin-bottom: 5px;
+  font-size: 1.8rem;
+  font-weight: 700;
 }
 
 .subtitulo {
   color: #6b6b6b;
   margin-bottom: 20px;
+  font-size: 1rem;
 }
 
+/* Container dos Cards (Esquerdo + Direito) */
 .container-geral {
   display: flex;
   gap: 20px;
+  align-items: flex-start; 
+  width: 100%;
+  box-sizing: border-box;
 }
 
-/* Card esquerdo: trajeto + pontos */
+/* ---------------------------------------------------- */
+/* CARD ESQUERDO (Trajeto + Pontos)
+/* ---------------------------------------------------- */
 .card-esquerdo {
   background: #fff;
-  flex: 2;
-  border-radius: 10px;
-  padding: 22px 26px;
+  flex: 2; 
+  border-radius: 12px;
+  padding: 24px;
   box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  box-sizing: border-box; /* CRÍTICO */
+  width: 100%;
 }
 
 .trajeto-header {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+/* Título do Trajeto (Origem -> Destino) */
+.trajeto-header h3 {
+  margin: 0;
+  font-size: 1.1rem;
+  color: #333;
+  line-height: 1.4;
+  max-width: 70%; /* Deixa espaço para a tag */
 }
 
 .status-agendada {
   background: #54d487;
   color: #fff;
   padding: 4px 10px;
-  border-radius: 10px;
-  font-size: 13px;
+  border-radius: 8px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  white-space: nowrap;
+  align-self: flex-start;
 }
 
 .info-trajeto {
   display: flex;
-  gap: 18px;
+  flex-direction: column; /* Melhor leitura vertical */
+  gap: 12px;
   margin: 10px 0 8px 0;
   color: #555;
-  font-size: 14px;
+  font-size: 0.9rem;
+}
+
+.info-item {
+  display: flex;
+  align-items: flex-start; /* Alinha ícone ao topo do texto */
+  gap: 10px;
 }
 
 .info-item img {
-  width: 16px;
-  margin-right: 8px;
-  vertical-align: middle;
+  width: 18px;
+  flex-shrink: 0; /* Impede ícone de amassar */
+  margin-top: 2px;
 }
 
-/* Linha roxa separadora pedida (mais visível e com espaçamento) */
+/* Força quebra de texto em endereços longos */
+.info-item span {
+  word-break: break-word; 
+  overflow-wrap: break-word;
+  line-height: 1.4;
+}
+
+/* Linha roxa separadora */
 .linha-roxa {
   border: none;
-  border-top: 2px solid #a855f7;
-  margin: 18px 0;
+  border-top: 1px solid #a855f7;
+  margin: 20px 0;
+  opacity: 0.5;
 }
 
-/* Descer os pontos de embarque um pouco mais (maior espaçamento superior) */
-.pontos-embarque {
-  margin-top: 6px;
+/* Pontos de embarque */
+.pontos-embarque h4 {
+  margin-top: 0;
+  margin-bottom: 15px;
+  color: #333;
+  font-size: 1rem;
 }
 
 .lista-pontos {
-  margin-top: 12px;
-}
-
-/* Cada opção - estilo visual próximo ao protótipo */
-.opcao-embarque {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin: 8px 0;
-  cursor: pointer;
-  user-select: none;
-  padding: 8px 6px;
-  border-radius: 6px;
-}
-
-/* hover leve sem mudar estrutura */
-.opcao-embarque:hover {
-  background: #faf5ff;
-}
-
-.opcao-embarque input[type="checkbox"] {
-  width: 18px;
-  height: 18px;
-  cursor: pointer;
-}
-
-/* estado ativo - muda o fundo do quadrado e ícone de check */
-.opcao-embarque.ativo input[type="checkbox"] {
-  /* deixamos o checkbox default marcado; a aparência principal vem do protótipo */
-}
-
-/* texto lado do checkbox */
-.texto-ponto {
-  display: flex;
-  gap: 8px;
-  align-items: baseline;
-}
-
-.nome-ponto {
-  font-size: 14px;
-  color: #222;
-}
-
-.previsao {
-  color: #6b6b6b;
-  font-size: 13px;
-}
-
-/* Card direito (perfil) — aumentei só a foto conforme pedido */
-.card-direito {
-  background: #fff;
-  flex: 1;
-  border-radius: 10px;
-  padding: 20px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  gap: 10px;
 }
 
-.perfil {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-/* foto levemente maior que antes */
-.foto-perfil {
-  width: 72px;   /* aumentado */
-  height: 72px;  /* aumentado */
-  border-radius: 50%;
-  object-fit: cover;
-}
-
-.nome-perfil {
-  font-weight: 600;
-  margin-bottom: 6px;
-}
-
-.info-lucas img {
-  width: 16px;
-  height: 16px;
-  margin-right: 6px;
-  vertical-align: middle;
-}
-
-.info-lucas p {
-  font-size: 14px;
-  margin: 6px 0;
-}
-
-.info-veiculo {
-  font-size: 14px;
-  margin-top: 10px;
-}
-
-.placa {
-  background: #d8b4fe;
-  padding: 2px 8px;
-  border-radius: 4px;
-  font-weight: 600;
-}
-
-.vagas {
-  margin-top: 8px;
-  font-size: 14px;
-}
-
-.maximo {
-  color: #6b6b6b;
-  font-size: 12px;
-}
-
-/* comentário estilizado como no protótipo */
-.comentarios {
-  margin-top: 14px;
-}
-
-.comentarios textarea {
-  width: 100%;
-  border: 1px solid #d6b3ff;
-  border-radius: 8px;
-  padding: 10px;
-  resize: none;
-  font-size: 13px;
-  height: 72px;
-  color: #555;
-  background: #fff;
-}
-
-/* botoes */
-.botoes {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 14px;
-}
-
-.btn-voltar {
-  background: #ff6b6b;
-  border: none;
-  padding: 8px 20px;
-  color: white;
-  border-radius: 6px;
-  cursor: pointer;
-  font-weight: 500;
-}
-
-.btn-confirmar {
-  background: #a855f7;
-  border: none;
-  padding: 8px 20px;
-  color: white;
-  border-radius: 6px;
-  cursor: pointer;
-  font-weight: 500;
-}
-
-/* Ajuste seguro: recua o primeiro card dentro de .container-geral
-   (não depende do nome da classe do card) */
-.conteudo-confirmar .container-geral > :first-child {
-  margin-left: 260px;           /* distância da sidebar */
-  width: calc(100% - 420px);    /* evita esticar por baixo da sidebar / mantém espaço pro card direito */
-  box-sizing: border-box;       /* garante que padding não quebre a largura */
-}
-
-/* proteção em telas menores: remove o margin-left e volta ao comportamento natural */
-@media (max-width: 1000px) {
-  .conteudo-confirmar .container-geral > :first-child {
-    margin-left: 0;
-    width: 100%;
-  }
-}
-
-/* Alinhar título e subtítulo corretamente (sem sobreposição da sidebar) */
-.conteudo-confirmar h2,
-.conteudo-confirmar .subtitulo {
-  margin-left: 260px; /* mesmo deslocamento lateral usado no card principal */
-}
-
-/* Proteção para telas menores */
-@media (max-width: 1000px) {
-  .conteudo-confirmar h2,
-  .conteudo-confirmar .subtitulo {
-    margin-left: 0;
-  }
-}
-
-/* --- ajustes solicitados para os checkboxes --- */
-.lista-pontos {
-  margin-top: 22px; /* mais espaço pra descer a lista */
-}
-
-/* === Ajuste final dos checkboxes === */
+/* Checkboxes customizados */
 .opcao-embarque {
   display: flex;
-  align-items: center;
+  align-items: flex-start; /* Alinha checkbox ao topo */
   gap: 12px;
-  margin: 14px 0;
   cursor: pointer;
   user-select: none;
-  padding: 10px 8px;
-  border-radius: 6px;
+  padding: 10px;
+  border-radius: 8px;
+  transition: background 0.2s;
+  border: 1px solid transparent;
 }
 
-/* Permite clicar no texto também */
-.opcao-embarque label {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  width: 100%;
-  cursor: pointer;
+.opcao-embarque:hover {
+  background: #faf5ff;
+  border-color: #f3e8ff;
 }
 
 .opcao-embarque input[type="checkbox"] {
   appearance: none;
   -webkit-appearance: none;
-  width: 18px;
-  height: 18px;
+  width: 20px;
+  height: 20px;
   border: 2px solid #a855f7;
   border-radius: 4px;
   cursor: pointer;
   position: relative;
   background-color: #fff;
-  transition: all 0.2s ease;
+  flex-shrink: 0; /* Checkbox não amassa */
+  margin-top: 2px;
   display: flex;
   align-items: center;
-  justify-content: center; /* centraliza o check */
+  justify-content: center;
 }
 
 .opcao-embarque input[type="checkbox"]:checked {
@@ -306,12 +176,240 @@
 .opcao-embarque input[type="checkbox"]:checked::after {
   content: "✔";
   color: #fff;
-  position: absolute;
-  font-size: 13px;
-  line-height: 1;
+  font-size: 12px;
 }
 
-.opcao-embarque:hover {
-  background: #faf5ff;
+.texto-ponto {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
 }
 
+.nome-ponto {
+  font-size: 0.9rem;
+  color: #333;
+  font-weight: 500;
+  word-break: break-word; /* Quebra texto longo */
+}
+
+.previsao {
+  color: #6b6b6b;
+  font-size: 0.8rem;
+}
+
+/* ---------------------------------------------------- */
+/* CARD DIREITO (Perfil Motorista)
+/* ---------------------------------------------------- */
+.card-direito {
+  background: #fff;
+  flex: 1; 
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  box-sizing: border-box; /* CRÍTICO */
+  width: 100%;
+  height: fit-content;
+}
+
+.perfil {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.foto-perfil {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #eee;
+}
+
+.nome-perfil {
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: #333;
+  margin: 0;
+}
+
+.info-lucas {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 15px;
+}
+
+.info-lucas p {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.info-lucas img {
+  width: 16px;
+  height: 16px;
+}
+
+.info-veiculo {
+  padding-top: 15px;
+  border-top: 1px solid #eee;
+}
+
+.placa {
+  background: #d8b4fe;
+  color: #4c1d95;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-weight: 700;
+  font-size: 0.85rem;
+}
+
+.vagas {
+  margin-top: 10px;
+  font-size: 0.9rem;
+  color: #333;
+}
+
+.maximo {
+  color: #888;
+  font-size: 0.8rem;
+  display: block;
+  margin-top: 2px;
+}
+
+/* Comentário */
+.comentarios {
+  margin-top: 20px;
+}
+.comentarios label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.comentarios textarea {
+  width: 100%;
+  border: 1px solid #d6b3ff;
+  border-radius: 8px;
+  padding: 12px;
+  resize: none;
+  font-size: 0.9rem;
+  height: 80px;
+  color: #333;
+  background: #fff;
+  box-sizing: border-box; /* CRÍTICO */
+}
+
+/* Botões */
+.botoes {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 25px;
+  gap: 15px;
+}
+
+.btn-voltar, .btn-confirmar {
+  border: none;
+  padding: 12px;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.95rem;
+  flex: 1; 
+  text-align: center;
+}
+
+.btn-voltar { background: #ff6b6b; }
+.btn-confirmar { background: #a855f7; }
+
+
+/* ==================================================== */
+/* RESPONSIVIDADE (CELULAR) - AJUSTE AGRESSIVO
+/* ==================================================== */
+
+@media (max-width: 1000px) {
+  
+  .conteudo-confirmar {
+    margin-left: 0; /* Remove a margem da sidebar */
+    width: 100%;
+    padding: 16px; /* Padding bem menor para caber na tela */
+  }
+
+  /* Empilha os cards */
+  .container-geral {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  /* Ajustes do Título */
+  .titulo-confirmar {
+    font-size: 1.5rem;
+    text-align: center;
+  }
+  .subtitulo {
+    font-size: 0.9rem;
+    text-align: center;
+    margin-bottom: 16px;
+  }
+
+  /* Ajuste do Card Esquerdo */
+  .card-esquerdo {
+    padding: 16px; /* Menos padding interno */
+  }
+  
+  .trajeto-header {
+    flex-direction: column; /* Empilha título e tag */
+    align-items: flex-start;
+    gap: 8px;
+  }
+  
+  .trajeto-header h3 {
+    max-width: 100%;
+    font-size: 1rem;
+  }
+
+  .status-agendada {
+    align-self: flex-start; /* Mantém alinhado à esquerda */
+    font-size: 0.7rem;
+  }
+
+  .info-item {
+    font-size: 0.85rem;
+  }
+
+  /* Ajuste do Card Direito */
+  .card-direito {
+    padding: 16px;
+  }
+
+  .perfil {
+    gap: 10px;
+  }
+  
+  .foto-perfil {
+    width: 50px;
+    height: 50px;
+  }
+  
+  .nome-perfil {
+    font-size: 1rem;
+  }
+
+  /* Botões ocupam largura total e empilham se precisar */
+  .botoes {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .btn-voltar, .btn-confirmar {
+    width: 100%;
+    padding: 14px;
+  }
+}

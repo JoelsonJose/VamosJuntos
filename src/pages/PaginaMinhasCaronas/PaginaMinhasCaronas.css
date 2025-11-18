@@ -1,22 +1,27 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
 /* ---------------------------------------------------- */
-/* LAYOUT DA PÁGINA                                     */
+/* LAYOUT DA PÁGINA 
 /* ---------------------------------------------------- */
 .pagina-caronas-container {
-  display: block;
+  display: flex;
   min-height: 100vh;
   background: var(--cor-fundo-pagina);
+  font-family: 'Inter', sans-serif;
 }
- 
+
 .conteudo-caronas {
+  flex-grow: 1;
+  /* Padrão Desktop */
+  width: calc(100% - 230px); 
   margin-left: 230px;
   padding: 40px 48px;
-  color: var(--cor-texto-principal); /* Era #333 */
+  color: var(--cor-texto-principal);
+  overflow-y: auto;
 }
- 
+
 /* ---------------------------------------------------- */
-/* CABEÇALHO ("Minhas Caronas")                         */
+/* CABEÇALHO 
 /* ---------------------------------------------------- */
 .header-minhas-caronas {
   margin-bottom: 32px; 
@@ -25,122 +30,117 @@
 .page-main-title {
   font-size: 28px;
   font-weight: 700;
-  color: var(--cor-texto-principal); /* Era #1f2937 */
+  color: var(--cor-texto-principal);
   margin: 0 0 8px 0;
 }
 
 .page-main-subtitle {
-  color: #777; /* Era #555 */
+  color: #777; 
   font-size: 1rem;
   margin: 0;
 }
 
 /* ---------------------------------------------------- */
-/* LISTA DE CARDS DE ROTA                               */
+/* LISTA DE CARDS 
 /* ---------------------------------------------------- */
 .lista-caronas-container {
   display: flex;
   flex-direction: column;
-  gap: 35px; 
-  max-width: 10000px;
+  gap: 24px;
+  width: 100%; /* Garante que a lista não passe do container */
 }
 
 .carona-item-wrapper {
   display: flex;
   gap: 16px;
   align-items: stretch;
+  width: 100%;
+  box-sizing: border-box; /* Importante para não vazar */
 }
 
 /* ---------------------------------------------------- */
-/* CARD DA ESQUERDA (INFORMAÇÕES)                       */
+/* CARD DA ESQUERDA (INFORMAÇÕES) 
 /* ---------------------------------------------------- */
 .carona-card-info {
   flex-grow: 1; 
   background: #fff;
   border-radius: 12px;
-  padding: 28px 24px;
+  padding: 24px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
   border: 1px solid #e5e7eb;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-sizing: border-box; /* O padding fica DENTRO da largura */
 }
 
 .card-info-header {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   gap: 16px;
   margin-bottom: 16px;
 }
 
 .rota-titulo {
-  font-size: 1.125rem; /* 18px */
+  font-size: 1.1rem;
   font-weight: 600;
   color: #1f2937;
   margin: 0;
   line-height: 1.4;
+  /* Garante que o texto quebre e não estoure o card */
+  word-break: break-word; 
+  overflow-wrap: break-word;
 }
 
 .rota-titulo span {
-  color: #9ca3af; /* Seta cinza */
+  color: #9ca3af; 
   font-weight: 400;
   margin: 0 4px;
 }
 
-/* --- Tags de Status --- */
+/* Tags de Status */
 .status-tag {
-  font-size: 0.75rem; /* 12px */
+  font-size: 0.75rem; 
   font-weight: 600;
   padding: 4px 12px;
   border-radius: 9999px;
   text-transform: capitalize;
-  flex-shrink: 0;
+  flex-shrink: 0; 
+  white-space: nowrap; 
 }
 
-.status-tag.status-agendada {
-  background-color: #FEF3C7; /* Amarelo */
-  color: #9A3412;
-}
-.status-tag.status-ativa {
-  background-color: #D1FAE5; /* Verde */
-  color: #065F46;
-}
-.status-tag.status-finalizada {
-  background-color: #DBEAFE; /* Azul */
-  color: #1E40AF;
-}
-.status-tag.status-cancelada {
-  background-color: #FEE2E2; /* Vermelho */
-  color: #991B1B;
-}
+.status-tag.status-agendada { background-color: #FEF3C7; color: #9A3412; }
+.status-tag.status-ativa { background-color: #D1FAE5; color: #065F46; }
+.status-tag.status-finalizada { background-color: #DBEAFE; color: #1E40AF; }
+.status-tag.status-cancelada { background-color: #FEE2E2; color: #991B1B; }
 
 .rota-horario {
   display: flex;
   align-items: center;
   gap: 8px;
-  font-size: 0.9rem; /* 14px */
+  font-size: 0.9rem;
   color: #6b7280;
   font-weight: 500;
 }
-
-.rota-horario .input-icon {
-  width: 16px;
-  height: 16px;
-  opacity: 0.6;
-}
+.rota-horario .input-icon { width: 16px; height: 16px; opacity: 0.6; }
 
 /* ---------------------------------------------------- */
-/* CARD DA DIREITA (AVALIAÇÃO)                          */
+/* CARD DA DIREITA (AVALIAÇÃO) 
 /* ---------------------------------------------------- */
 .carona-card-rating {
   flex-shrink: 0; 
-  width: 300px;
+  width: 300px; 
   background: #fff;
   border-radius: 12px;
-  padding: 28px 24px;
+  padding: 24px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
   border: 1px solid #e5e7eb;
   display: flex;
   align-items: center;
+  justify-content: center; 
   gap: 20px;
+  box-sizing: border-box; /* O padding fica DENTRO da largura */
 }
 
 .rating-user-foto img {
@@ -150,48 +150,89 @@
   object-fit: cover;
 }
 
-/* --- ESTILOS PARA O NOVO STAR-RATING COM <img> --- */
 .rating-stars {
   display: flex;
-  gap: 8px;
+  gap: 4px; 
 }
+.star-img { width: 24px; height: 24px; } 
+.star-img.locked { width: 20px; height: 20px; opacity: 0.6; }
 
-.star-img {
-  width: 30px;  /* Tamanho da estrela */
-  height: 30px;
-}
+/* ==================================================== */
+/* RESPONSIVIDADE 
+/* ==================================================== */
 
-/* Estilo para o cadeado */
-.star-img.locked {
-  width: 20px;  /* Cadeado um pouco menor */
-  height: 20px;
-  opacity: 0.6; /* Deixa o cadeado cinza/faded */
-}
-
-/* ---------------------------------------------------- */
-/* RESPONSIVIDADE                                       */
-/* ---------------------------------------------------- */
+/* Tablet e Menor (< 992px) */
 @media (max-width: 992px) {
   .conteudo-caronas {
-    padding: 24px;
-    margin-left: 0;
+    margin-left: 0; /* Remove margem da sidebar */
     width: 100%;
-  }
-  .lista-caronas-container {
-    max-width: 100%;
+    padding: 24px; /* Padding padrão tablet */
   }
 }
 
+/* Celular (< 768px) - Ajuste Agressivo */
 @media (max-width: 768px) {
-  .carona-item-wrapper {
-    flex-direction: column;
+  
+  .conteudo-caronas {
+    /* Reduz o padding da página para sobrar mais espaço para o card */
+    padding: 24px 16px; 
   }
-  .carona-card-rating {
+
+  .page-main-title {
+    font-size: 24px; /* Título um pouco menor */
+  }
+
+  .carona-item-wrapper {
+    flex-direction: column; /* Empilha Info em cima, Rating embaixo */
+    gap: 0; 
+    border-radius: 12px;
+    overflow: hidden; 
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06); 
+    border: 1px solid #e5e7eb;
     width: 100%;
   }
+
+  /* --- Parte de CIMA do card (Infos) --- */
+  .carona-card-info {
+    width: 100%; /* Força ocupar 100% */
+    border-radius: 0; 
+    border: none;
+    box-shadow: none;
+    padding: 20px;
+    border-bottom: 1px solid #f0f0f0; 
+  }
+
   .card-info-header {
-    flex-direction: column;
+    flex-direction: column; /* Título em cima, tag embaixo */
     align-items: flex-start;
-    gap: 12px;
+    gap: 8px;
+    margin-bottom: 12px;
+    width: 100%;
+  }
+
+  .rota-titulo {
+    font-size: 1rem;
+    width: 100%; /* Garante que o texto use a largura toda */
+  }
+
+  /* --- Parte de BAIXO do card (Rating) --- */
+  .carona-card-rating {
+    width: 100%; /* Força ocupar 100% */
+    border-radius: 0;
+    border: none;
+    box-shadow: none;
+    padding: 16px 20px;
+    justify-content: flex-start; /* Alinha à esquerda para ficar bonito */
+    background-color: #f9fafb; 
+  }
+  
+  .rating-user-foto img {
+    width: 40px; 
+    height: 40px;
+  }
+  
+  .star-img {
+    width: 20px;
+    height: 20px;
   }
 }

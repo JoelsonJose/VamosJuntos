@@ -1,4 +1,4 @@
-/* GLOBAIS/LAYOUT DA PÁGINA - mantive suas variáveis e estilos básicos */
+/* GLOBAIS/LAYOUT DA PÁGINA */
 .rota-pagina {
   min-height: 100vh;
   background: var(--cor-fundo-pagina);
@@ -6,6 +6,7 @@
 }
 
 .rota-conteudo {
+  /* Padrão Desktop */
   margin-left: 230px;
   padding: 30px 40px;
   flex-grow: 1;
@@ -27,7 +28,7 @@
 /* Layout principal */
 .rota-principal-container {
   display: grid;
-  grid-template-columns: 2fr 1fr;
+  grid-template-columns: 2fr 1fr; /* Esquerda maior, Direita menor */
   gap: 30px;
 }
 
@@ -45,11 +46,15 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 12px;
+  flex-wrap: wrap; /* Permite quebrar linha no mobile */
+  gap: 10px;
 }
 .rota-descricao {
   font-size: 16px;
   font-weight: 600;
   color: #333;
+  margin: 0;
+  line-height: 1.4;
 }
 .status-badge {
   background: #6ab04c;
@@ -58,15 +63,17 @@
   border-radius: 20px;
   font-size: 12px;
   font-weight: bold;
+  white-space: nowrap;
 }
 
-/* substitui a barra de progresso - info compacta */
+/* Info compacta */
 .info-compacta {
   display: flex;
   align-items: center;
   gap: 12px;
   margin-bottom: 14px;
   padding: 10px 14px;
+  flex-wrap: wrap; /* Permite quebrar linha */
 }
 .info-compacta-left {
   display: flex;
@@ -74,6 +81,10 @@
   gap: 10px;
   color: #666;
   font-size: 13px;
+  flex-wrap: wrap;
+}
+.info-compacta-text {
+  word-break: break-word;
 }
 .info-icon-small {
   width: 18px;
@@ -87,7 +98,7 @@
 /* MAPA */
 .rota-mapa {
   background: #ddd;
-  height: 420px; /* ajustado pra combinar com protótipo */
+  height: 420px;
   border-radius: 8px;
   overflow: hidden;
   box-shadow: 0 4px 10px rgba(0,0,0,0.05);
@@ -225,4 +236,38 @@
 }
 .cancelar-btn:hover {
   background-color: #e55345;
+}
+
+/* ==================================================== */
+/* RESPONSIVIDADE (CELULAR E TABLET)
+/* ==================================================== */
+
+@media (max-width: 1000px) {
+  .rota-conteudo {
+    margin-left: 0; /* Remove margem da sidebar */
+    width: 100%;
+    padding: 20px;
+  }
+
+  /* Empilha as colunas (Mapa em cima, Info Motorista embaixo) */
+  .rota-principal-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  /* Ajusta altura do mapa no mobile */
+  .rota-mapa {
+    height: 300px;
+  }
+
+  /* Ajustes de texto */
+  .rota-titulo-header h1 {
+    font-size: 24px;
+  }
+  
+  /* Garante que info compacta não estoure */
+  .info-compacta-left {
+    flex-wrap: wrap;
+  }
 }

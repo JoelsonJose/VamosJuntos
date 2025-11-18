@@ -4,67 +4,72 @@
 /* LAYOUT DA PÁGINA 
 /* ---------------------------------------------------- */
 .pagina-rotas-container {
-display: flex;
-min-height: 100vh;
-background: var(--cor-fundo-pagina);
-font-family: 'Inter', sans-serif;
+  display: flex;
+  min-height: 100vh;
+  background: var(--cor-fundo-pagina);
+  font-family: 'Inter', sans-serif;
 }
 
 .conteudo-rotas {
-flex-grow: 1;
-width: calc(100% - 230px);
-margin-left: 230px;
-padding: 40px 48px;
-overflow-y: auto;
-color: var(--cor-texto-principal);
+  flex-grow: 1;
+  width: calc(100% - 230px);
+  margin-left: 230px;
+  padding: 40px 48px;
+  overflow-y: auto;
+  color: var(--cor-texto-principal);
 }
 
 /* ---------------------------------------------------- */
 /* CABEÇALHO DA PÁGINA
 /* ---------------------------------------------------- */
 .header-minhas-rotas {
-display: flex;
-justify-content: space-between;
-align-items: center;
-margin-bottom: 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 32px;
+  flex-wrap: wrap; 
+  gap: 16px;
 }
 
 .page-main-title {
-font-size: 28px;
-font-weight: 700;
-color: var(--cor-texto-principal);
-margin: 0 0 8px 0;
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--cor-texto-principal);
+  margin: 0 0 8px 0;
 }
 
 .page-main-subtitle {
-color: var(--cor-texto-secundario);
-font-size: 1rem;
-margin: 0;
+  color: var(--cor-texto-secundario);
+  font-size: 1rem;
+  margin: 0;
 }
 
 .btn-nova-rota {
-display: flex;
-align-items: center;
-gap: 8px;
-background-color: var(--cor-roxo-principal);
-color: #fff;
-font-size: 1rem;
-font-weight: 600;
-border: none;
-border-radius: 12px;
-padding: 12px 20px;
-cursor: pointer;
-text-decoration: none;
-transition: background-color 0.2s ease, transform 0.1s ease;
-box-shadow: 0 4px 10px rgba(161, 0, 255, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center; 
+  gap: 8px;
+  background-color: var(--cor-roxo-principal);
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 12px;
+  padding: 12px 20px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+  box-shadow: 0 4px 10px rgba(161, 0, 255, 0.2);
+  white-space: nowrap; 
+  box-sizing: border-box;
 }
 .btn-nova-rota:hover {
-background-color: #7c3aed; 
-transform: translateY(-2px);
+  background-color: #7c3aed; 
+  transform: translateY(-2px);
 }
 .btn-nova-rota .btn-icon {
-width: 16px;
-height: 16px;
+  width: 16px;
+  height: 16px;
   filter: brightness(0) invert(1);
 }
 
@@ -72,121 +77,98 @@ height: 16px;
 /* LISTA DE CARDS DE ROTA
 /* ---------------------------------------------------- */
 .lista-rotas-container {
-display: flex;
-flex-direction: column;
-gap: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
 }
 
 .card-rota {
-background: #fff;
-border-radius: 16px;
-padding: 24px 32px;
-box-shadow: 0 6px 20px rgba(0, 0, 0, 0.07);
-border: 1px solid var(--cor-borda-cinza);
+  background: #fff;
+  border-radius: 16px;
+  padding: 24px 32px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.07);
+  border: 1px solid var(--cor-borda-cinza);
 }
 
 /* ---------------------------------------------------- */
-/* 1. Card Header (Título, Tag, Excluir)
+/* 1. Card Header
 /* ---------------------------------------------------- */
 .card-rota-header {
-display: flex;
-justify-content: space-between;
-align-items: flex-start;
- margin-bottom: 8px;
-  gap: 16px; /* Espaço entre o grupo da esquerda e os botões da direita */
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 8px;
+  gap: 16px; 
 }
 
-/* NOVO: Grupo da Esquerda (Título + Status) */
 .header-info-principal {
   display: flex;
   align-items: center;
-  gap: 16px; /* Espaço entre o título e o status */
-  flex-wrap: wrap; /* Permite que o status quebre a linha se o título for longo */
+  gap: 16px; 
+  flex-wrap: wrap; 
 }
 
 .rota-titulo {
-font-size: 1.5rem; /* 24px */
-font-weight: 600;
-color: var(--cor-texto-principal);
-margin: 0;
+  font-size: 1.5rem; /* 24px */
+  font-weight: 600;
+  color: var(--cor-texto-principal);
+  margin: 0;
+  line-height: 1.3;
 }
 
 .rota-titulo span {
-color: var(--cor-texto-secundario);
-font-weight: 400;
-margin: 0 8px;
+  color: var(--cor-texto-secundario);
+  font-weight: 400;
+  margin: 0 8px;
 }
 
-/* Ações da Direita (Editar, Excluir) */
 .header-actions {
-display: flex; 
-align-items: center;
-gap: 16px;
-flex-shrink: 0; 
-  /* MUDANÇA: Empurra os botões para a direita */
-margin-left: auto; 
+  display: flex; 
+  align-items: center;
+  gap: 16px;
+  flex-shrink: 0; 
+  margin-left: auto; 
 }
 
 .status-tag {
-font-size: 0.8rem; /* 12px */
-font-weight: 600;
-padding: 4px 12px;
-border-radius: 9999px;
-text-transform: uppercase;
+  font-size: 0.8rem; 
+  font-weight: 600;
+  padding: 4px 12px;
+  border-radius: 9999px;
+  text-transform: uppercase;
 }
 .status-tag.ativa {
-background-color: var(--cor-verde-tag);
-color: var(--cor-verde-tag-texto);
+  background-color: var(--cor-verde-tag);
+  color: var(--cor-verde-tag-texto);
 }
 .status-tag.inativa {
-background-color: var(--cor-fundo-card-alt);
-color: var(--cor-texto-secundario);
+  background-color: var(--cor-fundo-card-alt);
+  color: var(--cor-texto-secundario);
 }
 
-.btn-editar{
+.btn-editar, .btn-excluir{
  display: flex;
  align-items: center;
  gap: 6px;
  background: transparent;
  border: none;
- color: var(--cor-roxo-principal); 
  font-size: 0.875rem; 
  font-weight: 600;
  cursor: pointer;
  padding: 4px;
  text-decoration: none;
 }
-.btn-editar:hover {
- background-color: #7c3aed; 
- color: #fff; 
- border-radius: 6px; 
- text-decoration: none;
-}
 
-.btn-excluir {
- display: flex;
- align-items: center;
- gap: 6px;
- background: transparent;
- border: none;
- color: #EF4444; /* Vermelho */
- font-size: 0.875rem;
- font-weight: 600;
- cursor: pointer;
- padding: 4px;
-}
-.btn-excluir:hover {
- background-color: #DC2626; 
- color: #fff; 
- border-radius: 6px;
-}
-.btn-icon-excluir {
- width: 14px;
- height: 14px;
-}
+.btn-editar { color: var(--cor-roxo-principal); }
+.btn-editar:hover { background-color: #7c3aed; color: #fff; border-radius: 6px; }
+
+.btn-excluir { color: #EF4444; }
+.btn-excluir:hover { background-color: #DC2626; color: #fff; border-radius: 6px; }
+
+.btn-icon-excluir { width: 14px; height: 14px; }
 
 /* ---------------------------------------------------- */
-/* 2. Sub-Header (Ver pontos)
+/* 2. Sub-Header e Infos
 /* ---------------------------------------------------- */
 .rota-pontos-link {
  display: flex;
@@ -198,19 +180,10 @@ color: var(--cor-texto-secundario);
  text-decoration: none;
  cursor: pointer;
  margin-bottom: 24px;
+ width: fit-content;
 }
-.rota-pontos-link:hover {
- color: var(--cor-roxo-principal);
-}
-.rota-pontos-link .input-icon {
- width: 16px;
- height: 16px;
- opacity: 0.7;
-}
+.rota-pontos-link .input-icon { width: 16px; height: 16px; opacity: 0.7; }
 
-/* ---------------------------------------------------- */
-/* 3. Linha de Informações (Horário, Vagas, Nota)
-/* ---------------------------------------------------- */
 .rota-info-row {
  display: flex;
  flex-wrap: wrap; 
@@ -225,37 +198,27 @@ color: var(--cor-texto-secundario);
  gap: 12px;
  color: #000;
 }
-.info-icon {
- width: 24px;
- height: 24px;
- opacity: 0.6;
-}
+.info-icon { width: 24px; height: 24px; opacity: 0.6; }
+
 .info-text {
  display: flex;
  flex-direction: column;
  line-height: 1.4;
  color: #000;
 }
-.info-text strong {
- font-size: 0.9rem;
- font-weight: 600;
- color: #000;
-}
-.info-text span {
- font-size: 0.8rem;
- color: #000;
-}
+.info-text strong { font-size: 0.9rem; font-weight: 600; }
+.info-text span { font-size: 0.8rem; }
 
 /* ---------------------------------------------------- */
-/* 4. Rodapé do Card (Solicitações, Botões)
+/* 4. Rodapé do Card
 /* ---------------------------------------------------- */
 .card-rota-footer {
  display: flex;
  justify-content: space-between;
  align-items: flex-end; 
  margin-top: 24px;
-  flex-wrap: wrap; /* Permite quebrar em telas pequenas */
-  gap: 16px; /* Espaço entre os botões se quebrar */
+ flex-wrap: wrap; 
+ gap: 16px; 
 }
 
 .footer-solicitacoes {
@@ -263,13 +226,7 @@ color: var(--cor-texto-secundario);
  flex-direction: column;
  gap: 12px;
 }
-
-.footer-solicitacoes p {
- font-size: 0.9rem;
- font-weight: 500;
- color: #000;
- margin: 0;
-}
+.footer-solicitacoes p { font-size: 0.9rem; font-weight: 500; margin: 0; color: #000; }
 
 .btn-ver-solicitacoes {
  background-color: var(--cor-roxo-principal);
@@ -280,101 +237,229 @@ color: var(--cor-texto-secundario);
  font-size: 0.875rem;
  font-weight: 600;
  cursor: pointer;
- transition: background-color 0.2s ease;
  width: fit-content;
 }
-.btn-ver-solicitacoes:hover {
- background-color: #7c3aed;
-}
 
-/* NOVO: Grupo de botões da direita no rodapé */
 .footer-actions {
   display: flex;
   gap: 12px;
   align-items: center;
 }
 
-.btn-encerrar-vagas {
- background-color: #FEE2E2; 
- color: #DC2626; 
+.btn-encerrar-vagas, .btn-iniciar-viagem {
  border: none;
  border-radius: 10px;
  padding: 10px 16px;
  font-size: 0.875rem;
  font-weight: 600;
  cursor: pointer;
- transition: background-color 0.2s ease;
-}
-.btn-encerrar-vagas:hover {
- background-color: #FECACA;
+ text-decoration: none; 
+ white-space: nowrap;
 }
 
-/* NOVO: Botão Iniciar Viagem */
-.btn-iniciar-viagem {
-  background-color: #2563EB; /* Azul */
-  color: #fff;
-  border: none;
-  border-radius: 10px;
-  padding: 10px 16px;
-  font-size: 0.875rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-  text-decoration: none; /* Para o <Link> */
-}
-.btn-iniciar-viagem:hover {
-  background-color: #1D4ED8; /* Azul escuro */
-}
+.btn-encerrar-vagas { background-color: #FEE2E2; color: #DC2626; }
+.btn-iniciar-viagem { background-color: #2563EB; color: #fff; }
 
-/* ---------------------------------------------------- */
-/* RESPONSIVIDADE
-/* ---------------------------------------------------- */
+
+/* ==================================================== */
+/* RESPONSIVIDADE (AJUSTE AGRESSIVO PARA CELULAR)
+/* ==================================================== */
+
+/* Tablets e Celulares (< 992px) */
 @media (max-width: 992px) {
-  .conteudo-rotas {
- padding: 24px;
- margin-left: 0;
- width: 100%;
-}
+  .conteudo-rotas {
+    margin-left: 0;
+    width: 100%; 
+    padding: 24px 16px; /* Padding reduzido nas laterais */
+  }
+
+  .header-minhas-rotas {
+    flex-direction: column; 
+    align-items: flex-start;
+    gap: 16px;
+  }
+  
+  .btn-nova-rota { width: 100%; }
 }
 
+/* Celulares (< 768px) */
 @media (max-width: 768px) {
- .header-minhas-rotas {
- flex-direction: column;
- align-items: flex-start;
- gap: 16px;
-}
-  
-  .card-rota-header {
-flex-direction: column;
-align-items: flex-start;
-gap: 12px;
-}
-  
-  .header-actions {
-flex-direction: row; /* Mantém Editar/Excluir lado a lado */
-width: 100%;
-margin-left: 0;
-justify-content: flex-start; /* Alinha à esquerda */
-}
-  
-  .rota-info-row {
-flex-direction: column;
-gap: 16px;
-align-items: flex-start;
-}
-  
-  .card-rota-footer {
-flex-direction: column;
-align-items: flex-start;
-gap: 16px;
-}
-.footer-actions {
-flex-direction: column;
-align-items: stretch;
-width: 100%;
-}
-.btn-iniciar-viagem, .btn-encerrar-vagas {
-width: 100%;
-text-align: center;
+  
+  .page-main-title {
+    font-size: 22px; /* Título menor */
+  }
+
+  .card-rota {
+    padding: 16px; /* Padding interno do card reduzido */
+    border-radius: 12px;
+  }
+
+  /* CABEÇALHO DO CARD REORGANIZADO */
+  .card-rota-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .header-info-principal {
+    flex-direction: column; /* Título em cima, Status em baixo */
+    align-items: flex-start;
+    gap: 8px;
+    width: 100%;
+  }
+
+  .rota-titulo {
+    font-size: 1.1rem; /* Fonte do título da rota reduzida */
+    line-height: 1.4;
+  }
+
+  /* Botões Editar/Excluir */
+  .header-actions {
+    width: 100%;
+    margin-left: 0;
+    justify-content: space-between; /* Espalha os botões */
+    border-top: 1px solid #f0f0f0;
+    padding-top: 10px;
+  }
+  
+  .btn-editar, .btn-excluir {
+    font-size: 0.8rem; /* Botões menores */
+    padding: 6px 10px;
+    background-color: #f9fafb; /* Fundo leve para destacar clique */
+    border-radius: 6px;
+  }
+
+  /* INFOS (Horário, etc) */
+  .rota-info-row {
+    flex-direction: column; 
+    gap: 12px;
+    margin-top: 16px;
+    padding-bottom: 16px;
+  }
+  
+  /* RODAPÉ DO CARD */
+  .card-rota-footer {
+    flex-direction: column;
+    align-items: stretch; 
+    gap: 16px;
+    margin-top: 16px;
+  }
+
+  .footer-solicitacoes p {
+    font-size: 0.85rem;
+  }
+  
+  .btn-ver-solicitacoes,
+  .btn-iniciar-viagem, 
+  .btn-encerrar-vagas {
+    width: 100%; /* Botões ocupam largura total */
+    text-align: center;
+    justify-content: center;
+    padding: 12px; /* Área de toque maior */
+  }
+
+  .footer-actions {
+    flex-direction: column;
+    width: 100%;
+    gap: 10px;
+  }
+
+  /* Celulares (< 768px) */
+@media (max-width: 768px) {
+  
+  .page-main-title {
+    font-size: 22px;
+  }
+
+  .card-rota {
+    padding: 16px;
+    border-radius: 12px;
+  }
+
+  /* CABEÇALHO DO CARD REORGANIZADO */
+  .card-rota-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .header-info-principal {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    width: 100%;
+  }
+
+  .rota-titulo {
+    font-size: 1.1rem;
+    line-height: 1.4;
+  }
+
+  /* Botões Editar/Excluir */
+  .header-actions {
+    width: 100%;
+    margin-left: 0;
+    justify-content: space-between;
+    border-top: 1px solid #f0f0f0;
+    padding-top: 10px;
+  }
+  
+  .btn-editar, .btn-excluir {
+    font-size: 0.8rem;
+    padding: 6px 10px;
+    background-color: #f9fafb;
+    border-radius: 6px;
+  }
+
+  /* INFOS */
+  .rota-info-row {
+    flex-direction: column; 
+    gap: 12px;
+    margin-top: 16px;
+    padding-bottom: 16px;
+  }
+  
+  /* RODAPÉ DO CARD */
+  .card-rota-footer {
+    flex-direction: column;
+    align-items: stretch; /* Garante que os filhos ocupem a largura toda */
+    gap: 16px;
+    margin-top: 16px;
+  }
+
+  .footer-solicitacoes {
+    width: 100%; /* Garante largura total */
+  }
+  .footer-solicitacoes p {
+    font-size: 0.85rem;
+    margin-bottom: 8px; /* Espaço entre o texto e o botão */
+  }
+  
+  /* Botão "Ver solicitações" */
+  .btn-ver-solicitacoes {
+    width: 100%; 
+    text-align: center;
+    justify-content: center;
+    padding: 12px;
+  }
+
+  /* Container dos botões de ação (Iniciar/Encerrar) */
+  .footer-actions {
+    display: flex;
+    flex-direction: column; /* Empilha um em cima do outro */
+    width: 100%; /* Ocupa toda a largura disponível */
+    gap: 10px; /* Espaço entre Iniciar e Encerrar */
+  }
+
+  /* Botões "Iniciar Viagem" e "Encerrar Vagas" */
+  .btn-iniciar-viagem, 
+  .btn-encerrar-vagas {
+    display: block; /* Garante comportamento de bloco */
+    width: 100%; /* Força 100% da largura */
+    box-sizing: border-box; /* Garante que padding não aumente a largura além de 100% */
+    text-align: center;
+    justify-content: center;
+    padding: 12px;
+  }
 }
 }

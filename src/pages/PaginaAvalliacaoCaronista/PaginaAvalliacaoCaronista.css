@@ -7,11 +7,14 @@
 
 .conteudo-avaliar {
   flex-grow: 1;
-  margin-left: 230px;
+  /* Padrão Desktop */
+  margin-left: 230px; 
   padding: 40px 48px;
   display: flex;
   justify-content: center;
   align-items: flex-start; /* Alinha o card no topo */
+  width: calc(100% - 230px); /* Garante largura correta */
+  box-sizing: border-box;
 }
 
 .card-avaliacao-form {
@@ -26,12 +29,14 @@
   flex-direction: column;
   align-items: center;
   gap: 24px;
+  box-sizing: border-box; /* Garante que padding não estoure a largura */
 }
 
 .avaliar-header {
   text-align: center;
   color: var(--cor-texto-principal);
 }
+
 .avaliar-foto {
   width: 100px;
   height: 100px;
@@ -40,22 +45,98 @@
   border: 4px solid var(--cor-roxo-principal);
   margin-bottom: 16px;
 }
+
 .avaliar-header h2 {
   font-size: 1rem;
   font-weight: 500;
   color: var(--cor-texto-secundario);
   margin: 0;
 }
+
 .avaliar-header h1 {
   font-size: 1.75rem;
   font-weight: 700;
   margin: 4px 0 8px 0;
 }
+
 .avaliar-header p {
   font-size: 0.9rem;
   color: var(--cor-texto-secundario);
   margin: 0;
 }
+
 .grupo-comentario {
-    color: #dbdbdb;
+   color: #dbdbdb;
+   width: 100%; /* Garante que o container do comentário ocupe a largura */
+}
+
+/* Se houver textarea dentro do grupo-comentario */
+.grupo-comentario textarea {
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 12px;
+  resize: vertical;
+  font-family: 'Inter', sans-serif;
+}
+
+/* Botão de envio (caso não tenha estilo definido no snippet original) */
+.btn-enviar-avaliacao {
+  width: 100%;
+  padding: 12px;
+  background-color: var(--cor-roxo-principal);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.btn-enviar-avaliacao:hover {
+  background-color: #7c3aed;
+}
+
+
+/* ==================================================== */
+/* RESPONSIVIDADE (CELULAR E TABLET)
+/* ==================================================== */
+
+/* Tablet e Menor (< 992px) */
+@media (max-width: 992px) {
+  .conteudo-avaliar {
+    margin-left: 0; /* Remove margem da sidebar */
+    width: 100%;
+    padding: 24px;
+  }
+}
+
+/* Celular (< 600px) */
+@media (max-width: 600px) {
+  
+  .conteudo-avaliar {
+    padding: 16px; /* Menos padding externo */
+    align-items: center; /* Centraliza o card na tela */
+  }
+
+  .card-avaliacao-form {
+    padding: 24px 20px; /* Menos padding interno no card */
+    border-radius: 12px;
+    width: 100%;
+  }
+
+  .avaliar-foto {
+    width: 80px; /* Foto um pouco menor */
+    height: 80px;
+    margin-bottom: 12px;
+  }
+
+  .avaliar-header h1 {
+    font-size: 1.5rem; /* Título menor */
+  }
+
+  .avaliar-header p {
+    font-size: 0.85rem;
+  }
 }
