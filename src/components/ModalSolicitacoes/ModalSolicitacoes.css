@@ -7,17 +7,19 @@
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.6); /* Fundo escuro */
-  z-index: 1000;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 2000;
   display: flex;
   justify-content: center;
   align-items: center;
   backdrop-filter: blur(5px);
+  padding: 20px;
+  box-sizing: border-box;
 }
 
 /* O "card" branco principal do modal */
 .modal-solicitacoes-container {
-  background: #f7f7f9; /* Fundo claro (igual ao da página) */
+  background: #f7f7f9;
   width: 100%;
   max-width: 900px;
   height: 90vh;
@@ -26,7 +28,8 @@
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
   display: flex;
   flex-direction: column;
-  animation: zoomIn 0.3s ease-out; /* Animação de entrada */
+  animation: zoomIn 0.3s ease-out;
+  overflow: hidden; 
 }
 
 @keyframes zoomIn {
@@ -34,13 +37,14 @@
   to { transform: scale(1); opacity: 1; }
 }
 
-/* Cabeçalho do Modal ("Solicitações de Carona") */
+/* Cabeçalho do Modal */
 .modal-solicitacoes-header {
   padding: 20px 30px;
   border-bottom: 1px solid var(--cor-borda-cinza);
   display: flex;
   justify-content: space-between;
   align-items: center;
+  background: #fff; 
 }
 .modal-solicitacoes-header h2 {
   margin: 0;
@@ -48,16 +52,19 @@
   color: var(--cor-texto-principal);
 }
 .close-button {
-  font-size: 2.5rem;
+  font-size: 2rem;
   color: #9ca3af;
   cursor: pointer;
   line-height: 1;
+  border: none;
+  background: transparent;
+  padding: 0;
 }
 .close-button:hover {
   color: #1f2937;
 }
 
-/* Corpo do Modal (onde ficam os cards) */
+/* Corpo do Modal */
 .modal-solicitacoes-body {
   flex-grow: 1;
   overflow-y: auto;
@@ -69,16 +76,19 @@
 
 /* --- O Card de Solicitação Individual --- */
 .card-solicitacao {
-  position: relative; /* CRUCIAL para o toast */
+  position: relative; 
   display: flex;
-  align-items: center;
+  align-items: center; /* Alinha verticalmente ao centro */
   gap: 16px;
-  background: var(--cor-fundo-card);
+  background: #fff;
   border-radius: 12px;
   padding: 20px 24px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
   border: 1px solid var(--cor-borda-cinza);
-  overflow: hidden; /* Para o toast não vazar */
+  overflow: hidden; 
+  box-sizing: border-box;
+  /* Importante: permite quebra de linha se necessário */
+  flex-wrap: nowrap; 
 }
 
 .solicitacao-foto {
@@ -86,20 +96,27 @@
   height: 50px;
   border-radius: 50%;
   object-fit: cover;
+  flex-shrink: 0; /* Foto não amassa */
 }
 
 .solicitacao-info {
   flex-grow: 1;
+  min-width: 0; /* TRUQUE: Permite que o texto quebre linha dentro do flex */
 }
 .solicitacao-info h4 {
   margin: 0 0 4px 0;
   font-size: 1.1rem;
   color: var(--cor-texto-principal);
+  white-space: nowrap; /* Nome em uma linha (ou remova para quebrar) */
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .solicitacao-info p {
   margin: 0;
   font-size: 0.9rem;
   color: var(--cor-texto-secundario);
+  /* Texto do endereço pode quebrar */
+  line-height: 1.4;
 }
 
 .solicitacao-nota {
@@ -112,7 +129,7 @@
   flex-shrink: 0;
 }
 .solicitacao-nota svg {
-  color: #F59E0B; /* Estrela amarela */
+  color: #F59E0B; 
 }
 
 .solicitacao-actions {
@@ -130,31 +147,19 @@
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s ease;
+  white-space: nowrap;
 }
 
-.btn-aceitar {
-  background-color: var(--cor-verde-tag);
-  color: var(--cor-verde-tag-texto);
-}
-.btn-aceitar:hover {
-  background-color: #bbf7d0;
-}
+.btn-aceitar { background-color: var(--cor-verde-tag); color: var(--cor-verde-tag-texto); }
+.btn-aceitar:hover { background-color: #bbf7d0; }
 
-.btn-negar {
-  background-color: #FEE2E2; /* Vermelho claro */
-  color: #991B1B; /* Vermelho escuro */
-}
-.btn-negar:hover {
-  background-color: #fecaca;
-}
+.btn-negar { background-color: #FEE2E2; color: #991B1B; }
+.btn-negar:hover { background-color: #fecaca; }
 
-/* --- O Toast Flutuante (Aceito/Negado) --- */
+/* --- Toast Flutuante --- */
 .toast-solicitacao {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  top: 0; left: 0; width: 100%; height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -164,9 +169,65 @@
   z-index: 10;
   animation: zoomIn 0.2s ease;
 }
-.toast-solicitacao.aceito {
-  background-color: rgba(4, 120, 87, 0.9); /* Verde escuro com transparência */
-}
-.toast-solicitacao.negado {
-  background-color: rgba(185, 28, 28, 0.9); /* Vermelho escuro com transparência */
+.toast-solicitacao.aceito { background-color: rgba(4, 120, 87, 0.9); }
+.toast-solicitacao.negado { background-color: rgba(185, 28, 28, 0.9); }
+
+/* ==================================================== */
+/* RESPONSIVIDADE (CELULAR E TABLET)
+/* ==================================================== */
+
+@media (max-width: 768px) {
+  
+  .modal-solicitacoes-overlay {
+    padding: 0;
+    align-items: flex-end; 
+  }
+
+  .modal-solicitacoes-container {
+    width: 100%;
+    height: 100vh; 
+    max-height: none;
+    border-radius: 0; 
+  }
+
+  .modal-solicitacoes-header,
+  .modal-solicitacoes-body {
+    padding: 16px; /* Menos padding interno */
+  }
+
+  /* --- A CORREÇÃO DO CARD CORTADO --- */
+  .card-solicitacao {
+    flex-wrap: wrap; /* Permite que os itens quebrem linha */
+    gap: 12px;
+    padding: 16px;
+  }
+
+  .solicitacao-foto {
+    width: 40px;
+    height: 40px;
+  }
+
+  .solicitacao-info {
+    /* Força o texto a ocupar o espaço ao lado da foto */
+    flex-basis: calc(100% - 100px); 
+  }
+  
+  /* Esconde a nota ou ajusta se necessário */
+  .solicitacao-nota {
+     display: none; /* Opcional: esconde a nota no mobile para limpar */
+  }
+
+  /* Joga os botões para a linha de baixo */
+  .solicitacao-actions {
+    width: 100%;
+    justify-content: space-between;
+    margin-top: 4px;
+  }
+
+  .btn-aceitar, .btn-negar {
+    flex: 1; /* Botões ocupam largura igual e total */
+    text-align: center;
+    padding: 12px;
+    justify-content: center;
+  }
 }

@@ -1,66 +1,133 @@
-
-
+/* ---------------------------------------------------- */
+/* LAYOUT DA PÁGINA 
+/* ---------------------------------------------------- */
 .app-layout-container {
-    display: flex;       
-    min-height: 100vh;   
-    width: 100%;
-    align-items: flex-start; 
-    background: var(--cor-fundo-pagina);
+  display: flex;       
+  min-height: 100vh;   
+  width: 100%;
+  align-items: flex-start; 
+  background: var(--cor-fundo-pagina);
 }
+
 .profile-page-container {
-    flex-grow: 1; 
-    padding: 40px 48px;
-    position: relative;  
-    box-sizing: border-box; 
-    overflow-y: auto; 
-    margin-left: 230px;
+  flex-grow: 1; 
+  /* Padrão Desktop */
+  margin-left: 230px;
+  width: calc(100% - 230px);
+  padding: 40px 48px;
+  position: relative;  
+  box-sizing: border-box; 
+  overflow-y: auto; 
 }
 
-
+/* ---------------------------------------------------- */
+/* CABEÇALHO E BOTÃO
+/* ---------------------------------------------------- */
 .page-title {
-    margin-top: 0;
-    margin-bottom: 30px; 
-    font-size: 28px;
-    color: var(--cor-texto-principal);
+  margin-top: 0;
+  margin-bottom: 30px; 
+  font-size: 28px;
+  color: var(--cor-texto-principal);
+  font-weight: 700;
 }
 
 .edit-button {
-    position: absolute;
-    top: 20px; 
-    right: 45px; 
-    background-color: var(--cor-roxo-principal); 
-    color: white;
-    border: none;
-    padding: 8px 15px;
-    border-radius: 6px;
-    font-weight: bold;
-    cursor: pointer;
-    z-index: 10;
-    transition: background-color 0.2s;
-    display: flex;
-    align-items: center;
-    gap: 8px; 
-    border-radius: 12px; 
-    padding: 10px 18px; 
-    font-size: 0.95rem;
+  /* Desktop: Posicionado no canto superior direito */
+  position: absolute;
+  top: 40px; /* Alinhado com o padding do container */
+  right: 48px; 
+  
+  background-color: var(--cor-roxo-principal); 
+  color: white;
+  border: none;
+  border-radius: 12px; 
+  padding: 10px 18px; 
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  z-index: 10;
+  transition: background-color 0.2s, transform 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 8px; 
+  box-shadow: 0 4px 10px rgba(139, 92, 246, 0.2);
 }
 
 .edit-button:hover {
-    background-color: #8b5cf6; 
-    transform: translateY(-2px);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  background-color: #7c3aed; 
+  transform: translateY(-2px);
 }
 
 .edit-button-icon {
   width: 20px;  
   height: 20px; 
+  filter: brightness(0) invert(1); /* Garante que o ícone fique branco */
+}
+
+/* ---------------------------------------------------- */
+/* GRID DE CARDS (Perfil, Endereço, etc)
+/* ---------------------------------------------------- */
+
+/* Padrão Mobile (1 Coluna) */
+.profile-cards-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+/* Tablet/Desktop (2 Colunas) */
+@media (min-width: 1024px) {
+  .profile-cards-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr; /* Esquerda maior, Direita menor */
+    gap: 25px; 
+  }
 }
 
 
-@media (min-width: 1024px) {
-    .profile-cards-grid {
-        display: grid;
-        grid-template-columns: 2fr 1fr; 
-        gap: 25px; 
-    }
+/* ==================================================== */
+/* RESPONSIVIDADE (CELULAR E TABLET)
+/* ==================================================== */
+
+/* Tablet e Menor (< 992px) */
+@media (max-width: 992px) {
+  .profile-page-container {
+    /* Remove a margem da sidebar */
+    margin-left: 0;
+    width: 100%;
+    padding: 24px; /* Padding reduzido */
+  }
+  
+  .edit-button {
+    top: 24px; 
+    right: 24px;
+  }
+}
+
+/* Celular (< 600px) */
+@media (max-width: 600px) {
+  
+  .profile-page-container {
+    padding: 20px 16px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .page-title {
+    font-size: 24px;
+    margin-bottom: 16px;
+    text-align: left;
+  }
+
+  /* Ajuste do Botão Editar para Mobile */
+  .edit-button {
+    position: static; /* Deixa de flutuar */
+    width: 100%; /* Ocupa a largura toda */
+    justify-content: center;
+    margin-bottom: 24px; /* Espaço abaixo dele antes do conteúdo */
+  }
+
+  .profile-cards-grid {
+    gap: 16px;
+  }
 }

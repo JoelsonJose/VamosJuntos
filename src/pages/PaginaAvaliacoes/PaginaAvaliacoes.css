@@ -1,205 +1,272 @@
+/* ---------------------------------------------------- */
+/* CONTAINER PRINCIPAL 
+/* ---------------------------------------------------- */
 .pagina-avaliacoes-full-container {
-    min-height: 100vh;
-    background: var(--cor-fundo-pagina);
-    padding: 30px;
+  min-height: 100vh;
+  background: var(--cor-fundo-pagina);
+  padding: 30px;
+  display: flex;
+  justify-content: center; /* Centraliza o conteúdo */
 }
 
 .conteudo-avaliacoes-wrapper {
-    max-width: 900px;
-    margin: 0 auto;
-    background-color: #fff;
-    padding: 30px;
-    border-radius: 16px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 900px; /* Limite para desktop */
+  margin: 0 auto;
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 16px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box; /* Importante para o padding não estourar a largura */
 }
 
 .conteudo-avaliacoes-wrapper h2 {
-    text-align: center;
-    color: #4a4a4a;
-    font-size: 2rem;
-    font-weight: 700;
-    margin-bottom: 30px;
-    padding-bottom: 15px;
-    border-bottom: 2px solid #eee;
+  text-align: center;
+  color: #4a4a4a;
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 30px;
+  padding-bottom: 15px;
+  border-bottom: 2px solid #eee;
 }
 
-
+/* ---------------------------------------------------- */
+/* HEADER DO PERFIL (Foto + Nota)
+/* ---------------------------------------------------- */
 .header-perfil-avaliacoes {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    text-align: center;
-    margin-bottom: 40px;
-    padding-bottom: 20px;
-    border-bottom: 1px solid #ddd;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  margin-bottom: 40px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #ddd;
 }
 
 .foto-perfil-avaliado {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    object-fit: cover;
-    margin-bottom: 10px;
-    border: 4px solid #9333ea;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 10px;
+  border: 4px solid #9333ea;
 }
 
 .nome-perfil-avaliado {
-    font-size: 1.8rem;
-    font-weight: 700;
-    color: #333;
-    margin: 0;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #333;
+  margin: 0;
 }
 
-
 .rating-display {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    margin: 10px 0 5px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin: 10px 0 5px 0;
 }
 
 .nota-media {
-    font-size: 2rem;
-    font-weight: 800;
-    color: #4a4a4a;
+  font-size: 2rem;
+  font-weight: 800;
+  color: #4a4a4a;
 }
 
-.rating-estrelas .estrela-preenchida {
-    font-size: 1.5rem;
+.rating-estrelas {
+  display: flex; /* Garante que as estrelas fiquem alinhadas */
+  gap: 2px;
 }
 
+.rating-estrelas .estrela-preenchida,
 .rating-estrelas .estrela-vazia {
-    font-size: 1.5rem;
+  font-size: 1.5rem;
 }
 
 .subtitulo-avaliacoes {
-    color: #6a0dad;
-    font-size: 1rem;
-    font-weight: 500;
-    margin-top: 5px; /* Ajuste a margem após o rating-display */
+  color: #6a0dad;
+  font-size: 1rem;
+  font-weight: 500;
+  margin-top: 5px; 
 }
 
-
+/* ---------------------------------------------------- */
+/* BOTÃO VOLTAR
+/* ---------------------------------------------------- */
 .botao-voltar {
-    background: none;
-    border: none;
-    color: #9333ea;
-    font-weight: 600;
-    font-size: 1rem;
-    cursor: pointer;
-    margin-bottom: 20px;
-    padding: 5px 0;
-    transition: color 0.2s;
+  background: none;
+  border: none;
+  color: #9333ea;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-bottom: 20px;
+  padding: 5px 0;
+  transition: color 0.2s;
+  display: inline-flex; /* Melhor alinhamento se tiver ícone */
+  align-items: center;
 }
 
 .botao-voltar:hover {
-    color: #6a0dad;
+  color: #6a0dad;
 }
 
-
+/* ---------------------------------------------------- */
+/* LISTA DE AVALIAÇÕES (CARDS)
+/* ---------------------------------------------------- */
 .lista-avaliacoes {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
 .card-avaliacao {
-    display: flex;
-    align-items: flex-start;
-    background-color: #f7f3ff; /* Roxo bem claro */
-    padding: 20px;
-    border-radius: 12px;
-    border: 1px solid #e0e0ff;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  display: flex;
+  align-items: flex-start;
+  background-color: #f7f3ff; 
+  padding: 20px;
+  border-radius: 12px;
+  border: 1px solid #e0e0ff;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .foto-perfil-avaliacao {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    object-fit: cover;
-    margin-right: 15px;
-    border: 3px solid #9333ea;
-    flex-shrink: 0;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 15px;
+  border: 3px solid #9333ea;
+  flex-shrink: 0;
 }
 
 .detalhes-avaliacao {
-    flex-grow: 1;
+  flex-grow: 1;
+  width: 100%; /* Garante que ocupe o espaço restante */
 }
 
 .detalhes-avaliacao h3 {
-    margin-top: 0;
-    margin-bottom: 5px;
-    color: #333;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    font-size: 1.2em;
-    font-weight: 600;
+  margin-top: 0;
+  margin-bottom: 5px;
+  color: #333;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 1.1rem; /* Levemente ajustado */
+  font-weight: 600;
+  flex-wrap: wrap; /* Permite quebrar linha se o nome for longo */
+  gap: 8px;
 }
 
 .data-avaliacao {
-    font-size: 0.75em;
-    color: #888;
-    font-weight: normal;
+  font-size: 0.75em;
+  color: #888;
+  font-weight: normal;
+  white-space: nowrap; /* Impede que a data quebre de forma feia */
 }
 
 .estrelas-avaliacao-wrapper {
-    margin-bottom: 8px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
 }
 
 .estrela-preenchida {
-    color: #FFD700; 
-    font-size: 1.3em;
+  color: #FFD700; 
+  font-size: 1.2em;
 }
-
 .estrela-vazia {
-    color: #ccc; 
-    font-size: 1.3em;
+  color: #ccc; 
+  font-size: 1.2em;
 }
 
 .tipo-avaliacao {
-    background-color: #9333ea;
-    color: white;
-    padding: 4px 10px;
-    border-radius: 15px;
-    font-size: 0.8em;
-    font-weight: 500;
-    white-space: nowrap;
+  background-color: #9333ea;
+  color: white;
+  padding: 4px 10px;
+  border-radius: 15px;
+  font-size: 0.75em;
+  font-weight: 500;
+  white-space: nowrap;
 }
 
 .detalhes-avaliacao p {
-    color: #555;
-    line-height: 1.6;
-    margin-top: 5px;
-    font-style: italic;
-    border-left: 3px solid #ccc;
-    padding-left: 10px;
+  color: #555;
+  line-height: 1.6;
+  margin-top: 8px;
+  font-style: italic;
+  border-left: 3px solid #ccc;
+  padding-left: 10px;
+  font-size: 0.95rem;
 }
 
-/* Responsividade */
+/* ==================================================== */
+/* RESPONSIVIDADE (CELULAR)
+/* ==================================================== */
 @media (max-width: 600px) {
-    .conteudo-avaliacoes-wrapper {
-        padding: 15px;
-    }
-    .card-avaliacao {
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-    }
-    .foto-perfil-avaliacao {
-        margin: 0 0 10px 0;
-    }
-    .detalhes-avaliacao h3 {
-        flex-direction: column;
-        align-items: center;
-    }
-    .data-avaliacao {
-        margin-top: 5px;
-    }
+  
+  .pagina-avaliacoes-full-container {
+    padding: 15px; /* Menos padding na borda da tela */
+  }
+
+  .conteudo-avaliacoes-wrapper {
+    padding: 20px 15px; /* Menos padding interno no card principal */
+  }
+
+  .conteudo-avaliacoes-wrapper h2 {
+    font-size: 1.5rem; /* Título menor */
+    margin-bottom: 20px;
+  }
+
+  /* Header do Perfil */
+  .foto-perfil-avaliado {
+    width: 70px; /* Foto menor */
+    height: 70px;
+  }
+  .nome-perfil-avaliado {
+    font-size: 1.5rem;
+  }
+  .nota-media {
+    font-size: 1.8rem;
+  }
+
+  /* Card de Avaliação Individual */
+  .card-avaliacao {
+    flex-direction: column; /* Empilha foto em cima, texto embaixo */
+    align-items: center;
+    text-align: center;
+    padding: 15px;
+  }
+
+  .foto-perfil-avaliacao {
+    margin: 0 0 15px 0; /* Margem embaixo da foto */
+    width: 50px;
+    height: 50px;
+  }
+
+  .detalhes-avaliacao h3 {
+    flex-direction: column; /* Nome em cima, data embaixo */
+    gap: 4px;
+    justify-content: center;
+    text-align: center;
+  }
+  
+  .estrelas-avaliacao-wrapper {
+    justify-content: center; /* Centraliza estrelas */
+    margin-top: 5px;
+  }
+
+  .detalhes-avaliacao p {
+    border-left: none; /* Remove a borda lateral no mobile */
+    border-top: 2px solid #eee; /* Adiciona borda em cima */
+    padding-left: 0;
+    padding-top: 10px;
+    margin-top: 10px;
+    text-align: center; /* Centraliza o texto do comentário */
+  }
 }
