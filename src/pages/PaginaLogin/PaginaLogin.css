@@ -61,7 +61,7 @@
   /* MUDANÇA: 'px' para 'rem' */
   margin-top: 1.5625rem; /* 25px */
   font-size: 0.875rem; /* 14px */
-  color: var(--cor-texto-secundario);
+  color: #666666;
 }
 
 .forgot-link {
@@ -89,6 +89,14 @@
 
 .cadastro-link:hover {
   text-decoration: underline;
+}
+
+/* --- CORREÇÃO MODO ESCURO (Login) --- */
+body.modo-escuro .login-subtitle,
+body.alto-contraste .login-subtitle,
+body.modo-escuro .cadastro-link-text,
+body.alto-contraste .cadastro-link-text {
+  color: #666666 !important; /* Mantém cinza escuro */
 }
 
 /* --- NÍVEL 1 DE RESPONSIVIDADE (Tablets e Celulares) --- */
