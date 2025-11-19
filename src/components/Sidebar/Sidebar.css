@@ -87,6 +87,31 @@
   padding: 16px;
   border-top: 1px solid var(--cor-borda-cinza);
 }
+.footer-btn {
+  /* Reset total do estilo de botão padrão */
+  appearance: none;
+  -webkit-appearance: none;
+  background: transparent; /* Garante fundo transparente */
+  border: none; /* Remove a borda cinza padrão */
+  outline: none; /* Remove outline ao clicar */
+  
+  /* Seu estilo original */
+  padding: 0.625rem; /* 10px */
+  border-radius: 0.75rem; /* 12px */
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  
+  /* Flexbox para centralizar o ícone */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Garante que o hover funcione igual para ambos */
+.footer-btn:hover {
+  background-color: var(--cor-fundo-card-alt); /* Ex: #f3e8ff */
+}
 
 /* --- ÍCONES DINÂMICOS --- */
 .nav-icon-container {

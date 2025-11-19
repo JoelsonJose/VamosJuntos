@@ -260,6 +260,11 @@
 .btn-encerrar-vagas { background-color: #FEE2E2; color: #DC2626; }
 .btn-iniciar-viagem { background-color: #2563EB; color: #fff; }
 
+/* --- CORREÇÃO MODO ESCURO (Minhas Rotas) --- */
+body.modo-escuro .rota-pontos-link,
+body.alto-contraste .rota-pontos-link {
+  color: #6b7280 !important; /* Mantém cinza escuro */
+}
 
 /* ==================================================== */
 /* RESPONSIVIDADE (AJUSTE AGRESSIVO PARA CELULAR)

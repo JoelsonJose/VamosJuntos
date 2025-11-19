@@ -112,6 +112,13 @@
   margin-bottom: 1.5rem; 
 }
 
+/* --- CORREÇÃO MODO ESCURO (Dashboard) --- */
+body.modo-escuro .info-card-resumo,
+body.alto-contraste .info-card-resumo,
+body.modo-escuro .info-card-resumo span,
+body.alto-contraste .info-card-resumo span {
+  color: #6b7280 !important; /* Mantém cinza escuro */
+}
 
 /* ==================================================== */
 /* RESPONSIVIDADE (CELULAR E TABLET)
