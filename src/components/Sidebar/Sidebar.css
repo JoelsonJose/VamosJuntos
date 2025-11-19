@@ -196,3 +196,74 @@
 }
 
 }
+
+/* ============================================================ */
+/* CORREÇÃO DE ÍCONES DO RODAPÉ (MODO ESCURO / ALTO CONTRASTE) */
+/* ============================================================ */
+
+/* Quando o body tiver a classe 'modo-escuro' OU 'alto-contraste',
+   forçamos os ícones do rodapé a usar a versão BRANCA.
+*/
+
+body.modo-escuro .footer-btn .icon-b,
+body.alto-contraste .footer-btn .icon-b {
+  opacity: 0 !important; /* Esconde o ícone preto */
+}
+
+body.modo-escuro .footer-btn .icon-w,
+body.alto-contraste .footer-btn .icon-w {
+  opacity: 1 !important; /* Mostra o ícone branco */
+}
+
+/* GARANTIA EXTRA: Se por algum motivo a lógica de troca de imagem falhar,
+   aplicamos um filtro CSS para inverter as cores do ícone preto,
+   transformando-o em branco. 
+*/
+body.modo-escuro .footer-btn img,
+body.alto-contraste .footer-btn img {
+  filter: brightness(0) invert(1); 
+}
+
+/* Ajuste de cor de fundo do botão no hover (para não sumir no fundo preto) */
+body.modo-escuro .footer-btn:hover,
+body.alto-contraste .footer-btn:hover {
+  background-color: rgba(255, 255, 255, 0.1); /* Cinza claro transparente */
+}
+
+/* ============================================================ */
+/* CORREÇÃO DOS ÍCONES DE NAVEGAÇÃO (MODO ESCURO / ALTO CONTRASTE) */
+/* ============================================================ */
+
+/* 1. Esconde os ícones PRETOS (.icon-b) na navegação */
+body.modo-escuro .nav-btn .icon-b,
+body.alto-contraste .nav-btn .icon-b {
+  opacity: 0 !important;
+}
+
+/* 2. Mostra os ícones BRANCOS (.icon-w) na navegação */
+body.modo-escuro .nav-btn .icon-w,
+body.alto-contraste .nav-btn .icon-w {
+  opacity: 1 !important;
+}
+
+/* 3. Rede de Segurança (Filtro): 
+   Se alguma imagem falhar na troca, inverte a cor matematicamente (Preto -> Branco) 
+*/
+body.modo-escuro .nav-btn img,
+body.alto-contraste .nav-btn img {
+  filter: brightness(0) invert(1);
+}
+
+/* 4. Ajuste de Texto e Fundo no Hover (Para não ficar cinza escuro sobre preto) */
+body.modo-escuro .nav-btn:not(.active):hover,
+body.alto-contraste .nav-btn:not(.active):hover {
+  background-color: rgba(255, 255, 255, 0.1); /* Fundo levemente claro */
+  color: #ffffff; /* Força o texto a ficar branco */
+  box-shadow: none;
+}
+
+/* 5. Garante que o texto dos botões inativos também seja branco no modo escuro */
+body.modo-escuro .nav-btn,
+body.alto-contraste .nav-btn {
+  color: #ffffff;
+}
