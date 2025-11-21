@@ -339,7 +339,7 @@
   .conteudo-confirmar {
     margin-left: 0; /* Remove a margem da sidebar */
     width: 100%;
-    padding: 16px; /* Padding bem menor para caber na tela */
+    padding: 5rem 1.25rem 1.5rem 1.25rem; /* Padding bem menor para caber na tela */
   }
 
   /* Empilha os cards */

@@ -28,6 +28,8 @@ body {
 .subtitulo {
   color: #777; 
   margin-bottom: 18px;
+  margin-right: 39px;
+  margin-top: auto;
 }
 
 /* filtros */
@@ -172,11 +174,11 @@ body {
   margin-top: 8px;
 }
 /* responsivo */
-@media (max-width: 1000px) {
+@media (max-width: 1000px) {  
   .filtros-inputs { grid-template-columns: 1fr 1fr; }
   .conteudo-busca { grid-template-columns: 1fr; }
   .dicas-container { height: auto; }
-  .conteudo-buscar { margin-left: 0; padding: 18px; }
+  .conteudo-buscar { margin-left: 0; padding: 5rem 1.25rem 1.5rem 1.25rem; }
 }
 
 @media (max-width: 600px) {
