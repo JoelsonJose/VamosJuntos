@@ -263,7 +263,7 @@ textarea::placeholder {
 @media (max-width: 992px) {
   /* Em telas menores, remove a margem e o padding */
   .conteudo-rotas {
-    padding: 24px;
+    padding: 5rem 1.25rem 1.5rem 1.25rem;
     margin-left: 0;
     width: 100%;
   }
