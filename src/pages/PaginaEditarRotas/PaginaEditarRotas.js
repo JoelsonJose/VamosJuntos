@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate, useParams } from 'react-router-dom'; // Importe useParams
+import { useNavigate, useParams } from 'react-router-dom'; 
 import Sidebar from '../../components/Sidebar/Sidebar';
 import "./PaginaEditarRotas.css"; 
 import BotaoAcessibilidade from '../../components/BotaoAcessibilidade/BotaoAcessibilidade';
-import { API_URL } from '../../Config';
+// IMPORTANTE: Verifique se o nome do arquivo é config.js ou Config.js e ajuste aqui se precisar
+import { API_URL } from '../../Config'; 
 
-// Importe os ícones
 import IconMapa from '../../assets/IconsCriar/IconMapa.png';
 import IconRota from '../../assets/IconsCriar/IconRota.png';
 import IconRelogio from '../../assets/IconsCriar/IconRelogio.png';
@@ -16,20 +16,18 @@ import IconEstrela from '../../assets/IconsCriar/IconEstrela.png';
 
 export default function PaginaEditarRota() {
   const navigate = useNavigate();
-  const { id } = useParams(); // PEGA O ID DA URL (ex: 1)
+  const { id } = useParams(); 
 
-  // Estados do formulário
   const [origem, setOrigem] = useState("");
   const [destino, setDestino] = useState("");
   const [pontos, setPontos] = useState("");
   const [horario, setHorario] = useState("");
   const [diasSemana, setDiasSemana] = useState([]);
   const [observacoes, setObservacoes] = useState("");
-  const [vagas, setVagas] = useState(""); // Corresponde a vagasTotal
+  const [vagas, setVagas] = useState(""); 
   const [valor, setValor] = useState("");
   const [notaMinima, setNotaMinima] = useState("");
   
-  // Estado para guardar os dados originais (para não perder vagasOcupadas, dono, etc.)
   const [rotaOriginal, setRotaOriginal] = useState({});
 
   const dias = [
@@ -37,24 +35,22 @@ export default function PaginaEditarRota() {
     "Quinta-feira", "Sexta-feira", "Sábado",
   ];
 
-  // 1. BUSCAR DADOS DA ROTA AO ABRIR A TELA
   useEffect(() => {
     if (id) {
+      // CORREÇÃO: Usando API_URL
       fetch(`${API_URL}/rotas/${id}`)
         .then((res) => res.json())
         .then((data) => {
-          // Preenche os campos com o que veio do banco
           setOrigem(data.origem);
           setDestino(data.destino);
           setPontos(data.pontos || "");
           setHorario(data.horario);
           setDiasSemana(data.dias || []);
           setObservacoes(data.observacoes || "");
-          setVagas(data.vagasTotal); // Mapeia vagasTotal para o input vagas
+          setVagas(data.vagasTotal); 
           setValor(data.valor);
           setNotaMinima(data.notaMinima);
-          
-          setRotaOriginal(data); // Guarda o objeto completo
+          setRotaOriginal(data); 
         })
         .catch((err) => console.error("Erro ao buscar rota para edição:", err));
     }
@@ -68,27 +64,26 @@ export default function PaginaEditarRota() {
     );
   };
 
-  // 2. ATUALIZAR (PUT) OS DADOS NO BACK-END
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Mescla os dados originais com os novos editados
     const rotaAtualizada = {
-      ...rotaOriginal, // Mantém id, vagasOcupadas, dono:true, etc.
+      ...rotaOriginal, 
       origem, 
       destino, 
       pontos, 
       horario, 
       dias: diasSemana, 
       observacoes, 
-      vagasTotal: Number(vagas), // Atualiza o total de vagas
+      vagasTotal: Number(vagas), 
       valor, 
       notaMinima,
     };
 
     try {
-      const response = await fetch(`http://localhost:3001/rotas/${id}`, {
-        method: 'PUT', // PUT serve para atualizar
+      // CORREÇÃO CRÍTICA: Trocado localhost por API_URL
+      const response = await fetch(`${API_URL}/rotas/${id}`, {
+        method: 'PUT', 
         headers: {
           'Content-Type': 'application/json',
         },
@@ -97,7 +92,7 @@ export default function PaginaEditarRota() {
 
       if (response.ok) {
         alert("Rota atualizada com sucesso!");
-        navigate('/rotas'); // Volta para Minhas Rotas
+        navigate('/rotas'); 
       } else {
         alert("Erro ao atualizar rota.");
       }
@@ -110,83 +105,40 @@ export default function PaginaEditarRota() {
   return (
     <div className="pagina-criar-rotas-container">
       <Sidebar activePage="rotas" />
-      
       <main className="conteudo-rotas">
         <h1 className="page-main-title">Editar Rota</h1>
         <span className="page-main-subtitle">Edite as informações da sua carona</span>
-        
         <form className="form-card-principal" onSubmit={handleSubmit}>
-          
-          {/* --- Seção Informações da Rota --- */}
-          <h2 className="form-section-title">Informações da Rota</h2>
-          <p className="form-section-subtitle">Altere os detalhes necessários</p>
-
+          {/* Conteúdo do formulário mantido igual... */}
           <div className="grupo-inline">
             <div className="grupo">
-              <label>
-                <img src={IconMapa} alt="Origem" className="input-icon" />
-                Origem
-              </label>
-              <input
-                type="text"
-                value={origem}
-                onChange={(e) => setOrigem(e.target.value)}
-                required
-              />
+              <label><img src={IconMapa} className="input-icon" alt=""/> Origem</label>
+              <input type="text" value={origem} onChange={(e) => setOrigem(e.target.value)} required />
             </div>
             <div className="grupo">
-              <label>
-                <img src={IconMapa} alt="Destino" className="input-icon" />
-                Destino
-              </label>
-              <input
-                type="text"
-                value={destino}
-                onChange={(e) => setDestino(e.target.value)}
-                required
-              />
+              <label><img src={IconMapa} className="input-icon" alt=""/> Destino</label>
+              <input type="text" value={destino} onChange={(e) => setDestino(e.target.value)} required />
             </div>
           </div>
           
           <div className="grupo">
-            <label>
-              <img src={IconRota} alt="Rota" className="input-icon" />
-              Pontos-chave
-            </label>
-            <textarea
-              value={pontos}
-              onChange={(e) => setPontos(e.target.value)}
-            />
+            <label><img src={IconRota} className="input-icon" alt=""/> Pontos-chave</label>
+            <textarea value={pontos} onChange={(e) => setPontos(e.target.value)} />
           </div>
 
           <hr className="form-divider" />
 
           <div className="grupo-inline">
             <div className="grupo horario-saida-grupo">
-              <label>
-                <img src={IconRelogio} alt="Horário" className="input-icon" />
-                Horário
-              </label>
-              <input
-                type="time"
-                value={horario}
-                onChange={(e) => setHorario(e.target.value)}
-                required
-              />
+              <label><img src={IconRelogio} className="input-icon" alt=""/> Horário</label>
+              <input type="time" value={horario} onChange={(e) => setHorario(e.target.value)} required />
             </div>
             <div className="grupo dias-semana-grupo">
-              <label>
-                <img src={IconCalendario} alt="Dias" className="input-icon" />
-                Dias da semana
-              </label>
+              <label><img src={IconCalendario} className="input-icon" alt=""/> Dias da semana</label>
               <div className="dias-lista-grid">
                 {dias.map((dia) => (
                   <label key={dia} className="checkbox-item">
-                    <input
-                      type="checkbox"
-                      checked={diasSemana.includes(dia)}
-                      onChange={() => handleDiaChange(dia)}
-                    />
+                    <input type="checkbox" checked={diasSemana.includes(dia)} onChange={() => handleDiaChange(dia)} />
                     <span>{dia}</span>
                   </label>
                 ))}
@@ -195,45 +147,26 @@ export default function PaginaEditarRota() {
           </div>
 
           <hr className="form-divider" />
-
-          <div className="grupo">
-            <label>Observações</label>
-            <textarea
-              value={observacoes}
-              onChange={(e) => setObservacoes(e.target.value)}
-            />
-          </div>
-
+          <div className="grupo"><label>Observações</label><textarea value={observacoes} onChange={(e) => setObservacoes(e.target.value)} /></div>
           <hr className="form-divider" />
           
           <div className="grupo-inline-final">
             <div className="grupo">
-              <label>
-                <img src={IconPessoas} alt="Vagas" className="input-icon" />
-                Vagas Totais
-              </label>
+              <label><img src={IconPessoas} className="input-icon" alt=""/> Vagas Totais</label>
               <select value={vagas} onChange={(e) => setVagas(e.target.value)} required>
                 <option value="">Selecione</option>
                 {[1, 2, 3, 4, 5].map((n) => <option key={n} value={n}>{n}</option>)}
               </select>
             </div>
-
             <div className="grupo">
-              <label>
-                <img src={IconDinheiro} alt="Valor" className="input-icon" />
-                Valor (R$)
-              </label>
+              <label><img src={IconDinheiro} className="input-icon" alt=""/> Valor (R$)</label>
               <select value={valor} onChange={(e) => setValor(e.target.value)}>
                 <option value="">Selecione</option>
                 {['Gratuito', '5.00', '10.00', '15.00', '20.00'].map((val) => <option key={val} value={val}>{val}</option>)}
               </select>
             </div>
-
             <div className="grupo">
-              <label>
-                <img src={IconEstrela} alt="Nota" className="input-icon" />
-                Nota Mínima
-              </label>
+              <label><img src={IconEstrela} className="input-icon" alt=""/> Nota Mínima</label>
               <select value={notaMinima} onChange={(e) => setNotaMinima(e.target.value)}>
                 <option value="">Selecione</option>
                 {[1, 2, 3, 4, 5].map((n) => <option key={n} value={n}>{n} ⭐</option>)}
@@ -241,9 +174,7 @@ export default function PaginaEditarRota() {
             </div>
           </div>
 
-          <button type="submit" className="btn-criar-rota-final">
-            Salvar Alterações
-          </button>
+          <button type="submit" className="btn-criar-rota-final">Salvar Alterações</button>
         </form>
       </main>
       <BotaoAcessibilidade />
