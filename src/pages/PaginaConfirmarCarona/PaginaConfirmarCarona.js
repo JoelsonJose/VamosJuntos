@@ -38,6 +38,12 @@ const navigate = useNavigate();
     <div className="pagina-confirmar">
       <Sidebar />
       <div className="conteudo-confirmar">
+        <button 
+            onClick={() => navigate('/buscar')} 
+            className="botao-voltar"
+        >
+            &larr; Voltar para Buscar
+        </button>
         <h2>Buscar Carona</h2>
         <p className="subtitulo">Escolha a melhor carona para você</p>
 

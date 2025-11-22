@@ -11,14 +11,23 @@ import Wheelchair from '../../assets/RotaMotorista/Wheelchair.png';
 import Person from '../../assets/RotaMotorista/Person.png';
 import CarModelIcon from '../../assets/RotaMotorista/Koenigsegg One.png';
 import BotaoAcessibilidade from '../../components/BotaoAcessibilidade/BotaoAcessibilidade';
+import { useNavigate } from 'react-router-dom';
+
 
 
 export default function PaginaRotaCaronista() {
+  const navigate = useNavigate();
   return (
     <div className="rota-pagina">
       <Sidebar activePage="caronas" />
 
       <div className="rota-conteudo">
+        <button 
+            onClick={() => navigate('/caronas')} 
+            className="botao-voltar"
+        >
+            &larr; Voltar para Minhas Caronas
+        </button>
         <header className="rota-titulo-header">
           <h1>Minha viagem</h1>
           <p>Acompanhe sua viagem de perto</p>
