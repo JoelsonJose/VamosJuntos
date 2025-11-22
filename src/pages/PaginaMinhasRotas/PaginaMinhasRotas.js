@@ -46,7 +46,7 @@ export default function PaginaMinhasRotas() {
     if (rotaParaExcluir) {
       try {
         // Deleta do Banco de Dados Fake
-        await fetch(`http://localhost:3001/rotas/${rotaParaExcluir.id}`, {
+        await fetch(`${API_URL}/rotas/${rotaParaExcluir.id}`, {
           method: 'DELETE',
         });
         
