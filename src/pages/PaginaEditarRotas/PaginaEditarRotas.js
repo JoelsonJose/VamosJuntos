@@ -3,6 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom'; // Importe useParams
 import Sidebar from '../../components/Sidebar/Sidebar';
 import "./PaginaEditarRotas.css"; 
 import BotaoAcessibilidade from '../../components/BotaoAcessibilidade/BotaoAcessibilidade';
+import { API_URL } from '../../Config';
 
 // Importe os ícones
 import IconMapa from '../../assets/IconsCriar/IconMapa.png';
@@ -39,7 +40,7 @@ export default function PaginaEditarRota() {
   // 1. BUSCAR DADOS DA ROTA AO ABRIR A TELA
   useEffect(() => {
     if (id) {
-      fetch(`http://localhost:3001/rotas/${id}`)
+      fetch(`${API_URL}/rotas/${id}`)
         .then((res) => res.json())
         .then((data) => {
           // Preenche os campos com o que veio do banco

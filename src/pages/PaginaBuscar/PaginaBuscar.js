@@ -5,6 +5,7 @@ import StarYellow from '../../assets/Star amarela.png';
 import StarWhite from '../../assets/Star branca.png';
 import BotaoAcessibilidade from '../../components/BotaoAcessibilidade/BotaoAcessibilidade';
 import { useNavigate } from 'react-router-dom';
+import { API_URL } from '../../Config';
 
 function StarRating({ rating = 0, max = 5 }) {
   const stars = [];
@@ -34,7 +35,7 @@ export default function PaginaBuscar() {
 
   // Busca os dados do servidor
   useEffect(() => {
-    fetch('http://localhost:3001/rotas')
+    fetch(`${API_URL}/rotas`) 
       .then(response => response.json())
       .then(data => {
         // Transforma os dados do banco para o visual do seu design

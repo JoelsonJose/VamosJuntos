@@ -3,6 +3,7 @@ import Sidebar from '../../components/Sidebar/Sidebar';
 import './PaginaMinhasCaronas.css'; 
 import BotaoAcessibilidade from '../../components/BotaoAcessibilidade/BotaoAcessibilidade';
 import { useNavigate } from 'react-router-dom';
+import { API_URL } from '../../Config';
 
 // --- ÍCONES ---
 import IconRelogio from '../../assets/IconsCriar/IconRelogio.png';
@@ -63,7 +64,7 @@ export default function PaginaMinhasCaronas() {
 
   // Busca os dados do db.json assim que a tela abre
   useEffect(() => {
-    fetch('http://localhost:3001/caronas')
+    fetch(`${API_URL}/rotas`) 
       .then(response => response.json())
       .then(data => setCaronas(data))
       .catch(err => console.error("Erro ao carregar histórico:", err));

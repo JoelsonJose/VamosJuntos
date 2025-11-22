@@ -7,7 +7,7 @@ import ProfileHeaderCard from '../../components/CardPerfil/ProfileHeaderCard';
 import StatsCard from '../../components/CardPerfil/StatsCard'; 
 import ReviewsCard from '../../components/CardPerfil/ReviewsCard'; 
 import ConquistasCard from '../../components/CardPerfil/ConquistasCard'; 
-import EditProfileModal from '../../components/Modals/EditProfileModal'; 
+import EditProfileModal from '../../components/Modals/EditProfileModal';
 // Substitua estes imports pelos seus caminhos reais de assets
 import IconEditar from '../../assets/Editw.png';
 import FotoMaria from '../../assets/Fotos/usuario4.png'; 
