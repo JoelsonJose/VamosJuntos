@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './PaginaRotaMotorista.css';
 import Sidebar from '../../components/Sidebar/Sidebar';
 import StarRating from '../../components/StarRating/StarRating';
-
+import { useNavigate } from 'react-router-dom';
 import PerfilHomero from '../../assets/RotaMotorista/perfilhomero.png'; // NOVA IMAGEM
 import MapaRota from '../../assets/RotaMotorista/MAPA.png'; // NOVA IMAGEM (para o mock)
 import { Link } from 'react-router-dom';
@@ -21,6 +21,7 @@ import BotaoAcessibilidade from '../../components/BotaoAcessibilidade/BotaoAcess
 
 
 export default function PaginaRotaMotorista() {
+  const navigate = useNavigate();
   const [passageiros, setPassageiros] = useState([
     { nome: "João Gomes", rating: 4, marcado: null, embarque: true },
     { nome: "Gustavo Levi", rating: 5, marcado: null, embarque: true },
@@ -43,7 +44,12 @@ export default function PaginaRotaMotorista() {
 
       {/* Conteúdo Principal */}
       <div className="rota-conteudo">
-        
+        <button 
+            onClick={() => navigate('/rotas')} 
+            className="botao-voltar"
+        >
+            &larr; Voltar para Minhas Rotas
+        </button>
         {/* TÍTULO E SUBTÍTULO */}
         <header className="rota-titulo-header">
           <h1>Minhas Rotas</h1>
