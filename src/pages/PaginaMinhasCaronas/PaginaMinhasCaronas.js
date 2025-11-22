@@ -3,7 +3,9 @@ import Sidebar from '../../components/Sidebar/Sidebar';
 import './PaginaMinhasCaronas.css'; 
 import BotaoAcessibilidade from '../../components/BotaoAcessibilidade/BotaoAcessibilidade';
 import { useNavigate } from 'react-router-dom';
-import { API_URL } from '../../Config';
+
+// ATENÇÃO: Verifique se o arquivo na pasta src se chama 'config.js' (minúsculo)
+import { API_URL } from '../../Config'; 
 
 // --- ÍCONES ---
 import IconRelogio from '../../assets/IconsCriar/IconRelogio.png';
@@ -17,7 +19,6 @@ import FotoUsuario4 from '../../assets/Fotos/usuario4.png';
 import FotoUsuario5 from '../../assets/Fotos/usuario5.png'; 
 
 // --- MAPA DE FOTOS ---
-// Como o JSON não salva a imagem importada, salvamos um ID ("usuario1") e mapeamos aqui
 const mapaDeFotos = {
   "usuario1": FotoUsuario1,
   "usuario2": FotoUsuario2,
@@ -29,46 +30,61 @@ const mapaDeFotos = {
 // --- COMPONENTE DE ESTRELAS ---
 function StarRating({ rating = 0, locked = false, max = 5 }) {
   const stars = [];
-
   if (locked) {
     for (let i = 0; i < max; i++) {
-      stars.push(
-        <img
-          key={i}
-          src={IconCadeado}
-          alt="Avaliação bloqueada"
-          className="star-img locked"
-        />
-      );
+      stars.push(<img key={i} src={IconCadeado} alt="Avaliação bloqueada" className="star-img locked"/>);
     }
   } else {
     for (let i = 0; i < max; i++) {
       const src = i < rating ? StarYellow : StarWhite;
-      const alt = i < rating ? 'estrela cheia' : 'estrela vazia';
-      stars.push(
-        <img
-          key={i}
-          src={src}
-          alt={alt}
-          className="star-img"
-        />
-      );
+      stars.push(<img key={i} src={src} alt={i < rating ? 'estrela cheia' : 'estrela vazia'} className="star-img"/>);
     }
   }
-  return <div className="rating-stars" aria-label={`Avaliação ${rating} de ${max}`}>{stars}</div>;
+  return <div className="rating-stars">{stars}</div>;
 }
 
 // --- COMPONENTE PRINCIPAL DA PÁGINA ---
 export default function PaginaMinhasCaronas() {
   const [caronas, setCaronas] = useState([]);
+  const [erro, setErro] = useState(null); 
 
-  // Busca os dados do db.json assim que a tela abre
+  // Busca os dados do banco
   useEffect(() => {
-    fetch(`${API_URL}/rotas`) 
-      .then(response => response.json())
-      .then(data => setCaronas(data))
-      .catch(err => console.error("Erro ao carregar histórico:", err));
+    console.log("Tentando buscar caronas em:", `${API_URL}/caronas`); 
+
+    fetch(`${API_URL}/caronas`)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`Erro na resposta da API: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then(data => {
+        console.log("Dados recebidos:", data); 
+        if (Array.isArray(data)) {
+          setCaronas(data);
+        } else {
+          console.error("A API não retornou uma lista (array)!", data);
+          setCaronas([]); 
+        }
+      })
+      .catch(err => {
+        console.error("Erro fatal ao carregar histórico:", err);
+        setErro(err.message);
+      });
   }, []);
+
+  if (erro) {
+    return (
+      <div className="pagina-caronas-container">
+        <Sidebar activePage="minhas-caronas" />
+        <main className="conteudo-caronas" style={{padding: 20, color: 'red'}}>
+          <h2>Ocorreu um erro!</h2>
+          <p>Detalhes: {erro}</p>
+        </main>
+      </div>
+    );
+  }
 
   return (
     <div className="pagina-caronas-container">
@@ -97,8 +113,12 @@ function HeaderCaronas() {
 }
 
 function ListaCaronas({ caronas }) {
-  if (caronas.length === 0) {
-      return <div className="lista-caronas-container"><p style={{marginTop: 20}}>Carregando histórico...</p></div>;
+  if (!caronas || caronas.length === 0) {
+      return (
+        <div className="lista-caronas-container">
+            <p style={{marginTop: 20, color: '#666'}}>Nenhuma carona encontrada ou carregando...</p>
+        </div>
+      );
   }
 
   return (
@@ -111,15 +131,18 @@ function ListaCaronas({ caronas }) {
 }
 
 function CardCaronaItem({ carona }) {
-  const statusClass = `status-${carona.status.toLowerCase()}`;
   const navigate = useNavigate();
+  
+  // --- CORREÇÃO DA TELA BRANCA ---
+  // Garante que 'statusSafe' seja sempre uma string, mesmo se carona.status for null/undefined
+  const statusSafe = carona.status || 'agendada'; 
+  const statusClass = `status-${statusSafe.toLowerCase()}`;
   
   const handleCardClick = () => {
     navigate(`/caronas/caronista`);
   }; 
 
-  // Pega a foto correta baseada no ID do JSON
-  const fotoUsuario = mapaDeFotos[carona.fotoId] || FotoUsuario1;
+  const fotoParaMostrar = (carona.fotoId && mapaDeFotos[carona.fotoId]) ? mapaDeFotos[carona.fotoId] : FotoUsuario1;
 
   return (
     <div 
@@ -127,16 +150,14 @@ function CardCaronaItem({ carona }) {
       onClick={handleCardClick}
       role="button" 
       tabIndex={0} 
-      onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && handleCardClick()} 
     >
-      {/* --- CARD DA ESQUERDA (INFORMAÇÕES) --- */}
       <div className="carona-card-info">
         <div className="card-info-header">
           <h3 className="rota-titulo">
             {carona.origem} <span>&rarr;</span> {carona.destino}
           </h3>
           <span className={`status-tag ${statusClass}`}>
-            {carona.status}
+            {carona.status || 'Agendada'}
           </span>
         </div>
         <div className="rota-horario">
@@ -145,12 +166,10 @@ function CardCaronaItem({ carona }) {
         </div>
       </div>
 
-      {/* --- CARD DA DIREITA (AVALIAÇÃO) --- */}
       <div className="carona-card-rating">
         <div className="rating-user-foto">
-          <img src={fotoUsuario} alt="Usuário" />
+          {fotoParaMostrar && <img src={fotoParaMostrar} alt="Usuário" />}
         </div>
-        {/* Passa as props vindas do JSON */}
         <StarRating rating={carona.rating} locked={carona.locked} />
       </div>
 
