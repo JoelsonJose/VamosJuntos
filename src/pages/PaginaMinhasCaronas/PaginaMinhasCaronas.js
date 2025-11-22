@@ -1,80 +1,34 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Sidebar from '../../components/Sidebar/Sidebar';
 import './PaginaMinhasCaronas.css'; 
 import BotaoAcessibilidade from '../../components/BotaoAcessibilidade/BotaoAcessibilidade';
 import { useNavigate } from 'react-router-dom';
+
 // --- ÍCONES ---
-// (Certifique-se que estes caminhos/nomes estão corretos)
 import IconRelogio from '../../assets/IconsCriar/IconRelogio.png';
 import StarYellow from '../../assets/Star amarela.png';
 import StarWhite from '../../assets/Star branca.png';
-import IconCadeado from '../../assets/IconsCriar/IconCadeado.png'; // Você precisa desta imagem
+import IconCadeado from '../../assets/IconsCriar/IconCadeado.png'; 
 import FotoUsuario1 from '../../assets/Fotos/usuario1.png'; 
 import FotoUsuario2 from '../../assets/Fotos/usuario2.png'; 
 import FotoUsuario3 from '../../assets/Fotos/usuario3.png'; 
 import FotoUsuario4 from '../../assets/Fotos/usuario4.png'; 
 import FotoUsuario5 from '../../assets/Fotos/usuario5.png'; 
 
-// --- DADOS DE EXEMPLO ---
-const mockCaronas = [
-  {
-    id: 1,
-    origem: "Av. Alfredo Lisboa 810, Empresa",
-    destino: "Jardim São Paulo, Casa",
-    horario: "18:30",
-    status: "Agendada",
-    user: { foto: FotoUsuario1 },
-    rating: 4,
-    locked: false // Agendada = estrelas vazias
-  },
-  {
-    id: 2,
-    origem: "Jardim São Paulo, Casa",
-    destino: "Av. Alfredo Lisboa 810, Empresa",
-    horario: "8:00",
-    status: "Ativa",
-    user: { foto: FotoUsuario2 },
-    rating: 3,
-    locked: false // Ativa = estrelas vazias
-  },
-  {
-    id: 3,
-    origem: "Av. Alfredo Lisboa 810, Empresa",
-    destino: "Jardim São Paulo, Casa",
-    horario: "18:30",
-    status: "Finalizada",
-    user: { foto: FotoUsuario3 },
-    rating: 1, // Finalizada = 5 estrelas
-    locked: false
-  },
-  {
-    id: 4,
-    origem: "Av. Alfredo Lisboa 810, Empresa",
-    destino: "Jardim São Paulo, Casa",
-    horario: "18:30",
-    status: "Cancelada",
-    user: { foto: FotoUsuario4 },
-    rating: 0,
-    locked: true // Cancelada = cadeados
-  },
-  {
-    id: 5,
-    origem: "Jardim São Paulo, Casa",
-    destino: "Av. Alfredo Lisboa 810, Empresa",
-    horario: "8:00",
-    status: "Finalizada",
-    user: { foto: FotoUsuario5 },
-    rating: 5, // Finalizada = 5 estrelas
-    locked: false
-  },
-];
+// --- MAPA DE FOTOS ---
+// Como o JSON não salva a imagem importada, salvamos um ID ("usuario1") e mapeamos aqui
+const mapaDeFotos = {
+  "usuario1": FotoUsuario1,
+  "usuario2": FotoUsuario2,
+  "usuario3": FotoUsuario3,
+  "usuario4": FotoUsuario4,
+  "usuario5": FotoUsuario5
+};
 
-// --- COMPONENTE DE ESTRELAS (ADAPTADO) ---
-// Agora aceita 'rating' e 'locked'
+// --- COMPONENTE DE ESTRELAS ---
 function StarRating({ rating = 0, locked = false, max = 5 }) {
   const stars = [];
 
-  // Se 'locked' for true (ex: Cancelada), mostra cadeados
   if (locked) {
     for (let i = 0; i < max; i++) {
       stars.push(
@@ -82,13 +36,11 @@ function StarRating({ rating = 0, locked = false, max = 5 }) {
           key={i}
           src={IconCadeado}
           alt="Avaliação bloqueada"
-          className="star-img locked" // Classe especial para o cadeado
+          className="star-img locked"
         />
       );
     }
-  } 
-  // Se não estiver bloqueada, mostra estrelas (cheias ou vazias)
-  else {
+  } else {
     for (let i = 0; i < max; i++) {
       const src = i < rating ? StarYellow : StarWhite;
       const alt = i < rating ? 'estrela cheia' : 'estrela vazia';
@@ -105,22 +57,30 @@ function StarRating({ rating = 0, locked = false, max = 5 }) {
   return <div className="rating-stars" aria-label={`Avaliação ${rating} de ${max}`}>{stars}</div>;
 }
 
-
 // --- COMPONENTE PRINCIPAL DA PÁGINA ---
 export default function PaginaMinhasCaronas() {
+  const [caronas, setCaronas] = useState([]);
+
+  // Busca os dados do db.json assim que a tela abre
+  useEffect(() => {
+    fetch('http://localhost:3001/caronas')
+      .then(response => response.json())
+      .then(data => setCaronas(data))
+      .catch(err => console.error("Erro ao carregar histórico:", err));
+  }, []);
+
   return (
     <div className="pagina-caronas-container">
       <Sidebar activePage="minhas-caronas" />
       
       <main className="conteudo-caronas">
         <HeaderCaronas />
-        <ListaCaronas caronas={mockCaronas} />
+        <ListaCaronas caronas={caronas} />
       </main>
       <BotaoAcessibilidade />
     </div>
   );
 }
-
 
 // --- SUB-COMPONENTES DA PÁGINA ---
 
@@ -136,6 +96,10 @@ function HeaderCaronas() {
 }
 
 function ListaCaronas({ caronas }) {
+  if (caronas.length === 0) {
+      return <div className="lista-caronas-container"><p style={{marginTop: 20}}>Carregando histórico...</p></div>;
+  }
+
   return (
     <div className="lista-caronas-container">
       {caronas.map(carona => (
@@ -146,19 +110,23 @@ function ListaCaronas({ caronas }) {
 }
 
 function CardCaronaItem({ carona }) {
-  const statusClass = `status-${carona.status.toLowerCase()}`;
+  const statusClass = `status-${carona.status.toLowerCase()}`;
   const navigate = useNavigate();
+  
   const handleCardClick = () => {
     navigate(`/caronas/caronista`);
   }; 
+
+  // Pega a foto correta baseada no ID do JSON
+  const fotoUsuario = mapaDeFotos[carona.fotoId] || FotoUsuario1;
 
   return (
     <div 
       className="carona-item-wrapper" 
       onClick={handleCardClick}
-      role="button" // Para acessibilidade
-      tabIndex={0}  // Para acessibilidade (foco com Tab)
-      onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && handleCardClick()} // Para acessibilidade (clique com Enter/Espaço)
+      role="button" 
+      tabIndex={0} 
+      onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && handleCardClick()} 
     >
       {/* --- CARD DA ESQUERDA (INFORMAÇÕES) --- */}
       <div className="carona-card-info">
@@ -179,9 +147,9 @@ function CardCaronaItem({ carona }) {
       {/* --- CARD DA DIREITA (AVALIAÇÃO) --- */}
       <div className="carona-card-rating">
         <div className="rating-user-foto">
-          <img src={carona.user.foto} alt="Usuário" />
+          <img src={fotoUsuario} alt="Usuário" />
         </div>
-        {/* Passa as props 'rating' e 'locked' para o StarRating */}
+        {/* Passa as props vindas do JSON */}
         <StarRating rating={carona.rating} locked={carona.locked} />
       </div>
 

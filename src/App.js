@@ -28,7 +28,7 @@ function App() {
       <Route path= "/buscar" element= {<PaginaBuscar />} />
       <Route path= "/perfil" element= {<ProfilePage />} />
       <Route path= "/criar" element= {<PaginaCriar />} />
-      <Route path= "/rotas/editar" element= {<PaginaEditarRotas />} />
+      <Route path="/rotas/editar/:id" element={<PaginaEditarRotas />} />
       <Route path= "/rotas" element= {<PaginaRotas />} />
       <Route path= "/caronas" element= {<PaginaMinhasCaronas />} />
       <Route path= "/avaliacoes" element= {<PaginaAvaliacoes />} />

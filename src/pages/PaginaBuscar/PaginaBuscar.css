@@ -143,9 +143,9 @@ body {
 }
 
 /* cores de vagas */
-.vagas1, .vagas2 { background-color: #2f9e44; }
-.vagas3 { background-color: #ff9800; } /* laranja */
-.vagas4 { background-color: #d32f2f; }
+.vagas4, .vagas3 { background-color: #2f9e44; }
+.vagas2 { background-color: #ff9800; } /* laranja */
+.vagas1 { background-color: #d32f2f; }
 
 /* dicas */
 .dicas-container {
