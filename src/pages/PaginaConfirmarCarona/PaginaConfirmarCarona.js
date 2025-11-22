@@ -14,8 +14,6 @@ import LucasXimenes from '../../assets/ConfirmarCarona/LucasXimenes.png';
 import ClockCinza from '../../assets/RotaCaronista/Clockcinza.png';
 import LocationCinza from '../../assets/RotaCaronista/Locationcinza.png';
 
-
-
 export default function PaginaConfirmarCarona() {
   // começa SEM nenhuma seleção
   const [selectedPoint, setSelectedPoint] = useState(null);

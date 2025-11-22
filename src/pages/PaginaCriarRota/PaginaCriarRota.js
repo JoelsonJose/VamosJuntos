@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import Sidebar from '../../components/Sidebar/Sidebar';
 import "./PaginaCriarRota.css"; 
 import BotaoAcessibilidade from '../../components/BotaoAcessibilidade/BotaoAcessibilidade';
+import { API_URL } from '../../Config';
 
 // Importe os ícones
 import IconMapa from '../../assets/IconsCriar/IconMapa.png';
@@ -70,7 +71,7 @@ export default function PaginaCriarRota() {
     };
 
     try {
-      const response = await fetch('http://localhost:3001/rotas', {
+      const response = await fetch(`${API_URL}/rotas`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

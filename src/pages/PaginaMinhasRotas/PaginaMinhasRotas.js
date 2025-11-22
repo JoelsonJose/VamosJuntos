@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Sidebar from '../../components/Sidebar/Sidebar';
 import './PaginaMinhasRotas.css'; 
+import { API_URL } from '../../Config';
 import PopUpExcluir from '../../components/PopUpExcluir/PopUpExcluir';
 import IconMapa from '../../assets/IconsCriar/IconMapa.png';
 import IconRelogio from '../../assets/IconsCriar/IconRelogio.png';
@@ -20,7 +21,7 @@ export default function PaginaMinhasRotas() {
 
   // BUSCAR DADOS DO BACK-END (JSON SERVER)
   useEffect(() => {
-    fetch('http://localhost:3001/rotas')
+    fetch(`${API_URL}/rotas`) 
       .then(response => response.json())
       .then(data => {
         const apenasMinhas = data.filter(rota => rota.dono === true);
