@@ -1,10 +1,10 @@
+import React, { useState, useEffect } from 'react';
 import './PaginaBuscar.css';
 import Sidebar from '../../components/Sidebar/Sidebar'; 
 import StarYellow from '../../assets/Star amarela.png';
 import StarWhite from '../../assets/Star branca.png';
 import BotaoAcessibilidade from '../../components/BotaoAcessibilidade/BotaoAcessibilidade';
-import  {useNavigate}  from 'react-router-dom';
-
+import { useNavigate } from 'react-router-dom';
 
 function StarRating({ rating = 0, max = 5 }) {
   const stars = [];
@@ -26,16 +26,46 @@ function StarRating({ rating = 0, max = 5 }) {
 
 export default function PaginaBuscar() {
   const navigate = useNavigate();
+  const [caronas, setCaronas] = useState([]);
 
-  const caronas = [
-    { nome: "João Silva", rating: 4, rota: "Av. Alfredo Lisboa 810, Empresa → Jardim São Paulo, Casa", vagas: "3/4", classe: "vagas3" },
-    { nome: "Lucas Ximenes", rating: 3, rota: "Jardim São Paulo, Casa → Av. Alfredo Lisboa 810, Empresa", vagas: "1/4", classe: "vagas1" },
-    { nome: "Pedro Lima", rating: 5, rota: "Av. Alfredo Lisboa 810, Empresa → Jardim São Paulo, Casa", vagas: "4/4", classe: "vagas4" },
-    { nome: "Carla Menezes", rating: 2, rota: "Boa Viagem → Derby", vagas: "2/4", classe: "vagas2" },
-    { nome: "Lucas Andrade", rating: 4, rota: "Casa Amarela → Recife Antigo", vagas: "3/4", classe: "vagas3" },
-    { nome: "Fernanda Costa", rating: 5, rota: "Torre → Pina", vagas: "4/4", classe: "vagas4" },
-    { nome: "Ricardo Alves", rating: 3, rota: "Imbiribeira → Boa Vista", vagas: "1/4", classe: "vagas1" },
-  ];
+  // Estados dos filtros
+  const [origem, setOrigem] = useState("");
+  const [destino, setDestino] = useState("");
+
+  // Busca os dados do servidor
+  useEffect(() => {
+    fetch('http://localhost:3001/rotas')
+      .then(response => response.json())
+      .then(data => {
+        // Transforma os dados do banco para o visual do seu design
+        const dadosFormatados = data.map(rotaDoBanco => {
+          
+          const total = Number(rotaDoBanco.vagasTotal) || 4;
+          const ocupadas = Number(rotaDoBanco.vagasOcupadas) || 0;
+          const livres = total - ocupadas;
+          
+          // Lógica para manter suas cores (classes CSS)
+          let classeCss = "vagas1"; 
+          if (livres >= 3) classeCss = "vagas4"; 
+          else if (livres === 2) classeCss = "vagas3"; 
+          else if (livres === 1) classeCss = "vagas2";
+          else if (livres <= 0) classeCss = "vagas1"; 
+
+          return {
+            id: rotaDoBanco.id, 
+            nome: rotaDoBanco.motorista || "Motorista Parceiro", 
+            rating: Number(rotaDoBanco.notaMinima) || 5,
+            rota: `${rotaDoBanco.origem} → ${rotaDoBanco.destino}`, 
+            vagas: `${ocupadas}/${total}`,
+            classe: classeCss, 
+            origemReal: rotaDoBanco.origem,
+            destinoReal: rotaDoBanco.destino
+          };
+        });
+        setCaronas(dadosFormatados);
+      })
+      .catch(err => console.error("Erro ao buscar:", err));
+  }, []);
 
   return (
     <div className="pagina-buscar">
@@ -52,8 +82,18 @@ export default function PaginaBuscar() {
           </div>
 
           <div className="filtros-inputs">
-            <input type="text" placeholder="Origem (Bairro/Avenida)" />
-            <input type="text" placeholder="Destino (Bairro/Avenida)" />
+            <input 
+              type="text" 
+              placeholder="Origem (Bairro/Avenida)" 
+              value={origem}
+              onChange={(e) => setOrigem(e.target.value)}
+            />
+            <input 
+              type="text" 
+              placeholder="Destino (Bairro/Avenida)" 
+              value={destino}
+              onChange={(e) => setDestino(e.target.value)}
+            />
             <select>
               <option>Selecione o horário</option>
               <option>08:00</option>
@@ -74,16 +114,21 @@ export default function PaginaBuscar() {
 
         <div className="conteudo-busca">
           <div className="resultados-container">
-            {caronas.map((c, i) => (
-              <div
-  key={i}
-  className="carona-card"
-  onClick={() => {
-    if (c.nome === "Lucas Ximenes") navigate ('/buscar/conforimarcarona');
-  }}
-  style={{ cursor: c.nome === "Lucas Ximenes" ? 'pointer' : 'default' }}
->
+            {caronas.length === 0 && <p style={{padding: 20}}>Carregando caronas...</p>}
 
+            {caronas
+              .filter(c => 
+                  c.rota.toLowerCase().includes(origem.toLowerCase()) && 
+                  c.rota.toLowerCase().includes(destino.toLowerCase())
+              )
+              .map((c, i) => (
+              <div
+                key={c.id || i}
+                className="carona-card"
+                // AQUI FOI CORRIGIDO: Agora clica em qualquer card
+                onClick={() => navigate('/buscar/conforimarcarona')} 
+                style={{ cursor: 'pointer' }} 
+              >
                 <div className="carona-left">
                   <div className="carona-nome">
                     <strong>{c.nome}</strong>

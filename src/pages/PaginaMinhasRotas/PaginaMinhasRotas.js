@@ -1,8 +1,8 @@
-import React, { useState } from 'react'; // 1. IMPORTE o useState
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Sidebar from '../../components/Sidebar/Sidebar';
 import './PaginaMinhasRotas.css'; 
-import PopUpExcluir from '../../components/PopUpExcluir/PopUpExcluir'
+import PopUpExcluir from '../../components/PopUpExcluir/PopUpExcluir';
 import IconMapa from '../../assets/IconsCriar/IconMapa.png';
 import IconRelogio from '../../assets/IconsCriar/IconRelogio.png';
 import IconPessoas from '../../assets/IconsCriar/IconPessoas.png';
@@ -10,40 +10,25 @@ import IconEstrela from '../../assets/IconsCriar/IconEstrela.png';
 import BotaoAcessibilidade from '../../components/BotaoAcessibilidade/BotaoAcessibilidade';
 import ModalSolicitacoes from '../../components/ModalSolicitacoes/ModalSolicitacoes';
 
-const dadosIniciaisDasRotas = [
-  {
-    id: 1,
-    origem: "Casa Amarela(Saída)",
-    destino: "Recife Antigo(Chegada)",
-    ativa: true,
-    horario: "8:00",
-    dias: "Seg,Ter,Qua,Sex",
-    vagasOcupadas: 2,
-    vagasTotal: 4,
-    notaMinima: "4+",
-    novasSolicitacoes: 3,
-  },
-  {
-    id: 2,
-    origem: "Recife Antigo(Saída)",
-    destino: "Casa Amarela(Chegada)",
-    ativa: true,
-    horario: "18:00",
-    dias: "Seg,Ter,Qua,Sex",
-    vagasOcupadas: 1,
-    vagasTotal: 4,
-    notaMinima: "4+",
-    novasSolicitacoes: 2,
-  }
-];
-
 export default function PaginaMinhasRotas() {
   
-  const [minhasRotas, setMinhasRotas] = useState(dadosIniciaisDasRotas); 
+  const [minhasRotas, setMinhasRotas] = useState([]);
   const [modalAberto, setModalAberto] = useState(false);
   const [rotaParaExcluir, setRotaParaExcluir] = useState(null); 
   const [modalSolicitacoesAberto, setModalSolicitacoesAberto] = useState(false);
-  const [rotaSelecionada, setRotaSelecionada] = useState(null); // Para saber qual rota mostrar
+  const [rotaSelecionada, setRotaSelecionada] = useState(null); 
+
+  // BUSCAR DADOS DO BACK-END (JSON SERVER)
+  useEffect(() => {
+    fetch('http://localhost:3001/rotas')
+      .then(response => response.json())
+      .then(data => {
+        const apenasMinhas = data.filter(rota => rota.dono === true);
+        
+        setMinhasRotas(apenasMinhas);
+      })
+      .catch(error => console.error("Erro ao buscar rotas:", error));
+  }, []);
   
   const handleAbrirModal = (rota) => {
     setRotaParaExcluir(rota); 
@@ -55,18 +40,30 @@ export default function PaginaMinhasRotas() {
     setRotaParaExcluir(null); 
   };
 
-  const handleConfirmarExclusao = () => {
+  // EXCLUIR ROTA
+  const handleConfirmarExclusao = async () => {
     if (rotaParaExcluir) {
-      setMinhasRotas(rotasAtuais => 
-        rotasAtuais.filter(rota => rota.id !== rotaParaExcluir.id)
-      );
-      handleFecharModal(); 
+      try {
+        // Deleta do Banco de Dados Fake
+        await fetch(`http://localhost:3001/rotas/${rotaParaExcluir.id}`, {
+          method: 'DELETE',
+        });
+        
+        // Remove visualmente da lista sem precisar recarregar a página
+        setMinhasRotas(rotasAtuais => 
+          rotasAtuais.filter(rota => rota.id !== rotaParaExcluir.id)
+        );
+        handleFecharModal();
+      } catch (error) {
+        console.error("Erro ao excluir:", error);
+        alert("Erro ao excluir rota. Verifique se o servidor está rodando.");
+      }
     }
   };
 
   const handleAbrirModalSolicitacoes = (rota) => {
-    setRotaSelecionada(rota); // Guarda a rota que o usuário clicou
-    setModalSolicitacoesAberto(true); // Abre o modal
+    setRotaSelecionada(rota);
+    setModalSolicitacoesAberto(true);
   };
 
   const handleFecharModalSolicitacoes = () => {
@@ -87,6 +84,7 @@ export default function PaginaMinhasRotas() {
         />
       </main>
       <BotaoAcessibilidade />
+      
       <PopUpExcluir 
         isOpen={modalAberto}
         onClose={handleFecharModal}
@@ -94,6 +92,7 @@ export default function PaginaMinhasRotas() {
         titulo="Excluir Rota" 
         mensagem="Tem certeza que quer excluir esta rota?" 
       />
+      
       <ModalSolicitacoes
         isOpen={modalSolicitacoesAberto}
         onClose={handleFecharModalSolicitacoes}
@@ -118,6 +117,16 @@ function HeaderRotas() {
 }
 
 function ListaRotas({ rotas, onExcluir, onVerSolicitacoes }) {
+  if (rotas.length === 0) {
+    return (
+      <div className="lista-rotas-container">
+        <p style={{ textAlign: 'center', color: '#666', marginTop: '20px' }}>
+          Nenhuma rota encontrada. Crie sua primeira rota!
+        </p>
+      </div>
+    );
+  }
+
   return (
     <div className="lista-rotas-container">
       {rotas.map(rota => (
@@ -135,6 +144,9 @@ function ListaRotas({ rotas, onExcluir, onVerSolicitacoes }) {
 function CardRota({ rota, onExcluir, onVerSolicitacoes }) {
   const vagasDisponiveis = rota.vagasTotal - rota.vagasOcupadas;
 
+  // Formata os dias: se for array junta com vírgula, se for string mostra direto
+  const diasFormatados = Array.isArray(rota.dias) ? rota.dias.join(', ') : rota.dias;
+
   return (
     <article className="card-rota">
       <div className="card-rota-header">
@@ -145,9 +157,10 @@ function CardRota({ rota, onExcluir, onVerSolicitacoes }) {
           <span className={`status-tag ${rota.ativa ? 'ativa' : 'inativa'}`}>
             {rota.ativa ? 'Ativa' : 'Inativa'}
           </span>
-          <a href="/rotas/editar" className="btn-editar">
+          {/* Ajuste o link abaixo se tiver uma página de edição */}
+          <Link to={`/rotas/editar/${rota.id}`} className="btn-editar">
             Editar
-          </a>
+          </Link>
           <button 
             className="btn-excluir" 
             onClick={() => onExcluir(rota)} 
@@ -157,16 +170,18 @@ function CardRota({ rota, onExcluir, onVerSolicitacoes }) {
         </div>
       </div>
 
-      <a href="/rotas/motorista" className="rota-pontos-link">
+      <Link to="/rotas/motorista" className="rota-pontos-link">
         <img src={IconMapa} alt="Mapa" className="input-icon" />
         <span>Ver pontos de carona</span>
-      </a>
+      </Link>
+      
       <div className="rota-info-row">
         <div className="info-item">
           <img src={IconRelogio} alt="Horário" className="info-icon" />
           <div className="info-text">
             <strong>{rota.horario}</strong>
-            <span>{rota.dias}</span>
+            {/* Aqui usamos a variável formatada para evitar erro com Arrays */}
+            <span style={{ fontSize: '0.85rem' }}>{diasFormatados}</span>
           </div>
         </div>
         <div className="info-item">
@@ -179,23 +194,27 @@ function CardRota({ rota, onExcluir, onVerSolicitacoes }) {
         <div className="info-item">
           <img src={IconEstrela} alt="Nota" className="info-icon" />
           <div className="info-text">
-            <strong>{rota.notaMinima} estrelas</strong>
+            <strong>{rota.notaMinima || "4.5"} estrelas</strong>
             <span>nota mínima</span>
           </div>
         </div>
       </div>
+      
       <div className="card-rota-footer">
         <div className="footer-solicitacoes">
           <p>{rota.novasSolicitacoes} novas solicitações de carona</p>
           <button 
-          className="btn-ver-solicitacoes"
-          onClick={() => onVerSolicitacoes(rota)}>Ver solicitações</button>
+            className="btn-ver-solicitacoes"
+            onClick={() => onVerSolicitacoes(rota)}
+          >
+            Ver solicitações
+          </button>
         </div>
         <div className="footer-actions">
           <Link to={"/rotas/motorista"} className="btn-iniciar-viagem">
             Iniciar Viagem
           </Link>
-          <button className="btn-encerrar-vagas">Encerrar vagas disponíveis</button>
+          <button className="btn-encerrar-vagas">Encerrar vagas</button>
         </div>
       </div>
     </article>

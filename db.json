@@ -1,0 +1,101 @@
+{
+  "rotas": [
+    {
+      "id": 1,
+      "motorista": "João Silva",
+      "origem": "Armazém 12",
+      "destino": "Boa Viagem",
+      "horario": "18:30",
+      "dias": [
+        "Segunda",
+        "Quarta"
+      ],
+      "vagasTotal": 4,
+      "vagasOcupadas": 3,
+      "notaMinima": 4,
+      "valor": "5.00",
+      "ativa": true
+    },
+    {
+      "id": 2,
+      "motorista": "Lucas Ximenes",
+      "origem": "Armazém 9",
+      "destino": "Olinda (Carmo)",
+      "horario": "17:00",
+      "dias": [
+        "Terça",
+        "Quinta"
+      ],
+      "vagasTotal": 4,
+      "vagasOcupadas": 1,
+      "notaMinima": 3,
+      "valor": "Gratuito",
+      "ativa": true
+    },
+    {
+      "id": 3,
+      "motorista": "Pedro Lima",
+      "origem": "Jardim São Paulo",
+      "destino": "Armazém 9",
+      "horario": "18:15",
+      "dias": [
+        "Sexta"
+      ],
+      "vagasTotal": 4,
+      "vagasOcupadas": 4,
+      "notaMinima": 5,
+      "valor": "10.00",
+      "ativa": true
+    },
+    {
+      "id": 4,
+      "motorista": "Carla Menezes",
+      "origem": "Várzea",
+      "destino": "Armazém 12",
+      "horario": "19:00",
+      "dias": [
+        "Segunda"
+      ],
+      "vagasTotal": 4,
+      "vagasOcupadas": 2,
+      "notaMinima": 2,
+      "valor": "5.00",
+      "ativa": true
+    },
+    {
+      "id": "1b52",
+      "origem": "Boa vista",
+      "destino": "Armazem 12",
+      "pontos": "Atacado dos presentes, Praça do diário, Porto digital",
+      "horario": "07:30",
+      "dias": [
+        "Segunda-feira",
+        "Quarta-feira",
+        "Terça-feira",
+        "Quinta-feira",
+        "Sexta-feira"
+      ],
+      "observacoes": "",
+      "vagasTotal": 1,
+      "vagasOcupadas": 0,
+      "valor": "Gratuito",
+      "notaMinima": "5",
+      "ativa": true,
+      "novasSolicitacoes": 0,
+      "dono": true,
+      "motorista": "Você"
+    }
+  ],
+  "caronas": [
+    {
+      "id": 200,
+      "origem": "Armazém 9",
+      "destino": "Olinda (Carmo)",
+      "horario": "17:00",
+      "status": "Agendada",
+      "fotoId": "usuario2",
+      "rating": 3,
+      "locked": false
+    }
+  ]
+}
