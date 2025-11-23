@@ -131,11 +131,15 @@
 }
 
 .status-tag {
-  font-size: 0.8rem; 
-  font-weight: 600;
-  padding: 4px 12px;
-  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 700; /* Mais peso para parecer texto informativo */
+  padding: 4px 10px;
+  border-radius: 4px; /* Borda menos arredondada parece menos botão */
   text-transform: uppercase;
+  letter-spacing: 0.5px;
+  cursor: default; /* Importante: cursor padrão, não mãozinha */
+  box-shadow: none !important; /* Remove sombra se houver */
+  border: none;
 }
 .status-tag.ativa {
   background-color: var(--cor-verde-tag);

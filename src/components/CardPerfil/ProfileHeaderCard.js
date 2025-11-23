@@ -52,11 +52,6 @@ function ProfileHeaderCard({ userData }) {
             <span className="tag">{LocationIcon} {location}</span>
           </div>
         </div>
-
-        {/* BOTÃO DE ACESSIBILIDADE */}
-        <div className="accessibility-container">
-          <button className="accessibility-button">Acessibilidade</button>
-        </div>
       </div>
 
       {/* SEÇÃO SOBRE */}
