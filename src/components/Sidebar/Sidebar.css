@@ -11,19 +11,21 @@
   padding: 3px 12px;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
   justify-content: space-between;
   box-shadow: 2px 0 8px rgba(0,0,0,0.03);
   border-right: 1px solid var(--cor-borda-cinza);
   z-index: 900;
 }
 
-.sidebar-top {
+.sidebar-top {  
   display: flex;
   flex-direction: column;
   align-items: center;
   flex-grow: 1;
   overflow-y: auto;
   overflow-x: hidden;
+  min-height: 0;
 }
 
 .sidebar-logo {
@@ -86,6 +88,7 @@
   justify-content: center;
   padding: 16px;
   border-top: 1px solid var(--cor-borda-cinza);
+  flex-shrink: 0;
 }
 .footer-btn {
   /* Reset total do estilo de botão padrão */
@@ -291,4 +294,16 @@ body.alto-contraste .nav-btn:not(.active):hover {
 body.modo-escuro .nav-btn,
 body.alto-contraste .nav-btn {
   color: #ffffff;
+}
+
+/* Correção do clique no Modo Claro */
+body:not(.modo-escuro):not(.alto-contraste) .footer-btn:active .icon-b,
+body:not(.modo-escuro):not(.alto-contraste) .footer-btn:focus .icon-b {
+  opacity: 1 !important; /* Mantém o preto visível */
+  filter: none !important; /* Remove inversão de cor se houver */
+}
+
+body:not(.modo-escuro):not(.alto-contraste) .footer-btn:active .icon-w,
+body:not(.modo-escuro):not(.alto-contraste) .footer-btn:focus .icon-w {
+  opacity: 0 !important; /* Mantém o branco invisível */
 }

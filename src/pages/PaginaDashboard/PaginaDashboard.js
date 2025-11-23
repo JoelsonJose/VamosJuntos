@@ -54,7 +54,7 @@ function AreaResumo() {
             <span>Jardim São Paulo &rarr; Recife antigo às 8:00</span>
           </div>
         </div>
-        <a href="#-" className="detalhes-card-resumo">
+        <a href="/caronas/caronista" className="detalhes-card-resumo">
           <img src={Infoicon} alt="Info" className="Infoicon" /> 
           <strong> Mais detalhes...</strong>
         </a>
@@ -68,7 +68,7 @@ function AreaResumo() {
             <span>Recife antigo &rarr; Jardim São Paulo às 18:30</span>
           </div>
         </div>
-        <a href="#-" className="detalhes-card-resumo">
+        <a href="/caronas" className="detalhes-card-resumo">
           <img src={Infoicon} alt="Info" className="Infoicon" /> 
           <strong> Mais detalhes...</strong>
         </a>
