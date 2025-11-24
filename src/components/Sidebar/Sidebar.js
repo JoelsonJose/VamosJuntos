@@ -134,13 +134,10 @@ export default function Sidebar() {
             </div>
           </Link>
         </div>
-
-        {/* Modal de notificações */}
-        {isNotificacaoOpen && (
+      </aside>
+      {isNotificacaoOpen && (
           <CentralNotificacao notifications={notifications} onClose={toggleNotificacoes} />
         )}
-
-      </aside>
     </>
   );
 }
