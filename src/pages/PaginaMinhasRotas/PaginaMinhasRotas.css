@@ -291,87 +291,6 @@ body.alto-contraste .rota-pontos-link {
   .btn-nova-rota { width: 100%; }
 }
 
-/* Celulares (< 768px) */
-@media (max-width: 768px) {
-  
-  .page-main-title {
-    font-size: 22px; /* Título menor */
-  }
-
-  .card-rota {
-    padding: 16px; /* Padding interno do card reduzido */
-    border-radius: 12px;
-  }
-
-  /* CABEÇALHO DO CARD REORGANIZADO */
-  .card-rota-header {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 12px;
-  }
-
-  .header-info-principal {
-    flex-direction: column; /* Título em cima, Status em baixo */
-    align-items: flex-start;
-    gap: 8px;
-    width: 100%;
-  }
-
-  .rota-titulo {
-    font-size: 1.1rem; /* Fonte do título da rota reduzida */
-    line-height: 1.4;
-  }
-
-  /* Botões Editar/Excluir */
-  .header-actions {
-    width: 100%;
-    margin-left: 0;
-    justify-content: space-between; /* Espalha os botões */
-    border-top: 1px solid #f0f0f0;
-    padding-top: 10px;
-  }
-  
-  .btn-editar, .btn-excluir {
-    font-size: 0.8rem; /* Botões menores */
-    padding: 6px 10px;
-    background-color: #f9fafb; /* Fundo leve para destacar clique */
-    border-radius: 6px;
-  }
-
-  /* INFOS (Horário, etc) */
-  .rota-info-row {
-    flex-direction: column; 
-    gap: 12px;
-    margin-top: 16px;
-    padding-bottom: 16px;
-  }
-  
-  /* RODAPÉ DO CARD */
-  .card-rota-footer {
-    flex-direction: column;
-    align-items: stretch; 
-    gap: 16px;
-    margin-top: 16px;
-  }
-
-  .footer-solicitacoes p {
-    font-size: 0.85rem;
-  }
-  
-  .btn-ver-solicitacoes,
-  .btn-iniciar-viagem, 
-  .btn-encerrar-vagas {
-    width: 100%; /* Botões ocupam largura total */
-    text-align: center;
-    justify-content: center;
-    padding: 12px; /* Área de toque maior */
-  }
-
-  .footer-actions {
-    flex-direction: column;
-    width: 100%;
-    gap: 10px;
-  }
 
   /* Celulares (< 768px) */
 @media (max-width: 768px) {
@@ -393,24 +312,36 @@ body.alto-contraste .rota-pontos-link {
   }
 
   .header-info-principal {
-    flex-direction: column;
+    flex-direction: row;
+    flex-wrap: nowrap;
     align-items: flex-start;
     gap: 8px;
     width: 100%;
   }
 
-  .rota-titulo {
-    font-size: 1.1rem;
-    line-height: 1.4;
+ .rota-titulo {
+    font-size: 1rem;
+    line-height: 1.2;
+    white-space: nowrap; /* Texto em uma linha só */
+    overflow: hidden;    /* Corta o excesso */
+    text-overflow: ellipsis; /* Coloca "..." se for muito grande */
+    flex: 1; /* Ocupa todo o espaço disponível, deixando o resto pra tag */
+  }
+
+  .status-tag {
+    font-size: 0.7rem;
+    padding: 2px 8px;
+    flex-shrink: 0; /* Garante que a tag NUNCA encolha ou suma */
   }
 
   /* Botões Editar/Excluir */
   .header-actions {
     width: 100%;
     margin-left: 0;
-    justify-content: space-between;
+    justify-content: space-around;
     border-top: 1px solid #f0f0f0;
-    padding-top: 10px;
+    padding-top: 20px;
+    padding-bottom: 10px;
   }
   
   .btn-editar, .btn-excluir {
@@ -470,5 +401,4 @@ body.alto-contraste .rota-pontos-link {
     justify-content: center;
     padding: 12px;
   }
-}
 }

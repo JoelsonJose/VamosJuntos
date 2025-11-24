@@ -153,11 +153,12 @@ function CardRota({ rota, onExcluir, onVerSolicitacoes }) {
       <div className="card-rota-header">
         <h3 className="rota-titulo">
           {rota.origem} <span>&rarr;</span> {rota.destino}
-        </h3>
-        <div className="header-actions">
+
           <span className={`status-tag ${rota.ativa ? 'ativa' : 'inativa'}`}>
             {rota.ativa ? 'Ativa' : 'Inativa'}
           </span>
+        </h3>
+        <div className="header-actions">
           {/* Ajuste o link abaixo se tiver uma página de edição */}
           <Link to={`/rotas/editar/${rota.id}`} className="btn-editar">
             Editar
