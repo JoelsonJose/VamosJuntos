@@ -94,3 +94,190 @@
   margin-bottom: 8px;
   border-radius: 4px;
 }
+
+/* ==================================================== */
+/* RESPONSIVIDADE (CELULAR) - AJUSTE PARA O TOPO
+/* ==================================================== */
+@media (max-width: 992px) {
+  .central-notificacao {
+    /* Reseta as posições de desktop */
+    bottom: auto; 
+    left: auto;
+    
+    /* Nova Posição: Topo Direito */
+    top: 70px; /* Altura da barra superior (60px) + 10px de margem */
+    right: 10px; /* Margem da direita */
+    left: 10px;  /* Margem da esquerda (para centralizar/ocupar largura) */
+    
+    width: auto; /* Largura automática baseada nas margens left/right */
+    max-width: 400px; /* Limite para não ficar gigante em tablets */
+    margin: 0 auto; /* Centraliza se sobrar espaço */
+    
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+    animation: slideDown 0.3s ease-out;
+  }
+
+  @keyframes slideDown {
+    from { transform: translateY(-20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+  }
+}
+
+/* --- Resto do CSS (Mantido Igual) --- */
+
+.central-notificacao-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 20px 16px 20px;
+  border-bottom: 1px solid #f3f4f6;
+  background: #fafafa;
+}
+
+.central-notificacao-title {
+  font-family: 'Inter', sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  color: #1f2937;
+  margin: 0;
+}
+
+.central-notificacao-close {
+  background: none;
+  border: none;
+  font-size: 18px;
+  color: #6b7280;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.central-notificacao-close:hover {
+  background: #f3f4f6;
+  color: #374151;
+}
+
+.central-notificacao-content {
+  padding: 8px 12px 12px 12px;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.central-notificacao-empty {
+  text-align: center;
+  padding: 40px 20px;
+  color: #6b7280;
+}
+
+.central-notificacao-empty p {
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  margin: 0 0 8px 0;
+}
+
+.central-notificacao-empty small {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  color: #9ca3af;
+}
+
+/* Scrollbar customizada */
+.central-notificacao-content::-webkit-scrollbar { width: 6px; }
+.central-notificacao-content::-webkit-scrollbar-track { background: #f1f5f9; border-radius: 3px; }
+.central-notificacao-content::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
+.central-notificacao-content::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+
+/* Estilo do item de notificação */
+.notificacao-simples {
+  background: #f8f9fa;
+  border-left: 4px solid #8b5cf6;
+  padding: 12px;
+  margin-bottom: 8px;
+  border-radius: 4px;
+}
+
+/* CORREÇÃO PARA MODO ESCURO */
+body.modo-escuro .central-notificacao,
+body.alto-contraste .central-notificacao {
+  background-color: #fff !important; /* Mantém fundo branco para legibilidade */
+  color: #333 !important;
+}
+body.modo-escuro .central-notificacao-title,
+body.alto-contraste .central-notificacao-title {
+  color: #1f2937 !important;
+}
+
+/* ============================================================ */
+/* MODO ESCURO / ALTO CONTRASTE (Central de Notificações)       */
+/* ============================================================ */
+
+/* Container Principal Escuro */
+body.modo-escuro .central-notificacao,
+body.alto-contraste .central-notificacao {
+  background-color: #1e1e1e !important; /* Fundo cinza escuro */
+  border-color: #333 !important;         /* Borda discreta */
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5) !important; /* Sombra mais forte */
+  color: #e0e0e0 !important;             /* Texto padrão claro */
+}
+
+/* Cabeçalho Escuro */
+body.modo-escuro .central-notificacao-header,
+body.alto-contraste .central-notificacao-header {
+  background-color: #252525 !important;  /* Um pouco mais claro que o fundo */
+  border-bottom-color: #333 !important;
+}
+
+/* Título Branco */
+body.modo-escuro .central-notificacao-title,
+body.alto-contraste .central-notificacao-title {
+  color: #ffffff !important;
+}
+
+/* Botão de Fechar (X) */
+body.modo-escuro .central-notificacao-close,
+body.alto-contraste .central-notificacao-close {
+  color: #aaa !important;
+}
+
+body.modo-escuro .central-notificacao-close:hover,
+body.alto-contraste .central-notificacao-close:hover {
+  background-color: #333 !important;
+  color: #fff !important;
+}
+
+/* Estado Vazio (Texto "Nenhuma notificação") */
+body.modo-escuro .central-notificacao-empty p,
+body.alto-contraste .central-notificacao-empty p {
+  color: #e0e0e0 !important;
+}
+
+body.modo-escuro .central-notificacao-empty small,
+body.alto-contraste .central-notificacao-empty small {
+  color: #888 !important;
+}
+
+/* Scrollbar Escura */
+body.modo-escuro .central-notificacao-content::-webkit-scrollbar-track,
+body.alto-contraste .central-notificacao-content::-webkit-scrollbar-track {
+  background: #2c2c2c;
+}
+
+body.modo-escuro .central-notificacao-content::-webkit-scrollbar-thumb,
+body.alto-contraste .central-notificacao-content::-webkit-scrollbar-thumb {
+  background: #555;
+}
+
+body.modo-escuro .central-notificacao-content::-webkit-scrollbar-thumb:hover,
+body.alto-contraste .central-notificacao-content::-webkit-scrollbar-thumb:hover {
+  background: #777;
+}
+
+/* Card de Notificação Individual */
+body.modo-escuro .notificacao-simples,
+body.alto-contraste .notificacao-simples {
+  background-color: #2a2a2a !important; /* Fundo do item */
+  color: #f3f3f3 !important;             /* Texto do item */
+  border-left: 4px solid #8b5cf6;        /* Mantém a cor roxa da marca */
+}
