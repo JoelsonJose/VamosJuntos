@@ -24,6 +24,15 @@ import IconPerfilW from '../../assets/Sidebar_icons/Userw.png';
 import IconNotificacaoW from '../../assets/Sidebar_icons/Doorbellw.png';
 import IconLogoutW from '../../assets/Sidebar_icons/Logoutw.png';
 
+// Ícone SVG do Hambúrguer (3 tracinhos) para a Barra Superior
+const IconHamburger = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+    <line x1="3" y1="12" x2="21" y2="12"></line>
+    <line x1="3" y1="6" x2="21" y2="6"></line>
+    <line x1="3" y1="18" x2="21" y2="18"></line>
+  </svg>
+);
+
 export default function Sidebar() {
   const location = useLocation();
   const [isMobileOpen, setIsMobileOpen] = useState(false);
@@ -62,25 +71,41 @@ export default function Sidebar() {
 
   return (
     <>
+      {/* --- BARRA SUPERIOR MOBILE (TOP BAR) --- */}
+      {/* Só aparece no mobile via CSS */}
+      <header className="mobile-top-bar">
+        
+        {/* Botão Menu (Esquerda) */}
+        <button className="top-bar-btn menu-btn" onClick={handleOpenMobileMenu}>
+          <IconHamburger />
+        </button>
+
+        {/* Logo (Centro) */}
+        <div className="top-bar-logo">
+          <img src={logo} alt="VamosJuntos" />
+        </div>
+
+        {/* Ícones (Direita) */}
+        <div className="top-bar-actions">
+          <button className="top-bar-btn" onClick={toggleNotificacoes}>
+            <img src={IconNotificacaoB} alt="Notificações" className="icon-mobile-black" />
+          </button>
+          <Link to="/" className="top-bar-btn">
+            <img src={IconLogoutB} alt="Sair" className="icon-mobile-black" />
+          </Link>
+        </div>
+      </header>
+
       {/* BACKDROP CLICK → FECHAR */}
       {isMobileOpen && (
         <div className="sidebar-backdrop" onClick={handleCloseMobileMenu}></div>
       )}
 
-      {/* Botão de abrir */}
-      <button
-        className={`mobile-logo-opener ${isMobileOpen ? 'hide' : ''}`}
-        onClick={handleOpenMobileMenu}
-        aria-label="Abrir menu"
-      >
-        <img src={logo} alt="Abrir menu" />
-      </button>
-
-      {/* SIDEBAR */}
+      {/* SIDEBAR (LATERAL) */}
       <aside className={`sidebar ${isMobileOpen ? 'mobile-open' : ''}`}>
 
         <div className="sidebar-top">
-          {/* Clique no logo → FECHAR */}
+          {/* Clique no logo da sidebar → FECHAR */}
           <div
             className="sidebar-logo"
             onClick={handleCloseMobileMenu}
@@ -93,7 +118,6 @@ export default function Sidebar() {
           <nav className="sidebar-nav">
             {navItems.map((it) => {
               const isActive = location.pathname.startsWith(it.path);
-
               return (
                 <Link
                   key={it.path}
@@ -112,21 +136,14 @@ export default function Sidebar() {
           </nav>
         </div>
 
-        {/* FOOTER */}
+        {/* FOOTER DA SIDEBAR (Aparece quando a sidebar abre) */}
         <div className="sidebar-footer">
-
-          {/* Notificações */}
-          <button
-            className={`footer-btn ${isNotificacaoOpen ? 'active' : ''}`}
-            onClick={toggleNotificacoes}
-          >
+          <button className="footer-btn" onClick={toggleNotificacoes}>
             <div className="nav-icon-container">
               <img src={IconNotificacaoB} className="nav-icon icon-b" alt="Notificações" />
               <img src={IconNotificacaoW} className="nav-icon icon-w" alt="Notificações" />
             </div>
           </button>
-
-          {/* Logout */}
           <Link to="/" className="footer-btn" onClick={handleCloseMobileMenu}>
             <div className="nav-icon-container">
               <img src={IconLogoutB} className="nav-icon icon-b" alt="Logout" />
@@ -134,10 +151,13 @@ export default function Sidebar() {
             </div>
           </Link>
         </div>
+
       </aside>
+
+      {/* Notificação fora do aside para não cortar */}
       {isNotificacaoOpen && (
-          <CentralNotificacao notifications={notifications} onClose={toggleNotificacoes} />
-        )}
+        <CentralNotificacao notifications={notifications} onClose={toggleNotificacoes} />
+      )}
     </>
   );
 }
