@@ -1,140 +1,181 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from 'react';
+import './PaginaConfirmarCarona.css';
 import Sidebar from '../../components/Sidebar/Sidebar';
-import BotaoAcessibilidade from '../../components/BotaoAcessibilidade/BotaoAcessibilidade';
-import { API_URL } from '../../Config'; // Importando a URL certa
-import './PaginaConfirmarCarona.css'; 
+import StarRating from '../../components/StarRating/StarRating';
+import { useNavigate } from 'react-router-dom';
+// IMPORTANTE: Importando a URL para salvar no banco
+import { API_URL } from '../../Config'; 
 
-// Ícones (ajuste se necessário)
-import IconRelogio from '../../assets/IconsCriar/IconRelogio.png';
-import IconMapa from '../../assets/IconsCriar/IconMapa.png';
-import FotoUsuario2 from '../../assets/Fotos/usuario2.png'; // Foto do Lucas
+import PersonIcon from '../../assets/ConfirmarCarona/PersonConfirmar.png';
+import PeopleIcon from '../../assets/ConfirmarCarona/People in Car Side ViewConfirmar.png';
+import CheckIcon from '../../assets/ConfirmarCarona/Check MarkConfirmar.png';
+import CoinIcon from '../../assets/ConfirmarCarona/Coin in HandConfirmar.png';
+import LucasXimenes from '../../assets/ConfirmarCarona/LucasXimenes.png';
+
+import ClockCinza from '../../assets/RotaCaronista/Clockcinza.png';
+import LocationCinza from '../../assets/RotaCaronista/Locationcinza.png';
 
 export default function PaginaConfirmarCarona() {
+  // começa SEM nenhuma seleção
+  const [selectedPoint, setSelectedPoint] = useState(null);
   const navigate = useNavigate();
 
-  // Simulando os dados da rota que você escolheu (Lucas Ximenes)
-  // Num app real, esses dados viriam via 'state' do navigate
-  const dadosDaRota = {
-    motorista: "Lucas Ximenes",
-    origem: "Armazém 9",
-    destino: "Olinda (Carmo)",
-    horario: "17:00",
-    valor: "Gratuito",
-    fotoId: "usuario2" // Importante para aparecer a foto na lista
+  const pontos = [
+    { id: 1, nome: 'Praça de Jardim São Paulo', horario: '8:15' },
+    { id: 2, nome: 'Shopping Afogados', horario: '8:50' },
+    { id: 3, nome: 'Praça das cinco pontas', horario: '9:25' },
+    { id: 4, nome: 'Cais Santa Rita', horario: '9:35' },
+  ];
+
+  // Comportamento: só 1 selecionado.
+  const handleSelect = (id) => {
+    setSelectedPoint(prev => (prev === id ? null : id));
   };
 
+  // --- FUNÇÃO PARA SALVAR NO BANCO ---
   const handleConfirmar = async () => {
-    // Monta o objeto EXATAMENTE como a tela 'Minhas Caronas' espera
-    const novaCaronaAgendada = {
-      origem: dadosDaRota.origem,
-      destino: dadosDaRota.destino,
-      horario: dadosDaRota.horario,
-      status: "Agendada", // Isso define a cor amarela e o status
-      fotoId: dadosDaRota.fotoId, 
-      rating: 0,
-      locked: false
+    // Validação simples: obriga escolher um ponto
+    if (!selectedPoint) {
+        alert("Por favor, selecione um ponto de embarque antes de confirmar.");
+        return;
+    }
+
+    // Dados fixos do Lucas Ximenes (baseado no seu layout)
+    const novaCarona = {
+        motorista: "Lucas Ximenes",
+        origem: "Jardim São Paulo",
+        destino: "Av. Alfredo Lisboa 810",
+        horario: "08:00",
+        status: "Agendada",
+        fotoId: "usuario2", // ID da foto do Lucas no mapa da outra página
+        rating: 0,
+        locked: false,
+        valor: "5.00"
     };
 
     try {
-      // Salva na gaveta 'caronas' do MockAPI
-      const response = await fetch(`${API_URL}/caronas`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(novaCaronaAgendada),
-      });
+        const response = await fetch(`${API_URL}/caronas`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(novaCarona),
+        });
 
-      if (response.ok) {
-        alert("Carona confirmada com sucesso!");
-        navigate('/caronas'); // Vai para 'Minhas Caronas'
-      } else {
-        alert("Erro ao confirmar carona.");
-      }
+        if (response.ok) {
+            alert('Carona Confirmada com Sucesso!');
+            navigate('/caronas'); // Vai para Minhas Caronas ver o resultado
+        } else {
+            alert('Erro ao confirmar carona.');
+        }
     } catch (error) {
-      console.error("Erro:", error);
-      alert("Erro de conexão.");
+        console.error("Erro:", error);
+        alert('Erro de conexão com o servidor.');
     }
   };
 
-  const handleCancelar = () => {
-    navigate('/buscar');
-  };
-
   return (
-    <div className="pagina-confirmar-container" style={{ display: 'flex' }}>
-      <Sidebar activePage="buscar" />
-      
-      <main className="conteudo-confirmar" style={{ padding: '20px', width: '100%' }}>
-        <h1 className="page-main-title">Confirmar Carona</h1>
-        <p>Revise os detalhes da sua viagem</p>
+    <div className="pagina-confirmar">
+      <Sidebar />
+      <div className="conteudo-confirmar">
+        <button 
+            onClick={() => navigate('/buscar')} 
+            className="botao-voltar"
+        >
+            &larr; Voltar para Buscar
+        </button>
+        <h2>Buscar Carona</h2>
+        <p className="subtitulo">Escolha a melhor carona para você</p>
 
-        {/* Card de Resumo */}
-        <div className="card-confirmacao" style={{ 
-            background: 'white', 
-            padding: '20px', 
-            borderRadius: '15px', 
-            maxWidth: '500px',
-            boxShadow: '0 4px 15px rgba(0,0,0,0.1)',
-            margin: '20px 0'
-        }}>
-          <div style={{ display: 'flex', alignItems: 'center', marginBottom: '15px' }}>
-            <img src={FotoUsuario2} alt="Motorista" style={{ width: '50px', height: '50px', borderRadius: '50%', marginRight: '15px' }} />
-            <div>
-              <h3 style={{ margin: 0 }}>{dadosDaRota.motorista}</h3>
-              <span style={{ color: '#666' }}>Motorista Parceiro</span>
+        <div className="container-geral">
+          {/* CARD ESQUERDO */}
+          <div className="card-esquerdo">
+            <div className="trajeto-header">
+              <strong>Jardim São Paulo → Av. Alfredo Lisboa 810, Empresa</strong>
+              <span className="status-agendada">Agendada</span>
+            </div>
+
+            <div className="info-trajeto">
+              <div className="info-item">
+                <img src={ClockCinza} alt="hora" />
+                <span>8:00</span>
+              </div>
+              <div className="info-item">
+                <img src={LocationCinza} alt="local" />
+                <span>1ª Tv. Eng. Abdias de Carvalho - Curado - Ponto de embarque</span>
+              </div>
+            </div>
+
+            <hr className="linha-roxa" />
+
+            <div className="pontos-embarque">
+              <strong>Pontos de embarque:</strong>
+              <div className="lista-pontos">
+                {pontos.map((ponto) => (
+                  <label
+                    key={ponto.id}
+                    className={`opcao-embarque ${selectedPoint === ponto.id ? 'ativo' : ''}`}
+                  >
+                    <input
+                      type="checkbox"
+                      checked={selectedPoint === ponto.id}
+                      onChange={() => handleSelect(ponto.id)}
+                    />
+                    <div className="texto-ponto">
+                      <span className="nome-ponto">{ponto.nome}</span>
+                      <span className="previsao">-Previsão de chegada {ponto.horario}</span>
+                    </div>
+                  </label>
+                ))}
+              </div>
             </div>
           </div>
 
-          <div style={{ marginBottom: '10px', display: 'flex', alignItems: 'center', gap: '10px' }}>
-            <img src={IconMapa} width="20" alt="" />
-            <strong>{dadosDaRota.origem} ➔ {dadosDaRota.destino}</strong>
-          </div>
+          {/* CARD DIREITO */}
+          <div className="card-direito">
+            <div className="perfil">
+              <img src={LucasXimenes} alt="Lucas Ximenes" className="foto-perfil" />
+              <div>
+                <p className="nome-perfil">Lucas Ximenes</p>
+                <StarRating rating={3} />
+              </div>
+            </div>
 
-          <div style={{ marginBottom: '10px', display: 'flex', alignItems: 'center', gap: '10px' }}>
-            <img src={IconRelogio} width="20" alt="" />
-            <span>Saída às {dadosDaRota.horario}</span>
-          </div>
+            <div className="info-lucas">
+              <p><img src={PersonIcon} alt="idade" /> <strong>Idade:</strong> 28 anos</p>
+              <p><img src={PeopleIcon} alt="caronas" /> <strong>Caronas feitas:</strong> 546</p>
+              <p><img src={CheckIcon} alt="verificado" /> <strong>Membro verificado:</strong> CNH e Endereço</p>
+              <p><img src={CoinIcon} alt="valor" /> <strong>Valor sugerido:</strong> R$ 5,00</p>
+            </div>
 
-          <div style={{ marginTop: '20px', fontWeight: 'bold', color: '#4a00e0' }}>
-            Valor: {dadosDaRota.valor}
+            <div className="info-veiculo">
+              <strong>Honda civic 2023</strong>
+              <p>Acessibilidade <span className="ponto-acessibilidade">•</span></p>
+              <p><strong>PLACA:</strong> <span className="placa">BRA2E19</span></p>
+              <p className="vagas">3 vagas disponíveis <span className="maximo">(4 vagas máx.)</span></p>
+            </div>
+
+            <div className="comentarios">
+              <strong>Comentários:</strong>
+              <textarea
+                readOnly
+                value="Chegou no local na hora exata, ótima motorista."
+              />
+            </div>
+
+            <div className="botoes">
+              <button className="btn-voltar" onClick={() => navigate('/buscar')}>
+                    Voltar
+              </button>
+              {/* AQUI ESTÁ A MUDANÇA: Chama a função que salva de verdade */}
+              <button className="btn-confirmar" onClick={handleConfirmar}>
+                    Confirmar Carona
+              </button>
+
+            </div>
           </div>
         </div>
-
-        {/* Botões de Ação */}
-        <div className="actions-row" style={{ display: 'flex', gap: '15px' }}>
-          <button 
-            onClick={handleCancelar}
-            style={{ 
-              padding: '12px 24px', 
-              borderRadius: '8px', 
-              border: '1px solid #ccc', 
-              background: 'transparent',
-              cursor: 'pointer' 
-            }}
-          >
-            Cancelar
-          </button>
-          
-          <button 
-            onClick={handleConfirmar}
-            style={{ 
-              padding: '12px 24px', 
-              borderRadius: '8px', 
-              border: 'none', 
-              background: '#4a00e0', 
-              color: 'white', 
-              fontWeight: 'bold',
-              cursor: 'pointer' 
-            }}
-          >
-            Confirmar Viagem
-          </button>
-        </div>
-
-      </main>
-      <BotaoAcessibilidade />
+      </div>
     </div>
   );
 }
