@@ -1,7 +1,7 @@
 {
   "rotas": [
     {
-      "id": 1,
+      "id": "1",
       "motorista": "João Silva",
       "origem": "Armazém 12",
       "destino": "Boa Viagem",
@@ -17,7 +17,7 @@
       "ativa": true
     },
     {
-      "id": 2,
+      "id": "2",
       "motorista": "Lucas Ximenes",
       "origem": "Armazém 9",
       "destino": "Olinda (Carmo)",
@@ -33,7 +33,7 @@
       "ativa": true
     },
     {
-      "id": 3,
+      "id": "3",
       "motorista": "Pedro Lima",
       "origem": "Jardim São Paulo",
       "destino": "Armazém 9",
@@ -48,7 +48,7 @@
       "ativa": true
     },
     {
-      "id": 4,
+      "id": "4",
       "motorista": "Carla Menezes",
       "origem": "Várzea",
       "destino": "Armazém 12",
@@ -88,14 +88,16 @@
   ],
   "caronas": [
     {
-      "id": 200,
-      "origem": "Armazém 9",
-      "destino": "Olinda (Carmo)",
-      "horario": "17:00",
-      "status": "Agendada",
+      "id": "c07e",
+      "motorista": "Lucas Ximenes",
+      "origem": "Jardim São Paulo",
+      "destino": "Av. Alfredo Lisboa 810",
+      "horario": "08:00",
+      "status": "Cancelada",
       "fotoId": "usuario2",
-      "rating": 3,
-      "locked": false
+      "rating": 0,
+      "locked": true,
+      "valor": "5.00"
     }
   ]
 }

@@ -1,9 +1,10 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import Sidebar from '../../components/Sidebar/Sidebar';
 import BotaoAcessibilidade from '../../components/BotaoAcessibilidade/BotaoAcessibilidade';
 import StarRatingInput from '../../components/StarRatingInput/StarRatingInput';
-import './PaginaAvaliacao.css'; 
+import './PaginaAvaliacao.css';
+import { API_URL } from '../../Config';
 
 // Exemplo de dados da VIAGEM
 const mockDadosDaViagem = {
@@ -19,41 +20,45 @@ const mockDadosDaViagem = {
 
 export default function PaginaAvaliacao() {
   const navigate = useNavigate();
-  // const { rideId } = useParams(); // Pega o ID da URL (ex: /avaliar/123)
-  
-  const dados = mockDadosDaViagem; // Usando dados de exemplo
+  const { caronaId } = useParams();
 
-  // --- MUDANÇA NA LÓGICA DE ESTADO ---
-  // Em vez de um 'rating', guardamos um objeto de avaliações
-  // Ex: { 101: { rating: 4, comentario: "..." }, 102: { rating: 5 } }
+  const [dados, setDados] = useState(mockDadosDaViagem);
   const [avaliacoes, setAvaliacoes] = useState({});
 
-  // Função para atualizar a nota de um passageiro específico
+  useEffect(() => {
+    // No futuro, você pode buscar os dados da carona da API
+    // fetch(`${API_URL}/caronas/${caronaId}`).then(res => res.json()).then(data => {
+    //   // A API precisaria retornar os passageiros da carona
+    //   setDados(data);
+    // });
+    // Por enquanto, usamos o mock, mas com o ID correto.
+    setDados(prev => ({ ...prev, id: caronaId }));
+  }, [caronaId]);
+
+
   const handleRatingChange = (passengerId, rating) => {
     setAvaliacoes(prev => ({
       ...prev,
       [passengerId]: {
-        ...prev[passengerId], // Mantém o comentário, se já existir
+        ...prev[passengerId],
         rating: rating
       }
     }));
   };
 
-  // Função para atualizar o comentário de um passageiro específico
   const handleCommentChange = (passengerId, comentario) => {
     setAvaliacoes(prev => ({
       ...prev,
       [passengerId]: {
-        ...prev[passengerId], // Mantém a nota, se já existir
+        ...prev[passengerId],
         comentario: comentario
       }
     }));
   };
-  
-  const handleSubmit = (e) => {
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Verifica se todos os passageiros foram avaliados (pelo menos 1 estrela)
     const allRated = dados.passageiros.every(
       p => avaliacoes[p.id] && avaliacoes[p.id].rating > 0
     );
@@ -63,19 +68,39 @@ export default function PaginaAvaliacao() {
       return;
     }
 
-    // 1. Enviar os dados para o backend
-    //    (O backend receberá um objeto com as avaliações)
-    console.log("Enviando avaliações:", {
-      rideId: dados.id,
-      evaluations: avaliacoes
-    });
-    // fetch('/api/avaliar-passageiros', { method: 'POST', body: JSON.stringify(avaliacoes) })
+    try {
+      // 1. Enviar as avaliações dos passageiros (opcional, se tiver o endpoint)
+      console.log("Enviando avaliações:", {
+        rideId: dados.id,
+        evaluations: avaliacoes
+      });
+      // await fetch('/api/avaliar-passageiros', { method: 'POST', body: JSON.stringify(avaliacoes) });
 
-    // 2. Notificação de Confirmação
-    alert("Avaliações registradas com sucesso!");
+      // 2. Atualizar o status da carona para "Finalizada"
+      const response = await fetch(`${API_URL}/caronas/${caronaId}`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          status: 'Finalizada'
+        }),
+      });
 
-    // 3. Redirecionar o usuário
-    navigate('/rotas'); // Leva de volta para o histórico
+      if (!response.ok) {
+        throw new Error('Falha ao atualizar o status da carona.');
+      }
+
+      // 3. Notificação de Confirmação
+      alert("Avaliações registradas e carona finalizada com sucesso!");
+
+      // 4. Redirecionar o usuário
+      navigate('/minhascaronas');
+
+    } catch (error) {
+      console.error("Erro no processo de avaliação:", error);
+      alert("Ocorreu um erro. Tente novamente.");
+    }
   };
 
   return (
@@ -83,14 +108,13 @@ export default function PaginaAvaliacao() {
       <Sidebar />
       <main className="conteudo-avaliar">
         <form className="card-avaliacao-form-motorista" onSubmit={handleSubmit}>
-          
+
           <div className="avaliar-header-motorista">
             <h2>Como foi sua viagem?</h2>
             <h1>Avalie seus passageiros</h1>
             <p>Sua avaliação é importante para manter a comunidade segura.</p>
           </div>
-          
-          {/* --- LISTA DE PASSAGEIROS PARA AVALIAR --- */}
+
           <div className="lista-passageiros-avaliar">
             {dados.passageiros.map(passageiro => (
               <div key={passageiro.id} className="card-passageiro-avaliar">
@@ -98,14 +122,12 @@ export default function PaginaAvaliacao() {
                   <img src={passageiro.foto} alt={passageiro.nome} className="avaliar-foto-passageiro" />
                   <span className="nome-passageiro">{passageiro.nome}</span>
                 </div>
-                
-                {/* Estrelas para este passageiro */}
-                <StarRatingInput 
+
+                <StarRatingInput
                   rating={avaliacoes[passageiro.id]?.rating || 0}
                   setRating={(rating) => handleRatingChange(passageiro.id, rating)}
                 />
-                
-                {/* Comentário (opcional) para este passageiro */}
+
                 <textarea
                   className="comentario-passageiro"
                   placeholder={`Deixar um comentário para ${passageiro.nome} (opcional)`}
@@ -120,7 +142,7 @@ export default function PaginaAvaliacao() {
           <button type="submit" className="btn-enviar-avaliacao">
             Enviar Avaliações
           </button>
-          
+
         </form>
       </main>
       <BotaoAcessibilidade />

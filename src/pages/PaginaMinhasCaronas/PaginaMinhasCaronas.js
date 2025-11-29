@@ -31,9 +31,8 @@ const mapaDeFotos = {
 function StarRating({ rating = 0, locked = false, max = 5 }) {
   const stars = [];
   if (locked) {
-    for (let i = 0; i < max; i++) {
-      stars.push(<img key={i} src={IconCadeado} alt="Avaliação bloqueada" className="star-img locked"/>);
-    }
+    // Renderiza apenas um cadeado quando bloqueado
+    stars.push(<img key="locked" src={IconCadeado} alt="Avaliação bloqueada" className="star-img locked"/>);
   } else {
     for (let i = 0; i < max; i++) {
       const src = i < rating ? StarYellow : StarWhite;
@@ -138,9 +137,11 @@ function CardCaronaItem({ carona }) {
   const statusSafe = carona.status || 'agendada'; 
   const statusClass = `status-${statusSafe.toLowerCase()}`;
   
-  const handleCardClick = () => {
-    navigate(`/caronas/caronista`);
-  }; 
+  // Em PaginaMinhasCaronas.js
+const handleCardClick = () => {
+  // Agora enviamos o ID da carona para a próxima página saber qual abrir
+  navigate(`/caronas/caronista`, { state: { caronaId: carona.id } });
+};
 
   const fotoParaMostrar = (carona.fotoId && mapaDeFotos[carona.fotoId]) ? mapaDeFotos[carona.fotoId] : FotoUsuario1;
 

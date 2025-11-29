@@ -5,7 +5,6 @@ import StarRating from '../../components/StarRating/StarRating';
 import { useNavigate } from 'react-router-dom';
 import PerfilHomero from '../../assets/RotaMotorista/perfilhomero.png'; // NOVA IMAGEM
 import MapaRota from '../../assets/RotaMotorista/MAPA.png'; // NOVA IMAGEM (para o mock)
-import { Link } from 'react-router-dom';
 import CarroProgress from '../../assets/RotaMotorista/Sedan.png';
 import Wheelchair from '../../assets/RotaMotorista/Wheelchair.png';
 import Person from '../../assets/RotaMotorista/Person.png';
@@ -22,6 +21,10 @@ import BotaoAcessibilidade from '../../components/BotaoAcessibilidade/BotaoAcess
 
 export default function PaginaRotaMotorista() {
   const navigate = useNavigate();
+  // Este ID é para conectar esta página à página de avaliação.
+  // No futuro, ele viria da URL (useParams) ou de um estado global.
+  const caronaId = "94f7";
+
   const [passageiros, setPassageiros] = useState([
     { nome: "João Gomes", rating: 4, marcado: null, embarque: true },
     { nome: "Gustavo Levi", rating: 5, marcado: null, embarque: true },
@@ -38,14 +41,19 @@ export default function PaginaRotaMotorista() {
   const concluidos = passageiros.filter(p => p.marcado !== null).length;
   const progresso = (concluidos / passageiros.length) * 100;
 
+  const handleFinalizar = () => {
+    // Leva para a página de avaliação com o ID da carona
+    navigate(`/avaliar/${caronaId}`);
+  };
+
   return (
     <div className="rota-pagina">
       <Sidebar activePage="rotas" />
 
       {/* Conteúdo Principal */}
       <div className="rota-conteudo">
-        <button 
-            onClick={() => navigate('/rotas')} 
+        <button
+            onClick={() => navigate('/rotas')}
             className="botao-voltar"
         >
             &larr; Voltar para Minhas Rotas
@@ -58,7 +66,7 @@ export default function PaginaRotaMotorista() {
 
         {/* CONTAINER PRINCIPAL: PROGRESSO, MAPA E CARD LATERAL */}
         <main className="rota-principal-container">
-          
+
           {/* PROGRESSO E MAPA */}
           <div className="rota-mapa-progress-wrapper">
 
@@ -69,30 +77,30 @@ export default function PaginaRotaMotorista() {
               </p>
               <div className="status-badge">Ativa</div>
             </div>
-            
+
             <div className="rota-mapa-progress-wrapper card-branco">
 
               {/* Barra Roxo Claro */}
-              <div className="rota-progresso-bar-bg"> 
+              <div className="rota-progresso-bar-bg">
                 {/* Ícones de parada (simulados) */}
                 <div className="progresso-stop stop-1"></div>
                 <div className="progresso-stop stop-2"></div>
                 <div className="progresso-stop stop-3"></div>
                 <div className="progresso-stop stop-4"></div>
-                
+
                 {/* Barra de Progresso Real */}
                 <div className="progresso-fill" style={{ width: `${progresso}%` }}></div>
-                
+
                 {/* Ícone do Carro */}
-                <img 
-                  src={CarroProgress} 
-                  className="carro-progress-img" 
-                  style={{ left: `${progresso}%` }} 
+                <img
+                  src={CarroProgress}
+                  className="carro-progress-img"
+                  style={{ left: `${progresso}%` }}
                   alt="Carro de Progresso"
                 />
               </div>
             </div>
-            
+
 
             {/* MAPA (IMAGEM MOCK) */}
             <div className="rota-mapa card-branco">
@@ -123,7 +131,7 @@ export default function PaginaRotaMotorista() {
             </div>
 
               <p className="caronas-info">508 caronas feitas</p>
-              
+
               <div className="info-item-icon">
                 <img src={Person} alt="Vagas" />
                 <span>4 vagas</span>
@@ -175,9 +183,9 @@ export default function PaginaRotaMotorista() {
                 </div>
               ))}
             </div>
-            <Link to={"/rotas/motorista/avaliacao"} className="finalizar-btn">
-            Finalizar carona
-            </Link>
+            <button onClick={handleFinalizar} className="finalizar-btn">
+              Finalizar carona
+            </button>
           </div> {/* FIM .card-lateral-direita */}
 
         </main>

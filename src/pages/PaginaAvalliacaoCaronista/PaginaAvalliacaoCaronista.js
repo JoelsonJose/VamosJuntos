@@ -1,49 +1,82 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import Sidebar from '../../components/Sidebar/Sidebar';
 import BotaoAcessibilidade from '../../components/BotaoAcessibilidade/BotaoAcessibilidade';
 import StarRatingInput from '../../components/StarRatingInput/StarRatingInput';
-import './PaginaAvalliacaoCaronista.css'; // Vamos criar este CSS
+import './PaginaAvalliacaoCaronista.css'; 
+import { API_URL } from '../../Config'; // Importando para conectar com o banco
 
-// Exemplo de dados (no app real, você buscaria isso usando o ID da carona)
+// Exemplo de dados (Mantive seu mock visual)
 const mockDadosCarona = {
   id: 123,
-  tipo: 'motorista', // 'motorista' ou 'caronista'
+  tipo: 'motorista', 
   nome: "Lucas Ximenes",
-  foto: "https://placehold.co/100x100/f0e6ff/a100ff?text=LX" // Use a foto real
+  foto: "https://placehold.co/100x100/f0e6ff/a100ff?text=LX" 
 };
 
-
-export default function PaginaAvaliacao() {
+export default function PaginaAvaliacaoCaronista() {
   const navigate = useNavigate();
-  // const { rideId } = useParams(); // Pega o ID da URL (ex: /avaliar/123)
+  const location = useLocation();
+  
+  // Pega o ID que a gente mandou da tela de Rota
+  const caronaId = location.state?.caronaId;
 
   // Estados para o formulário
   const [rating, setRating] = useState(0);
   const [comentario, setComentario] = useState("");
+  
+  // Estado para armazenar os dados reais do banco (para não perder nada ao atualizar)
+  const [dadosReais, setDadosReais] = useState(null);
 
-  const dados = mockDadosCarona; // Usando dados de exemplo
+  const dados = mockDadosCarona; // Mantém o visual fixo como você pediu
 
-  const handleSubmit = (e) => {
+  // 1. Busca os dados reais da carona assim que a tela abre
+  useEffect(() => {
+    if (caronaId) {
+      fetch(`${API_URL}/caronas/${caronaId}`)
+        .then(res => res.json())
+        .then(data => setDadosReais(data))
+        .catch(err => console.error("Erro ao buscar dados reais:", err));
+    }
+  }, [caronaId]);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (rating === 0) {
       alert("Por favor, selecione pelo menos uma estrela.");
       return;
     }
 
-    // 1. Enviar os dados para o backend
-    console.log({
-      rideId: dados.id,
-      rating: rating,
-      comment: comentario,
-    });
-    // fetch('/api/avaliar', { method: 'POST', body: ... })
+    try {
+      // Se temos o ID e os dados reais, atualizamos no banco
+      if (caronaId && dadosReais) {
+        
+        const caronaAtualizada = {
+          ...dadosReais, // Mantém origem, destino, horário, etc.
+          status: "Finalizada", // <--- A MÁGICA: Muda a cor da tag para VERDE
+          rating: rating,       // Salva as estrelas
+          locked: false,        // Destrava as estrelas na visualização
+          comentario: comentario // (Opcional) Salva o comentário
+        };
 
-    // 2. Notificação de Confirmação
-    alert("Sua avaliação foi registrada.");
+        // Envia para o MockAPI
+        await fetch(`${API_URL}/caronas/${caronaId}`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(caronaAtualizada)
+        });
+      }
 
-    // 3. Redirecionar o usuário
-    navigate('/caronas'); // Leva de volta para o histórico
+      // 2. Notificação de Confirmação
+      alert("Sua avaliação foi registrada e a viagem finalizada!");
+
+      // 3. Redirecionar o usuário
+      navigate('/caronas'); // Leva de volta para o histórico
+
+    } catch (error) {
+      console.error("Erro ao avaliar:", error);
+      alert("Erro de conexão ao salvar avaliação.");
+    }
   };
 
   return (
