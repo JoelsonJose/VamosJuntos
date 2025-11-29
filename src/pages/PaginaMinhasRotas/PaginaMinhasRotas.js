@@ -19,13 +19,11 @@ export default function PaginaMinhasRotas() {
   const [modalSolicitacoesAberto, setModalSolicitacoesAberto] = useState(false);
   const [rotaSelecionada, setRotaSelecionada] = useState(null); 
 
-  // BUSCAR DADOS DO BACK-END (JSON SERVER)
   useEffect(() => {
     fetch(`${API_URL}/rotas`) 
       .then(response => response.json())
       .then(data => {
         const apenasMinhas = data.filter(rota => rota.dono === true);
-        
         setMinhasRotas(apenasMinhas);
       })
       .catch(error => console.error("Erro ao buscar rotas:", error));
@@ -41,24 +39,41 @@ export default function PaginaMinhasRotas() {
     setRotaParaExcluir(null); 
   };
 
-  // EXCLUIR ROTA
   const handleConfirmarExclusao = async () => {
     if (rotaParaExcluir) {
       try {
-        // Deleta do Banco de Dados Fake
         await fetch(`${API_URL}/rotas/${rotaParaExcluir.id}`, {
           method: 'DELETE',
         });
-        
-        // Remove visualmente da lista sem precisar recarregar a página
         setMinhasRotas(rotasAtuais => 
           rotasAtuais.filter(rota => rota.id !== rotaParaExcluir.id)
         );
         handleFecharModal();
       } catch (error) {
         console.error("Erro ao excluir:", error);
-        alert("Erro ao excluir rota. Verifique se o servidor está rodando.");
+        alert("Erro ao excluir rota.");
       }
+    }
+  };
+
+  const toggleRotaAtiva = async (rotaId, novoEstado) => {
+    try {
+      const response = await fetch(`${API_URL}/rotas/${rotaId}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ativa: novoEstado }),
+      });
+
+      if (!response.ok) throw new Error(`Falha ao ${novoEstado ? 'ativar' : 'desativar'} a rota.`);
+
+      setMinhasRotas(rotasAtuais =>
+        rotasAtuais.map(rota =>
+          rota.id === rotaId ? { ...rota, ativa: novoEstado } : rota
+        )
+      );
+    } catch (error) {
+      console.error("Erro ao alterar status da rota:", error);
+      alert("Erro ao alterar status da rota.");
     }
   };
 
@@ -82,6 +97,7 @@ export default function PaginaMinhasRotas() {
           rotas={minhasRotas} 
           onExcluir={handleAbrirModal} 
           onVerSolicitacoes={handleAbrirModalSolicitacoes}
+          onToggleAtiva={toggleRotaAtiva}
         />
       </main>
       <BotaoAcessibilidade />
@@ -117,7 +133,7 @@ function HeaderRotas() {
   );
 }
 
-function ListaRotas({ rotas, onExcluir, onVerSolicitacoes }) {
+function ListaRotas({ rotas, onExcluir, onVerSolicitacoes, onToggleAtiva }) {
   if (rotas.length === 0) {
     return (
       <div className="lista-rotas-container">
@@ -135,31 +151,35 @@ function ListaRotas({ rotas, onExcluir, onVerSolicitacoes }) {
           key={rota.id} 
           rota={rota} 
           onExcluir={onExcluir}
-          onVerSolicitacoes={onVerSolicitacoes}  
+          onVerSolicitacoes={onVerSolicitacoes}
+          onToggleAtiva={onToggleAtiva}
         />
       ))}
     </div>
   );
 }
 
-function CardRota({ rota, onExcluir, onVerSolicitacoes }) {
+function CardRota({ rota, onExcluir, onVerSolicitacoes, onToggleAtiva }) {
   const vagasDisponiveis = rota.vagasTotal - rota.vagasOcupadas;
-
-  // Formata os dias: se for array junta com vírgula, se for string mostra direto
   const diasFormatados = Array.isArray(rota.dias) ? rota.dias.join(', ') : rota.dias;
+
+  const handleIniciarClick = (e) => {
+    if (!rota.ativa) {
+      e.preventDefault();
+      alert("Você não pode iniciar uma rota desativada.");
+    }
+  };
 
   return (
     <article className="card-rota">
       <div className="card-rota-header">
         <h3 className="rota-titulo">
           {rota.origem} <span>&rarr;</span> {rota.destino}
-
-          <span className={`status-tag ${rota.ativa ? 'ativa' : 'inativa'}`}>
-            {rota.ativa ? 'Ativa' : 'Inativa'}
+          <span className={`status-tag ${rota.ativa ? 'ativa' : 'desativada'}`}>
+            {rota.ativa ? 'Ativa' : 'Desativada'}
           </span>
         </h3>
         <div className="header-actions">
-          {/* Ajuste o link abaixo se tiver uma página de edição */}
           <Link to={`/rotas/editar/${rota.id}`} className="btn-editar">
             Editar
           </Link>
@@ -182,7 +202,6 @@ function CardRota({ rota, onExcluir, onVerSolicitacoes }) {
           <img src={IconRelogio} alt="Horário" className="info-icon" />
           <div className="info-text">
             <strong>{rota.horario}</strong>
-            {/* Aqui usamos a variável formatada para evitar erro com Arrays */}
             <span style={{ fontSize: '0.85rem' }}>{diasFormatados}</span>
           </div>
         </div>
@@ -213,10 +232,28 @@ function CardRota({ rota, onExcluir, onVerSolicitacoes }) {
           </button>
         </div>
         <div className="footer-actions">
-          <Link to={"/rotas/motorista"} className="btn-iniciar-viagem">
+          <Link 
+            to={"/rotas/motorista"} 
+            className={`btn-iniciar-viagem ${!rota.ativa ? 'disabled' : ''}`}
+            onClick={handleIniciarClick}
+          >
             Iniciar Viagem
           </Link>
-          <button className="btn-encerrar-vagas">Encerrar vagas</button>
+          {rota.ativa ? (
+            <button 
+              className="btn-encerrar-vagas"
+              onClick={() => onToggleAtiva(rota.id, false)}
+            >
+              Desativar rota
+            </button>
+          ) : (
+            <button 
+              className="btn-ativar-rota"
+              onClick={() => onToggleAtiva(rota.id, true)}
+            >
+              Ativar rota
+            </button>
+          )}
         </div>
       </div>
     </article>

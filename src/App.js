@@ -33,7 +33,7 @@ function App() {
       <Route path= "/caronas" element= {<PaginaMinhasCaronas />} />
       <Route path= "/avaliacoes" element= {<PaginaAvaliacoes />} />
       <Route path= "/rotas/motorista" element= {<PaginaRotaMotorista/>} />
-      <Route path= "/rotas/motorista/avaliacao" element= {<PaginaAvaliacao/>} />
+      <Route path= "/avaliar/:caronaId" element= {<PaginaAvaliacao/>} />
       <Route path= "/caronas/caronista" element= {<PaginaRotaCaronista/>} />
       <Route path= "/caronas/caronista/avaliacao" element= {<PaginaAvaliacaoCaronista/>} />
       <Route path= "/buscar/conforimarcarona" element= {<PaginaConfirmarCarona/>} />

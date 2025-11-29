@@ -38,31 +38,31 @@ export default function PaginaBuscar() {
     fetch(`${API_URL}/rotas`) 
       .then(response => response.json())
       .then(data => {
-        // Transforma os dados do banco para o visual do seu design
-        const dadosFormatados = data.map(rotaDoBanco => {
-          
-          const total = Number(rotaDoBanco.vagasTotal) || 4;
-          const ocupadas = Number(rotaDoBanco.vagasOcupadas) || 0;
-          const livres = total - ocupadas;
-          
-          // Lógica para manter suas cores (classes CSS)
-          let classeCss = "vagas1"; 
-          if (livres >= 3) classeCss = "vagas4"; 
-          else if (livres === 2) classeCss = "vagas3"; 
-          else if (livres === 1) classeCss = "vagas2";
-          else if (livres <= 0) classeCss = "vagas1"; 
+        // Filtra apenas rotas ativas e depois formata
+        const dadosFormatados = data
+          .filter(rotaDoBanco => rotaDoBanco.ativa)
+          .map(rotaDoBanco => {
+            const total = Number(rotaDoBanco.vagasTotal) || 4;
+            const ocupadas = Number(rotaDoBanco.vagasOcupadas) || 0;
+            const livres = total - ocupadas;
+            
+            let classeCss = "vagas1"; 
+            if (livres >= 3) classeCss = "vagas4"; 
+            else if (livres === 2) classeCss = "vagas3"; 
+            else if (livres === 1) classeCss = "vagas2";
+            else if (livres <= 0) classeCss = "vagas1"; 
 
-          return {
-            id: rotaDoBanco.id, 
-            nome: rotaDoBanco.motorista || "Motorista Parceiro", 
-            rating: Number(rotaDoBanco.notaMinima) || 5,
-            rota: `${rotaDoBanco.origem} → ${rotaDoBanco.destino}`, 
-            vagas: `${ocupadas}/${total}`,
-            classe: classeCss, 
-            origemReal: rotaDoBanco.origem,
-            destinoReal: rotaDoBanco.destino
-          };
-        });
+            return {
+              id: rotaDoBanco.id, 
+              nome: rotaDoBanco.motorista || "Motorista Parceiro", 
+              rating: Number(rotaDoBanco.notaMinima) || 5,
+              rota: `${rotaDoBanco.origem} → ${rotaDoBanco.destino}`, 
+              vagas: `${ocupadas}/${total}`,
+              classe: classeCss, 
+              origemReal: rotaDoBanco.origem,
+              destinoReal: rotaDoBanco.destino
+            };
+          });
         setCaronas(dadosFormatados);
       })
       .catch(err => console.error("Erro ao buscar:", err));

@@ -112,7 +112,7 @@
 
 .status-tag.status-agendada { background-color: #FEF3C7; color: #9A3412; }
 .status-tag.status-ativa { background-color: #D1FAE5; color: #065F46; }
-.status-tag.status-finalizada { background-color: #DBEAFE; color: #1E40AF; }
+.status-tag.status-finalizada { background-color: #D1FAE5; color: #065F46; }
 .status-tag.status-cancelada { background-color: #FEE2E2; color: #991B1B; }
 
 .rota-horario {

@@ -32,7 +32,7 @@ export default function PaginaConfirmarCarona() {
     setSelectedPoint(prev => (prev === id ? null : id));
   };
 
-  // --- FUNÇÃO PARA SALVAR NO BANCO ---
+  // --- FUNÇÃO PARA SALVAR NO BANCO (COM PROTEÇÃO DE DUPLICIDADE) ---
   const handleConfirmar = async () => {
     // Validação simples: obriga escolher um ponto
     if (!selectedPoint) {
@@ -40,20 +40,38 @@ export default function PaginaConfirmarCarona() {
         return;
     }
 
-    // Dados fixos do Lucas Ximenes (baseado no seu layout)
-    const novaCarona = {
-        motorista: "Lucas Ximenes",
-        origem: "Jardim São Paulo",
-        destino: "Av. Alfredo Lisboa 810",
-        horario: "08:00",
-        status: "Agendada",
-        fotoId: "usuario2", // ID da foto do Lucas no mapa da outra página
-        rating: 0,
-        locked: false,
-        valor: "5.00"
-    };
-
     try {
+        // 1. Antes de salvar, buscamos o que já existe para não duplicar
+        const checkResponse = await fetch(`${API_URL}/caronas`);
+        const minhasCaronas = await checkResponse.json();
+
+        // Verifica se já existe carona ativa deste motorista neste horário
+        const jaExiste = minhasCaronas.some(carona => 
+            carona.motorista === "Lucas Ximenes" && 
+            carona.horario === "08:00" &&
+            carona.status !== "Cancelada"
+        );
+
+        if (jaExiste) {
+            alert("Você já confirmou esta viagem anteriormente!");
+            navigate('/caronas'); // Apenas redireciona sem criar nova
+            return;
+        }
+
+        // 2. Se não existe, cria o objeto da nova carona
+        const novaCarona = {
+            motorista: "Lucas Ximenes",
+            origem: "Jardim São Paulo",
+            destino: "Av. Alfredo Lisboa 810",
+            horario: "08:00",
+            status: "Agendada",
+            fotoId: "usuario2", // ID da foto do Lucas no mapa da outra página
+            rating: 3,
+            locked: false,
+            valor: "5.00"
+        };
+
+        // 3. Salva no banco
         const response = await fetch(`${API_URL}/caronas`, {
             method: 'POST',
             headers: {
@@ -167,7 +185,7 @@ export default function PaginaConfirmarCarona() {
               <button className="btn-voltar" onClick={() => navigate('/buscar')}>
                     Voltar
               </button>
-              {/* AQUI ESTÁ A MUDANÇA: Chama a função que salva de verdade */}
+              {/* Chama a nova função protegida */}
               <button className="btn-confirmar" onClick={handleConfirmar}>
                     Confirmar Carona
               </button>

@@ -1,9 +1,13 @@
+import React, { useState, useEffect } from 'react';
 import './PaginaRotaCaronista.css';
 import Sidebar from '../../components/Sidebar/Sidebar';
 import StarRating from '../../components/StarRating/StarRating';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { API_URL } from '../../Config'; // Importando API para funcionar de verdade
+
+// --- IMAGENS (Mantidas) ---
 import PerfilLucas from '../../assets/Fotos/usuario2.png';
 import MapaRota from '../../assets/RotaCaronista/MAPAcaronista.png'; 
-import { Link } from 'react-router-dom';
 import ClockCinza from '../../assets/RotaCaronista/Clockcinza.png';
 import LocationCinza from '../../assets/RotaCaronista/Locationcinza.png';
 import MapPinpoint from '../../assets/RotaMotorista/Map Pinpoint.png';
@@ -11,21 +15,103 @@ import Wheelchair from '../../assets/RotaMotorista/Wheelchair.png';
 import Person from '../../assets/RotaMotorista/Person.png';
 import CarModelIcon from '../../assets/RotaMotorista/Koenigsegg One.png';
 import BotaoAcessibilidade from '../../components/BotaoAcessibilidade/BotaoAcessibilidade';
-import { useNavigate } from 'react-router-dom';
 
+// Fotos extras para fallback
+import FotoUsuario1 from '../../assets/Fotos/usuario1.png'; 
+import FotoUsuario3 from '../../assets/Fotos/usuario3.png'; 
+import FotoUsuario4 from '../../assets/Fotos/usuario4.png'; 
+import FotoUsuario5 from '../../assets/Fotos/usuario5.png'; 
 
+const mapaDeFotos = {
+  "usuario1": FotoUsuario1,
+  "usuario2": PerfilLucas, // Lucas
+  "usuario3": FotoUsuario3,
+  "usuario4": FotoUsuario4,
+  "usuario5": FotoUsuario5
+};
 
 export default function PaginaRotaCaronista() {
   const navigate = useNavigate();
+  const location = useLocation();
+  
+  // Pega o ID que veio da tela anterior. Se não tiver, tenta pegar o primeiro do banco (fallback)
+  const caronaId = location.state?.caronaId;
+  const [carona, setCarona] = useState(null);
+
+  // 1. BUSCAR DADOS DA CARONA ATUAL
+  useEffect(() => {
+    const fetchCarona = async () => {
+      try {
+        let url = `${API_URL}/caronas`;
+        if (caronaId) url += `/${caronaId}`;
+        
+        const response = await fetch(url);
+        const data = await response.json();
+        
+        // Se veio uma lista (caso não tenha ID), pega o último item criado (lógica de fallback)
+        if (Array.isArray(data)) {
+            setCarona(data[data.length - 1]); 
+        } else {
+            setCarona(data);
+        }
+      } catch (error) {
+        console.error("Erro ao buscar detalhes:", error);
+      }
+    };
+    fetchCarona();
+  }, [caronaId]);
+
+  // Se ainda estiver carregando
+  if (!carona) return <div style={{padding: 20}}>Carregando detalhes da viagem...</div>;
+
+  // --- LÓGICA DOS BOTÕES ---
+
+  // 2. CANCELAR (Atualiza status para Cancelada)
+  const handleCancelar = async () => {
+    if (window.confirm("Tem certeza que deseja cancelar esta viagem?")) {
+      try {
+        await fetch(`${API_URL}/caronas/${carona.id}`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ ...carona, status: "Cancelada", locked: true, rating: 0 })
+        });
+        alert("Viagem cancelada.");
+        navigate('/caronas'); // Volta para a lista
+      } catch (error) {
+        alert("Erro ao cancelar.");
+      }
+    }
+  };
+
+  // 3. FINALIZAR (Vai para Avaliação)
+  const handleFinalizar = () => {
+    navigate('/caronas/caronista/avaliacao', { state: { caronaId: carona.id } });
+  };
+
+  // 4. EXCLUIR (Remove do banco)
+  const handleExcluir = async () => {
+    if (window.confirm("Deseja apagar esta viagem do histórico?")) {
+      try {
+        await fetch(`${API_URL}/caronas/${carona.id}`, { method: 'DELETE' });
+        alert("Viagem excluída.");
+        navigate('/caronas');
+      } catch (error) {
+        alert("Erro ao excluir.");
+      }
+    }
+  };
+
+  // Dados visuais
+  const fotoMotorista = mapaDeFotos[carona.fotoId] || PerfilLucas;
+  const status = carona.status || "Agendada";
+  const isFinalizadaOrCancelada = status === "Finalizada" || status === "Cancelada";
+
   return (
     <div className="rota-pagina">
       <Sidebar activePage="caronas" />
 
       <div className="rota-conteudo">
-        <button 
-            onClick={() => navigate('/caronas')} 
-            className="botao-voltar"
-        >
+        <button onClick={() => navigate('/caronas')} className="botao-voltar">
             &larr; Voltar para Minhas Caronas
         </button>
         <header className="rota-titulo-header">
@@ -35,42 +121,38 @@ export default function PaginaRotaCaronista() {
 
         <main className="rota-principal-container">
 
-          {/* Coluna esquerda: card com destino + pequena linha de infos + mapa */}
+          {/* Coluna esquerda */}
           <div className="rota-mapa-progress-wrapper">
-
-            {/* Cabeçalho do destino (igual protótipo) */}
             <div className="rota-progress-header">
               <p className="rota-descricao">
-                Jardim São Paulo → Av. Alfredo Lisboa 810, Empresa
+                {carona.origem} → {carona.destino}
               </p>
-              <div className="status-badge">Ativa</div>
+              {/* Badge Dinâmica baseada no status */}
+              <div className={`status-badge status-${status.toLowerCase()}`}>{status}</div>
             </div>
 
-            {/* Linha de infos acima do mapa (substitui barra de progresso) */}
             <div className="info-compacta card-branco">
               <div className="info-compacta-left">
                 <img src={ClockCinza} alt="Relógio" className="info-icon-small" />
-                <span className="info-compacta-text">8:00</span>
+                <span className="info-compacta-text">{carona.horario}</span>
                 <img src={LocationCinza} alt="Local" className="info-icon-small location" />
-                <span className="info-compacta-text">1ª Tv. Eng. Abdias de Carvalho - Curado · Ponto de embarque</span>
+                <span className="info-compacta-text">Ponto de embarque: {carona.origem}</span>
               </div>
             </div>
 
-            {/* MAPA (mock) */}
             <div className="rota-mapa card-branco">
               <img src={MapaRota} alt="Mapa da Rota" className="mapa-img" />
             </div>
           </div>
 
-          {/* Coluna direita: card do motorista */}
+          {/* Coluna direita */}
           <div className="card-lateral-direita">
-
             <div className="motorista-header-card">
               <div className="motorista-info-perfil">
-                <img src={PerfilLucas} alt="Foto do Motorista" className="perfil-img" />
+                <img src={fotoMotorista} alt="Foto do Motorista" className="perfil-img" />
                 <div className="motorista-detalhes">
-                  <strong className="nome-motorista">Lucas Ximenes</strong>
-                  <StarRating rating={5} />
+                  <strong className="nome-motorista">{carona.motorista || "Motorista"}</strong>
+                  <StarRating rating={carona.rating || 0} />
                 </div>
               </div>
             </div>
@@ -80,9 +162,7 @@ export default function PaginaRotaCaronista() {
                 <img src={CarModelIcon} alt="Modelo do Carro" className="carro-modelo-icon" />
                 Honda civic 2023
               </div>
-
               <p className="caronas-info">546 caronas feitas</p>
-
               <div className="info-item-icon">
                 <img src={Person} alt="Vagas" />
                 <span>4 vagas</span>
@@ -95,18 +175,14 @@ export default function PaginaRotaCaronista() {
                 <img src={MapPinpoint} alt="Distância" />
                 <span>1,8 km de você - 6 minutos</span>
               </div>
-
-              {/* PLACA: badge em CSS (100% criado por CSS) */}
               <div className="placa-row">
                 <strong>PLACA:</strong>
                 <div className="placa-badge">BRA2E19</div>
               </div>
-
             </div>
 
             <hr className="divider-lista"/>
 
-            {/* Comentários estáticos (dois) */}
             <div className="comentarios-lista">
               <div className="comentario-box">
                 <p className="comentario-text">"Ótimo motorista, dirigibilidade segura e confiante."</p>
@@ -116,17 +192,40 @@ export default function PaginaRotaCaronista() {
               </div>
             </div>
 
-            <Link to={"/caronas/caronista/avaliacao"} className="cancelar-btn">
-              Finalizar carona
-            </Link>
+            {/* --- BOTÕES COM LÓGICA DE TROCA --- */}
+            <div className="botoes-acao-container" style={{display: 'flex', flexDirection: 'column', gap: '10px', marginTop: '20px'}}>
+              
+              {isFinalizadaOrCancelada ? (
+                // Se já acabou ou cancelou, mostra EXCLUIR
+                <button 
+                    onClick={handleExcluir} 
+                    className="cancelar-btn"
+                >
+                  Excluir Histórico
+                </button>
+              ) : (
+                // Se está ativa/agendada, mostra FINALIZAR e CANCELAR
+                <>
+                  <button 
+                    onClick={handleFinalizar} 
+                    className="cancelar-btn"
+                  >
+                    Finalizar carona
+                  </button>
 
-            <Link to={"/caronas"} className="cancelar-btn">
-              Cancelar viagem
-            </Link>
+                  <button 
+                    onClick={handleCancelar} 
+                    className="cancelar-btn"
+                  >
+                    Cancelar viagem
+                  </button>
+                </>
+              )}
+            
+            </div>
 
           </div>
         </main>
-
         <BotaoAcessibilidade/>
       </div>
     </div>

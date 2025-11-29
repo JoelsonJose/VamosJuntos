@@ -57,14 +57,20 @@
   line-height: 1.4;
 }
 .status-badge {
-  background: #6ab04c;
-  color: white;
+  font-size: 0.75rem; 
+  font-weight: 600;
   padding: 4px 12px;
-  border-radius: 20px;
-  font-size: 12px;
-  font-weight: bold;
-  white-space: nowrap;
+  border-radius: 9999px;
+  text-transform: capitalize;
+  flex-shrink: 0; 
+  white-space: nowrap; 
 }
+
+.status-badge.status-agendada { background-color: #FEF3C7; color: #9A3412; }
+.status-badge.status-ativa { background-color: #D1FAE5; color: #065F46; }
+.status-badge.status-finalizada { background-color: #D1FAE5; color: #065F46; }
+.status-badge.status-cancelada { background-color: #FEE2E2; color: #991B1B; }
+
 
 /* Info compacta */
 .info-compacta {

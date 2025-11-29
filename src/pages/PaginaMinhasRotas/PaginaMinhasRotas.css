@@ -145,9 +145,9 @@
   background-color: var(--cor-verde-tag);
   color: var(--cor-verde-tag-texto);
 }
-.status-tag.inativa {
-  background-color: var(--cor-fundo-card-alt);
-  color: var(--cor-texto-secundario);
+.status-tag.desativada {
+  background-color: #FEE2E2;
+  color: #DC2626;
 }
 
 .btn-editar, .btn-excluir{
@@ -250,7 +250,7 @@
   align-items: center;
 }
 
-.btn-encerrar-vagas, .btn-iniciar-viagem {
+.btn-encerrar-vagas, .btn-iniciar-viagem, .btn-ativar-rota {
  border: none;
  border-radius: 10px;
  padding: 10px 16px;
@@ -262,7 +262,14 @@
 }
 
 .btn-encerrar-vagas { background-color: #FEE2E2; color: #DC2626; }
+.btn-ativar-rota { background-color: #D1FAE5; color: #065F46; }
 .btn-iniciar-viagem { background-color: #2563EB; color: #fff; }
+.btn-iniciar-viagem.disabled {
+  background-color: #D1D5DB; /* cinza */
+  color: #6B7280;
+  cursor: not-allowed;
+  pointer-events: none;
+}
 
 /* --- CORREÇÃO MODO ESCURO (Minhas Rotas) --- */
 body.modo-escuro .rota-pontos-link,
