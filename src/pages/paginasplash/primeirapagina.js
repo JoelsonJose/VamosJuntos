@@ -2,7 +2,7 @@ import '../../index.css'
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './primeirapagina.css';
-import logo from '../../assets/Somente_Logo_VJ 1.png';  
+import logo from '../../assets/imagem vamosjuntos.png';  
 
 const PrimeiraPagina = () => {
   const [isFadingOut, setIsFadingOut] = useState(false);
