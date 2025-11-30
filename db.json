@@ -88,15 +88,15 @@
   ],
   "caronas": [
     {
-      "id": "c07e",
+      "id": "af85",
       "motorista": "Lucas Ximenes",
       "origem": "Jardim São Paulo",
       "destino": "Av. Alfredo Lisboa 810",
       "horario": "08:00",
-      "status": "Cancelada",
+      "status": "Agendada",
       "fotoId": "usuario2",
-      "rating": 0,
-      "locked": true,
+      "rating": 3,
+      "locked": false,
       "valor": "5.00"
     }
   ]
