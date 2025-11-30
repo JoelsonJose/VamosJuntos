@@ -47,7 +47,7 @@ body {
 
 .filtros-inputs {
   display: grid;
-  grid-template-columns: 1fr 1fr 220px 220px auto;
+  grid-template-columns: 1fr 1fr 180px 180px auto auto;
   gap: 10px;
   align-items: center;
 }
@@ -68,6 +68,7 @@ body {
   padding: 10px 18px;
   border-radius: 8px;
   cursor: pointer;
+  transition: all 0.2s ease;
 }
 
 .btn-buscar:hover{
@@ -75,6 +76,25 @@ body {
   transform: translateY(-2px);
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
+
+.btn-limpar {
+  background-color: #f1f1f1;
+  color: #555;
+  border: 1px solid #ccc;
+  padding: 10px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-limpar:hover {
+  background-color: #e0e0e0;
+  border-color: #bbb;
+}
+.btn-limpar:active {
+  transform: translateY(1px);
+}
+
 
 /* RESULTADOS + DICAS */
 .conteudo-busca {

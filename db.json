@@ -4,30 +4,31 @@
       "id": "1",
       "motorista": "João Silva",
       "origem": "Armazém 12",
-      "destino": "Boa Viagem",
-      "horario": "18:30",
+      "destino": "Bairro do Recife",
+      "horario": "08:00",
       "dias": [
         "Segunda",
-        "Quarta"
+        "Quarta",
+        "Sexta"
       ],
       "vagasTotal": 4,
-      "vagasOcupadas": 3,
+      "vagasOcupadas": 4,
       "notaMinima": 4,
-      "valor": "5.00",
+      "valor": "6.00",
       "ativa": true
     },
     {
       "id": "2",
       "motorista": "Lucas Ximenes",
       "origem": "Armazém 9",
-      "destino": "Olinda (Carmo)",
-      "horario": "17:00",
+      "destino": "Carmo, Olinda",
+      "horario": "12:00",
       "dias": [
         "Terça",
         "Quinta"
       ],
-      "vagasTotal": 4,
-      "vagasOcupadas": 1,
+      "vagasTotal": 3,
+      "vagasOcupadas": 2,
       "notaMinima": 3,
       "valor": "Gratuito",
       "ativa": true
@@ -37,49 +38,141 @@
       "motorista": "Pedro Lima",
       "origem": "Jardim São Paulo",
       "destino": "Armazém 9",
-      "horario": "18:15",
+      "horario": "18:00",
       "dias": [
+        "Segunda",
+        "Terça",
+        "Quarta",
+        "Quinta",
         "Sexta"
       ],
-      "vagasTotal": 4,
-      "vagasOcupadas": 4,
+      "vagasTotal": 2,
+      "vagasOcupadas": 2,
       "notaMinima": 5,
-      "valor": "10.00",
-      "ativa": true
+      "valor": "8.00",
+      "ativa": false
     },
     {
       "id": "4",
       "motorista": "Carla Menezes",
-      "origem": "Várzea",
-      "destino": "Armazém 12",
-      "horario": "19:00",
+      "origem": "Armazém 12",
+      "destino": "Cidade Universitária",
+      "horario": "08:00",
       "dias": [
-        "Segunda"
+        "Segunda",
+        "Quarta"
       ],
       "vagasTotal": 4,
-      "vagasOcupadas": 2,
-      "notaMinima": 2,
+      "vagasOcupadas": 4,
+      "notaMinima": 4,
+      "valor": "3.00",
+      "ativa": true
+    },
+    {
+      "id": "5",
+      "motorista": "Mariana Costa",
+      "origem": "Graças",
+      "destino": "Armazém 12",
+      "horario": "12:00",
+      "dias": [
+        "Segunda",
+        "Terça",
+        "Quarta",
+        "Quinta",
+        "Sexta"
+      ],
+      "vagasTotal": 3,
+      "vagasOcupadas": 0,
+      "notaMinima": 4.5,
       "valor": "5.00",
       "ativa": true
     },
     {
-      "id": "1b52",
-      "origem": "Boa vista",
-      "destino": "Armazem 12",
-      "pontos": "Atacado dos presentes, Praça do diário, Porto digital",
-      "horario": "07:30",
+      "id": "6",
+      "motorista": "Ricardo Souza",
+      "origem": "Armazém 9",
+      "destino": "Bairro do Recife",
+      "horario": "08:00",
       "dias": [
-        "Segunda-feira",
-        "Quarta-feira",
-        "Terça-feira",
-        "Quinta-feira",
-        "Sexta-feira"
+        "Terça",
+        "Quinta"
+      ],
+      "vagasTotal": 2,
+      "vagasOcupadas": 1,
+      "notaMinima": 4,
+      "valor": "7.00",
+      "ativa": true
+    },
+    {
+      "id": "7",
+      "motorista": "Beatriz Lima",
+      "origem": "Santo Amaro",
+      "destino": "Armazém 9",
+      "horario": "18:00",
+      "dias": [
+        "Segunda",
+        "Sexta"
+      ],
+      "vagasTotal": 4,
+      "vagasOcupadas": 3,
+      "notaMinima": 4,
+      "valor": "10.00",
+      "ativa": true
+    },
+    {
+      "id": "8",
+      "motorista": "Fernando Dias",
+      "origem": "Armazém 12",
+      "destino": "Cidade Universitária",
+      "horario": "12:00",
+      "dias": [
+        "Quarta"
+      ],
+      "vagasTotal": 3,
+      "vagasOcupadas": 1,
+      "notaMinima": 3,
+      "valor": "Gratuito",
+      "ativa": true
+    },
+    {
+      "id": "1b52",
+      "origem": "Boa Vista",
+      "destino": "Armazém 12",
+      "pontos": "Atacado dos presentes, Praça do diário",
+      "horario": "08:00",
+      "dias": [
+        "Segunda",
+        "Quarta",
+        "Sexta"
+      ],
+      "observacoes": "Carro com ar-condicionado",
+      "vagasTotal": 3,
+      "vagasOcupadas": 1,
+      "valor": "7.50",
+      "notaMinima": "4",
+      "ativa": true,
+      "novasSolicitacoes": 2,
+      "dono": true,
+      "motorista": "Você"
+    },
+    {
+      "id": "c7a3",
+      "origem": "Armazém 9",
+      "destino": "Centro do Recife",
+      "pontos": "Shopping Recife, Av. Agamenon Magalhães",
+      "horario": "18:00",
+      "dias": [
+        "Segunda",
+        "Terça",
+        "Quarta",
+        "Quinta",
+        "Sexta"
       ],
       "observacoes": "",
-      "vagasTotal": 1,
+      "vagasTotal": 4,
       "vagasOcupadas": 0,
-      "valor": "Gratuito",
-      "notaMinima": "5",
+      "valor": "12.00",
+      "notaMinima": "3",
       "ativa": true,
       "novasSolicitacoes": 0,
       "dono": true,
@@ -88,7 +181,7 @@
   ],
   "caronas": [
     {
-      "id": "af85",
+      "id": "90d7",
       "motorista": "Lucas Ximenes",
       "origem": "Jardim São Paulo",
       "destino": "Av. Alfredo Lisboa 810",
