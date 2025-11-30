@@ -1,0 +1,88 @@
+.esqueci-senha-background {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: var(--cor-fundo-pagina);
+    padding: 2.5rem 1.25rem;
+  }
+  
+  .esqueci-senha-container {
+    background-color: #FFFFFF;
+    border-radius: 1.5rem;
+    box-shadow: 0 0.625rem 1.875rem rgba(0, 0, 0, 0.1);
+    padding: 2.5rem;
+    width: 100%;
+    max-width: 31.25rem;
+    text-align: center;
+  }
+  
+  .esqueci-senha-logo {
+    width: 2.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  .esqueci-senha-title {
+    font-size: 1.75rem;
+    font-weight: 700;
+    font-family: Inter;
+    color: #1E1E1E;
+    margin: 0;
+  }
+  
+  .esqueci-senha-subtitle {
+    font-size: 1rem;
+    font-family: Inter;
+    color: var(--cor-texto-secundario);
+    margin-top: 0.5rem;
+    margin-bottom: 1.875rem;
+  }
+  
+  .esqueci-senha-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: Inter;
+  }
+  
+  .login-link-text {
+    margin-top: 1.5625rem;
+    font-size: 0.875rem;
+    color: #666666;
+  }
+  
+  .login-link {
+    color: var(--cor-roxo-principal);
+    font-weight: 600;
+    text-decoration: none;
+  }
+  
+  .login-link:hover {
+    text-decoration: underline;
+  }
+  
+  body.modo-escuro .esqueci-senha-subtitle,
+  body.alto-contraste .esqueci-senha-subtitle {
+    color: #666666 !important;
+  }
+  
+  @media (max-width: 600px) {
+    .esqueci-senha-container {
+      padding: 2rem;
+  }
+  
+    .esqueci-senha-background {
+      padding: 1.5rem 1rem;
+  }
+  }
+  
+  @media (max-width: 400px) {
+    .esqueci-senha-container {
+  padding: 1.5rem;
+  }
+  
+    .esqueci-senha-background {
+  padding: 1rem 0.5rem;
+  }
+  }
+  

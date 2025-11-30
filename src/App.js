@@ -16,6 +16,7 @@ import PaginaAvaliacao from './pages/PaginaAvaliacao/PaginaAvaliacao';
 import PaginaRotaCaronista from './pages/PaginaRotaCaronista/PaginaRotaCaronista';
 import PaginaAvaliacaoCaronista from './pages/PaginaAvalliacaoCaronista/PaginaAvalliacaoCaronista';
 import PaginaConfirmarCarona from './pages/PaginaConfirmarCarona/PaginaConfirmarCarona';
+import PaginaEsqueciSenha from './pages/PaginaEsqueciSenha/PaginaEsqueciSenha';
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
       <Route path= "/inicio" element= {<PaginaInicial />} />
       <Route path= "/cadastro" element= {<PaginaRegistro />} />
       <Route path= "/login" element= {<PaginaLogin />} />
+      <Route path= "/esqueci" element= {<PaginaEsqueciSenha />} />
       <Route path= "/dashboard" element= {<PaginaDashboard />} />
       <Route path= "/buscar" element= {<PaginaBuscar />} />
       <Route path= "/perfil" element= {<ProfilePage />} />
