@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import './Sidebar.css';
-import logo from '../../assets/Somente_Logo_VJ 1.png';
+import logo from '../../assets/imagem vamosjuntos.png';
 import CentralNotificacao from '../CentralNotificacao/CentralNotificacao';
 
 // Ícones Pretos

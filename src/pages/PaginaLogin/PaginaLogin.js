@@ -2,7 +2,7 @@ import './PaginaLogin.css';
 import { Link } from 'react-router-dom'; 
 import Input from '../../components/Input/Input'; 
 import Button from '../../components/Button'; 
-import logo from '../../assets/Somente_Logo_VJ 1.png';
+import logo from '../../assets/imagem vamosjuntos.png';
 import { useNavigate } from 'react-router-dom';
 import BotaoAcessibilidade from "../../components/BotaoAcessibilidade/BotaoAcessibilidade";
 
