@@ -61,26 +61,45 @@ export default function PaginaMinhasRotas() {
     }
   };
 
-  const toggleRotaAtiva = async (rotaId, novoEstado) => {
-    try {
-      const response = await fetch(`${API_URL}/rotas/${rotaId}`, {
-        method: 'PATCH',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ativa: novoEstado }),
-      });
+ const toggleRotaAtiva = async (rotaId, novoEstado) => {
+  try {
+    // pega os dados completos da rota antes de atualizar
+    const rotaAtual = minhasRotas.find(r => r.id === rotaId);
 
-      if (!response.ok) throw new Error(`Falha ao ${novoEstado ? 'ativar' : 'desativar'} a rota.`);
-
-      setMinhasRotas(rotasAtuais =>
-        rotasAtuais.map(rota =>
-          rota.id === rotaId ? { ...rota, ativa: novoEstado } : rota
-        )
-      );
-    } catch (error) {
-      console.error("Erro ao alterar status da rota:", error);
-      alert("Erro ao alterar status da rota.");
+    if (!rotaAtual) {
+      throw new Error("Rota não encontrada na lista local.");
     }
-  };
+
+    // MockAPI exige enviar o objeto COMPLETO no PUT
+    const rotaAtualizada = {
+      ...rotaAtual,
+      ativa: novoEstado
+    };
+
+    const response = await fetch(`${API_URL}/rotas/${rotaId}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(rotaAtualizada),
+    });
+
+    if (!response.ok) {
+      const textoErro = await response.text();
+      throw new Error(`Erro ao atualizar rota: ${textoErro}`);
+    }
+
+    // Atualiza a lista local
+    setMinhasRotas(rotasAtuais =>
+      rotasAtuais.map(rota =>
+        rota.id === rotaId ? rotaAtualizada : rota
+      )
+    );
+
+  } catch (error) {
+    console.error("Erro ao alterar status da rota:", error);
+    alert("Erro ao alterar status da rota.");
+  }
+};
+
 
   const handleAbrirModalSolicitacoes = (rota) => {
     setRotaSelecionada(rota);
