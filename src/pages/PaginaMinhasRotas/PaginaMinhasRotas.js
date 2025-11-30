@@ -20,8 +20,13 @@ export default function PaginaMinhasRotas() {
   const [rotaSelecionada, setRotaSelecionada] = useState(null); 
 
   useEffect(() => {
-    fetch(`${API_URL}/rotas`) 
-      .then(response => response.json())
+    fetch(`${API_URL}/rotas`)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
       .then(data => {
         const apenasMinhas = data.filter(rota => rota.dono === true);
         setMinhasRotas(apenasMinhas);
