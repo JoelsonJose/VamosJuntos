@@ -8,7 +8,7 @@
   min-height: 100vh;
   background: var(--cor-fundo-pagina);
   font-family: 'Inter', sans-serif;
-  margin-top: -40px;
+  /* Removido margin-top para ser tratado pelo padding do conteudo-rotas */
 }
 
 /* ---------------------------------------------------- */
@@ -24,21 +24,22 @@
 }
 
 /* ---------------------------------------------------- */
-/* TÍTULO E SUBTÍTULO DA PÁGINA                         */
+/* TÍTULO E SUBTÍTULO DA PÁGINA (Modelo: PaginaBuscar)   */
 /* ---------------------------------------------------- */
-.page-main-title {
+
+
+.conteudo-rotas h1 {
+  margin: 7px 0 6px 0; /* Definido margin-top para 7px conforme solicitado */
   font-size: 28px;
   font-weight: 700;
   color: #1f2937;
-  margin-top: -40px;
-  margin-bottom: 8px;
 }
 
-.page-main-subtitle {
-  color: #555;
-  font-size: 1rem;
-  margin-top: 10px;
-  margin-bottom: 1px;
+.subtitulo {
+  color: #777; 
+  margin-bottom: 18px;
+  /* Removido margin-right: 39px para corrigir desalinhamento */
+  margin-top: auto;
   display: block;
 }
 
@@ -263,9 +264,10 @@ textarea::placeholder {
 @media (max-width: 992px) {
   /* Em telas menores, remove a margem e o padding */
   .conteudo-rotas {
-    padding: 5rem 1.25rem 1.5rem 1.25rem;
+    padding: 7rem 1.25rem 1.5rem 1.25rem !important; /* Aumentado e forçado o padding-top para descer o conteúdo no mobile */
     margin-left: 0;
     width: 100%;
+    box-sizing: border-box !important; /* Forçando o box-sizing */
   }
 
   .form-card-principal {

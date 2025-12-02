@@ -96,8 +96,8 @@ export default function PaginaCriarRota() {
       <Sidebar activePage="criar" />
       
       <main className="conteudo-rotas">
-        <h1 className="page-main-title">Criar Nova Rota</h1>
-        <span className="page-main-subtitle">Ofereça uma carona para seus colegas de trabalho</span>
+        <h1>Criar Nova Rota</h1>
+        <p className="subtitulo">Ofereça uma carona para seus colegas de trabalho</p>
         
         <form className="form-card-principal" onSubmit={handleSubmit}>
           

@@ -400,7 +400,8 @@ body.alto-contraste .rota-pontos-link {
 
   /* Botões "Iniciar Viagem" e "Encerrar Vagas" */
   .btn-iniciar-viagem, 
-  .btn-encerrar-vagas {
+  .btn-encerrar-vagas,
+  .btn-ativar-rota {
     display: block; /* Garante comportamento de bloco */
     width: 100%; /* Força 100% da largura */
     box-sizing: border-box; /* Garante que padding não aumente a largura além de 100% */
