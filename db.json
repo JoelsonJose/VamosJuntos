@@ -151,7 +151,7 @@
       "valor": "7.50",
       "notaMinima": "4",
       "ativa": true,
-      "novasSolicitacoes": 2,
+      "novasSolicitacoes": 3,
       "dono": true,
       "motorista": "Você"
     },
@@ -181,7 +181,7 @@
   ],
   "caronas": [
     {
-      "id": "90d7",
+      "id": "b013",
       "motorista": "Lucas Ximenes",
       "origem": "Jardim São Paulo",
       "destino": "Av. Alfredo Lisboa 810",

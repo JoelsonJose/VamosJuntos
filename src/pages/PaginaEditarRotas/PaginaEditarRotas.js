@@ -106,8 +106,8 @@ export default function PaginaEditarRota() {
     <div className="pagina-criar-rotas-container">
       <Sidebar activePage="rotas" />
       <main className="conteudo-rotas">
-        <h1 className="page-main-title">Editar Rota</h1>
-        <span className="page-main-subtitle">Edite as informações da sua carona</span>
+        <h1>Editar Rota</h1>
+        <p className="subtitulo">Edite as informações da sua carona</p>
         <form className="form-card-principal" onSubmit={handleSubmit}>
           {/* Conteúdo do formulário mantido igual... */}
           <div className="grupo-inline">

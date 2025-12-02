@@ -248,7 +248,7 @@
 /* RESPONSIVIDADE (CELULAR E TABLET)
 /* ==================================================== */
 
-@media (max-width: 1000px) {
+@media (max-width: 992px) {
   .rota-conteudo {
     margin-left: 0; /* Remove margem da sidebar */
     width: 100%;
