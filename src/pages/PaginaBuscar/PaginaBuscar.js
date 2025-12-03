@@ -123,17 +123,10 @@ export default function PaginaBuscar() {
 
   useEffect(() => {
     const handleResize = () => {
-      const mobile = window.innerWidth <= 1000;
-      setIsMobile(mobile);
-      if (mobile) {
-        setIsDicasExpanded(false); // Collapsed on mobile
-      } else {
-        setIsDicasExpanded(true); // Expanded on desktop
-      }
+      setIsMobile(window.innerWidth <= 1000);
     };
 
     window.addEventListener('resize', handleResize);
-    handleResize(); // Initial check
 
     return () => window.removeEventListener('resize', handleResize);
   }, []);
