@@ -171,11 +171,27 @@ body {
 .dicas-container {
   background: #fff;
   border-radius: 12px;
-  padding: 20px 24px 24px 24px;
+  padding: 20px 24px 24px 24px; /* Standard padding for the container */
   box-shadow: 0 2px 10px rgba(0,0,0,0.08);
-  height: calc(100vh - 260px);
-  overflow-y: auto;
+  max-height: 500px; /* Sufficiently large to show all content when expanded */
+  overflow: hidden;
   color: #000;
+  transition: all 0.3s ease-in-out;
+}
+
+.dicas-container h3 {
+  cursor: pointer;
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10+ */
+  user-select: none;
+  margin: 0;
+  margin-left: 55px;
+  padding-left: 0; /* Ensure header starts at the container's left padding */
+}
+
+.dicas-container .dicas-content {
+  margin-left: -10px; /* Negative margin to shift content further left */
+  padding-left: 10px; /* Adjust padding if needed to control spacing */
 }
 
 .dica-bloco h4 { 
@@ -196,8 +212,13 @@ body {
 /* responsivo */
 @media (max-width: 1000px) {  
   .filtros-inputs { grid-template-columns: 1fr 1fr; }
-  .conteudo-busca { grid-template-columns: 1fr; }
-  .dicas-container { height: auto; }
+  .conteudo-busca { 
+    display: flex;
+    flex-direction: column;
+   }
+  .dicas-container { 
+    order: -1;
+   }
   .conteudo-buscar { margin-left: 0; padding: 5rem 1.25rem 1.5rem 1.25rem; }
 }
 

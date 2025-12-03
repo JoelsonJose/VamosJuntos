@@ -118,6 +118,12 @@ export default function PaginaBuscar() {
     setCaronas(caronasFiltradas);
   };
 
+  const [isDicasExpanded, setIsDicasExpanded] = useState(false);
+
+  const toggleDicas = () => {
+    setIsDicasExpanded(!isDicasExpanded);
+  };
+
   const handleLimparFiltros = () => {
     setOrigem("");
     setDestino("");
@@ -201,34 +207,38 @@ export default function PaginaBuscar() {
           </div>
 
           <div className="dicas-container">
-            <h3>💡 Dicas de Busca</h3>
+            <h3 onClick={toggleDicas} style={{ cursor: 'pointer' }}>💡 Dicas de Busca</h3>
+            
+            {isDicasExpanded && (
+              <>
+                <div className="dica-bloco">
+                  <h4>Horários Mais Procurados</h4>
+                  <ul>
+                    {horariosPopulares.map(horario => (
+                      <li key={horario}>{horario}</li>
+                    ))}
+                  </ul>
+                </div>
 
-            <div className="dica-bloco">
-              <h4>Horários Mais Procurados</h4>
-              <ul>
-                {horariosPopulares.map(horario => (
-                  <li key={horario}>{horario}</li>
-                ))}
-              </ul>
-            </div>
+                <div className="dica-bloco">
+                  <h4>Como Buscar</h4>
+                  <ul>
+                    <li>Use nomes de bairros ou avenidas</li>
+                    <li>Seja flexível com horários</li>
+                    <li>Considere pontos próximos</li>
+                  </ul>
+                </div>
 
-            <div className="dica-bloco">
-              <h4>Como Buscar</h4>
-              <ul>
-                <li>Use nomes de bairros ou avenidas</li>
-                <li>Seja flexível com horários</li>
-                <li>Considere pontos próximos</li>
-              </ul>
-            </div>
-
-            <div className="dica-bloco">
-              <h4>Bairros Populares</h4>
-              <ul>
-                {bairrosPopulares.map(bairro => (
-                  <li key={bairro}>{bairro}</li>
-                ))}
-              </ul>
-            </div>
+                <div className="dica-bloco">
+                  <h4>Bairros Populares</h4>
+                  <ul>
+                    {bairrosPopulares.map(bairro => (
+                      <li key={bairro}>{bairro}</li>
+                    ))}
+                  </ul>
+                </div>
+              </>
+            )}
           </div>
         </div>
       </div>
