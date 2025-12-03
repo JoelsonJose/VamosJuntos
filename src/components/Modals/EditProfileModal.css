@@ -20,7 +20,7 @@
     max-width: 500px; /* Limita a largura como na sua imagem */
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
     /* Permite o scroll interno se o conteúdo for muito grande */
-    max-height: 90vh; 
+    max-height: 80vh; 
     overflow-y: auto; 
 }
 
@@ -28,6 +28,7 @@
     display: flex;
     align-items: flex-start;
     margin-bottom: 25px;
+    margin-top: 20px;
 }
 
 .modal-icon-container {
@@ -38,6 +39,15 @@
     margin-right: 15px;
     width: 40px; 
     height: 40px;
+    display: flex; /* Para centralizar o ícone */
+    justify-content: center; /* Centraliza horizontalmente */
+    align-items: center; /* Centraliza verticalmente */
+}
+
+.edit-icon {
+    width: 35px; /* Tamanho do ícone */
+    height: 35px;
+    object-fit: contain; /* Garante que o ícone se ajuste */
 }
 
 .modal-title-container h2 {
@@ -138,8 +148,54 @@
     cursor: pointer;
     margin-top: 30px;
     transition: background-color 0.2s ease;
+    margin-bottom: 10px;
 }
 
 .confirm-button:hover {
     background-color: #4c2c80; /* Roxo um pouco mais escuro */
 }
+
+/* Botão Voltar (Escondido por Padrão) */
+
+.modal-back-btn {
+    display: none;
+}
+
+
+/* ==================================================== */
+
+/* RESPONSIVIDADE (CELULAR)
+
+/* ==================================================== */
+
+@media (max-width: 768px) {
+
+  .edit-modal-overlay {
+    align-items: flex-start;
+    /* Removido o padding-top daqui para usar margin no conteúdo */
+  }
+    .edit-modal-content {
+      max-width: 95%;
+      max-height: 90vh;
+      padding: 20px;
+      border-radius: 15px;
+      margin-top: 7vh !important; /* Estratégia de espaçamento final e agressiva */
+    }
+    /* Exibe e estiliza o Botão Voltar no mobile para corresponder ao padrão do app */
+    .modal-back-btn {
+      display: inline-flex;
+      align-items: center;
+      background: none;
+      border: none;
+      color: #9333ea;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      margin-bottom: 20px;
+      padding: 5px 0;
+      transition: color 0.2s;
+    }
+    .modal-back-btn:hover {
+      color: #6a0dad;
+    }
+  }

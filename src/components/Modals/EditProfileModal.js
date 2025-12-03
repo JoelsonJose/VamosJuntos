@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'; 
 import './EditProfileModal.css'; 
-
+import EditIcon from '../../assets/Editw.png'; // Importando o ícone de edição branco
 
 const departments = [
     "Selecione seu departamento",
@@ -75,7 +75,7 @@ const EditProfileModal = ({ isOpen, onClose, currentData, onSave }) => {
                 
                 <header className="edit-modal-header">
                     <div className="modal-icon-container">
-                       {/* Aqui vai o ícone da sua empresa */}
+                       <img src={EditIcon} alt="Ícone de Edição" className="edit-icon" />
                     </div>
                     <div className="modal-title-container">
                         <h2>Edição de perfil</h2>
