@@ -118,10 +118,30 @@ export default function PaginaBuscar() {
     setCaronas(caronasFiltradas);
   };
 
-  const [isDicasExpanded, setIsDicasExpanded] = useState(false);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 1000);
+  const [isDicasExpanded, setIsDicasExpanded] = useState(!isMobile);
+
+  useEffect(() => {
+    const handleResize = () => {
+      const mobile = window.innerWidth <= 1000;
+      setIsMobile(mobile);
+      if (mobile) {
+        setIsDicasExpanded(false); // Collapsed on mobile
+      } else {
+        setIsDicasExpanded(true); // Expanded on desktop
+      }
+    };
+
+    window.addEventListener('resize', handleResize);
+    handleResize(); // Initial check
+
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   const toggleDicas = () => {
-    setIsDicasExpanded(!isDicasExpanded);
+    if (isMobile) {
+      setIsDicasExpanded(!isDicasExpanded);
+    }
   };
 
   const handleLimparFiltros = () => {
@@ -206,11 +226,11 @@ export default function PaginaBuscar() {
             ))}
           </div>
 
-          <div className="dicas-container">
-            <h3 onClick={toggleDicas} style={{ cursor: 'pointer' }}>💡 Dicas de Busca</h3>
+          <div className={`dicas-container ${!isDicasExpanded && isMobile ? 'dicas-collapsed' : ''}`}>
+            <h3 onClick={toggleDicas} style={{ cursor: isMobile ? 'pointer' : 'default' }}>💡 Dicas de Busca</h3>
             
             {isDicasExpanded && (
-              <>
+              <div className="dicas-content">
                 <div className="dica-bloco">
                   <h4>Horários Mais Procurados</h4>
                   <ul>
@@ -237,7 +257,7 @@ export default function PaginaBuscar() {
                     ))}
                   </ul>
                 </div>
-              </>
+              </div>
             )}
           </div>
         </div>
