@@ -3,8 +3,8 @@ import './PaginaConfirmarCarona.css';
 import Sidebar from '../../components/Sidebar/Sidebar';
 import StarRating from '../../components/StarRating/StarRating';
 import { useNavigate } from 'react-router-dom';
-// IMPORTANTE: Importando a URL para salvar no banco
 import { API_URL } from '../../Config'; 
+import ConfirmationModal from '../../components/ConfirmationModal/ConfirmationModal';
 
 import PersonIcon from '../../assets/ConfirmarCarona/PersonConfirmar.png';
 import PeopleIcon from '../../assets/ConfirmarCarona/People in Car Side ViewConfirmar.png';
@@ -20,6 +20,16 @@ export default function PaginaConfirmarCarona() {
   const [selectedPoint, setSelectedPoint] = useState(null);
   const navigate = useNavigate();
 
+  const [modalConfig, setModalConfig] = useState({
+    isOpen: false,
+    title: '',
+    message: '',
+    isAlertOnly: false,
+    onConfirm: null
+  });
+
+  const closeModal = () => setModalConfig({ ...modalConfig, isOpen: false });
+  
   const pontos = [
     { id: 1, nome: 'Praça de Jardim São Paulo', horario: '8:15' },
     { id: 2, nome: 'Shopping Afogados', horario: '8:50' },
@@ -32,65 +42,93 @@ export default function PaginaConfirmarCarona() {
     setSelectedPoint(prev => (prev === id ? null : id));
   };
 
-  // --- FUNÇÃO PARA SALVAR NO BANCO (COM PROTEÇÃO DE DUPLICIDADE) ---
-  const handleConfirmar = async () => {
-    // Validação simples: obriga escolher um ponto
-    if (!selectedPoint) {
-        alert("Por favor, selecione um ponto de embarque antes de confirmar.");
-        return;
-    }
+  // --- FUNÇÃO PARA SALVAR NO BANCO (COM PROTEÇÃO E CORREÇÃO DE MODAL) ---
+  const handleConfirmar = async () => {
+    // 1. Validação: Tem ponto selecionado?
+    if (!selectedPoint) {
+        setModalConfig({
+          isOpen: true,
+          title: 'Atenção',
+          message: 'Por favor, selecione um ponto de embarque antes de confirmar',
+          isAlertOnly: true,
+          onConfirm: closeModal
+        });
+        return;
+    }
 
-    try {
-        // 1. Antes de salvar, buscamos o que já existe para não duplicar
-        const checkResponse = await fetch(`${API_URL}/caronas`);
-        const minhasCaronas = await checkResponse.json();
+    try {
+        // 2. PROTEÇÃO DE DUPLICIDADE: Busca caronas antes de salvar
+        const checkResponse = await fetch(`${API_URL}/caronas`);
+        const minhasCaronas = await checkResponse.json();
 
-        // Verifica se já existe carona ativa deste motorista neste horário
-        const jaExiste = minhasCaronas.some(carona => 
-            carona.motorista === "Lucas Ximenes" && 
-            carona.horario === "08:00" &&
-            carona.status !== "Cancelada"
-        );
+        const jaExiste = minhasCaronas.some(carona => 
+            carona.motorista === "Lucas Ximenes" && 
+            carona.horario === "08:00" &&
+            carona.status !== "Cancelada"
+        );
 
-        if (jaExiste) {
-            alert("Você já confirmou esta viagem anteriormente!");
-            navigate('/caronas'); // Apenas redireciona sem criar nova
-            return;
+        if (jaExiste) {
+            setModalConfig({
+              isOpen: true,
+              title: 'Aviso',
+              message: 'Você já confirmou esta viagem anteriormente!',
+              isAlertOnly: true,
+              onConfirm: () => {
+                  closeModal();
+                  navigate('/caronas'); // Navega só quando clicar OK
+              }
+            });
+            return; // Para tudo aqui
+        }
+
+        // 3. Se não existe, cria o objeto
+        const novaCarona = {
+            motorista: "Lucas Ximenes",
+            origem: "Jardim São Paulo",
+            destino: "Av. Alfredo Lisboa 810",
+            horario: "08:00",
+            status: "Agendada",
+            fotoId: "usuario2",
+            rating: 3,
+            locked: false,
+            valor: "5.00"
+        };
+
+        // 4. Salva no banco
+        const response = await fetch(`${API_URL}/caronas`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(novaCarona),
+        });
+
+        if (response.ok) {
+            setModalConfig({
+              isOpen: true,
+              title: 'Sucesso',
+              message: 'Carona Confirmada com Sucesso!',
+              isAlertOnly: true,
+              // O SEGREDO ESTÁ AQUI: Navegar SÓ depois de clicar no botão do modal
+              onConfirm: () => {
+                  closeModal();
+                  navigate('/caronas'); 
+              }
+            });
+            // NÃO COLOQUE navigate AQUI FORA!
+        } else {
+            throw new Error('Erro na resposta da API');
         }
 
-        // 2. Se não existe, cria o objeto da nova carona
-        const novaCarona = {
-            motorista: "Lucas Ximenes",
-            origem: "Jardim São Paulo",
-            destino: "Av. Alfredo Lisboa 810",
-            horario: "08:00",
-            status: "Agendada",
-            fotoId: "usuario2", // ID da foto do Lucas no mapa da outra página
-            rating: 3,
-            locked: false,
-            valor: "5.00"
-        };
-
-        // 3. Salva no banco
-        const response = await fetch(`${API_URL}/caronas`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(novaCarona),
-        });
-
-        if (response.ok) {
-            alert('Carona Confirmada com Sucesso!');
-            navigate('/caronas'); // Vai para Minhas Caronas ver o resultado
-        } else {
-            alert('Erro ao confirmar carona.');
-        }
-    } catch (error) {
-        console.error("Erro:", error);
-        alert('Erro de conexão com o servidor.');
-    }
-  };
+    } catch (error) {
+        console.error("Erro:", error);
+        setModalConfig({
+              isOpen: true,
+              title: 'Erro',
+              message: 'Erro de conexão com o servidor',
+              isAlertOnly: true,
+              onConfirm: closeModal
+        });
+    }
+  };
 
   return (
     <div className="pagina-confirmar">
@@ -194,6 +232,16 @@ export default function PaginaConfirmarCarona() {
           </div>
         </div>
       </div>
+      <ConfirmationModal
+        isOpen={modalConfig.isOpen}
+        title={modalConfig.title}
+        message={modalConfig.message}
+        isAlertOnly={modalConfig.isAlertOnly}
+        onClose={closeModal}
+        onConfirm={() => {
+          if (modalConfig.onConfirm) modalConfig.onConfirm();
+        }}
+      />
     </div>
   );
 }

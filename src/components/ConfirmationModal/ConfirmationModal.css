@@ -1,0 +1,110 @@
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.6); 
+  backdrop-filter: blur(4px); 
+  z-index: 9999; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+
+.modal-container {
+  background-color: #fff;
+  width: 100%;
+  max-width: 400px;
+  border-radius: 16px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  padding: 24px;
+  text-align: center;
+  
+ 
+  animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes popIn {
+  from { transform: scale(0.8); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+/* Texto */
+.modal-header h3 {
+  margin: 0 0 12px 0;
+  color: #1f2937; 
+  font-size: 1.25rem;
+  font-weight: 700;
+  font-family: 'Inter', sans-serif;
+}
+
+.modal-body p {
+  margin: 0 0 24px 0;
+  color: #6b7280; 
+  font-size: 1rem;
+  line-height: 1.5;
+  font-family: 'Inter', sans-serif;
+}
+
+
+.modal-footer {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+}
+
+.btn-modal {
+  border: none;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: 'Inter', sans-serif;
+  flex: 1; 
+}
+
+
+.btn-primary {
+  background-color: var(--cor-roxo-principal, #8b5cf6); 
+  color: #fff;
+}
+.btn-primary:hover {
+  background-color: #7c3aed;
+  transform: translateY(-1px);
+}
+
+
+.btn-secondary {
+  background-color: transparent;
+  color: #6b7280;
+  border: 1px solid #e5e7eb;
+}
+.btn-secondary:hover {
+  background-color: #f9fafb;
+  color: #1f2937;
+}
+
+
+body.modo-escuro .modal-container,
+body.alto-contraste .modal-container {
+  background-color: #1e1e1e;
+  border: 1px solid #333;
+}
+body.modo-escuro .modal-header h3,
+body.alto-contraste .modal-header h3 {
+  color: #fff;
+}
+body.modo-escuro .modal-body p,
+body.alto-contraste .modal-body p {
+  color: #ccc;
+}
+body.modo-escuro .btn-secondary,
+body.alto-contraste .btn-secondary {
+  border-color: #444;
+  color: #ccc;
+}

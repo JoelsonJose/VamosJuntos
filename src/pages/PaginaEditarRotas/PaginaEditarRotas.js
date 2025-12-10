@@ -3,9 +3,8 @@ import { useNavigate, useParams } from 'react-router-dom';
 import Sidebar from '../../components/Sidebar/Sidebar';
 import "./PaginaEditarRotas.css"; 
 import BotaoAcessibilidade from '../../components/BotaoAcessibilidade/BotaoAcessibilidade';
-// IMPORTANTE: Verifique se o nome do arquivo é config.js ou Config.js e ajuste aqui se precisar
 import { API_URL } from '../../Config'; 
-
+import ConfirmationModal from '../../components/ConfirmationModal/ConfirmationModal';
 import IconMapa from '../../assets/IconsCriar/IconMapa.png';
 import IconRota from '../../assets/IconsCriar/IconRota.png';
 import IconRelogio from '../../assets/IconsCriar/IconRelogio.png';
@@ -17,7 +16,6 @@ import IconEstrela from '../../assets/IconsCriar/IconEstrela.png';
 export default function PaginaEditarRota() {
   const navigate = useNavigate();
   const { id } = useParams(); 
-
   const [origem, setOrigem] = useState("");
   const [destino, setDestino] = useState("");
   const [pontos, setPontos] = useState("");
@@ -27,9 +25,18 @@ export default function PaginaEditarRota() {
   const [vagas, setVagas] = useState(""); 
   const [valor, setValor] = useState("");
   const [notaMinima, setNotaMinima] = useState("");
-  
   const [rotaOriginal, setRotaOriginal] = useState({});
 
+    const [modalConfig, setModalConfig] = useState({
+          isOpen: false,
+          title: '',
+          message: '',
+          isAlertOnly: false,
+          onConfirm: null
+        });
+      
+    const closeModal = () => setModalConfig({ ...modalConfig, isOpen: false });
+    
   const dias = [
     "Segunda-feira", "Terça-feira", "Quarta-feira", 
     "Quinta-feira", "Sexta-feira", "Sábado",
@@ -91,14 +98,34 @@ export default function PaginaEditarRota() {
       });
 
       if (response.ok) {
-        alert("Rota atualizada com sucesso!");
-        navigate('/rotas'); 
+        setModalConfig({
+            isOpen: true,
+            title: 'Sucesso',
+            message: 'Rota atualizada com sucesso!',
+            isAlertOnly: true,
+            onConfirm: () => {
+                closeModal();
+                navigate('/rotas'); 
+            }
+        });
       } else {
-        alert("Erro ao atualizar rota.");
+        setModalConfig({
+            isOpen: true,
+            title: 'Erro',
+            message: 'Não foi possível atualizar a rota.',
+            isAlertOnly: true,
+            onConfirm: closeModal
+        });
       }
     } catch (error) {
       console.error("Erro na requisição:", error);
-      alert("Erro ao conectar com o servidor.");
+      setModalConfig({
+            isOpen: true,
+            title: 'Erro',
+            message: 'Erro ao conectar com o servidor.',
+            isAlertOnly: true,
+            onConfirm: closeModal
+        });
     }
   };
 
@@ -173,11 +200,21 @@ export default function PaginaEditarRota() {
               </select>
             </div>
           </div>
-
+          
           <button type="submit" className="btn-criar-rota-final">Salvar Alterações</button>
         </form>
       </main>
       <BotaoAcessibilidade />
+      <ConfirmationModal
+        isOpen={modalConfig.isOpen}
+        title={modalConfig.title}
+        message={modalConfig.message}
+        isAlertOnly={modalConfig.isAlertOnly}
+        onClose={closeModal}
+        onConfirm={() => {
+          if (modalConfig.onConfirm) modalConfig.onConfirm();
+        }}
+      />
     </div>
   );
 };
