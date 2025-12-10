@@ -4,8 +4,7 @@ import Sidebar from '../../components/Sidebar/Sidebar';
 import "./PaginaCriarRota.css"; 
 import BotaoAcessibilidade from '../../components/BotaoAcessibilidade/BotaoAcessibilidade';
 import { API_URL } from '../../Config';
-
-// Importe os ícones
+import ConfirmationModal from '../../components/ConfirmationModal/ConfirmationModal';
 import IconMapa from '../../assets/IconsCriar/IconMapa.png';
 import IconRota from '../../assets/IconsCriar/IconRota.png';
 import IconRelogio from '../../assets/IconsCriar/IconRelogio.png';
@@ -27,6 +26,16 @@ export default function PaginaCriarRota() {
   const [valor, setValor] = useState("");
   const [notaMinima, setNotaMinima] = useState("");
 
+  const [modalConfig, setModalConfig] = useState({
+    isOpen: false,
+    title: '',
+    message: '',
+    isAlertOnly: false,
+    onConfirm: null
+  });
+
+  const closeModal = () => setModalConfig({ ...modalConfig, isOpen: false });  
+
   const dias = [
     "Segunda-feira", "Terça-feira", "Quarta-feira", 
     "Quinta-feira", "Sexta-feira", "Sábado",
@@ -46,7 +55,13 @@ export default function PaginaCriarRota() {
 
     // Validação básica
     if (!origem || !destino || !horario || !vagas) {
-      alert("Por favor, preencha os campos obrigatórios.");
+      setModalConfig({
+        isOpen: true,
+        title: 'Atenção',
+        message: 'Por favor, preencha todos os campos obrigatórios.',
+        isAlertOnly: true,
+        onConfirm: closeModal
+      });
       return;
     }
 
@@ -64,10 +79,8 @@ export default function PaginaCriarRota() {
       notaMinima,
       ativa: true,
       novasSolicitacoes: 0,
-      
-      // --- CORREÇÃO AQUI ---
-      dono: true,          // Isso garante que apareça em "Minhas Rotas"
-      motorista: "Você"    // Para aparecer seu nome na busca
+      dono: true,         
+      motorista: "Você"   
     };
 
     try {
@@ -80,14 +93,34 @@ export default function PaginaCriarRota() {
       });
 
       if (response.ok) {
-        alert("Rota criada com sucesso!");
-        navigate('/rotas'); // Redireciona para a tela de Minhas Rotas
+        setModalConfig({
+                isOpen: true,
+                title: 'Sucesso',
+                message: 'Sua rota foi criada e já está disponível.',
+                isAlertOnly: true,
+                onConfirm: () => {
+                    closeModal();
+                    navigate('/rotas'); 
+                }
+            });
       } else {
-        alert("Erro ao criar rota no servidor.");
+        setModalConfig({
+                isOpen: true,
+                title: 'Erro',
+                message: 'Não foi possível criar a rota. Tente novamente.',
+                isAlertOnly: true,
+                onConfirm: closeModal
+            });
       }
     } catch (error) {
       console.error("Erro na requisição:", error);
-      alert("Erro ao conectar com o servidor. Verifique se o json-server está rodando.");
+      setModalConfig({
+            isOpen: true,
+            title: 'Erro de Conexão',
+            message: 'Não foi possível conectar ao servidor.',
+            isAlertOnly: true,
+            onConfirm: closeModal
+        });
     }
   };
 
@@ -239,6 +272,16 @@ export default function PaginaCriarRota() {
         </form>
       </main>
       <BotaoAcessibilidade />
+      <ConfirmationModal
+        isOpen={modalConfig.isOpen}
+        title={modalConfig.title}
+        message={modalConfig.message}
+        isAlertOnly={modalConfig.isAlertOnly}
+        onClose={closeModal}
+        onConfirm={() => {
+            if (modalConfig.onConfirm) modalConfig.onConfirm();
+        }}
+      />
     </div>
   );
 };

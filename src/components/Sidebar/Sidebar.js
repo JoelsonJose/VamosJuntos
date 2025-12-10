@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import './Sidebar.css';
 import logo from '../../assets/imagem vamosjuntos.png';
 import CentralNotificacao from '../CentralNotificacao/CentralNotificacao';
+import ConfirmationModal from '../../components/ConfirmationModal/ConfirmationModal';
 
 // Ícones Pretos
 import IconDashboardB from '../../assets/Sidebar_icons/Detailsb.png';
@@ -35,8 +36,19 @@ const IconHamburger = () => (
 
 export default function Sidebar() {
   const location = useLocation();
+  const navigate = useNavigate();
   const [isMobileOpen, setIsMobileOpen] = useState(false);
   const [isNotificacaoOpen, setIsNotificacaoOpen] = useState(false);
+
+  const [modalConfig, setModalConfig] = useState({
+    isOpen: false,
+    title: '',
+    message: '',
+    isAlertOnly: false,
+    onConfirm: null
+  });
+
+  const closeModal = () => setModalConfig({ ...modalConfig, isOpen: false });
 
   const navItems = [
     { label: 'Dashboard', iconB: IconDashboardB, iconW: IconDashboardW, path: '/dashboard' },
@@ -59,6 +71,24 @@ export default function Sidebar() {
 
   const handleOpenMobileMenu = () => setIsMobileOpen(true);
   const handleCloseMobileMenu = () => setIsMobileOpen(false);
+
+  const handleLogoutClick = (e) => {
+
+    if (e && e.preventDefault) e.preventDefault();
+
+    handleCloseMobileMenu(); // Fecha o menu se estiver no mobile
+
+    setModalConfig({
+      isOpen: true,
+      title: 'Sair da Conta',
+      message: 'Tem certeza que deseja sair do VamosJuntos?',
+      isAlertOnly: false, // Mostra Cancelar e Confirmar
+      onConfirm: () => {
+        closeModal();
+        navigate('/'); // Redireciona para o Login
+      }
+    });
+  };
 
   // Scroll + overlay blackout
   useEffect(() => {
@@ -90,9 +120,9 @@ export default function Sidebar() {
           <button className="top-bar-btn" onClick={toggleNotificacoes}>
             <img src={IconNotificacaoB} alt="Notificações" className="icon-mobile-black" />
           </button>
-          <Link to="/" className="top-bar-btn">
+          <button className="top-bar-btn" onClick={handleLogoutClick}>
             <img src={IconLogoutB} alt="Sair" className="icon-mobile-black" />
-          </Link>
+          </button>
         </div>
       </header>
 
@@ -144,12 +174,12 @@ export default function Sidebar() {
               <img src={IconNotificacaoW} className="nav-icon icon-w" alt="Notificações" />
             </div>
           </button>
-          <Link to="/" className="footer-btn" onClick={handleCloseMobileMenu}>
+          <button className="footer-btn" onClick={handleLogoutClick}>
             <div className="nav-icon-container">
               <img src={IconLogoutB} className="nav-icon icon-b" alt="Logout" />
               <img src={IconLogoutW} className="nav-icon icon-w" alt="Logout" />
             </div>
-          </Link>
+          </button>
         </div>
 
       </aside>
@@ -158,6 +188,17 @@ export default function Sidebar() {
       {isNotificacaoOpen && (
         <CentralNotificacao notifications={notifications} onClose={toggleNotificacoes} />
       )}
+
+      <ConfirmationModal
+        isOpen={modalConfig.isOpen}
+        title={modalConfig.title}
+        message={modalConfig.message}
+        isAlertOnly={modalConfig.isAlertOnly}
+        onClose={closeModal}
+        onConfirm={() => {
+          if (modalConfig.onConfirm) modalConfig.onConfirm();
+        }}
+      />
     </>
   );
 }

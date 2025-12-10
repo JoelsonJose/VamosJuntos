@@ -4,6 +4,7 @@ import Sidebar from '../../components/Sidebar/Sidebar';
 import StarRating from '../../components/StarRating/StarRating';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { API_URL } from '../../Config'; // Importando API para funcionar de verdade
+import ConfirmationModal from '../../components/ConfirmationModal/ConfirmationModal';
 
 // --- IMAGENS (Mantidas) ---
 import PerfilLucas from '../../assets/Fotos/usuario2.png';
@@ -34,9 +35,40 @@ export default function PaginaRotaCaronista() {
   const navigate = useNavigate();
   const location = useLocation();
   
+  const [modalConfig, setModalConfig] = useState({
+      isOpen: false,
+      title: '',
+      message: '',
+      isAlertOnly: false,
+      onConfirm: null
+    });
+  
+  const closeModal = () => setModalConfig({ ...modalConfig, isOpen: false });
+
   // Pega o ID que veio da tela anterior. Se não tiver, tenta pegar o primeiro do banco (fallback)
   const caronaId = location.state?.caronaId;
   const [carona, setCarona] = useState(null);
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalMessage, setModalMessage] = useState('');
+  const [confirmAction, setConfirmAction] = useState(null);
+
+  const showConfirmationModal = (message, action) => {
+    setModalMessage(message);
+    setConfirmAction(() => action);
+    setIsModalOpen(true);
+  };
+
+  const handleConfirm = () => {
+    if (confirmAction) {
+      confirmAction();
+    }
+    setIsModalOpen(false);
+  };
+
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
 
   // 1. BUSCAR DADOS DA CARONA ATUAL
   useEffect(() => {
@@ -67,20 +99,37 @@ export default function PaginaRotaCaronista() {
   // --- LÓGICA DOS BOTÕES ---
 
   // 2. CANCELAR (Atualiza status para Cancelada)
-  const handleCancelar = async () => {
-    if (window.confirm("Tem certeza que deseja cancelar esta viagem?")) {
+  const handleCancelar = () => {
+    showConfirmationModal("Tem certeza que deseja cancelar esta viagem?", async () => {
       try {
         await fetch(`${API_URL}/caronas/${carona.id}`, {
           method: 'PUT',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ ...carona, status: "Cancelada", locked: true, rating: 0 })
         });
-        alert("Viagem cancelada.");
-        navigate('/caronas'); // Volta para a lista
+        setModalConfig({
+          isOpen: true,
+          title: 'Atenção',
+          message: 'Viagem cancelada',
+          isAlertOnly: true,
+          onConfirm: () => {
+                  closeModal();
+                  navigate('/caronas'); 
+              }
+        });
       } catch (error) {
-        alert("Erro ao cancelar.");
+        setModalConfig({
+          isOpen: true,
+          title: 'Atenção',
+          message: 'Erro ao cancelar',
+          isAlertOnly: true,
+          onConfirm: () => {
+                  closeModal();
+                  navigate('/caronas'); 
+              }
+        });
       }
-    }
+    });
   };
 
   // 3. FINALIZAR (Vai para Avaliação)
@@ -89,16 +138,33 @@ export default function PaginaRotaCaronista() {
   };
 
   // 4. EXCLUIR (Remove do banco)
-  const handleExcluir = async () => {
-    if (window.confirm("Deseja apagar esta viagem do histórico?")) {
+  const handleExcluir = () => {
+    showConfirmationModal("Deseja apagar esta viagem do histórico?", async () => {
       try {
         await fetch(`${API_URL}/caronas/${carona.id}`, { method: 'DELETE' });
-        alert("Viagem excluída.");
-        navigate('/caronas');
+         setModalConfig({
+          isOpen: true,
+          title: 'Atenção',
+          message: 'Viagem excluída',
+          isAlertOnly: true,
+          onConfirm: () => {
+                  closeModal();
+                  navigate('/caronas'); 
+              }
+        });
       } catch (error) {
-        alert("Erro ao excluir.");
+        setModalConfig({
+          isOpen: true,
+          title: 'Atenção',
+          message: 'Erro ao excluir',
+          isAlertOnly: true,
+          onConfirm: () => {
+                  closeModal();
+                  navigate('/caronas'); 
+              }
+        });
       }
-    }
+    });
   };
 
   // Dados visuais
@@ -111,6 +177,12 @@ export default function PaginaRotaCaronista() {
       <Sidebar activePage="caronas" />
 
       <div className="rota-conteudo">
+        <ConfirmationModal
+          isOpen={isModalOpen}
+          message={modalMessage}
+          onConfirm={handleConfirm}
+          onCancel={handleCancel}
+        />
         <button onClick={() => navigate('/caronas')} className="botao-voltar">
             &larr; Voltar para Minhas Caronas
         </button>
@@ -228,6 +300,16 @@ export default function PaginaRotaCaronista() {
         </main>
         <BotaoAcessibilidade/>
       </div>
+      <ConfirmationModal
+        isOpen={modalConfig.isOpen}
+        title={modalConfig.title}
+        message={modalConfig.message}
+        isAlertOnly={modalConfig.isAlertOnly}
+        onClose={closeModal}
+        onConfirm={() => {
+          if (modalConfig.onConfirm) modalConfig.onConfirm();
+        }}
+      />
     </div>
   );
 }

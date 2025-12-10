@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react"; // 1. Importe useRef
 import "./BotaoAcessibilidade.css";
+import IconeAcessibilidade from "../../assets/Icone de acessibilidade VJ.png";
 
 // --- Função Helper para ler o localStorage ---
 function getEstadoInicial(key, valorInicial) {
@@ -74,7 +75,7 @@ export default function BotaoAcessibilidade() {
         onClick={() => setOpen(!open)}
       >
       <img
-        src="https://www.sorocaba.sp.gov.br/conselhos-municipais/wp-content/uploads/2019/08/conselhos-municipais-o-simbolo-de-acessibilidade-logo-universal.png"
+        src={IconeAcessibilidade}
         alt="Acessibilidade"
         style={{ width: "36px", height: "36px" }}
       />

@@ -10,6 +10,9 @@ import IconPessoas from '../../assets/IconsCriar/IconPessoas.png';
 import IconEstrela from '../../assets/IconsCriar/IconEstrela.png';
 import BotaoAcessibilidade from '../../components/BotaoAcessibilidade/BotaoAcessibilidade';
 import ModalSolicitacoes from '../../components/ModalSolicitacoes/ModalSolicitacoes';
+import ConfirmationModal from '../../components/ConfirmationModal/ConfirmationModal';
+import { useNavigate } from 'react-router-dom';
+
 
 export default function PaginaMinhasRotas() {
   
@@ -34,6 +37,16 @@ export default function PaginaMinhasRotas() {
       .catch(error => console.error("Erro ao buscar rotas:", error));
   }, []);
   
+  const [modalConfig, setModalConfig] = useState({
+        isOpen: false,
+        title: '',
+        message: '',
+        isAlertOnly: false,
+        onConfirm: null
+      });
+    
+  const closeModal = () => setModalConfig({ ...modalConfig, isOpen: false });
+  
   const handleAbrirModal = (rota) => {
     setRotaParaExcluir(rota); 
     setModalAberto(true);
@@ -56,7 +69,13 @@ export default function PaginaMinhasRotas() {
         handleFecharModal();
       } catch (error) {
         console.error("Erro ao excluir:", error);
-        alert("Erro ao excluir rota.");
+        setModalConfig({
+          isOpen: true,
+          title: 'Atenção',
+          message: 'Erro ao excluir rota',
+          isAlertOnly: true,
+          onConfirm: closeModal,
+        });
       }
     }
   };
@@ -96,7 +115,13 @@ export default function PaginaMinhasRotas() {
 
   } catch (error) {
     console.error("Erro ao alterar status da rota:", error);
-    alert("Erro ao alterar status da rota.");
+    setModalConfig({
+      isOpen: true,
+      title: 'Atenção',
+      message: 'Erro ao alterar status da rota',
+      isAlertOnly: true,
+      onConfirm: closeModal,
+    });
   }
 };
 
@@ -184,14 +209,69 @@ function ListaRotas({ rotas, onExcluir, onVerSolicitacoes, onToggleAtiva }) {
 }
 
 function CardRota({ rota, onExcluir, onVerSolicitacoes, onToggleAtiva }) {
+
+  const navigate = useNavigate();
+  
+  const [modalConfig, setModalConfig] = useState({
+        isOpen: false,
+        title: '',
+        message: '',
+        isAlertOnly: false,
+        onConfirm: null
+      });
+    
+  const closeModal = () => setModalConfig({ ...modalConfig, isOpen: false });
+  
   const vagasDisponiveis = rota.vagasTotal - rota.vagasOcupadas;
   const diasFormatados = Array.isArray(rota.dias) ? rota.dias.join(', ') : rota.dias;
 
   const handleIniciarClick = (e) => {
+    e.preventDefault(); 
+
     if (!rota.ativa) {
-      e.preventDefault();
-      alert("Você não pode iniciar uma rota desativada.");
+      setModalConfig({
+         isOpen: true,
+         title: 'Rota Desativada',
+         message: 'Você não pode iniciar uma viagem em uma rota desativada. Ative-a primeiro.',
+         isAlertOnly: true, 
+         onConfirm: closeModal
+       });
+    } else {
+       // Se ativa, pede confirmação
+       setModalConfig({
+         isOpen: true,
+         title: 'Iniciar Viagem',
+         message: (
+            <>
+                Deseja iniciar esta viagem agora?
+                <br />
+                Os passageiros serão notificados.
+            </>
+         ),
+         isAlertOnly: false,
+         onConfirm: () => {
+             // Ação confirmada: FECHA O MODAL E NAVEGA
+             closeModal();
+             navigate('/rotas/motorista'); // <--- ISSO ESTAVA FALTANDO OU NÃO ESTAVA SENDO CHAMADO
+         }
+       });
     }
+  };
+
+  const handleToggleClick = () => {
+    const novoEstado = !rota.ativa;
+    const acao = novoEstado ? "ativar" : "desativar";
+    
+    setModalConfig({
+        isOpen: true,
+        title: `Confirmação`,
+        message: `Tem certeza que deseja ${acao} esta rota?`,
+        isAlertOnly: false, // Confirmação Sim/Não
+        onConfirm: () => {
+            onToggleAtiva(rota.id, novoEstado); // Chama a função do pai
+            closeModal();
+        }
+    });
   };
 
   return (
@@ -247,7 +327,7 @@ function CardRota({ rota, onExcluir, onVerSolicitacoes, onToggleAtiva }) {
       
       <div className="card-rota-footer">
         <div className="footer-solicitacoes">
-          <p>{rota.novasSolicitacoes} novas solicitações de carona</p>
+          <p>{rota.novasSolicitacoes || 0} novas solicitações de carona</p>
           <button 
             className="btn-ver-solicitacoes"
             onClick={() => onVerSolicitacoes(rota)}
@@ -256,30 +336,35 @@ function CardRota({ rota, onExcluir, onVerSolicitacoes, onToggleAtiva }) {
           </button>
         </div>
         <div className="footer-actions">
-          <Link 
-            to={"/rotas/motorista"} 
-            className={`btn-iniciar-viagem ${!rota.ativa ? 'disabled' : ''}`}
+          {/* Botão Iniciar Viagem com bloqueio */}
+          <button 
+            className={`btn-iniciar-viagem ${!rota.ativa ? 'disabled-link' : ''}`}
             onClick={handleIniciarClick}
+            style={!rota.ativa ? { opacity: 0.6, cursor: 'not-allowed' } : {}}
           >
             Iniciar Viagem
-          </Link>
-          {rota.ativa ? (
-            <button 
-              className="btn-encerrar-vagas"
-              onClick={() => onToggleAtiva(rota.id, false)}
-            >
-              Desativar rota
-            </button>
-          ) : (
-            <button 
-              className="btn-ativar-rota"
-              onClick={() => onToggleAtiva(rota.id, true)}
-            >
-              Ativar rota
-            </button>
-          )}
+          </button>
+          
+          {/* Botão Ativar/Desativar */}
+          <button 
+            className={rota.ativa ? "btn-encerrar-vagas" : "btn-ativar-rota"} // Crie a classe .btn-ativar-rota no CSS (verde) se quiser
+            style={!rota.ativa ? { backgroundColor: '#d1fae5', color: '#065f46' } : {}} // Estilo rápido para o botão verde
+            onClick={handleToggleClick}
+          >
+            {rota.ativa ? "Desativar rota" : "Ativar rota"}
+          </button>
         </div>
       </div>
+      <ConfirmationModal
+        isOpen={modalConfig.isOpen}
+        title={modalConfig.title}
+        message={modalConfig.message}
+        isAlertOnly={modalConfig.isAlertOnly}
+        onClose={closeModal}
+        onConfirm={() => {
+          if (modalConfig.onConfirm) modalConfig.onConfirm();
+        }}
+      />
     </article>
   );
 }

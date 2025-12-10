@@ -5,6 +5,7 @@ import BotaoAcessibilidade from '../../components/BotaoAcessibilidade/BotaoAcess
 import StarRatingInput from '../../components/StarRatingInput/StarRatingInput';
 import './PaginaAvalliacaoCaronista.css'; 
 import { API_URL } from '../../Config'; // Importando para conectar com o banco
+import ConfirmationModal from '../../components/ConfirmationModal/ConfirmationModal';
 
 // Exemplo de dados (Mantive seu mock visual)
 const mockDadosCarona = {
@@ -18,6 +19,16 @@ export default function PaginaAvaliacaoCaronista() {
   const navigate = useNavigate();
   const location = useLocation();
   
+  const [modalConfig, setModalConfig] = useState({
+      isOpen: false,
+      title: '',
+      message: '',
+      isAlertOnly: false,
+      onConfirm: null
+    });
+  
+    const closeModal = () => setModalConfig({ ...modalConfig, isOpen: false });
+
   // Pega o ID que a gente mandou da tela de Rota
   const caronaId = location.state?.caronaId;
 
@@ -43,7 +54,13 @@ export default function PaginaAvaliacaoCaronista() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (rating === 0) {
-      alert("Por favor, selecione pelo menos uma estrela.");
+      setModalConfig({
+          isOpen: true,
+          title: 'Atenção',
+          message: 'Por favor, selecione pelo menos uma estrela!',
+          isAlertOnly: true,
+          onConfirm: closeModal
+        });
       return;
     }
 
@@ -68,10 +85,16 @@ export default function PaginaAvaliacaoCaronista() {
       }
 
       // 2. Notificação de Confirmação
-      alert("Sua avaliação foi registrada e a viagem finalizada!");
-
-      // 3. Redirecionar o usuário
-      navigate('/caronas'); // Leva de volta para o histórico
+      setModalConfig({
+              isOpen: true,
+              title: 'Sucesso',
+              message: 'Sua avaliação foi registrada e a viagem finalizada!',
+              isAlertOnly: true,
+              onConfirm: () => {
+                  closeModal();
+                  navigate('/caronas'); // Navega só quando clicar OK
+              }
+            });
 
     } catch (error) {
       console.error("Erro ao avaliar:", error);
@@ -113,6 +136,16 @@ export default function PaginaAvaliacaoCaronista() {
         </form>
       </main>
       <BotaoAcessibilidade />
+      <ConfirmationModal
+        isOpen={modalConfig.isOpen}
+        title={modalConfig.title}
+        message={modalConfig.message}
+        isAlertOnly={modalConfig.isAlertOnly}
+        onClose={closeModal}
+        onConfirm={() => {
+          if (modalConfig.onConfirm) modalConfig.onConfirm();
+        }}
+      />
     </div>
   );
 }
