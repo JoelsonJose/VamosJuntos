@@ -11,20 +11,21 @@
   justify-content: center;
   align-items: center;
   padding: 20px;
+  box-sizing: border-box;
 }
 
 
 .modal-container {
   background-color: #fff;
-  width: 100%;
-  max-width: 400px;
+  width: 90%; /* Use a percentage for more flexibility on smaller screens */
+  max-width: 500px; /* Cap the maximum width for larger screens */
   border-radius: 16px;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
   padding: 24px;
   text-align: center;
-  
- 
+  position: relative; /* Needed for potential absolute positioning of close button if added */
   animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-sizing: border-box;
 }
 
 @keyframes popIn {
@@ -89,6 +90,41 @@
   color: #1f2937;
 }
 
+@media (max-width: 600px) {
+  .modal-container {
+    padding: 20px; /* Slightly less padding on smaller screens */
+  }
+  .modal-header h3 {
+    font-size: 1.15rem; /* Slightly smaller font size for header */
+  }
+  .modal-body p {
+    font-size: 0.95rem; /* Slightly smaller font size for body text */
+  }
+  .modal-footer {
+    flex-direction: column;
+    gap: 8px; /* Reduce gap between stacked buttons */
+  }
+  .btn-modal {
+    padding: 10px 15px; /* Adjust button padding */
+    font-size: 0.9rem; /* Adjust button font size */
+  }
+}
+
+/* Specific adjustments for very small screens, e.g., 375px width phones */
+@media (max-width: 380px) {
+  .modal-overlay {
+    padding: 10px;
+  }
+  .modal-container {
+    padding: 15px;
+  }
+  .modal-header h3 {
+    font-size: 1rem;
+  }
+  .modal-body p {
+    font-size: 0.85rem;
+  }
+}
 
 body.modo-escuro .modal-container,
 body.alto-contraste .modal-container {
