@@ -89,6 +89,11 @@
   color: #1f2937;
 }
 
+@media (max-width: 600px) {
+  .modal-footer {
+    flex-direction: column;
+  }
+}
 
 body.modo-escuro .modal-container,
 body.alto-contraste .modal-container {
