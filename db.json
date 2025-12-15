@@ -179,18 +179,5 @@
       "motorista": "Você"
     }
   ],
-  "caronas": [
-    {
-      "id": "8fc7",
-      "motorista": "Lucas Ximenes",
-      "origem": "Jardim São Paulo",
-      "destino": "Av. Alfredo Lisboa 810",
-      "horario": "08:00",
-      "status": "Agendada",
-      "fotoId": "usuario2",
-      "rating": 3,
-      "locked": false,
-      "valor": "5.00"
-    }
-  ]
+  "caronas": []
 }
