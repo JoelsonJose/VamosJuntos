@@ -430,9 +430,7 @@ Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para ma
 
 ---
 
-## Squad 33:
-
-**Joelson José**
+## Squad 31:
 
 - GitHub: [@JoelsonJose](https://github.com/JoelsonJose)
 			[@Homeroflavio](https://github.com/Homeroflavio)
