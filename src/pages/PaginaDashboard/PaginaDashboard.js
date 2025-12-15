@@ -6,6 +6,7 @@ import CardCarona from '../../components/CardCarona/CardCarona';
 import Infoicon from '../../assets/Dashboard/Info.png';
 import BotaoAcessibilidade from '../../components/BotaoAcessibilidade/BotaoAcessibilidade';
 import { API_URL } from '../../Config';
+import { useNavigate } from 'react-router-dom';
 
 const dadosDaCarona = {
   origem: "Casa",
@@ -48,7 +49,7 @@ export default function DashboardPage() {
       <main className="dashboard-content">
         <HeaderDashboard nomeUsuario="Homero Flávio" />
         <AreaResumo caronas={caronas} isLoading={isLoading} error={error} />
-        <AreaCaronasSolicitadas />
+        <AreaCaronasSolicitadas caronas={caronas} />
       </main>
       <BotaoAcessibilidade />
     </div>
@@ -137,11 +138,28 @@ function AreaResumo({ caronas, isLoading, error }) {
   );
 }
 
-function AreaCaronasSolicitadas() {
+function AreaCaronasSolicitadas({ caronas }) {
+  const navigate = useNavigate();
+
+  // Verifica se há alguma carona ativa para exibir
+  const activeCarona = caronas.length > 0 ? caronas[0] : null;
+
   return (
     <section className="caronas-solicitadas">
       <h2>Caronas Solicitadas</h2>
-      <CardCarona carona={dadosDaCarona} />
+      {activeCarona ? (
+        <CardCarona carona={activeCarona} />
+      ) : (
+        <div className="card-carona-vazio">
+          <p>Nenhuma carona ativa no momento.</p>
+          <button
+            className="btn-buscar-carona"
+            onClick={() => navigate('/buscar')}
+          >
+            Buscar Carona
+          </button>
+        </div>
+      )}
     </section>
   );
 }

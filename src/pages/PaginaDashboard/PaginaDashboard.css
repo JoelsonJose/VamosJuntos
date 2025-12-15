@@ -112,6 +112,44 @@
   margin-bottom: 1.5rem; 
 }
 
+/* Estilos para o estado vazio do CardCarona */
+.card-carona-vazio {
+  background-color: #fff;
+  border-radius: 1rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  padding: 2rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 150px; /* Altura mínima para o card vazio */
+  margin-bottom: 1.5rem; /* Espaçamento abaixo do card */
+}
+
+.card-carona-vazio p {
+  font-size: 1.25rem;
+  color: #666;
+  margin-bottom: 1rem;
+}
+
+.btn-buscar-carona {
+  background-color: var(--cor-roxo-principal);
+  color: #fff;
+  border: none;
+  border-radius: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.btn-buscar-carona:hover {
+  background-color: var(--cor-roxo-escuro); /* Uma versão mais escura do roxo */
+}
+
+
 /* --- CORREÇÃO MODO ESCURO (Dashboard) --- */
 body.modo-escuro .info-card-resumo,
 body.alto-contraste .info-card-resumo,

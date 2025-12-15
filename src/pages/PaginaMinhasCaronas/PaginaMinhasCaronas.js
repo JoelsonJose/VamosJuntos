@@ -45,11 +45,13 @@ function StarRating({ rating = 0, locked = false, max = 5 }) {
 // --- COMPONENTE PRINCIPAL DA PÁGINA ---
 export default function PaginaMinhasCaronas() {
   const [caronas, setCaronas] = useState([]);
-  const [erro, setErro] = useState(null); 
+  const [erro, setErro] = useState(null);
+  const [isLoading, setIsLoading] = useState(true); // --- NOVO ESTADO DE CARREGAMENTO ---
 
   // Busca os dados do banco
   useEffect(() => {
-    console.log("Tentando buscar caronas em:", `${API_URL}/caronas`); 
+    console.log("Tentando buscar caronas em:", `${API_URL}/caronas`);
+    setIsLoading(true); // --- INICIA O CARREGAMENTO ---
 
     fetch(`${API_URL}/caronas`)
       .then(response => {
@@ -59,17 +61,20 @@ export default function PaginaMinhasCaronas() {
         return response.json();
       })
       .then(data => {
-        console.log("Dados recebidos:", data); 
+        console.log("Dados recebidos:", data);
         if (Array.isArray(data)) {
           setCaronas(data);
         } else {
           console.error("A API não retornou uma lista (array)!", data);
-          setCaronas([]); 
+          setCaronas([]);
         }
       })
       .catch(err => {
         console.error("Erro fatal ao carregar histórico:", err);
         setErro(err.message);
+      })
+      .finally(() => {
+        setIsLoading(false); // --- FINALIZA O CARREGAMENTO ---
       });
   }, []);
 
@@ -91,7 +96,7 @@ export default function PaginaMinhasCaronas() {
       
       <main className="conteudo-caronas">
         <HeaderCaronas />
-        <ListaCaronas caronas={caronas} />
+        <ListaCaronas caronas={caronas} isLoading={isLoading} />
       </main>
       <BotaoAcessibilidade />
     </div>
@@ -111,18 +116,26 @@ function HeaderCaronas() {
   );
 }
 
-function ListaCaronas({ caronas }) {
+function ListaCaronas({ caronas, isLoading }) {
+  if (isLoading) {
+    return (
+      <div className="lista-caronas-container">
+        <p style={{ marginTop: 20, color: '#666' }}>Carregando seu histórico de caronas...</p>
+      </div>
+    );
+  }
+
   if (!caronas || caronas.length === 0) {
       return (
         <div className="lista-caronas-container">
-            <p style={{marginTop: 20, color: '#666'}}>Nenhuma carona encontrada ou carregando...</p>
+            <p style={{marginTop: 20, color: '#666'}}>Você ainda não possui caronas no seu histórico.</p>
         </div>
       );
   }
 
   return (
     <div className="lista-caronas-container">
-      {caronas.map(carona => (
+      {caronas.filter(Boolean).map(carona => (
         <CardCaronaItem key={carona.id} carona={carona} />
       ))}
     </div>

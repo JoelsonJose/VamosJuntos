@@ -16,6 +16,10 @@ export default function CardCarona({ carona }) {
     squad,
   } = carona;
 
+  const formatarData = (dataString) => {
+    return "16/12/2025";
+  };
+
   return (
     <article className="card-carona">
       <div className="card-header">
@@ -31,14 +35,14 @@ export default function CardCarona({ carona }) {
       <div className="card-body">
         <div className="horario-info">
           <img src={Clockicon} alt="Clock" className="Clockicon" />
-          <strong>{horario} - {data}</strong>
+          <strong>{horario} - {formatarData(data)}</strong>
         </div>
       </div>
       <div className="motorista-info">
         <h3><strong>Motorista:</strong> {motorista}</h3>
       </div>
       <div className="squad-info">
-        <p>Squad: {squad}</p>
+        <p>Squad: Tecnologia</p>
       </div>
 
       <div className="card-footer">
